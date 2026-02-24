@@ -425,4 +425,4 @@ Write-Host "[+] LAB READY FOR ATTACK CHAIN" -ForegroundColor Green
 - Elad Shamir — [SPN Jacking](https://eladshamir.com/2022/02/10/SPN-jacking.html)
 - Dirk-jan Mollema — [krbrelayx](https://github.com/dirkjanm/krbrelayx)
 - ShutdownRepo — [impacket fork with tgssub](https://github.com/ShutdownRepo/impacket)
-- HTB Academy — Kerberos Attacks module
+- HTB Academy — Kerberos Attacks module / DACL ATTACKS II module
