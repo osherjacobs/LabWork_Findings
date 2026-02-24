@@ -291,4 +291,4 @@ The key differentiator: the Linux path requires no Windows foothold at all. Netw
 - Elad Shamir — [Wagging the Dog: Abusing Resource-Based Constrained Delegation](https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html)
 - Dirk-jan Mollema — [krbrelayx](https://github.com/dirkjanm/krbrelayx)
 - ShutdownRepo — [impacket fork with tgssub](https://github.com/ShutdownRepo/impacket)
-- HTB Academy — Kerberos Attacks module
+- HTB Academy — Kerberos Attacks module / DACL ATTACKS II Module
