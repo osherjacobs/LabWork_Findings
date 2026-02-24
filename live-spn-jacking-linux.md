@@ -292,3 +292,6 @@ The key differentiator: the Linux path requires no Windows foothold at all. Netw
 - Dirk-jan Mollema — [krbrelayx](https://github.com/dirkjanm/krbrelayx)
 - ShutdownRepo — [impacket fork with tgssub](https://github.com/ShutdownRepo/impacket)
 - HTB Academy — Kerberos Attacks module / DACL ATTACKS II Module
+
+- <img width="1864" height="569" alt="spnjacksystem" src="https://github.com/user-attachments/assets/3a29886e-200d-42fc-93a9-52a48138e0d5" />
+
