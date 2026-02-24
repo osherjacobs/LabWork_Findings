@@ -284,6 +284,170 @@ SPN jacking produces a distinctive paired pattern: 4742 showing `servicePrincipa
 
 The key differentiator: the Linux path requires no Windows foothold at all. Network access and LDAP credentials are sufficient for the entire attack chain. The ccache file written to disk during tgssub is a detection artifact the Windows in-memory path avoids.
 
+LAB SETUP SCRIPT:
+
+# ============================================================
+# LAB2019 SPN-JACKING LAB SETUP SCRIPT V3
+# Run on DC01 as Domain Administrator AFTER domain is built
+# Domain: LAB2019.LOCAL
+# ============================================================
+# TOPOLOGY:
+#   DC01     172.16.61.144  - Domain Controller (Server 2022)
+#   SRV01    172.16.61.140  - Delegation source (Server 2022)
+#   DBSRV002 172.16.61.145  - SPN donor (Server 2019)
+#   WEB01B   172.16.61.146  - Landing target (Server 2019)
+#   Kali     172.16.61.129  - Attack box
+#
+# ATTACK USER: ownerofalonelySPN / Password123
+#
+# NOTE ON WEB01B SPN:
+#   Windows Server enforces validated write on servicePrincipalName.
+#   This means a non-DA account cannot write an SPN that doesn't
+#   match the machine's hostname, regardless of ACL grants.
+#   In the attack chain, addspn.py --clear runs as ownerofalonelySPN
+#   (stripping DBSRV002's SPNs works fine - those match hostname).
+#   Writing dmserver/DBSRV002 to WEB01B requires DA. In a real
+#   environment this would require GenericAll or ownership of WEB01B.
+#   This script sets WEB01B's SPN as DA to simulate that condition.
+# ============================================================
+
+Import-Module ActiveDirectory
+
+# ------------------------------------------------------------
+# STEP 1 - Clear any leftover SPNs from previous runs
+# ------------------------------------------------------------
+Write-Host "[*] Step 1 - Cleaning leftover dmserver SPNs" -ForegroundColor Cyan
+setspn -D dmserver/DBSRV002 DBSRV002$ 2>$null
+setspn -D dmserver/DBSRV002.LAB2019.LOCAL DBSRV002$ 2>$null
+setspn -D dmserver/DBSRV002 WEB01B$ 2>$null
+setspn -D dmserver/DBSRV002.LAB2019.LOCAL WEB01B$ 2>$null
+Write-Host "[+] Clean" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 2 - Set SPNs on DBSRV002 (the donor)
+#          These are the SPNs the attacker will strip and jack
+# ------------------------------------------------------------
+Write-Host "[*] Step 2 - Setting SPNs on DBSRV002" -ForegroundColor Cyan
+setspn -S dmserver/DBSRV002 DBSRV002$
+setspn -S dmserver/DBSRV002.LAB2019.LOCAL DBSRV002$
+Write-Host "[+] DBSRV002 SPNs set" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 3 - Create lab attack user
+# ------------------------------------------------------------
+Write-Host "[*] Step 3 - Creating ownerofalonelySPN" -ForegroundColor Cyan
+$userExists = Get-ADUser -Filter {SamAccountName -eq "ownerofalonelySPN"} -ErrorAction SilentlyContinue
+if (-not $userExists) {
+    New-ADUser `
+        -Name "ownerofalonelySPN" `
+        -SamAccountName "ownerofalonelySPN" `
+        -AccountPassword (ConvertTo-SecureString "Password123" -AsPlainText -Force) `
+        -Enabled $true `
+        -PasswordNeverExpires $true
+    Write-Host "[+] User created" -ForegroundColor Green
+} else {
+    Write-Host "[!] User already exists, skipping" -ForegroundColor Yellow
+}
+
+# ------------------------------------------------------------
+# STEP 4 - Grant ownerofalonelySPN WriteSPN on DBSRV002
+#          Allows attacker to clear DBSRV002 SPNs via addspn.py
+# ------------------------------------------------------------
+Write-Host "[*] Step 4 - Granting WriteSPN on DBSRV002" -ForegroundColor Cyan
+$dbsrv002DN = (Get-ADComputer DBSRV002).DistinguishedName
+dsacls "$dbsrv002DN" /G "LAB2019\ownerofalonelySPN:WP;servicePrincipalName;" | Out-Null
+Write-Host "[+] Done" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 5 - Grant ownerofalonelySPN WriteSPN on WEB01B
+#          In real attack scenario this would be GenericAll/GenericWrite
+#          Windows validated write enforcement means DA must set the
+#          initial SPN - attacker can then clear/restore freely
+# ------------------------------------------------------------
+Write-Host "[*] Step 5 - Granting WriteSPN on WEB01B" -ForegroundColor Cyan
+$web01bDN = (Get-ADComputer WEB01B).DistinguishedName
+dsacls "$web01bDN" /G "LAB2019\ownerofalonelySPN:WP;servicePrincipalName;" | Out-Null
+Write-Host "[+] Done" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 6 - Configure SRV01 constrained delegation
+#          with protocol transition (TrustedToAuthForDelegation)
+#          This is what makes S4U2Self + S4U2Proxy possible
+# ------------------------------------------------------------
+Write-Host "[*] Step 6 - Configuring SRV01 constrained delegation" -ForegroundColor Cyan
+Set-ADComputer SRV01 -Add @{"msDS-AllowedToDelegateTo" = @(
+    "dmserver/DBSRV002",
+    "dmserver/DBSRV002.LAB2019.LOCAL"
+)}
+Set-ADAccountControl SRV01$ -TrustedToAuthForDelegation $true
+Write-Host "[+] Done" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 7 - Enable audit policy for telemetry
+#          4742 = Computer account changed (SPN modified)
+#          4769 = Kerberos service ticket requested (S4U)
+#          4768 = Kerberos TGT requested
+#          5136 = Directory service object modified
+# ------------------------------------------------------------
+Write-Host "[*] Step 7 - Enabling audit policy" -ForegroundColor Cyan
+auditpol /set /subcategory:"Computer Account Management" /success:enable /failure:enable
+auditpol /set /subcategory:"Kerberos Service Ticket Operations" /success:enable /failure:enable
+auditpol /set /subcategory:"Kerberos Authentication Service" /success:enable /failure:enable
+auditpol /set /subcategory:"Directory Service Changes" /success:enable /failure:enable
+Write-Host "[+] Audit policy set" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 8 - Clear all event logs (clean baseline for attack)
+# ------------------------------------------------------------
+Write-Host "[*] Step 8 - Clearing event logs" -ForegroundColor Cyan
+wevtutil cl Security
+wevtutil cl System
+wevtutil cl Application
+wevtutil cl "Directory Service"
+Write-Host "[+] Logs cleared" -ForegroundColor Green
+
+# ------------------------------------------------------------
+# STEP 9 - Verify everything is correct before attack
+# ------------------------------------------------------------
+Write-Host ""
+Write-Host "[*] Step 9 - Verification" -ForegroundColor Cyan
+Write-Host "--- DBSRV002 SPNs (should show dmserver/DBSRV002*) ---" -ForegroundColor White
+setspn -L DBSRV002$
+Write-Host "--- WEB01B SPNs (should NOT show dmserver/*) ---" -ForegroundColor White
+setspn -L WEB01B$
+Write-Host "--- SRV01 delegation (should show dmserver/DBSRV002*) ---" -ForegroundColor White
+Get-ADComputer SRV01 -Properties msDS-AllowedToDelegateTo, TrustedToAuthForDelegation |
+    Select-Object Name, TrustedToAuthForDelegation, msDS-AllowedToDelegateTo | Format-List
+Write-Host "--- Audit policy ---" -ForegroundColor White
+auditpol /get /subcategory:"Computer Account Management"
+auditpol /get /subcategory:"Kerberos Service Ticket Operations"
+
+# ------------------------------------------------------------
+# MANUAL STEPS REMAINING AFTER THIS SCRIPT
+# ------------------------------------------------------------
+Write-Host ""
+Write-Host "============================================================" -ForegroundColor Yellow
+Write-Host "MANUAL STEPS REQUIRED:" -ForegroundColor Yellow
+Write-Host "============================================================" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "1. RDP to WEB01B and drop flag:" -ForegroundColor Yellow
+Write-Host '   New-Item -Path "C:\flag.txt" -ItemType File -Value "SPN_JACKED{L1v3_Fr0m_K4l1}"' -ForegroundColor White
+Write-Host ""
+Write-Host "2. On Kali - add to /etc/hosts:" -ForegroundColor Yellow
+Write-Host "   172.16.61.144 DC01.LAB2019.LOCAL DC01" -ForegroundColor White
+Write-Host "   172.16.61.145 DBSRV002.LAB2019.LOCAL DBSRV002" -ForegroundColor White
+Write-Host "   172.16.61.146 WEB01B.LAB2019.LOCAL WEB01B" -ForegroundColor White
+Write-Host "   172.16.61.140 SRV01.LAB2019.LOCAL SRV01" -ForegroundColor White
+Write-Host ""
+Write-Host "3. On Kali - sync time:" -ForegroundColor Yellow
+Write-Host "   sudo ntpdate 172.16.61.144" -ForegroundColor White
+Write-Host ""
+Write-Host "4. On Kali - confirm tools exist:" -ForegroundColor Yellow
+Write-Host "   ls /home/kali/krbrelayx/addspn.py" -ForegroundColor White
+Write-Host "   ls /home/kali/tgssub/examples/tgssub.py" -ForegroundColor White
+Write-Host ""
+Write-Host "[+] LAB READY FOR ATTACK CHAIN" -ForegroundColor Green
+
 ---
 
 ## References
