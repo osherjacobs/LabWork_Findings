@@ -203,7 +203,12 @@ AND ClientAddress NOT IN ("::1", "127.0.0.1")
 FOLLOWED BY 4768 from same source IP
 WITHIN 60 seconds
 ```
-
+```
+Encryption Type as a Corroborating Signal (0x17 / RC4)
+Of historical note: some early implementations of this attack forced RC4-HMAC (encryption type 0x17) during the TGT request. This made encryption downgrade monitoring a useful detection layer at the time — 4768 events with Ticket Encryption Type = 0x17 for accounts that don't normally use RC4 would stand out.
+In practice this signal was always tooling-dependent rather than inherent to the attack. Modern impacket negotiates AES-256 (0x12) cleanly, as seen in this lab's captured telemetry. The RC4 indicator would not have fired here.
+Worth understanding for completeness, and relevant if you encounter legacy exploit scripts in the wild — but not a signal to build primary detection logic around even in unpatched environments.
+```
 ---
 
 ## Remediation
