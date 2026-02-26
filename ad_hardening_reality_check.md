@@ -30,10 +30,24 @@ Stop chasing "threat actors." Start answering these three governance questions:
 
 ## The Uncomfortable Truth
 
-Red-team tooling is just automated graph traversal. It looks like magic — but it's just finding the "temporary" exceptions you made in 2017.
+Red-team tooling feels like sorcery because it automates graph traversal.
 
-A diligent auditor reviewing ACL diffs and delegation settings can eliminate entire attack classes without ever running a single "hacking" tool.
+But most findings trace back to:
 
-Most organizations chase noisy logons.  
-Attackers manipulate authorization.  
-**That is the gap.**
+Delegation convenience
+
+Legacy service accounts
+
+Over-broad ACL inheritance
+
+Mis-scoped certificate templates
+
+“Temporary” exceptions that never expired
+
+A disciplined internal audit of ACLs and delegation settings can collapse entire attack classes before a single exploit runs.
+
+Active Directory doesn’t collapse because attackers are geniuses.
+
+It collapses because governance drifts.
+
+And jargon makes drift sound sophisticated.
