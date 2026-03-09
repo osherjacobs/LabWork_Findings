@@ -299,6 +299,18 @@ foreach ($adapter in $adapters) {
 - **ResponderGuard / CredDefense Toolkit** — Beau Bullock (@dafthack), Black Hills Information Security — [https://github.com/CredDefense/CredDefense](https://github.com/CredDefense/CredDefense)
 - **Responder** — Laurent Gaffie — [https://github.com/lgandx/Responder](https://github.com/lgandx/Responder)
 
+<img width="1849" height="453" alt="CreddefensescreenKALIRESPONDER" src="https://github.com/user-attachments/assets/940a51f5-eadf-464a-b7e6-5f0a18e43f97" />
+<img width="1132" height="812" alt="Creddefensescreentelemetry1" src="https://github.com/user-attachments/assets/9e081530-6a87-443c-9caa-abebaf3f06b7" />
+<img width="1848" height="892" alt="Creddefensescreentelemetry2" src="https://github.com/user-attachments/assets/7030f106-b3b2-4fcf-b85f-f445e0619fa6" />
+<img width="1846" height="864" alt="CreddefensescreenDC01telemetry1" src="https://github.com/user-attachments/assets/3bab4954-1104-44dc-b6c8-b0aece6b204d" />
+<img width="1108" height="433" alt="CreddefensescreenDC01telemetry2" src="https://github.com/user-attachments/assets/26017ff3-04e1-4d81-8e3f-6154b2d21c91" />
+<img width="983" height="514" alt="Creddefensescreen" src="https://github.com/user-attachments/assets/33216fc1-049d-4e96-bb80-866e5e92dc97" />
+
+
+
+
+
+
 ---
 
 *Lab built on VMware Workstation. All credentials used are lab-only and have been redacted from this writeup.*
