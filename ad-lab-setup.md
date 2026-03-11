@@ -126,4 +126,4 @@ For attack practice, it is recommended to install the following tools on Kali:
 - **BloodHound** — AD enumeration and attack path visualization
 - **Neo4j** — Required backend database for BloodHound
 
-Environment is ready for domain attack practice. Certain administrator UAC settings may need altering but that is not covered in this guide.
+Environment is ready for domain attack practice. Certain administrator UAC settings / SMB signing settings on the DC may need altering but that is not covered in this guide.
