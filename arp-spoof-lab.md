@@ -2,6 +2,8 @@
 
 ## Overview
 
+Long time since I've touched anything CCNA'ish or network related. Needed to do a lab for an assignment I got simulating an ARP spoofing attack.
+
 ARP spoofing is a Man-in-the-Middle (MiTM) attack that exploits the stateless, trust-based nature of the ARP protocol. ARP has no authentication — any host can assert ownership of any IP address, and other hosts will update their cache accordingly.
 
 The attacker sends forged ARP replies to two targets simultaneously:
@@ -224,3 +226,16 @@ ping -c 3 192.168.113.1
 ```cmd
 netsh interface ip set address "Ethernet0" static 192.168.113.50 255.255.255.0 192.168.113.1
 ```
+UBUNTU HOST ip -a
+<img width="1526" height="675" alt="IPSETUPUBUNTUHOST" src="https://github.com/user-attachments/assets/b0ac81c4-8e8d-4b8b-9c57-5629c403a195" />
+
+Attacker setup (Kali) stating to host that it is the victim and that it is the gateway to the victim:
+<img width="1858" height="1045" alt="Arpspoofattackcommands" src="https://github.com/user-attachments/assets/7522e96a-cbe6-4024-8f89-2915f5cd083e" />
+
+Victim traffic. Used a Windows AD DC as Windows is quite chatty:
+
+<img width="1246" height="1072" alt="VictimtrafficDC01" src="https://github.com/user-attachments/assets/e762b80d-7f3e-41c0-b85d-58d72e584adc" />
+
+
+
+
