@@ -98,6 +98,18 @@ Kali is seeing all victim traffic in plaintext — DNS queries, ICMP, NetBIOS br
 
 ---
 
+ARP Spoofing — Attack Confirmed
+The attack is verified from both sides.
+On the victim (192.168.113.50), arp -a showed the gateway's IP (192.168.113.1) resolving to Kali's MAC 00-0c-29-7b-8e-d5 instead of the real gateway MAC — the victim now sends all outbound traffic to Kali.
+On the gateway (192.168.113.1), ip neigh show confirmed the victim's IP (192.168.113.50) also mapped to Kali's MAC 00:0c:29:7b:8e:d5 — return traffic is equally redirected.
+Kali sits between both, invisible. Neither host has any indication the path has been altered. tcpdump on Kali captured the victim's DNS queries, ICMP, and NetBIOS traffic in plaintext — intercepted in transit without disrupting connectivity.
+This is ARP spoofing as a MiTM primitive: no exploits, no credentials, no visibility. Just two forged ARP replies and a poisoned cache on each end.
+
+<img width="1131" height="270" alt="IP_Neighbour" src="https://github.com/user-attachments/assets/a05056df-b649-47ce-b62e-b8363f688e1b" />
+
+
+
+
 ## Why It Works
 
 ARP is stateless and unauthenticated by design. Hosts accept ARP replies without verifying:
