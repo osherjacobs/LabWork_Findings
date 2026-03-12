@@ -250,6 +250,10 @@ UBUNTU HOST ip -a
 
 <img width="1526" height="675" alt="IPSETUPUBUNTUHOST" src="https://github.com/user-attachments/assets/b0ac81c4-8e8d-4b8b-9c57-5629c403a195" />
 
+DC ipconfig output
+
+<img width="1063" height="646" alt="DCIPCONFIG" src="https://github.com/user-attachments/assets/528a85aa-adbe-4a0d-a250-e25945a9c414" />
+
 Attacker setup (Kali) stating to host that it is the victim and that it is the gateway to the victim:
 
 <img width="1858" height="1045" alt="Arpspoofattackcommands" src="https://github.com/user-attachments/assets/7522e96a-cbe6-4024-8f89-2915f5cd083e" />
