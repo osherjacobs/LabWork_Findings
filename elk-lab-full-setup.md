@@ -1,5 +1,5 @@
-# ELK Security Monitoring Lab — Adversarial Detection Engineering
-
+**# ELK Security Monitoring Lab — Adversarial Detection Engineering
+**
 Windows Server 2019 AD + Kali + ELK Stack (Elasticsearch, Kibana, Winlogbeat)
 
 This lab was built to reproduce common post-compromise behavior in Active Directory and observe how it appears in native Windows telemetry.
