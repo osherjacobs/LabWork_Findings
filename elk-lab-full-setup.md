@@ -1,5 +1,19 @@
-# ELK Security Monitoring Lab — Full Setup Guide
-**Ubuntu (bare metal) + Windows Server 2019 DC + Kali | Elasticsearch + Kibana + Winlogbeat 8.19.12**
+ELK Security Monitoring Lab — Adversarial Detection Engineering
+
+Windows Server 2019 AD + Kali + ELK Stack (Elasticsearch, Kibana, Winlogbeat)
+
+This lab was built to reproduce common post-compromise behavior in Active Directory and observe how it appears in native Windows telemetry.
+
+The focus is not deployment, but visibility:
+
+what actions generate signal
+
+what looks benign but isn’t
+
+where default logging and detection logic fail
+
+Tested scenario:
+Admin share access (SMB → C$) using valid credentials, mapped to Event ID 5145 and correlated logon activity.
 
 ---
 
