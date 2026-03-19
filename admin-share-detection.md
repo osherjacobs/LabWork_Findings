@@ -200,3 +200,11 @@ Full correlation: logon + share access + access mask escalation from single sour
 ---
 
 *Lab environment. All testing performed on owned infrastructure.*
+
+<img width="1864" height="927" alt="Elastic_Dashboard" src="https://github.com/user-attachments/assets/8c44b6b3-da1f-40d0-b810-432e8c124be6" />
+
+<img width="1863" height="929" alt="KibanaAlertSMB" src="https://github.com/user-attachments/assets/b3fc4480-451b-4262-9acf-68ae8a7da53a" />
+
+<img width="873" height="416" alt="kalismbkibana" src="https://github.com/user-attachments/assets/7a4caebf-83ff-4ee9-b1c9-2e4f7a38fb47" />
+
+
