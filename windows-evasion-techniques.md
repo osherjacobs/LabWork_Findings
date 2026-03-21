@@ -543,7 +543,7 @@ string script = Encoding.UTF8.GetString(encrypted);
 ### Full Windows 11 Enterprise Bypass Achievement
 
 **Environment:**
-- Target: Windows 11 Enterprise (fully patched, December 2024)
+- Target: Windows 11 Enterprise (fully patched, December 2025)
 - User: Standard account (non-administrator)
 
 **Defenses Active:**
