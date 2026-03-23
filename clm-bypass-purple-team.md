@@ -318,7 +318,7 @@ Same binary. Same payload. Different result 90 days later.
 
 The CLM bypass mechanism is unchanged and unpatched — it remains architectural. The C# vehicle itself still evades detection. It is the embedded PowerShell payload that Microsoft signatured between December 2025 and March 2026.
 
-The revshells.com TLS shell pattern was not in Defender's signature database in December 2025. It is now. Offensive tooling has a shelf life. The ~90-day window this technique remained viable is a data point worth recording.
+The revshells.com TLS shell pattern was not in Defender's signature database in December 2025. It is now. Offensive tooling has a shelf life. The ~90-day window this technique remained viable might be a data point worth recording.
 
 **Detection layer conclusion:** ELK captured the full attack chain in both scenarios. The SIEM is indifferent to whether evasion succeeds. The kill chain is visible either way.
 
