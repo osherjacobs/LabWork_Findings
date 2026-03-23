@@ -323,5 +323,689 @@ The revshells.com TLS shell pattern was not in Defender's signature database in 
 **Detection layer conclusion:** ELK captured the full attack chain in both scenarios. The SIEM is indifferent to whether evasion succeeds. The kill chain is visible either way.
 
 ---
+<img width="1143" height="592" alt="kalirevshell" src="https://github.com/user-attachments/assets/d3a87bd0-3ba9-4cca-8203-b5fd890ad241" />
+
+<img width="1875" height="1050" alt="kibanaALERTREVSHELLWINTASKS" src="https://github.com/user-attachments/assets/c3d4fe87-8058-4abb-9780-3dc0ba6fe41a" />
+
+<img width="1866" height="777" alt="elasticrevshellCLMBYPASS" src="https://github.com/user-attachments/assets/b41b049c-4943-4ec8-bf3c-2ba0dc352bc9" />
+
+{
+  "_index": ".internal.alerts-security.alerts-default-000001",
+  "_id": "e583ae0bf38d3c8ae952485bda86f3607f9a8571ff3c09673365bbab23f02dde",
+  "_score": 1,
+  "_source": {
+    "kibana.alert.rule.execution.timestamp": "2026-03-23T15:09:47.447Z",
+    "kibana.alert.start": "2026-03-23T15:09:47.447Z",
+    "kibana.alert.last_detected": "2026-03-23T15:09:47.447Z",
+    "kibana.version": "8.19.12",
+    "kibana.alert.rule.parameters": {
+      "description": "Detects binary execution from C:\\Windows\\Tasks - a well-documented AppLocker bypass path. Any execution from this location should be treated as suspicious",
+      "risk_score": 73,
+      "severity": "high",
+      "license": "",
+      "meta": {
+        "kibana_siem_app_url": "http://localhost:5601/app/security"
+      },
+      "author": [],
+      "false_positives": [],
+      "from": "now-6m",
+      "rule_id": "fb8585fa-7191-4f86-99d1-169743c114fc",
+      "max_signals": 100,
+      "risk_score_mapping": [],
+      "severity_mapping": [],
+      "threat": [],
+      "to": "now",
+      "references": [],
+      "version": 1,
+      "exceptions_list": [],
+      "immutable": false,
+      "rule_source": {
+        "type": "internal"
+      },
+      "related_integrations": [],
+      "required_fields": [],
+      "setup": "",
+      "type": "query",
+      "language": "kuery",
+      "index": [
+        "apm-*-transaction*",
+        "auditbeat-*",
+        "endgame-*",
+        "filebeat-*",
+        "logs-*",
+        "packetbeat-*",
+        "traces-apm*",
+        "winlogbeat-*",
+        "-*elastic-cloud-logs-*"
+      ],
+      "query": "event.provider: \"Microsoft-Windows-Sysmon\" AND event.code: 1 AND winlog.event_data.CurrentDirectory: \"C:\\\\Windows\\\\Tasks\\\\\"",
+      "filters": []
+    },
+    "kibana.alert.rule.category": "Custom Query Rule",
+    "kibana.alert.rule.consumer": "siem",
+    "kibana.alert.rule.execution.uuid": "94dde0f7-86bd-4415-9671-b99f61f1cc93",
+    "kibana.alert.rule.name": "Sysmon - Binary Execution from Windows Tasks",
+    "kibana.alert.rule.producer": "siem",
+    "kibana.alert.rule.revision": 0,
+    "kibana.alert.rule.rule_type_id": "siem.queryRule",
+    "kibana.alert.rule.uuid": "8f430f4d-58cb-42df-a73b-3e740dc28bb8",
+    "kibana.space_ids": [
+      "default"
+    ],
+    "kibana.alert.rule.tags": [
+      "Sysmon AppLocker-Bypass Defense-Evasion"
+    ],
+    "@timestamp": "2026-03-23T15:09:47.402Z",
+    "event": {
+      "action": "Process Create (rule: ProcessCreate)",
+      "created": "2026-03-23T15:05:40.535Z",
+      "code": "1",
+      "provider": "Microsoft-Windows-Sysmon"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "Process Create:\nRuleName: -\nUtcTime: 2026-03-23 15:05:39.308\nProcessGuid: {6e4a868b-56c3-69c1-0202-000000001500}\nProcessId: 6048\nImage: C:\\Windows\\SysWOW64\\ipconfig.exe\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\nDescription: IP Configuration Utility\nProduct: Microsoft® Windows® Operating System\nCompany: Microsoft Corporation\nOriginalFileName: ipconfig.exe\nCommandLine: \"C:\\Windows\\system32\\ipconfig.exe\"\nCurrentDirectory: C:\\Windows\\Tasks\\\nUser: LAB2019\\Administrator\nLogonGuid: {6e4a868b-378b-69c1-b204-070000000000}\nLogonId: 0x704B2\nTerminalSessionId: 1\nIntegrityLevel: High\nHashes: MD5=B8CB2DFCA7379908B0605331A759AF4C,SHA256=B0832DEC07A4CB6228B7B392D6ABAFB79E9BF7327605AE3E86E1E617DE7495A5,IMPHASH=98CEEAF3EB55DE32686F14F2CF79FC6F\nParentProcessGuid: {6e4a868b-56b2-69c1-ff01-000000001500}\nParentProcessId: 6412\nParentImage: C:\\Windows\\Tasks\\CLMBypassa.exe\nParentCommandLine: \"C:\\Windows\\Tasks\\CLMBypassa.exe\"\nParentUser: LAB2019\\Administrator",
+    "host": {
+      "name": "DC01.lab2019.local"
+    },
+    "ecs": {
+      "version": "8.0.0"
+    },
+    "agent": {
+      "version": "8.19.12",
+      "ephemeral_id": "44c7493a-e825-4822-a803-977c6614c9c6",
+      "id": "1751edc0-760c-4637-bf88-257c35b4f211",
+      "name": "DC01",
+      "type": "winlogbeat",
+      "hostname": "DC01"
+    },
+    "winlog": {
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "record_id": 8476,
+      "computer_name": "DC01.lab2019.local",
+      "user": {
+        "name": "SYSTEM",
+        "type": "User",
+        "identifier": "S-1-5-18",
+        "domain": "NT AUTHORITY"
+      },
+      "event_data": {
+        "UtcTime": "2026-03-23 15:05:39.308",
+        "Company": "Microsoft Corporation",
+        "ParentImage": "C:\\Windows\\Tasks\\CLMBypassa.exe",
+        "User": "LAB2019\\Administrator",
+        "Image": "C:\\Windows\\SysWOW64\\ipconfig.exe",
+        "OriginalFileName": "ipconfig.exe",
+        "ParentProcessId": "6412",
+        "ProcessId": "6048",
+        "LogonGuid": "{6e4a868b-378b-69c1-b204-070000000000}",
+        "ParentProcessGuid": "{6e4a868b-56b2-69c1-ff01-000000001500}",
+        "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+        "TerminalSessionId": "1",
+        "ParentCommandLine": "\"C:\\Windows\\Tasks\\CLMBypassa.exe\"",
+        "CommandLine": "\"C:\\Windows\\system32\\ipconfig.exe\"",
+        "Product": "Microsoft® Windows® Operating System",
+        "ProcessGuid": "{6e4a868b-56c3-69c1-0202-000000001500}",
+        "Description": "IP Configuration Utility",
+        "Hashes": "MD5=B8CB2DFCA7379908B0605331A759AF4C,SHA256=B0832DEC07A4CB6228B7B392D6ABAFB79E9BF7327605AE3E86E1E617DE7495A5,IMPHASH=98CEEAF3EB55DE32686F14F2CF79FC6F",
+        "RuleName": "-",
+        "ParentUser": "LAB2019\\Administrator",
+        "CurrentDirectory": "C:\\Windows\\Tasks\\",
+        "LogonId": "0x704b2",
+        "IntegrityLevel": "High"
+      },
+      "process": {
+        "pid": 3212,
+        "thread": {
+          "id": 4916
+        }
+      },
+      "event_id": "1",
+      "opcode": "Info",
+      "version": 5,
+      "api": "wineventlog",
+      "task": "Process Create (rule: ProcessCreate)"
+    },
+    "kibana.alert.original_event.action": "Process Create (rule: ProcessCreate)",
+    "kibana.alert.original_event.created": "2026-03-23T15:05:40.535Z",
+    "kibana.alert.original_event.code": "1",
+    "kibana.alert.original_event.kind": "event",
+    "kibana.alert.original_event.provider": "Microsoft-Windows-Sysmon",
+    "event.kind": "signal",
+    "kibana.alert.original_time": "2026-03-23T15:05:39.309Z",
+    "kibana.alert.ancestors": [
+      {
+        "id": "5b87G50Bg45ehbJcBQbS",
+        "type": "event",
+        "index": ".ds-winlogbeat-8.19.12-2026.03.19-000001",
+        "depth": 0
+      }
+    ],
+    "kibana.alert.status": "active",
+    "kibana.alert.workflow_status": "open",
+    "kibana.alert.depth": 1,
+    "kibana.alert.reason": "event on DC01.lab2019.local created high alert Sysmon - Binary Execution from Windows Tasks.",
+    "kibana.alert.severity": "high",
+    "kibana.alert.risk_score": 73,
+    "kibana.alert.rule.actions": [],
+    "kibana.alert.rule.author": [],
+    "kibana.alert.rule.created_at": "2026-03-23T15:04:43.875Z",
+    "kibana.alert.rule.created_by": "elastic",
+    "kibana.alert.rule.description": "Detects binary execution from C:\\Windows\\Tasks - a well-documented AppLocker bypass path. Any execution from this location should be treated as suspicious",
+    "kibana.alert.rule.enabled": true,
+    "kibana.alert.rule.exceptions_list": [],
+    "kibana.alert.rule.false_positives": [],
+    "kibana.alert.rule.from": "now-6m",
+    "kibana.alert.rule.immutable": false,
+    "kibana.alert.rule.interval": "5m",
+    "kibana.alert.rule.indices": [
+      "apm-*-transaction*",
+      "auditbeat-*",
+      "endgame-*",
+      "filebeat-*",
+      "logs-*",
+      "packetbeat-*",
+      "traces-apm*",
+      "winlogbeat-*",
+      "-*elastic-cloud-logs-*"
+    ],
+    "kibana.alert.rule.license": "",
+    "kibana.alert.rule.max_signals": 100,
+    "kibana.alert.rule.references": [],
+    "kibana.alert.rule.risk_score_mapping": [],
+    "kibana.alert.rule.rule_id": "fb8585fa-7191-4f86-99d1-169743c114fc",
+    "kibana.alert.rule.severity_mapping": [],
+    "kibana.alert.rule.threat": [],
+    "kibana.alert.rule.to": "now",
+    "kibana.alert.rule.type": "query",
+    "kibana.alert.rule.updated_at": "2026-03-23T15:04:43.875Z",
+    "kibana.alert.rule.updated_by": "elastic",
+    "kibana.alert.rule.version": 1,
+    "kibana.alert.uuid": "e583ae0bf38d3c8ae952485bda86f3607f9a8571ff3c09673365bbab23f02dde",
+    "kibana.alert.workflow_tags": [],
+    "kibana.alert.workflow_assignee_ids": [],
+    "kibana.alert.rule.meta.kibana_siem_app_url": "http://localhost:5601/app/security",
+    "kibana.alert.rule.risk_score": 73,
+    "kibana.alert.rule.severity": "high",
+    "kibana.alert.intended_timestamp": "2026-03-23T15:09:47.402Z",
+    "kibana.alert.rule.execution.type": "scheduled"
+  },
+  "fields": {
+    "kibana.alert.severity": [
+      "high"
+    ],
+    "kibana.alert.rule.updated_by": [
+      "elastic"
+    ],
+    "signal.ancestors.depth": [
+      0
+    ],
+    "winlog.event_data.ProcessGuid": [
+      "{6e4a868b-56c3-69c1-0202-000000001500}"
+    ],
+    "kibana.alert.rule.tags": [
+      "Sysmon AppLocker-Bypass Defense-Evasion"
+    ],
+    "signal.original_event.created": [
+      "2026-03-23T15:05:40.535Z"
+    ],
+    "winlog.process.pid": [
+      3212
+    ],
+    "kibana.alert.reason.text": [
+      "event on DC01.lab2019.local created high alert Sysmon - Binary Execution from Windows Tasks."
+    ],
+    "winlog.event_data.ParentImage": [
+      "C:\\Windows\\Tasks\\CLMBypassa.exe"
+    ],
+    "kibana.alert.ancestors.depth": [
+      0
+    ],
+    "signal.rule.enabled": [
+      "true"
+    ],
+    "signal.rule.max_signals": [
+      100
+    ],
+    "kibana.alert.risk_score": [
+      73
+    ],
+    "signal.rule.updated_at": [
+      "2026-03-23T15:04:43.875Z"
+    ],
+    "agent.name": [
+      "DC01"
+    ],
+    "winlog.event_data.UtcTime": [
+      "2026-03-23 15:05:39.308"
+    ],
+    "winlog.event_data.OriginalFileName": [
+      "ipconfig.exe"
+    ],
+    "winlog.event_data.Company": [
+      "Microsoft Corporation"
+    ],
+    "winlog.event_data.RuleName": [
+      "-"
+    ],
+    "signal.original_event.code": [
+      "1"
+    ],
+    "winlog.event_data.User": [
+      "LAB2019\\Administrator"
+    ],
+    "kibana.alert.rule.interval": [
+      "5m"
+    ],
+    "kibana.alert.rule.type": [
+      "query"
+    ],
+    "agent.hostname": [
+      "DC01"
+    ],
+    "kibana.alert.start": [
+      "2026-03-23T15:09:47.447Z"
+    ],
+    "event.provider": [
+      "Microsoft-Windows-Sysmon"
+    ],
+    "kibana.alert.rule.immutable": [
+      "false"
+    ],
+    "event.code": [
+      "1"
+    ],
+    "winlog.event_data.FileVersion": [
+      "10.0.17763.1 (WinBuild.160101.0800)"
+    ],
+    "agent.id": [
+      "1751edc0-760c-4637-bf88-257c35b4f211"
+    ],
+    "signal.rule.from": [
+      "now-6m"
+    ],
+    "winlog.event_data.LogonGuid": [
+      "{6e4a868b-378b-69c1-b204-070000000000}"
+    ],
+    "kibana.alert.rule.enabled": [
+      "true"
+    ],
+    "kibana.alert.rule.version": [
+      "1"
+    ],
+    "kibana.alert.ancestors.type": [
+      "event"
+    ],
+    "winlog.event_data.Description": [
+      "IP Configuration Utility"
+    ],
+    "winlog.process.thread.id": [
+      4916
+    ],
+    "signal.ancestors.index": [
+      ".ds-winlogbeat-8.19.12-2026.03.19-000001"
+    ],
+    "agent.type": [
+      "winlogbeat"
+    ],
+    "winlog.api": [
+      "wineventlog"
+    ],
+    "winlog.event_data.ProcessId": [
+      "6048"
+    ],
+    "kibana.alert.rule.max_signals": [
+      100
+    ],
+    "kibana.alert.rule.risk_score": [
+      73
+    ],
+    "winlog.user.name": [
+      "SYSTEM"
+    ],
+    "kibana.alert.rule.consumer": [
+      "siem"
+    ],
+    "kibana.alert.rule.indices": [
+      "apm-*-transaction*",
+      "auditbeat-*",
+      "endgame-*",
+      "filebeat-*",
+      "logs-*",
+      "packetbeat-*",
+      "traces-apm*",
+      "winlogbeat-*",
+      "-*elastic-cloud-logs-*"
+    ],
+    "kibana.alert.rule.category": [
+      "Custom Query Rule"
+    ],
+    "winlog.event_data.Image": [
+      "C:\\Windows\\SysWOW64\\ipconfig.exe"
+    ],
+    "event.action": [
+      "Process Create (rule: ProcessCreate)"
+    ],
+    "@timestamp": [
+      "2026-03-23T15:09:47.402Z"
+    ],
+    "kibana.alert.original_event.action": [
+      "Process Create (rule: ProcessCreate)"
+    ],
+    "signal.rule.updated_by": [
+      "elastic"
+    ],
+    "winlog.channel": [
+      "Microsoft-Windows-Sysmon/Operational"
+    ],
+    "kibana.alert.intended_timestamp": [
+      "2026-03-23T15:09:47.402Z"
+    ],
+    "kibana.alert.rule.severity": [
+      "high"
+    ],
+    "winlog.opcode": [
+      "Info"
+    ],
+    "agent.ephemeral_id": [
+      "44c7493a-e825-4822-a803-977c6614c9c6"
+    ],
+    "kibana.alert.rule.execution.timestamp": [
+      "2026-03-23T15:09:47.447Z"
+    ],
+    "kibana.alert.rule.execution.uuid": [
+      "94dde0f7-86bd-4415-9671-b99f61f1cc93"
+    ],
+    "kibana.alert.uuid": [
+      "e583ae0bf38d3c8ae952485bda86f3607f9a8571ff3c09673365bbab23f02dde"
+    ],
+    "kibana.alert.rule.meta.kibana_siem_app_url": [
+      "http://localhost:5601/app/security"
+    ],
+    "kibana.version": [
+      "8.19.12"
+    ],
+    "winlog.event_data.TerminalSessionId": [
+      "1"
+    ],
+    "signal.rule.license": [
+      ""
+    ],
+    "signal.ancestors.type": [
+      "event"
+    ],
+    "kibana.alert.rule.rule_id": [
+      "fb8585fa-7191-4f86-99d1-169743c114fc"
+    ],
+    "signal.rule.type": [
+      "query"
+    ],
+    "winlog.event_data.ParentProcessId": [
+      "6412"
+    ],
+    "winlog.event_data.LogonId": [
+      "0x704b2"
+    ],
+    "kibana.alert.ancestors.id": [
+      "5b87G50Bg45ehbJcBQbS"
+    ],
+    "kibana.alert.original_event.code": [
+      "1"
+    ],
+    "winlog.provider_guid": [
+      "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
+    ],
+    "winlog.provider_name": [
+      "Microsoft-Windows-Sysmon"
+    ],
+    "kibana.alert.rule.description": [
+      "Detects binary execution from C:\\Windows\\Tasks - a well-documented AppLocker bypass path. Any execution from this location should be treated as suspicious"
+    ],
+    "winlog.computer_name": [
+      "DC01.lab2019.local"
+    ],
+    "kibana.alert.rule.producer": [
+      "siem"
+    ],
+    "kibana.alert.rule.to": [
+      "now"
+    ],
+    "signal.rule.created_by": [
+      "elastic"
+    ],
+    "signal.rule.interval": [
+      "5m"
+    ],
+    "kibana.alert.rule.created_by": [
+      "elastic"
+    ],
+    "signal.rule.id": [
+      "8f430f4d-58cb-42df-a73b-3e740dc28bb8"
+    ],
+    "signal.reason": [
+      "event on DC01.lab2019.local created high alert Sysmon - Binary Execution from Windows Tasks."
+    ],
+    "signal.rule.risk_score": [
+      73
+    ],
+    "winlog.record_id": [
+      8476
+    ],
+    "winlog.event_data.CommandLine": [
+      "\"C:\\Windows\\system32\\ipconfig.exe\""
+    ],
+    "kibana.alert.rule.name": [
+      "Sysmon - Binary Execution from Windows Tasks"
+    ],
+    "log.level": [
+      "information"
+    ],
+    "host.name": [
+      "DC01.lab2019.local"
+    ],
+    "signal.status": [
+      "open"
+    ],
+    "winlog.event_data.ParentProcessGuid": [
+      "{6e4a868b-56b2-69c1-ff01-000000001500}"
+    ],
+    "event.kind": [
+      "signal"
+    ],
+    "winlog.version": [
+      5
+    ],
+    "signal.rule.created_at": [
+      "2026-03-23T15:04:43.875Z"
+    ],
+    "signal.rule.tags": [
+      "Sysmon AppLocker-Bypass Defense-Evasion"
+    ],
+    "kibana.alert.workflow_status": [
+      "open"
+    ],
+    "kibana.alert.original_event.created": [
+      "2026-03-23T15:05:40.535Z"
+    ],
+    "kibana.alert.rule.uuid": [
+      "8f430f4d-58cb-42df-a73b-3e740dc28bb8"
+    ],
+    "signal.original_event.provider": [
+      "Microsoft-Windows-Sysmon"
+    ],
+    "kibana.alert.reason": [
+      "event on DC01.lab2019.local created high alert Sysmon - Binary Execution from Windows Tasks."
+    ],
+    "signal.ancestors.id": [
+      "5b87G50Bg45ehbJcBQbS"
+    ],
+    "signal.original_time": [
+      "2026-03-23T15:05:39.309Z"
+    ],
+    "ecs.version": [
+      "8.0.0"
+    ],
+    "signal.rule.severity": [
+      "high"
+    ],
+    "kibana.alert.ancestors.index": [
+      ".ds-winlogbeat-8.19.12-2026.03.19-000001"
+    ],
+    "event.created": [
+      "2026-03-23T15:05:40.535Z"
+    ],
+    "agent.version": [
+      "8.19.12"
+    ],
+    "kibana.alert.depth": [
+      1
+    ],
+    "kibana.alert.rule.from": [
+      "now-6m"
+    ],
+    "kibana.alert.rule.parameters": [
+      {
+        "severity": "high",
+        "max_signals": 100,
+        "rule_source": {
+          "type": "internal"
+        },
+        "risk_score": 73,
+        "query": "event.provider: \"Microsoft-Windows-Sysmon\" AND event.code: 1 AND winlog.event_data.CurrentDirectory: \"C:\\\\Windows\\\\Tasks\\\\\"",
+        "description": "Detects binary execution from C:\\Windows\\Tasks - a well-documented AppLocker bypass path. Any execution from this location should be treated as suspicious",
+        "index": [
+          "apm-*-transaction*",
+          "auditbeat-*",
+          "endgame-*",
+          "filebeat-*",
+          "logs-*",
+          "packetbeat-*",
+          "traces-apm*",
+          "winlogbeat-*",
+          "-*elastic-cloud-logs-*"
+        ],
+        "language": "kuery",
+        "type": "query",
+        "version": 1,
+        "rule_id": "fb8585fa-7191-4f86-99d1-169743c114fc",
+        "license": "",
+        "immutable": false,
+        "meta": {
+          "kibana_siem_app_url": "http://localhost:5601/app/security"
+        },
+        "setup": "",
+        "from": "now-6m",
+        "to": "now"
+      }
+    ],
+    "kibana.alert.rule.revision": [
+      0
+    ],
+    "signal.rule.version": [
+      "1"
+    ],
+    "signal.original_event.kind": [
+      "event"
+    ],
+    "kibana.alert.status": [
+      "active"
+    ],
+    "winlog.event_data.ParentUser": [
+      "LAB2019\\Administrator"
+    ],
+    "kibana.alert.last_detected": [
+      "2026-03-23T15:09:47.447Z"
+    ],
+    "signal.depth": [
+      1
+    ],
+    "signal.rule.immutable": [
+      "false"
+    ],
+    "winlog.user.type": [
+      "User"
+    ],
+    "kibana.alert.rule.rule_type_id": [
+      "siem.queryRule"
+    ],
+    "signal.rule.name": [
+      "Sysmon - Binary Execution from Windows Tasks"
+    ],
+    "kibana.alert.original_event.provider": [
+      "Microsoft-Windows-Sysmon"
+    ],
+    "signal.rule.rule_id": [
+      "fb8585fa-7191-4f86-99d1-169743c114fc"
+    ],
+    "kibana.alert.rule.license": [
+      ""
+    ],
+    "winlog.event_data.Hashes": [
+      "MD5=B8CB2DFCA7379908B0605331A759AF4C,SHA256=B0832DEC07A4CB6228B7B392D6ABAFB79E9BF7327605AE3E86E1E617DE7495A5,IMPHASH=98CEEAF3EB55DE32686F14F2CF79FC6F"
+    ],
+    "kibana.alert.original_event.kind": [
+      "event"
+    ],
+    "winlog.user.identifier": [
+      "S-1-5-18"
+    ],
+    "winlog.task": [
+      "Process Create (rule: ProcessCreate)"
+    ],
+    "winlog.user.domain": [
+      "NT AUTHORITY"
+    ],
+    "kibana.alert.rule.updated_at": [
+      "2026-03-23T15:04:43.875Z"
+    ],
+    "signal.rule.description": [
+      "Detects binary execution from C:\\Windows\\Tasks - a well-documented AppLocker bypass path. Any execution from this location should be treated as suspicious"
+    ],
+    "winlog.event_data.IntegrityLevel": [
+      "High"
+    ],
+    "message": [
+      "Process Create:\nRuleName: -\nUtcTime: 2026-03-23 15:05:39.308\nProcessGuid: {6e4a868b-56c3-69c1-0202-000000001500}\nProcessId: 6048\nImage: C:\\Windows\\SysWOW64\\ipconfig.exe\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\nDescription: IP Configuration Utility\nProduct: Microsoft® Windows® Operating System\nCompany: Microsoft Corporation\nOriginalFileName: ipconfig.exe\nCommandLine: \"C:\\Windows\\system32\\ipconfig.exe\"\nCurrentDirectory: C:\\Windows\\Tasks\\\nUser: LAB2019\\Administrator\nLogonGuid: {6e4a868b-378b-69c1-b204-070000000000}\nLogonId: 0x704B2\nTerminalSessionId: 1\nIntegrityLevel: High\nHashes: MD5=B8CB2DFCA7379908B0605331A759AF4C,SHA256=B0832DEC07A4CB6228B7B392D6ABAFB79E9BF7327605AE3E86E1E617DE7495A5,IMPHASH=98CEEAF3EB55DE32686F14F2CF79FC6F\nParentProcessGuid: {6e4a868b-56b2-69c1-ff01-000000001500}\nParentProcessId: 6412\nParentImage: C:\\Windows\\Tasks\\CLMBypassa.exe\nParentCommandLine: \"C:\\Windows\\Tasks\\CLMBypassa.exe\"\nParentUser: LAB2019\\Administrator"
+    ],
+    "winlog.event_id": [
+      "1"
+    ],
+    "signal.original_event.action": [
+      "Process Create (rule: ProcessCreate)"
+    ],
+    "kibana.alert.rule.created_at": [
+      "2026-03-23T15:04:43.875Z"
+    ],
+    "signal.rule.to": [
+      "now"
+    ],
+    "kibana.space_ids": [
+      "default"
+    ],
+    "winlog.event_data.CurrentDirectory": [
+      "C:\\Windows\\Tasks\\"
+    ],
+    "kibana.alert.rule.execution.type": [
+      "scheduled"
+    ],
+    "winlog.event_data.ParentCommandLine": [
+      "\"C:\\Windows\\Tasks\\CLMBypassa.exe\""
+    ],
+    "winlog.event_data.Product": [
+      "Microsoft® Windows® Operating System"
+    ],
+    "kibana.alert.original_time": [
+      "2026-03-23T15:05:39.309Z"
+    ]
+  }
+}
+
+
+
+
+
 
 *Isolated lab environment. Windows Server 2019 DC and Windows 11 Enterprise VM. No production systems involved.*
