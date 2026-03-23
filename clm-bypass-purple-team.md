@@ -62,7 +62,7 @@ AppLocker blocked execution from standard user-writable paths (Desktop, Download
 - Writable by standard users in many default configurations
 - Falls within the `%WINDIR%\*` allowed path in default AppLocker executable rules
 
-This is not obscure tradecraft. `C:\Windows\Tasks` as an AppLocker bypass has been publicly documented for years and appears in every AppLocker bypass reference. It works on default configurations in 2026. The fact that it remains unaddressed in default deployments is, to put it plainly, indefensible — analogous to the years-long window between ADCS ESC vulnerabilities being known and organizations actually closing them.
+This is not obscure tradecraft. `C:\Windows\Tasks` as an AppLocker bypass has been publicly documented for years and appears in every AppLocker bypass reference. It works on default configurations in 2026. The fact that it remains unaddressed in default deployments is, to put it plainly, indefensible — analogous to the years-long window between ADCS ESC vulnerabilities being known and organizations actually closing them. Any allow rule scoped broadly to %WINDIR% implicitly trusts legacy writable subpaths.
 
 Binary copied to `C:\Windows\Tasks\` and executed successfully.
 
