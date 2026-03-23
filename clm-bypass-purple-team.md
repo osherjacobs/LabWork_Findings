@@ -59,7 +59,7 @@ CLM bypass via custom runspace is architectural — Microsoft does not treat it 
 
 AppLocker blocked execution from standard user-writable paths (Desktop, Downloads). `C:\Windows\Tasks` satisfies two conditions simultaneously:
 
-- Writable by standard users in many default configurations
+- Writable by standard users in many environments due to inherited ACLs or legacy configuration
 - Falls within the `%WINDIR%\*` allowed path in default AppLocker executable rules
 
 This is not obscure tradecraft. `C:\Windows\Tasks` as an AppLocker bypass has been publicly documented for years and appears in every AppLocker bypass reference. It works on default configurations in 2026. The fact that it remains unaddressed in default deployments is, to put it plainly, indefensible — analogous to the years-long window between ADCS ESC vulnerabilities being known and organizations actually closing them. Any allow rule scoped broadly to %WINDIR% implicitly trusts legacy writable subpaths.
