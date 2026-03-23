@@ -325,7 +325,7 @@ The revshells.com TLS shell pattern was not in Defender's signature database in 
 **Detection layer conclusion:** ELK captured the full attack chain in both scenarios. The SIEM is indifferent to whether evasion succeeds. The kill chain is visible either way.
 
 ---
-
+<img width="1871" height="969" alt="devmachinecsharpCLM" src="https://github.com/user-attachments/assets/329a7750-8026-4385-8c9f-f906c23aeaa4" />
 <img width="1143" height="592" alt="kalirevshell" src="https://github.com/user-attachments/assets/bb515727-8a28-4d72-ab82-237e051e8e8e" />
 <img width="1165" height="735" alt="kibanaclmbypass" src="https://github.com/user-attachments/assets/d3f815f8-6ed9-430b-bbe2-742260ed317a" />
 <img width="1882" height="1051" alt="kibanalertrevshelwintasks" src="https://github.com/user-attachments/assets/bd1eaa08-4eca-45a9-a409-90708ad04885" />
