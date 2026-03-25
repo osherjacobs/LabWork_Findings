@@ -302,5 +302,18 @@ The `Hidden: true` flag is rare in legitimate scheduled tasks and high-signal wh
 | Lateral Movement: Remote Services | T1021 |
 
 ---
+<img width="1608" height="784" alt="MoneySHotALERTS25032026" src="https://github.com/user-attachments/assets/cac4d1c5-6f1a-444c-b2bd-4d1c768e045e" />
+<img width="1602" height="871" alt="systemshellgoexec" src="https://github.com/user-attachments/assets/b448a849-badb-4a2b-9fcc-6c0b327a8bd1" />
+<img width="1763" height="856" alt="shellDC2" src="https://github.com/user-attachments/assets/6b00e171-7f56-41eb-803f-f5c0d2bb12d6" />
+<img width="1412" height="828" alt="shellDC1" src="https://github.com/user-attachments/assets/7a491e4c-b5ec-4eec-8a65-0f72ec8eb786" />
+<img width="1314" height="921" alt="image" src="https://github.com/user-attachments/assets/e629445a-2377-489e-ab3e-40ad042fdc86" />
+<img width="819" height="666" alt="image" src="https://github.com/user-attachments/assets/63e4df99-458d-4d88-8491-7b365b568641" />
+<img width="1601" height="713" alt="image" src="https://github.com/user-attachments/assets/6469f2a4-91a7-4ee7-9949-890521c3bfcc" />
+
+
+
+
+
+
 
 *Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
