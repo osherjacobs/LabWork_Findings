@@ -6,7 +6,11 @@
 **Defender:** ELK SIEM (Kibana 8.19.12), Sysmon, Winlogbeat, Windows Security Auditing  
 **Objective:** Demonstrate credential-based persistence via scheduled task abuse, document SIEM detection gaps, and close them with custom detection rules.
 
-> This is a detection engineering document. The nature of the payload, specific tooling choices, and certain implementation details are intentionally omitted or generalised. Specific tool versions, payload internals, and bypass mechanics are not the focus here — the focus is on what the SIEM sees, what it misses, and what closes the gap. Readers looking for offensive tooling guidance should look elsewhere.
+> This is a detection engineering document. The nature of the payload, specific tooling choices, and certain implementation details are intentionally omitted or generalised.  
+> 
+> These details are highly environment-specific, evolve rapidly as defenses and tooling change, and can differ significantly between targets. Specific tool versions, payload internals, and bypass mechanics are therefore not the focus here — the emphasis remains on what the SIEM sees, what it misses, and what closes the gap in a rules-based detection program.  
+> 
+> Readers looking for offensive tooling guidance or step-by-step implementation should look elsewhere.
 
 ---
 
