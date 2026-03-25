@@ -343,6 +343,7 @@ The attack chain in this document relies on direct network access from the attac
 
 ---
 <img width="1608" height="784" alt="MoneySHotALERTS25032026" src="https://github.com/user-attachments/assets/98a14490-f41b-45b5-a2f4-a0d6970e5b9a" />
+<img width="1382" height="736" alt="image" src="https://github.com/user-attachments/assets/1e1905a5-8fdb-4b27-9eb1-dc57cf689f7d" />
 <img width="1602" height="871" alt="systemshellgoexec" src="https://github.com/user-attachments/assets/0bc34fe3-005d-47f0-a311-12a7d766dd37" />
 <img width="1412" height="828" alt="shellDC1" src="https://github.com/user-attachments/assets/e1e5f094-acdd-492e-9f62-1b0b26c41161" />
 <img width="1587" height="432" alt="image" src="https://github.com/user-attachments/assets/384683a4-632d-4fae-ba14-3e3fa4a6e0e0" />
