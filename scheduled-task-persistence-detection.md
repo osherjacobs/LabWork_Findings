@@ -6,11 +6,7 @@
 **Defender:** ELK SIEM (Kibana 8.19.12), Sysmon, Winlogbeat, Windows Security Auditing  
 **Objective:** Demonstrate credential-based persistence via scheduled task abuse, document SIEM detection gaps, and close them with custom detection rules.
 
-> This is a detection engineering document. The nature of the payload, specific tooling choices, and certain implementation details are intentionally omitted or generalised.  
-> 
-> These details are highly environment-specific, evolve rapidly as defenses and tooling change, and can differ significantly between targets. Specific tool versions, payload internals, and bypass mechanics are therefore not the focus here — the emphasis remains on what the SIEM sees, what it misses, and what closes the gap in a rules-based detection program.  
-> 
-> Readers looking for offensive tooling guidance or step-by-step implementation should look elsewhere.
+> This is a detection engineering document. The nature of the payload, specific tooling choices, and certain implementation details are intentionally omitted or generalised. Specific tool versions, payload internals, and bypass mechanics are not the focus here — the focus is on what the SIEM sees, what it misses, and what closes the gap. Readers looking for offensive tooling guidance should look elsewhere.
 
 ---
 
@@ -283,6 +279,19 @@ The `Hidden: true` flag is rare in legitimate scheduled tasks and high-signal wh
 | Restrict write access to Tasks | Non-admin accounts should not write here |
 | Credential hygiene | Tier-0 admin credentials must not be exposed to lateral movement paths |
 
+### Network Controls
+
+The attack chain in this document relies on direct network access from the attacker to the target DC on RPC port 135 and dynamic high ports (49152+), plus SMB port 445 for file drop. The following network controls significantly raise the bar:
+
+| Control | Detail |
+|---|---|
+| Network segmentation | DCs should only be reachable on administrative ports from designated management hosts — not from arbitrary workstations or attacker machines on the same flat network |
+| Bastion / jump host model | All administrative traffic to DCs routed exclusively through a hardened, separately authenticated jump host. Compromise of the jump host becomes a prerequisite — adding a significant detection opportunity |
+| Windows Firewall on DC | Restrict inbound RPC (port 135 + dynamic range 49152+) and SMB (port 445) to known management subnets only |
+| Restrict C$ admin share | SMB admin share access should be limited to jump hosts and designated management systems — killing the file drop step entirely for an attacker without jump host access |
+
+**Realistic caveat:** These controls require network segmentation that many organisations — particularly smaller or less mature ones — do not have in place. Flat networks where any host can reach any other host on any port remain common. In that environment, valid credentials alone are sufficient for this entire attack chain to succeed. The detection controls in this document remain relevant regardless of network maturity — but network segmentation removes entire attack steps before detection is even needed.
+
 ---
 
 ## Tools Used
@@ -306,6 +315,10 @@ The `Hidden: true` flag is rare in legitimate scheduled tasks and high-signal wh
 | Defense Evasion: Impair Defenses | T1562.001 |
 | Execution: PowerShell | T1059.001 |
 | Lateral Movement: Remote Services | T1021 |
+
+---
+
+*Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
 
 ---
 <img width="1608" height="784" alt="MoneySHotALERTS25032026" src="https://github.com/user-attachments/assets/98a14490-f41b-45b5-a2f4-a0d6970e5b9a" />
