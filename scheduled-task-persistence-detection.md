@@ -309,7 +309,254 @@ The `Hidden: true` flag is rare in legitimate scheduled tasks and high-signal wh
 <img width="1314" height="921" alt="image" src="https://github.com/user-attachments/assets/e629445a-2377-489e-ab3e-40ad042fdc86" />
 <img width="819" height="666" alt="image" src="https://github.com/user-attachments/assets/63e4df99-458d-4d88-8491-7b365b568641" />
 <img width="1601" height="713" alt="image" src="https://github.com/user-attachments/assets/6469f2a4-91a7-4ee7-9949-890521c3bfcc" />
-
+{
+  "_index": ".ds-winlogbeat-8.19.12-2026.03.19-000001",
+  "_id": "YJ0cJJ0Bx8v-C8UyxO__",
+  "_version": 1,
+  "_source": {
+    "@timestamp": "2026-03-25T08:29:15.686Z",
+    "message": "Process Create:\nRuleName: -\nUtcTime: 2026-03-25 08:29:15.679\nProcessGuid: {6e4a868b-9cdb-69c3-fd00-000000001800}\nProcessId: 6340\nImage: C:\\Windows\\System32\\whoami.exe\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\nDescription: whoami - displays logged on user information\nProduct: Microsoft® Windows® Operating System\nCompany: Microsoft Corporation\nOriginalFileName: whoami.exe\nCommandLine: \"C:\\Windows\\system32\\whoami.exe\"\nCurrentDirectory: C:\\Windows\\system32\\\nUser: NT AUTHORITY\\SYSTEM\nLogonGuid: {6e4a868b-97c2-69c3-e703-000000000000}\nLogonId: 0x3E7\nTerminalSessionId: 0\nIntegrityLevel: System\nHashes: MD5=43C2D3293AD939241DF61B3630A9D3B6,SHA256=1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A,IMPHASH=7FF0758B766F747CE57DFAC70743FB88\nParentProcessGuid: {6e4a868b-9cc5-69c3-f600-000000001800}\nParentProcessId: 6000\nParentImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\nParentCommandLine: \"powershell.exe\" -ep bypass -File C:\\Windows\\Tasks\\ld.ps1\nParentUser: NT AUTHORITY\\SYSTEM",
+    "host": {
+      "name": "DC01.lab2019.local"
+    },
+    "ecs": {
+      "version": "8.0.0"
+    },
+    "agent": {
+      "type": "winlogbeat",
+      "version": "8.19.12",
+      "ephemeral_id": "fde1598c-a29d-4435-a887-a43839be166b",
+      "id": "1751edc0-760c-4637-bf88-257c35b4f211",
+      "name": "DC01"
+    },
+    "winlog": {
+      "user": {
+        "identifier": "S-1-5-18",
+        "domain": "NT AUTHORITY",
+        "name": "SYSTEM",
+        "type": "User"
+      },
+      "record_id": 11282,
+      "version": 5,
+      "event_data": {
+        "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "Description": "whoami - displays logged on user information",
+        "ParentProcessGuid": "{6e4a868b-9cc5-69c3-f600-000000001800}",
+        "UtcTime": "2026-03-25 08:29:15.679",
+        "ProcessGuid": "{6e4a868b-9cdb-69c3-fd00-000000001800}",
+        "Hashes": "MD5=43C2D3293AD939241DF61B3630A9D3B6,SHA256=1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A,IMPHASH=7FF0758B766F747CE57DFAC70743FB88",
+        "ParentProcessId": "6000",
+        "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+        "ParentUser": "NT AUTHORITY\\SYSTEM",
+        "User": "NT AUTHORITY\\SYSTEM",
+        "ParentCommandLine": "\"powershell.exe\" -ep bypass -File C:\\Windows\\Tasks\\ld.ps1",
+        "Product": "Microsoft® Windows® Operating System",
+        "ProcessId": "6340",
+        "Company": "Microsoft Corporation",
+        "CommandLine": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "TerminalSessionId": "0",
+        "RuleName": "-",
+        "LogonGuid": "{6e4a868b-97c2-69c3-e703-000000000000}",
+        "IntegrityLevel": "System",
+        "OriginalFileName": "whoami.exe",
+        "Image": "C:\\Windows\\System32\\whoami.exe",
+        "CurrentDirectory": "C:\\Windows\\system32\\",
+        "LogonId": "0x3e7"
+      },
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "event_id": "1",
+      "task": "Process Create (rule: ProcessCreate)",
+      "computer_name": "DC01.lab2019.local",
+      "process": {
+        "pid": 3440,
+        "thread": {
+          "id": 4172
+        }
+      },
+      "opcode": "Info",
+      "api": "wineventlog",
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
+    },
+    "event": {
+      "created": "2026-03-25T08:29:16.940Z",
+      "code": "1",
+      "kind": "event",
+      "provider": "Microsoft-Windows-Sysmon",
+      "action": "Process Create (rule: ProcessCreate)"
+    },
+    "log": {
+      "level": "information"
+    }
+  },
+  "fields": {
+    "winlog.event_data.LogonId": [
+      "0x3e7"
+    ],
+    "winlog.event_data.ParentProcessId": [
+      "6000"
+    ],
+    "winlog.event_data.ProcessGuid": [
+      "{6e4a868b-9cdb-69c3-fd00-000000001800}"
+    ],
+    "winlog.provider_guid": [
+      "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
+    ],
+    "winlog.provider_name": [
+      "Microsoft-Windows-Sysmon"
+    ],
+    "winlog.computer_name": [
+      "DC01.lab2019.local"
+    ],
+    "winlog.process.pid": [
+      3440
+    ],
+    "winlog.event_data.ParentImage": [
+      "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    ],
+    "winlog.record_id": [
+      "11282"
+    ],
+    "winlog.event_data.CommandLine": [
+      "\"C:\\Windows\\system32\\whoami.exe\""
+    ],
+    "log.level": [
+      "information"
+    ],
+    "agent.name": [
+      "DC01"
+    ],
+    "host.name": [
+      "DC01.lab2019.local"
+    ],
+    "winlog.event_data.UtcTime": [
+      "2026-03-25 08:29:15.679"
+    ],
+    "winlog.event_data.OriginalFileName": [
+      "whoami.exe"
+    ],
+    "winlog.event_data.ParentProcessGuid": [
+      "{6e4a868b-9cc5-69c3-f600-000000001800}"
+    ],
+    "event.kind": [
+      "event"
+    ],
+    "winlog.event_data.Company": [
+      "Microsoft Corporation"
+    ],
+    "winlog.version": [
+      5
+    ],
+    "winlog.event_data.RuleName": [
+      "-"
+    ],
+    "winlog.event_data.User": [
+      "NT AUTHORITY\\SYSTEM"
+    ],
+    "agent.hostname": [
+      "DC01"
+    ],
+    "event.provider": [
+      "Microsoft-Windows-Sysmon"
+    ],
+    "event.code": [
+      "1"
+    ],
+    "winlog.event_data.FileVersion": [
+      "10.0.17763.1 (WinBuild.160101.0800)"
+    ],
+    "agent.id": [
+      "1751edc0-760c-4637-bf88-257c35b4f211"
+    ],
+    "ecs.version": [
+      "8.0.0"
+    ],
+    "event.created": [
+      "2026-03-25T08:29:16.940Z"
+    ],
+    "winlog.event_data.LogonGuid": [
+      "{6e4a868b-97c2-69c3-e703-000000000000}"
+    ],
+    "agent.version": [
+      "8.19.12"
+    ],
+    "winlog.event_data.Description": [
+      "whoami - displays logged on user information"
+    ],
+    "winlog.process.thread.id": [
+      4172
+    ],
+    "winlog.event_data.ParentUser": [
+      "NT AUTHORITY\\SYSTEM"
+    ],
+    "winlog.user.type": [
+      "User"
+    ],
+    "agent.type": [
+      "winlogbeat"
+    ],
+    "winlog.api": [
+      "wineventlog"
+    ],
+    "winlog.event_data.Hashes": [
+      "MD5=43C2D3293AD939241DF61B3630A9D3B6,SHA256=1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A,IMPHASH=7FF0758B766F747CE57DFAC70743FB88"
+    ],
+    "winlog.event_data.ProcessId": [
+      "6340"
+    ],
+    "winlog.user.identifier": [
+      "S-1-5-18"
+    ],
+    "winlog.task": [
+      "Process Create (rule: ProcessCreate)"
+    ],
+    "winlog.user.domain": [
+      "NT AUTHORITY"
+    ],
+    "winlog.event_data.IntegrityLevel": [
+      "System"
+    ],
+    "message": [
+      "Process Create:\nRuleName: -\nUtcTime: 2026-03-25 08:29:15.679\nProcessGuid: {6e4a868b-9cdb-69c3-fd00-000000001800}\nProcessId: 6340\nImage: C:\\Windows\\System32\\whoami.exe\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\nDescription: whoami - displays logged on user information\nProduct: Microsoft® Windows® Operating System\nCompany: Microsoft Corporation\nOriginalFileName: whoami.exe\nCommandLine: \"C:\\Windows\\system32\\whoami.exe\"\nCurrentDirectory: C:\\Windows\\system32\\\nUser: NT AUTHORITY\\SYSTEM\nLogonGuid: {6e4a868b-97c2-69c3-e703-000000000000}\nLogonId: 0x3E7\nTerminalSessionId: 0\nIntegrityLevel: System\nHashes: MD5=43C2D3293AD939241DF61B3630A9D3B6,SHA256=1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A,IMPHASH=7FF0758B766F747CE57DFAC70743FB88\nParentProcessGuid: {6e4a868b-9cc5-69c3-f600-000000001800}\nParentProcessId: 6000\nParentImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\nParentCommandLine: \"powershell.exe\" -ep bypass -File C:\\Windows\\Tasks\\ld.ps1\nParentUser: NT AUTHORITY\\SYSTEM"
+    ],
+    "winlog.event_id": [
+      "1"
+    ],
+    "winlog.user.name": [
+      "SYSTEM"
+    ],
+    "winlog.event_data.Image": [
+      "C:\\Windows\\System32\\whoami.exe"
+    ],
+    "event.action": [
+      "Process Create (rule: ProcessCreate)"
+    ],
+    "@timestamp": [
+      "2026-03-25T08:29:15.686Z"
+    ],
+    "winlog.channel": [
+      "Microsoft-Windows-Sysmon/Operational"
+    ],
+    "winlog.opcode": [
+      "Info"
+    ],
+    "agent.ephemeral_id": [
+      "fde1598c-a29d-4435-a887-a43839be166b"
+    ],
+    "winlog.event_data.CurrentDirectory": [
+      "C:\\Windows\\system32\\"
+    ],
+    "winlog.event_data.TerminalSessionId": [
+      "0"
+    ],
+    "winlog.event_data.ParentCommandLine": [
+      "\"powershell.exe\" -ep bypass -File C:\\Windows\\Tasks\\ld.ps1"
+    ],
+    "winlog.event_data.Product": [
+      "Microsoft® Windows® Operating System"
+    ]
+  }
+}
 
 
 
