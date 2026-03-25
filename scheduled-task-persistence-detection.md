@@ -268,6 +268,27 @@ The `Hidden: true` flag is rare in legitimate scheduled tasks and high-signal wh
 
 ---
 
+## Evasion Considerations
+
+The detection rules in this document are tuned to this specific implementation. They are high-signal starting points, not comprehensive coverage of T1053.005.
+
+Variations that would partially or fully evade these rules:
+
+| Variation | Rule 1 Impact | Rule 2 Impact |
+|---|---|---|
+| PowerShell executed without `-ep bypass` | Blind | Blind if TaskContent path differs |
+| Payload stored outside `C:\Windows\Tasks\` | Blind | Blind |
+| Encoded command (`-enc`) instead of `-File` | Blind | Caught if path still in TaskContent |
+| LOLBin execution instead of PowerShell | Blind | Caught if task registered via TSCH |
+| Task registered via WMI or COM directly | Blind | Blind — no EID 4698 |
+| Fileless execution — payload hosted remotely | Blind | Caught if task registered via TSCH |
+
+Rule 1 is the more brittle of the two — it relies on specific `ParentCommandLine` string matches. Rule 2 is more durable — it fires on the task registration event regardless of execution method, as long as the Tasks path appears in the XML. Broadening Rule 1 to hunt on `ParentImage` containing `powershell.exe` spawned from `svchost.exe` (Task Scheduler parent) would significantly improve coverage independent of command line arguments.
+
+These rules should be treated as a detection baseline, not a finished product.
+
+---
+
 ## Mitigations
 
 | Control | Detail |
