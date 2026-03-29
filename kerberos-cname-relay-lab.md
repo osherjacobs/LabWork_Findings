@@ -298,7 +298,8 @@ nxc smb 192.168.1.4 -u administrator -H 3c02b6b6fb6b3b17242dc33a31bc011f --share
 <img width="1856" height="300" alt="NXCWITHJSMITHHASH" src="https://github.com/user-attachments/assets/fb2ecaca-302d-4fa4-907c-79e9d29d7efe" />
 <img width="1813" height="293" alt="NXCWITHADMINHASH" src="https://github.com/user-attachments/assets/f6cc9c69-d5a9-4d3c-8e38-090d68581428" />
 <img width="1400" height="404" alt="HACKERACCOUNTADDED" src="https://github.com/user-attachments/assets/c1e5a656-f4d8-44e1-8b75-8dc2233722f6" />
-<img width="975" height="512" alt="HACKERACCOUNTADDEDPRIV" src="https://github.com/user-attachments/assets/61653f29-9f32-46bb-adc6-34ee97f1cabf" />
+<img width="1172" height="822" alt="HACKERACCOUNTADDEDPRIV" src="https://github.com/user-attachments/assets/74679282-b57b-4e7d-ae88-547d342ac75e" />
+
 
 
 
