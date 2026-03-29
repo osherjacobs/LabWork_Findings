@@ -1,5 +1,8 @@
 # Kerberos CNAME Relay → ADCS ESC8 → ESC1 → Domain Admin
 
+(Note: I’m using “Kerberos relay” as convenient shorthand. Technically, krbrelayx performs ticket coercion + reuse rather than classic real-time NTLM-style relaying. It captures the coerced TGS and reuses it to request the certificate directly.)
+
+
 **CVE-2026-20929 | Based on Cymulate Research (January 2026)**
 
 ---
