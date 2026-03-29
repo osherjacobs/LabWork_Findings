@@ -292,6 +292,7 @@ nxc smb 192.168.1.4 -u administrator -H 3c02b6b6fb6b3b17242dc33a31bc011f --share
 <img width="633" height="637" alt="mapkalimactoDCIP" src="https://github.com/user-attachments/assets/1bb6eb23-93cf-4998-995a-6cd654841b4c" />
 <img width="941" height="469" alt="MITM6SPOOFEDREPLIES" src="https://github.com/user-attachments/assets/8e4e277a-8837-4bd6-af4d-5204a037f83e" />
 <img width="1525" height="80" alt="CertificateidentityJSMITH" src="https://github.com/user-attachments/assets/d373cf4e-01b5-4dce-9105-de0533c9af30" />
+<img width="921" height="449" alt="relayx" src="https://github.com/user-attachments/assets/f81984fa-fa3a-4160-8a59-c66c6f16704b" />
 <img width="1468" height="223" alt="jsmithtgtsavedtoccache" src="https://github.com/user-attachments/assets/ba6721a7-1249-41c7-a96f-b822630ea9ab" />
 <img width="1697" height="130" alt="RECOVEREDNTHASHJSMITH" src="https://github.com/user-attachments/assets/9760ffbe-3a72-47b3-a533-05c7d8e9819c" />
 <img width="1335" height="316" alt="2026-03-29_16-16ADMINHASHVIAPKINIT" src="https://github.com/user-attachments/assets/7f5e341f-21d7-4852-9781-c074eb362788" />
