@@ -283,7 +283,7 @@ nxc smb 192.168.1.4 -u administrator -H 3c02b6b6fb6b3b17242dc33a31bc011f --share
 
 ## References
 
-- [Cymulate: Kerberos Authentication Relay Via CNAME Abuse (Jan 2026)](https://cymulate.com)](https://cymulate.com/blog/kerberos-authentication-relay-via-cname-abuse/
+- [Cymulate: Kerberos Authentication Relay Via CNAME Abuse (Jan 2026)](https://cymulate.com/blog/kerberos-authentication-relay-via-cname-abuse/)](https://cymulate.com/blog/kerberos-authentication-relay-via-cname-abuse/
 - [BenZamir/MITM6-Kerberos-CNAME-Abuse](https://github.com/BenZamir/MITM6-Kerberos-CNAME-Abuse)
 - [dirkjanm/krbrelayx](https://github.com/dirkjanm/krbrelayx)
 - [dirkjanm/PKINITtools](https://github.com/dirkjanm/PKINITtools)
