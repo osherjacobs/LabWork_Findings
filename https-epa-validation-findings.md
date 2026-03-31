@@ -245,6 +245,7 @@ All three are required. Any one alone is insufficient.
 <img width="1165" height="317" alt="CA0DBROWS" src="https://github.com/user-attachments/assets/86dc4187-eb58-49aa-af61-7a077b405d74" />
 <img width="851" height="477" alt="certbinding" src="https://github.com/user-attachments/assets/9bf97c3e-70b0-40a1-b18b-8a7dcd8c085e" 
 <img width="1013" height="750" alt="curlsslverok" src="https://github.com/user-attachments/assets/e9fea444-72bd-482d-a2d0-26f57c8423bb" />
+<img width="1013" height="750" alt="curlsslverok" src="https://github.com/user-attachments/assets/c8526a42-b098-4d67-bf19-0461da85fd72" />
 <img width="935" height="493" alt="krbrelayx401" src="https://github.com/user-attachments/assets/1d7c9ce3-aedd-4fb8-9be9-e672a21cbafc" />
 <img width="991" height="77" alt="require" src="https://github.com/user-attachments/assets/8b061cda-5b3a-47bc-9aca-e723bf66bff5" />
 
