@@ -171,15 +171,6 @@ Re-ran relay and trigger. Output:
 
 ---
 
-### Step 6 — Wire-Level Evidence
-
-The Wireshark capture confirms the two-leg relay architecture and the failure point:
-Frame 496 — Inbound coercion (WEB01B → Kali:80)
-jsmith's Kerberos AP-REQ arriving at the attacker listener. The Authorization: Negotiate header carries the full 4888-byte Kerberos token. The victim believes it is authenticating to fileserver.lab2019.local.
-Frame 501 — Outbound relay (Kali → DC01:443)
-krbrelayx initiating a TLS connection to the CA. SNI=dc01.lab2019.local confirms the relayed ticket is being forwarded to the correct ADCS endpoint over a separate TLS session — the session for which no CBT value exists in the relayed AP-REQ.
-Frame 515 — Failure propagated (Kali → WEB01B:80)
-krbrelayx returns HTTP 404 to the victim after receiving the CA's 401. The WWW-Authenticate: Negotiate header remains present — the relay completed; the CA rejected the authentication.
 
 ### Result
 
@@ -188,6 +179,18 @@ krbrelayx returns HTTP 404 to the victim after receiving the CA's 401. The WWW-A
 **Important sequence clarification:** jsmith's Kerberos ticket was successfully received and relayed by krbrelayx — the relay itself worked. The CSR was generated. The failure occurred specifically when krbrelayx POSTed the certificate request to ADCS over HTTPS. ADCS accepted the TLS connection but rejected the authentication with 401. The ticket was valid; the channel binding was not. The relayed AP-REQ did not contain a CBT value matching the TLS session between the attacker (Kali) and ADCS (DC01).
 
 ---
+
+### Step 6 — Wire-Level Evidence
+
+The Wireshark capture confirms the two-leg relay architecture and the precise failure point. Filter applied: (ip.addr == 192.168.1.242 && tcp.port == 80) || (ip.addr == 192.168.1.4 && tcp.port == 443)
+Frame 496 — Inbound coercion (WEB01B → Kali:80)
+jsmith's Kerberos AP-REQ arriving at the attacker listener. The Authorization: Negotiate header carries a 4888-byte Kerberos token. The victim believes it is authenticating to fileserver.lab2019.local. No CBT value is present — the inbound connection is plain HTTP, no TLS session exists from which to derive one.
+Frame 501 — Outbound relay (Kali → DC01:443)
+krbrelayx initiating a separate TLS session to the CA. SNI=dc01.lab2019.local confirms the correct ADCS endpoint. This is a new TLS session — entirely independent of anything the victim established. The relayed AP-REQ carries no CBT value bound to this session. This is the gap EPA=Require is designed to detect.
+Frame 515 — Failure propagated (Kali → WEB01B:80)
+krbrelayx returns HTTP 404 to the victim after receiving the CA's 401. The relay completed end-to-end. The failure was not in the relay mechanics — it was in the CA's channel binding validation.
+Key architectural point: the victim's connection to Kali is HTTP throughout. jsmith never sees HTTPS. The HTTPS session exists only between Kali and the CA — a session the victim has no part in and cannot bind to. This is why enforcing HTTPS on CertSrv breaks the relay: it creates a TLS context that the relayed credential cannot legitimately claim.
+
 
 ### Conclusions
 
