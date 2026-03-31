@@ -230,16 +230,6 @@ All three are required. Any one alone is insufficient.
 
 ---
 
-### Notes for Writeup Update
-
-- Update `kerberos-cname-relay-epa-bypass-detection.md` Overview with corrected mechanism statement
-- Update "Why EPA doesn't help here" section — clarify applies specifically to HTTP endpoints
-- Add validation section: "HTTPS + EPA blocks the relay — confirmed"
-- Add visual diagram
-- Update Mitigation section — HTTP must be disabled, not just EPA configured
-- Add upstream TLS termination caveat
-- Add EPA=WhenSupported production note
-- LinkedIn clarification comment: add link to updated writeup
 
 <img width="911" height="112" alt="binding" src="https://github.com/user-attachments/assets/3275270b-2020-43bc-9fbe-364089f25ebb" />
 <img width="1165" height="317" alt="CA0DBROWS" src="https://github.com/user-attachments/assets/86dc4187-eb58-49aa-af61-7a077b405d74" />
