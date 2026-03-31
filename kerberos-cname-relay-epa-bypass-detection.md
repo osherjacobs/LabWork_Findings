@@ -284,6 +284,9 @@ Kerberos signing and channel binding enforcement on other services (LDAP, SMB) r
 - [PKINITtools](https://github.com/dirkjanm/PKINITtools) — Dirk-jan Mollema
 - [mitm6-cname fork](https://github.com/osherjacobs/MITM6-Kerberos-CNAME-Abuse)
 
+<img width="1076" height="243" alt="eparequired" src="https://github.com/user-attachments/assets/635b288a-cafa-490b-9740-04dc3da94d59" />
+
+
 <img width="1461" height="838" alt="wireshark" src="https://github.com/user-attachments/assets/faf036a6-26a3-4e75-bb5c-ed9ac8b88713" />
 
 <img width="1840" height="705" alt="pwnagechain" src="https://github.com/user-attachments/assets/fd6bfd78-853a-4c78-a293-1db2a506ff10" />
