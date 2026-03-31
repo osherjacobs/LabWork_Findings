@@ -188,7 +188,10 @@ jsmith's Kerberos AP-REQ arriving at the attacker listener. The Authorization: N
 Frame 501 — Outbound relay (Kali → DC01:443)
 krbrelayx initiating a separate TLS session to the CA. SNI=dc01.lab2019.local confirms the correct ADCS endpoint. This is a new TLS session — entirely independent of anything the victim established. The relayed AP-REQ carries no CBT value bound to this session. This is the gap EPA=Require is designed to detect.
 Frame 515 — Failure propagated (Kali → WEB01B:80)
-krbrelayx returns HTTP 404 to the victim after receiving the CA's 401. The relay completed end-to-end. The failure was not in the relay mechanics — it was in the CA's channel binding validation.
+krbrelayx returns HTTP 404 to the victim after the CA rejected the certificate request with 401. The 404 is krbrelayx's own response to the victim — the CA's 401 is visible only in the krbrelayx debug output and in the encrypted TLS application data on the port 443 leg. 
+
+The relay completed end-to-end. The failure was not in the relay mechanics — it was in the CA's channel binding validation.
+
 Key architectural point: the victim's connection to Kali is HTTP throughout. jsmith never sees HTTPS. The HTTPS session exists only between Kali and the CA — a session the victim has no part in and cannot bind to. This is why enforcing HTTPS on CertSrv breaks the relay: it creates a TLS context that the relayed credential cannot legitimately claim.
 
 
