@@ -240,6 +240,8 @@ All three are required. Any one alone is insufficient.
 <img width="991" height="77" alt="require" src="https://github.com/user-attachments/assets/8b061cda-5b3a-47bc-9aca-e723bf66bff5" />
 <img width="1458" height="682" alt="image" src="https://github.com/user-attachments/assets/883dfe94-a64d-42db-b0a1-217e8c9ff02f" />
 <img width="1459" height="713" alt="image" src="https://github.com/user-attachments/assets/aed82296-3e6a-4e2f-afcb-c71453249fa6" />
+<img width="1476" height="810" alt="image" src="https://github.com/user-attachments/assets/f3c5c408-26be-4b4f-867b-9f36f44988cd" />
+
 
 
 
