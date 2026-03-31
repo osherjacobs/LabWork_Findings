@@ -279,7 +279,7 @@ Kerberos signing and channel binding enforcement on other services (LDAP, SMB) r
 ## References
 
 - [kerberos-cname-relay-lab.md](kerberos-cname-relay-lab.md) — lab build and full attack chain
-- [Cymulate CVE-2026-20929 research](https://cymulate.com) — original technique
+- [Cymulate CVE-2026-20929 research](https://cymulate.com/blog/kerberos-authentication-relay-via-cname-abuse/) — original technique
 - [krbrelayx](https://github.com/dirkjanm/krbrelayx) — Dirk-jan Mollema
 - [PKINITtools](https://github.com/dirkjanm/PKINITtools) — Dirk-jan Mollema
 - [mitm6-cname fork](https://github.com/osherjacobs/MITM6-Kerberos-CNAME-Abuse)
