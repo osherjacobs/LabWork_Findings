@@ -1,4 +1,4 @@
-<img width="935" height="493" alt="krbrelayx401" src="https://github.com/user-attachments/assets/05792434-cfca-4091-85a1-8e8edb0445be" /># Kerberos CNAME Relay — HTTPS + EPA Validation
+
 ## March 31, 2026
 
 ### Background
