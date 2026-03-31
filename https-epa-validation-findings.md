@@ -171,6 +171,15 @@ Re-ran relay and trigger. Output:
 
 ---
 
+Step 6 — Wire-Level Evidence
+The Wireshark capture confirms the two-leg relay architecture and the failure point:
+Frame 496 — Inbound coercion (WEB01B → Kali:80)
+jsmith's Kerberos AP-REQ arriving at the attacker listener. The Authorization: Negotiate header carries the full 4888-byte Kerberos token. The victim believes it is authenticating to fileserver.lab2019.local.
+Frame 501 — Outbound relay (Kali → DC01:443)
+krbrelayx initiating a TLS connection to the CA. SNI=dc01.lab2019.local confirms the relayed ticket is being forwarded to the correct ADCS endpoint over a separate TLS session — the session for which no CBT value exists in the relayed AP-REQ.
+Frame 515 — Failure propagated (Kali → WEB01B:80)
+krbrelayx returns HTTP 404 to the victim after receiving the CA's 401. The WWW-Authenticate: Negotiate header remains present — the relay completed; the CA rejected the authentication.
+
 ### Result
 
 **HTTP 401 from certfnsh.asp over HTTPS.**
