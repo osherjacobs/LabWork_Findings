@@ -171,7 +171,8 @@ Re-ran relay and trigger. Output:
 
 ---
 
-Step 6 — Wire-Level Evidence
+### Step 6 — Wire-Level Evidence
+
 The Wireshark capture confirms the two-leg relay architecture and the failure point:
 Frame 496 — Inbound coercion (WEB01B → Kali:80)
 jsmith's Kerberos AP-REQ arriving at the attacker listener. The Authorization: Negotiate header carries the full 4888-byte Kerberos token. The victim believes it is authenticating to fileserver.lab2019.local.
