@@ -317,3 +317,27 @@ Note: KQL does not support direct field-to-field comparison. The service name = 
 - [pywhisker](https://github.com/ShutdownRepo/pywhisker)
 - [PKINITtools](https://github.com/dirkjanm/PKINITtools)
 - [impacket](https://github.com/fortra/impacket)
+
+
+<img width="1877" height="952" alt="KIBANA" src="https://github.com/user-attachments/assets/7ac70133-c9a3-40e2-b412-b069a9f7a254" />
+
+<img width="1744" height="299" alt="proofnoaccesslowprivbefore" src="https://github.com/user-attachments/assets/fd7763db-c60b-48ff-98b6-9e72e6ec4132" />
+
+<img width="990" height="135" alt="grantfullcontrol" src="https://github.com/user-attachments/assets/019a5591-68cf-4f82-8bd0-3c5dceaefab7" />
+
+<img width="902" height="200" alt="Takeownership" src="https://github.com/user-attachments/assets/4a889d25-0207-432e-b274-b463642e634a" />
+
+<img width="1100" height="265" alt="WriteShadowCred" src="https://github.com/user-attachments/assets/7aad275c-d60a-4ee0-acc7-339ec2036c6c" />
+
+<img width="1244" height="249" alt="pkinittgt" src="https://github.com/user-attachments/assets/13f38a4a-f013-4f9d-b2dd-993f93f5d560" />
+
+<img width="1442" height="179" alt="extractnthash" src="https://github.com/user-attachments/assets/06b51b75-4b01-46b2-8d5c-1701d757c20e" />
+
+<img width="1166" height="395" alt="PTH" src="https://github.com/user-attachments/assets/13031e83-3eb3-414e-9842-f2e0d3435de4" />
+
+<img width="1442" height="179" alt="extractnthash" src="https://github.com/user-attachments/assets/3787650c-172f-48db-beb2-124dfb5203b2" />
+
+
+
+
+
