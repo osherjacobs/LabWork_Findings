@@ -335,7 +335,6 @@ Note: KQL does not support direct field-to-field comparison. The service name = 
 
 <img width="1166" height="395" alt="PTH" src="https://github.com/user-attachments/assets/13031e83-3eb3-414e-9842-f2e0d3435de4" />
 
-<img width="1442" height="179" alt="extractnthash" src="https://github.com/user-attachments/assets/3787650c-172f-48db-beb2-124dfb5203b2" />
 
 
 
