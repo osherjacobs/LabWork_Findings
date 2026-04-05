@@ -19,6 +19,8 @@ BloodHound path:
 LOWPRIV → MemberOf → MANAGERS → WriteOwner → CTO_BRO
 ```
 
+<img width="1813" height="482" alt="bloodhoundBEFORE" src="https://github.com/user-attachments/assets/80452103-767d-4b37-9c56-4117b4310c14" />
+
 ---
 
 ## Why Shadow Credentials Instead of a Password Reset
@@ -325,7 +327,6 @@ Note: KQL does not support direct field-to-field comparison. The service name = 
 - [impacket](https://github.com/fortra/impacket)
 
 
-<img width="1813" height="482" alt="bloodhoundBEFORE" src="https://github.com/user-attachments/assets/b9c64fb4-fb28-4e7c-9c93-1a9b51f96a57" />
 
 <img width="1877" height="952" alt="KIBANA" src="https://github.com/user-attachments/assets/7ac70133-c9a3-40e2-b412-b069a9f7a254" />
 
