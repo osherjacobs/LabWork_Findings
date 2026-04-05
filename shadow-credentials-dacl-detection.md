@@ -324,6 +324,9 @@ Note: KQL does not support direct field-to-field comparison. The service name = 
 - [PKINITtools](https://github.com/dirkjanm/PKINITtools)
 - [impacket](https://github.com/fortra/impacket)
 
+
+<img width="1813" height="482" alt="bloodhoundBEFORE" src="https://github.com/user-attachments/assets/b9c64fb4-fb28-4e7c-9c93-1a9b51f96a57" />
+
 <img width="1877" height="952" alt="KIBANA" src="https://github.com/user-attachments/assets/7ac70133-c9a3-40e2-b412-b069a9f7a254" />
 
 <img width="1744" height="299" alt="proofnoaccesslowprivbefore" src="https://github.com/user-attachments/assets/fd7763db-c60b-48ff-98b6-9e72e6ec4132" />
