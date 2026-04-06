@@ -261,7 +261,7 @@ winlog.event_data.CommandLine: *JAB*
 
 <img width="1040" height="594" alt="kalipayloaddelivery" src="https://github.com/user-attachments/assets/fde0bcd4-8dc3-4bae-b4a8-853d6c2d85ae" />
 
-<img width="1719" height="429" alt="keepasdbexfil" src="https://github.com/user-attachments/assets/d2d47385-830d-432e-81d6-671609a597e9" />
+<img width="1824" height="426" alt="keepasdbexfil" src="https://github.com/user-attachments/assets/83aa5af3-cc88-46b4-86e5-265af8e52efb" />
 
 <img width="1046" height="457" alt="shelloutputscreenshot4" src="https://github.com/user-attachments/assets/8d3e2d40-8b0e-42e2-a02e-dab60c38f45f" />
 
