@@ -5,7 +5,7 @@
 **Platform:** Windows Server 2022 Standard Evaluation (WIN-ATTACK.lab2019.local)  
 **Attacker:** Kali Linux — nxc (NetExec) v1.x  
 **Defender:** ELK SIEM (Kibana 8.19.12), Sysmon, Winlogbeat, Windows Security Auditing  
-**Prerequisite:** [Vector 2 writeup](https://github.com/osherjacobs/AD-Lab-Research/blob/main/scheduled-task-persistence-detection.md) — same evasion chain, extended with post-exploitation credential access.
+**Relevant prior reading:** [Vector 2 writeup](https://github.com/osherjacobs/AD-Lab-Research/blob/main/scheduled-task-persistence-detection.md) — same evasion chain, extended with post-exploitation credential access.
 
 > This is a detection engineering document. Payload internals and bypass mechanics are intentionally omitted. The focus is on what the telemetry looks like, where detection coverage exists, and where it ends.
 
