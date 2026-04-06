@@ -5,21 +5,25 @@
 **Platform:** Windows Server 2022 Standard Evaluation (WIN-ATTACK.lab2019.local)  
 **Attacker:** Kali Linux — nxc (NetExec) v1.x  
 **Defender:** ELK SIEM (Kibana 8.19.12), Sysmon, Winlogbeat, Windows Security Auditing  
-**Relevant prior reading:** [Vector 2 writeup](https://github.com/osherjacobs/AD-Lab-Research/blob/main/scheduled-task-persistence-detection.md) — same evasion chain, extended with post-exploitation credential access.
+**Prerequisite:** [Vector 2 writeup](./nxc-wmiexec-detection.md) — same evasion chain, extended with post-exploitation credential access.
 
 > This is a detection engineering document. Payload internals and bypass mechanics are intentionally omitted. The focus is on what the telemetry looks like, where detection coverage exists, and where it ends.
+
+The remote execution chain provides situational awareness and generates detectable telemetry. The exfiltration itself requires only administrative credentials and reachable admin SMB shares (C$) — both already available under the assumed breach model.
 
 ---
 
 ## Threat Model
 
-Assumed breach. Attacker has valid administrative credentials — Domain Admin is used here to simplify lab setup. The technique does not rely on Domain Admin specifically: any principal with remote execution rights to the target workstation can retrieve the vault once it is accessible. No exploit required.
+Assumed breach. Attacker has valid administrative credentials — Domain Admin is used here to simplify lab setup. The technique does not rely on Domain Admin specifically: any principal with remote execution rights to the target workstation and SMB access to the administrative shares can retrieve the vault. No exploit required.
 
-Target: a privileged administrative workstation (WIN-ATTACK.lab2019.local) running Windows Server 2022. A domain administrator has logged in to perform maintenance and left KeePass running with the credential vault unlocked. No idle lock policy is enforced.
+Target: a privileged administrative workstation (WIN-ATTACK.lab2019.local) running Windows Server 2022. KeePass is running — consistent with an administrator having recently logged in for maintenance. No idle lock policy is enforced.
 
 This is not a contrived scenario. Credential vaults are routinely present on jump hosts, management servers, and admin workstations. Administrators leave vaults open during maintenance windows. This lab collapses infrastructure roles into a single host to simplify demonstration of the detection chain.
 
 KeePass is representative of locally accessible credential vaults — KeePass, Password Safe, browser stores, exported PAM secrets. The detection problem is tool-agnostic: the telemetry gap exists for any locally readable secret store once the host is compromised.
+
+Note: the credential vault file (.kdbx) can be retrieved directly via SMB using administrative credentials — no remote command execution or shell is strictly required. The WMI execution step adds operational certainty: it confirms the KeePass process is active and reveals the exact user profile path before any exfiltration occurs. Profile paths are not always predictable across environments.
 
 **The attacker does not need to find the vault. They just need to look.**
 
@@ -49,7 +53,7 @@ Two independent layers working together. Neither alone is sufficient.
 
 ### Layer 1 — `--no-output` bypasses Defender's nxc signature
 
-By default nxc wmiexec executes commands as:
+nxc uses SMB as the transport protocol and wmiexec as the execution method. By default, wmiexec executes commands as:
 
 ```
 cmd.exe /Q /c [command] 1> C:\windows\temp\[guid].txt 2>&1
@@ -80,6 +84,13 @@ This chain was previously validated on Windows Server 2019. This document confir
 ---
 
 ## Attack Chain
+
+The execution chain serves two purposes:
+
+1. **Situational awareness** — confirming the KeePass process is active and locating the exact user profile path before exfiltration
+2. **Detection baseline** — generating the full telemetry chain for purple team validation
+
+The exfiltration step itself requires only administrative credentials and access to default admin shares (C$, ADMIN$).
 
 ### 1. Payload Pre-Staged
 
@@ -120,7 +131,7 @@ SHELL> tasklist | findstr -i keepass
 KeePass.exe    4000 Console    1    4,456 K
 ```
 
-KeePass running in Console session 1 — interactive desktop, vault open.
+KeePass process confirmed running in Console session 1. User profile path located via directory enumeration — not always predictable across environments. No dedicated detection rule fired for this reconnaissance step.
 
 ### 7. Credential Store Exfiltration
 
@@ -136,7 +147,7 @@ getting file \Users\Administrator.LAB2019\Documents\sysadminsecrets.kdbx
 of size 2087
 ```
 
-Credential vault is now on the attack box. Detection ends here.
+Credential vault is now on the attack box. Detection effectively ends once the file crosses the host boundary via legitimate SMB.
 
 ---
 
@@ -169,9 +180,9 @@ All five custom Kibana rules fired on WIN-ATTACK.lab2019.local:
 
 ### The Blind Spot
 
-The SIEM captures every stage of execution. It cannot observe what happens once the credential store leaves the host boundary.
+The SIEM captures every stage of execution on the host. It cannot observe what happens once the credential store leaves the host boundary over an allowed protocol.
 
-At that point, the problem is no longer endpoint detection — it is data control.
+At that point, the problem shifts from endpoint detection to data control and egress protection.
 
 ---
 
@@ -222,8 +233,9 @@ winlog.event_data.CommandLine: *JAB*
 | Credential vault accessible post-compromise | Store vaults on dedicated PAM infrastructure, not workstations or servers with network exposure |
 | No idle lock policy | Enforce auto-lock on session switch and after inactivity: Tools → Settings → Security |
 | Administrative SMB shares reachable | Restrict C$ and ADMIN$ access via host-based firewall rules scoped to management subnets |
-| Detection ends at exfil | Implement DLP controls on sensitive file extensions (.kdbx) at network egress |
+| Detection ends at exfil | Implement DLP controls on sensitive file extensions (.kdbx, .psafe3) at network egress |
 | No alert on vault file access | Set SACL on .kdbx files — EID 4663 on read access provides pre-exfil detection opportunity |
+| High-privilege SMB reads of sensitive extensions | Monitor EID 5145 for .kdbx/.psafe3 reads combined with prior process enumeration activity |
 
 ---
 
@@ -245,13 +257,16 @@ winlog.event_data.CommandLine: *JAB*
 
 | Tool | Purpose |
 |---|---|
-| nxc (NetExec) | Remote WMI execution |
+| nxc (NetExec) | Remote WMI execution via SMB |
 | ncat (TLS) | Encrypted reverse shell listener |
 | smbclient | Credential vault exfiltration |
 | Sysmon 15.20 | Process and network telemetry |
 | Winlogbeat 8.19.12 | Log shipping to ELK |
 | Kibana 8.19.12 | SIEM alerting and rule analysis |
 
+---
+
+*Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
 ---
 <img width="1715" height="917" alt="kibanarules" src="https://github.com/user-attachments/assets/90db4b52-5adb-4bc2-bec3-672cf0ba6397" />
 
