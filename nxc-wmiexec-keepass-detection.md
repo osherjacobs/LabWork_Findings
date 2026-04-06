@@ -253,5 +253,22 @@ winlog.event_data.CommandLine: *JAB*
 | Kibana 8.19.12 | SIEM alerting and rule analysis |
 
 ---
+<img width="1715" height="917" alt="kibanarules" src="https://github.com/user-attachments/assets/90db4b52-5adb-4bc2-bec3-672cf0ba6397" />
+
+<img width="1843" height="583" alt="kibanarules1" src="https://github.com/user-attachments/assets/303e2614-3ab5-45aa-bb01-8690f1cbca01" />
+
+<img width="1002" height="591" alt="antiviruson" src="https://github.com/user-attachments/assets/1bd868dc-0c67-4d8f-8aa3-5bdc9df3dc60" />
+
+<img width="1040" height="594" alt="kalipayloaddelivery" src="https://github.com/user-attachments/assets/fde0bcd4-8dc3-4bae-b4a8-853d6c2d85ae" />
+
+<img width="1719" height="429" alt="keepasdbexfil" src="https://github.com/user-attachments/assets/d2d47385-830d-432e-81d6-671609a597e9" />
+
+<img width="1046" height="457" alt="shelloutputscreenshot4" src="https://github.com/user-attachments/assets/8d3e2d40-8b0e-42e2-a02e-dab60c38f45f" />
+
+<img width="878" height="767" alt="virusdefinitionstatus" src="https://github.com/user-attachments/assets/6adb4f97-ce88-4aa2-9346-373268a63498" />
+
+
+
+
 
 *Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
