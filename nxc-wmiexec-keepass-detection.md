@@ -1,4 +1,4 @@
-# nxc wmiexec + KeePass Credential Exfiltration — Detection Chain Analysis
+# nxc SMB/wmiexec + KeePass Credential Exfiltration — Detection Chain Analysis
 ## Windows Server 2022 Privileged Workstation — Purple Team Lab (Vector 3)
 
 **Date:** 2026-04-06  
