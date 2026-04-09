@@ -25,7 +25,7 @@ KeePass is representative of locally accessible credential vaults — KeePass, P
 
 Note: the credential vault file (.kdbx) can be retrieved directly via SMB using administrative credentials — no remote command execution or shell is strictly required. The WMI execution step adds operational certainty: it confirms the KeePass process is active and reveals the exact user profile path before any exfiltration occurs. Profile paths are not always predictable across environments.
 
-**The attacker does not need to crack the vault (yet). They just need to find the file."**
+**The attacker does not need to crack the vault (yet). They just need to find the file.**
 
 ---
 
