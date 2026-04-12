@@ -6,11 +6,33 @@
 
 ---
 
+## ⚠️ Update — April 12, 2026
+
+**The lab DC was not unpatched.**
+
+The evaluation ISO shipped at build `26100.32230` — above the patch threshold (`~26100.4061`, KB5058383, April 2025 Patch Tuesday). No cumulative updates were applied post-install; the fix was baked into the ISO. Windows Update history confirms only Defender definition updates were applied after provisioning.
+
+**What this means:**
+- All references to "unpatched DC" in this writeup should be read as "assumed unpatched DC"
+- The correct patch threshold is `26100.4061`, not `26100.4946` as previously stated
+- To reproduce against a genuinely unpatched target: use the RTM evaluation ISO (`26100.1`) and block Windows Update before first boot
+
+**What remains valid:**
+- The KDC returns a valid TGS on this build — the primitive survives the patch at the protocol level
+- Rubeus crashes parsing the response on this build
+- The detection rule is unaffected — `msDS-ManagedAccountPrecededByLink` write is the invariant regardless of patch level
+
+**Open question:** Whether the primitive surviving on a patched build reflects incomplete patching, intentional protocol behavior, or a tooling artifact that mimics a successful KDC exchange is unresolved. A confirmed RTM build is required to separate these hypotheses.
+
+*Primitive survives. Exploit doesn't. More research ahead.*
+
+---
+
 ## Executive Summary
 
-This writeup documents a full purple team lab execution of the Bad Successor dMSA privilege escalation technique (CVE-2025-29810) against an intentionally unpatched Windows Server 2025 Domain Controller. The goal was to validate the attack chain end-to-end, capture detection telemetry in ELK, and produce a production-grade Kibana detection rule.
+This writeup documents a purple team lab execution of the Bad Successor dMSA privilege escalation technique (CVE-2025-29810) against a Windows Server 2025 Domain Controller (build 26100.32230 — assumed unpatched at time of testing; see update above). The goal was to validate the attack chain end-to-end, capture detection telemetry in ELK, and produce a production-grade Kibana detection rule.
 
-**Result:** The KDC-side primitive is confirmed working at the protocol level. DA was not achieved due to unfixed parsing bugs in all available public tooling. This creates a gap between theoretical exploitability and practical weaponization. The detection rule is valid, tested, and ready for production deployment.
+**Result:** The KDC-side primitive is confirmed working at the protocol level on this build. DA was not achieved due to unfixed parsing bugs in all available public tooling. This creates a gap between theoretical exploitability and practical weaponization. The detection rule is valid, tested, and ready for production deployment.
 
 ---
 
@@ -20,11 +42,11 @@ This writeup documents a full purple team lab execution of the Bad Successor dMS
 |---|---|---|---|
 | Kali | 192.168.1.218 | Kali Linux | Attacker |
 | WIN-ATTACK | 192.168.1.83 | Server 2022 Standard Eval | Domain-joined attack platform |
-| DC02 (WIN-G4OJKPN3TOV) | 192.168.1.4 | Server 2025 Datacenter Eval Build 26100.32230 | Unpatched DC |
+| DC02 (WIN-G4OJKPN3TOV) | 192.168.1.4 | Server 2025 Datacenter Eval — Build 26100.32230 | DC (assumed unpatched — see update) |
 | ELK | 192.168.1.250 | Ubuntu | SIEM (Elasticsearch + Kibana) |
 
 **Domain:** `badsuccessor.local`  
-**Patch threshold:** 26100.4946 (DC02 is below — vulnerable)  
+**Actual patch status:** Build 26100.32230 is above the patch threshold (26100.4061). See update note.  
 **DA account:** `Administrator` (built-in)  
 **DC local admin (console access):** `ubuntu`  
 **Low-privilege attacker:** `lowpriv`
@@ -37,9 +59,9 @@ In May 2025, Yuval Gordon (Akamai) published [BadSuccessor](https://www.akamai.c
 
 **Pre-patch primitive:** An attacker with `CreateChild` over any OU could create a dMSA, set `msDS-ManagedAccountPrecededByLink` to a DA account, and request a Kerberos ticket inheriting the DA's credentials.
 
-**Post-patch:** Microsoft patched the `CreateChild` abuse path. The post-patch primitive (documented by Yuval and expanded by SpecterOps) requires `GenericWrite` on a target object plus `CreateChild` on an OU — a more constrained but still realistic misconfiguration in real environments.
+**Post-patch:** Microsoft patched the `CreateChild` abuse path (KB5058383, build 26100.4061). The post-patch primitive (documented by Yuval and expanded by SpecterOps) requires `GenericWrite` on a target object plus `CreateChild` on an OU — a more constrained but still realistic misconfiguration in real environments.
 
-This lab targets the **pre-patch primitive** on an intentionally unpatched DC.
+This lab targeted the **pre-patch primitive** on what was assumed to be an unpatched DC. The DC was in fact patched. See update note.
 
 ---
 
@@ -60,7 +82,7 @@ Server 2025 enforces LDAP signing by default. This blocked **every Linux-side LD
 - `powerview` (Kali) — connected but couldn't find objects due to signing
 - Registry modification (`LDAPServerIntegrity=0`) — GPO kept overriding it back
 
-**Resolution:** All attribute writes were performed from WIN-ATTACK using native Windows AD cmdlets, which handle LDAP signing transparently. This requires execution from a domain-joined context, which may not always be available to an attacker — a real operational constraint.
+**Resolution:** All attribute writes were performed from WIN-ATTACK using native Windows AD cmdlets, which handle LDAP signing transparently. This requires execution from a domain-joined context — a real operational constraint that limits the Linux-side attack surface significantly.
 
 ### Defender
 Every attack binary was flagged before reaching the target:
@@ -76,7 +98,7 @@ Defender had to be disabled on WIN-ATTACK to transfer binaries. Even with real-t
 DS Change auditing (`Directory Service Changes`) was not enabled by default. `auditpol` commands succeeded but were overridden by GPO until `gpupdate /force` was run. Object-level SACLs also needed to be set on the dMSA object itself — container-level SACLs alone were insufficient.
 
 ### Tooling Archaeology
-An outdated 2022 Rubeus build carried over from a previous HTB lab -I found worked for most things- had no `/dmsa` support — three years before dMSA was implemented. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
+An outdated 2022 Rubeus build carried over from a previous HTB lab had no `/dmsa` support — three years before dMSA was implemented. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
 
 ---
 
@@ -135,7 +157,7 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Rubeus.PA_DMSA_KEY_PACKAGE..ctor(AsnElt body)
 ```
 
-**Interpretation:** The TGS response was successfully returned by the KDC before Rubeus crashed during parsing. This is a client-side bug, not a server-side rejection. The vulnerability is functioning as expected at the protocol level.
+**Interpretation:** The TGS response was successfully returned by the KDC before Rubeus crashed during parsing. This is a client-side bug, not a server-side rejection. The vulnerability is functioning at the protocol level — on a build that should be patched (see update note). Whether this reflects incomplete patching or tooling behavior that mimics a successful exchange is an open question.
 
 The ticket arrives. Rubeus can't read it.
 
@@ -159,7 +181,7 @@ Multiple fix attempts were made during this lab with null guards and index adjus
 
 In testing against fully hardened Server 2025 DCs with LDAP signing enforced, SharpSuccessor intermittently failed to apply the `msDS-ManagedAccountPrecededByLink` attribute despite reporting success. The tool dropped the critical attribute write silently. Confirmed by querying the DC directly after each tool run.
 
-**Implication:** The detection rule will not fire if SharpSuccessor is used as the sole attack tool against a hardened Server 2025 DC — because the attack itself did not succeed.
+**Implication:** The detection rule will not fire if SharpSuccessor is used as the sole attack tool against a hardened Server 2025 DC where the attribute write silently fails — because the attack itself did not succeed.
 
 ---
 
@@ -213,9 +235,10 @@ not winlog.event_data.SubjectUserSid: "S-1-5-18"
 
 | Finding | Status |
 |---|---|
-| KDC issues dMSA TGS response on unpatched Server 2025 | ✅ Confirmed |
+| KDC returns dMSA TGS response on build 26100.32230 | ✅ Confirmed |
 | EID 5136 fires on attribute write | ✅ Confirmed |
 | Kibana rule validated against live telemetry | ✅ Confirmed |
+| DC was genuinely unpatched | ❌ Incorrect — build 26100.32230 is above patch threshold |
 | DA achieved via public tooling | ❌ Not achieved |
 | GhostPack Rubeus /dmsa parsing bug | ❌ Unfixed in public repo |
 | SharpSuccessor reliable against hardened Server 2025 | ❌ Intermittent silent failure |
@@ -225,13 +248,34 @@ not winlog.event_data.SubjectUserSid: "S-1-5-18"
 
 ## Conclusions
 
-The Bad Successor dMSA attack primitive is viable at the protocol and KDC level on unpatched Windows Server 2025 DCs. Public tooling cannot currently complete the attack chain end-to-end without modification. This creates a gap between theoretical exploitability and practical weaponization.
+The Bad Successor dMSA attack primitive surfaces at the protocol level on build 26100.32230 — a build that should be patched. Whether this reflects incomplete patching, residual protocol behavior, or a tooling artifact is unresolved without a confirmed RTM baseline.
 
-The SpecterOps demonstration (October 2025) suggests their chain relied on functionality not currently present in public tooling.
+Public tooling cannot currently complete the attack chain end-to-end without modification. The SpecterOps demonstration (October 2025) suggests their chain relied on functionality not present in current public releases.
 
-The detection is **tool-agnostic** — the invariant is a critical attribute write in the attack chain, not the tool. Any implementation that successfully writes `msDS-ManagedAccountPrecededByLink` will trigger EID 5136. The rule is production-ready.
+The detection is **tool-agnostic** — the invariant is the attribute write, not the tool. Any implementation that successfully writes `msDS-ManagedAccountPrecededByLink` will trigger EID 5136. The rule is production-ready.
 
-**Patch recommendation:** Update Server 2025 DCs to build 26100.4946 or later.
+**Patch recommendation:** Update Server 2025 DCs to build 26100.4061 or later (KB5058383).
+
+---
+
+## Further Research
+
+The following questions are unresolved and represent the direction of follow-on work:
+
+1. **Does the primitive genuinely survive the patch?**  
+   Reproduce Step 3 against a confirmed RTM build (26100.1) with Windows Update fully blocked. If the KDC returns a valid TGS there too, the patch is not closing the protocol primitive — only the privilege path to `CreateChild`. If it fails, the result on 26100.32230 was a tooling artifact.
+
+2. **Can the Rubeus parsing bug be fixed?**  
+   The `PA_DMSA_KEY_PACKAGE` ASN.1 parser crashes on the `previousKeys` OPTIONAL field. A correct fix would add null guards and handle absent fields per the RFC. The question is whether a correctly parsed ticket on a patched build contains usable DA key material or zeroed/stub values — the patch may be operating at the key material level rather than the TGS issuance level.
+
+3. **Post-patch primitive (GenericWrite path)**  
+   SpecterOps documented a post-patch path requiring `GenericWrite` on a target object. This lab did not test that path. It represents the realistic misconfiguration vector in environments that have applied KB5058383.
+
+4. **Detection coverage on RTM build**  
+   Validate that EID 5136 fires identically on a confirmed unpatched (26100.1) DC. The detection rule should be build-agnostic, but telemetry confirmation on RTM is outstanding.
+
+5. **SharpSuccessor reliability under LDAP signing**  
+   The intermittent silent attribute write failure against hardened Server 2025 is undocumented. Whether this is a race condition, a signing negotiation timing issue, or a bug in the tool's LDAP write handling deserves a dedicated investigation.
 
 ---
 
