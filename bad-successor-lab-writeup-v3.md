@@ -8,7 +8,7 @@
 
 ## ⚠️ Update — April 12, 2026
 
-**The lab DC was not unpatched.**
+**The lab DC was already patched.**
 
 The evaluation ISO shipped at build `26100.32230` — above the patch threshold (`~26100.4946`, KB5063878, August 2025 Patch Tuesday). No cumulative updates were applied post-install; the fix was baked into the ISO. Windows Update history confirms only Defender definition updates were applied after provisioning.
 
@@ -61,7 +61,7 @@ In May 2025, Yuval Gordon (Akamai) published [BadSuccessor](https://www.akamai.c
 
 **Post-patch:** Microsoft patched the `CreateChild` abuse path (KB5063878, build 26100.4946). The post-patch primitive (documented by Yuval and expanded by SpecterOps) requires `GenericWrite` on a target object plus `CreateChild` on an OU — a more constrained but still realistic misconfiguration in real environments.
 
-This lab targeted the **pre-patch primitive** on what was assumed to be an unpatched DC. The DC was in fact patched. See update note.
+This lab attempted to reproduce the **pre-patch primitive** on what was assumed to be an unpatched DC. The DC was in fact already patched. See update note.
 
 ---
 
