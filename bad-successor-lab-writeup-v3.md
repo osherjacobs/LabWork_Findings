@@ -241,7 +241,7 @@ The detection is **tool-agnostic** — the invariant is a critical attribute wri
 - [SpecterOps — The (Near) Return of the King](https://specterops.io/blog/2025/10/20/the-near-return-of-the-king/)
 - [logangoins/SharpSuccessor](https://github.com/logangoins/SharpSuccessor)
 - [GhostPack/Rubeus](https://github.com/GhostPack/Rubeus)
-- [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
+
 
 <img width="1869" height="826" alt="kibanabadsuccessoralert" src="https://github.com/user-attachments/assets/b43bfeed-0fe8-4d59-a4ea-be3a99d2bb8b" />
 
