@@ -245,6 +245,7 @@ The detection is **tool-agnostic** — the invariant is a critical attribute wri
 - [GhostPack/Rubeus](https://github.com/GhostPack/Rubeus)
 
 
+
 <img width="1869" height="826" alt="kibanabadsuccessoralert" src="https://github.com/user-attachments/assets/b43bfeed-0fe8-4d59-a4ea-be3a99d2bb8b" />
 
 <img width="1494" height="403" alt="SharpSuccessor1" src="https://github.com/user-attachments/assets/3cc342e9-b935-48eb-a9df-70c7130323d2" />
@@ -252,6 +253,9 @@ The detection is **tool-agnostic** — the invariant is a critical attribute wri
 <img width="1854" height="729" alt="Rubeusasktgs" src="https://github.com/user-attachments/assets/bd54fe08-d0cc-4472-bb49-600d69eb5a9e" />
 
 <img width="1850" height="537" alt="Rubeustgtdeleg" src="https://github.com/user-attachments/assets/f3ddeb26-c122-4e53-9e64-5b04ef0fc090" />
+
+<img width="1420" height="875" alt="image" src="https://github.com/user-attachments/assets/38547d1b-9708-43e3-a67e-867cda88495e" />
+
 
 {
   "_index": ".internal.alerts-security.alerts-default-000001",
