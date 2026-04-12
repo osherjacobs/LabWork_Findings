@@ -221,13 +221,15 @@ not winlog.event_data.SubjectUserSid: "S-1-5-18"
 
 **Severity:** Critical  
 **Risk Score:** 90  
-**False Positive Rate:** No known legitimate use cases in typical enterprise environments.
+**False Positive Rate:** No common legitimate use cases in typical enterprise environments.
 
 **MITRE ATT&CK:**
 - Tactic: Privilege Escalation (TA0004)
 - Technique: Account Manipulation (T1098)
 
 **Tags:** `Active Directory`, `Privilege Escalation`, `dMSA`, `Bad Successor`, `CVE-2025-29810`, `Windows Server 2025`
+
+> **⚠️ Note:** The Kibana rule description embedded in the alert JSON below contains a stale patch threshold (`26100.4946`). The correct threshold is `26100.4061` (KB5058383, April 2025 Patch Tuesday). Update the rule description in Kibana before deploying to production.
 
 ---
 
