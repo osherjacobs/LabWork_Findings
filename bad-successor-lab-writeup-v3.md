@@ -10,7 +10,7 @@
 
 This writeup documents a full purple team lab execution of the Bad Successor dMSA privilege escalation technique (CVE-2025-29810) against an intentionally unpatched Windows Server 2025 Domain Controller. The goal was to validate the attack chain end-to-end, capture detection telemetry in ELK, and produce a production-grade Kibana detection rule.
 
-**Result:** The KDC-side primitive is confirmed working at the protocol level. DA was not achieved due to unfixed parsing bugs in all available public tooling (that I could find...). This creates a gap between theoretical exploitability and practical weaponization. The detection rule is valid, tested, and ready for production deployment.
+**Result:** The KDC-side primitive is confirmed working at the protocol level. DA was not achieved due to unfixed parsing bugs in all available public tooling. This creates a gap between theoretical exploitability and practical weaponization. The detection rule is valid, tested, and ready for production deployment.
 
 ---
 
@@ -76,7 +76,7 @@ Defender had to be disabled on WIN-ATTACK to transfer binaries. Even with real-t
 DS Change auditing (`Directory Service Changes`) was not enabled by default. `auditpol` commands succeeded but were overridden by GPO until `gpupdate /force` was run. Object-level SACLs also needed to be set on the dMSA object itself — container-level SACLs alone were insufficient.
 
 ### Tooling Archaeology
-The Rubeus binary in my Kali tools folder was from February 2022 — three years before dMSA support was added. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
+An outdated 2022 Rubeus build carried over from a previous HTB lab had no `/dmsa` support — three years before dMSA was implemented. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
 
 ---
 
@@ -225,7 +225,7 @@ not winlog.event_data.SubjectUserSid: "S-1-5-18"
 
 ## Conclusions
 
-The Bad Successor dMSA attack primitive is viable at the protocol and KDC level on unpatched Windows Server 2025 DCs. Public tooling -at least that I was able to find- cannot currently complete the attack chain end-to-end without modification. This creates a gap between theoretical exploitability and practical weaponization.
+The Bad Successor dMSA attack primitive is viable at the protocol and KDC level on unpatched Windows Server 2025 DCs. Public tooling cannot currently complete the attack chain end-to-end without modification. This creates a gap between theoretical exploitability and practical weaponization.
 
 The SpecterOps demonstration (October 2025) suggests their chain relied on functionality not currently present in public tooling.
 
