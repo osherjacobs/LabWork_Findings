@@ -25,7 +25,8 @@ This writeup documents a full purple team lab execution of the Bad Successor dMS
 
 **Domain:** `badsuccessor.local`  
 **Patch threshold:** 26100.4946 (DC02 is below — vulnerable)  
-**DA account:** `ubuntu`  
+**DA account:** `Administrator` (built-in)  
+**DC local admin (console access):** `ubuntu`  
 **Low-privilege attacker:** `lowpriv`
 
 ---
@@ -233,6 +234,7 @@ The detection is **tool-agnostic** — the invariant is a critical attribute wri
 **Patch recommendation:** Update Server 2025 DCs to build 26100.4946 or later.
 
 ---
+
 
 ## References
 
