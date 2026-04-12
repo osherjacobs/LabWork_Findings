@@ -8,7 +8,7 @@
 
 ## ⚠️ Update — April 12, 2026
 
-**The lab DC was not unpatched.**
+**The lab DC was NOT unpatched.**
 
 The evaluation ISO shipped at build `26100.32230` — above the patch threshold (`~26100.4061`, KB5058383, April 2025 Patch Tuesday). No cumulative updates were applied post-install; the fix was baked into the ISO. Windows Update history confirms only Defender definition updates were applied after provisioning.
 
