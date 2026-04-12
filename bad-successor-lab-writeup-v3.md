@@ -18,11 +18,11 @@ The evaluation ISO shipped at build `26100.32230` — above the patch threshold 
 - To reproduce against a genuinely unpatched target: use the RTM evaluation ISO (`26100.1`) and block Windows Update before first boot
 
 **What remains valid:**
-- The KDC returns a valid TGS on this build — the primitive survives the patch at the protocol level
+- The KDC returns a valid TGS on this build — the primitive appears to survive the patch at the protocol level
 - Rubeus crashes parsing the response on this build
 - The detection rule is unaffected — `msDS-ManagedAccountPrecededByLink` write is the invariant regardless of patch level
 
-**Open question:** Whether the primitive surviving on a patched build reflects incomplete patching, intentional protocol behavior, or a tooling artifact that mimics a successful KDC exchange is unresolved. A confirmed RTM build is required to separate these hypotheses.
+**Open question:** Whether the primitive (seemingly) surviving on a patched build reflects incomplete patching, intentional protocol behavior, or a tooling artifact that mimics a successful KDC exchange is unresolved. A confirmed RTM build is required to separate these hypotheses.
 
 *Primitive survives. Exploit doesn't. More research ahead.*
 
