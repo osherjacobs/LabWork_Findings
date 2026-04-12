@@ -237,7 +237,7 @@ The detection is **tool-agnostic** — the invariant is a critical attribute wri
 ## References
 
 - [Akamai — BadSuccessor: Abusing dMSA for Privilege Escalation](https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory)
-- [Yuval Gordon — BadSuccessor Is Dead, Long Live BadSuccessor(?)](https://www.akamai.com/blog/security-research/badsuccessor-is-dead-long-live-badsuccessor)
+- [Yuval Gordon — BadSuccessor Is Dead, Long Live BadSuccessor(?)](https://www.akamai.com/blog/security-research/badsuccessor-is-dead-analyzing-badsuccessor-patch)
 - [SpecterOps — The (Near) Return of the King](https://specterops.io/blog/2025/10/20/the-near-return-of-the-king/)
 - [logangoins/SharpSuccessor](https://github.com/logangoins/SharpSuccessor)
 - [GhostPack/Rubeus](https://github.com/GhostPack/Rubeus)
