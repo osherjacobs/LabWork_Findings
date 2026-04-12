@@ -76,7 +76,7 @@ Defender had to be disabled on WIN-ATTACK to transfer binaries. Even with real-t
 DS Change auditing (`Directory Service Changes`) was not enabled by default. `auditpol` commands succeeded but were overridden by GPO until `gpupdate /force` was run. Object-level SACLs also needed to be set on the dMSA object itself — container-level SACLs alone were insufficient.
 
 ### Tooling Archaeology
-The Rubeus binary shipping with Kali was from February 2022 — three years before dMSA support was added. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
+The Rubeus binary in my Kali tools folder was from February 2022 — three years before dMSA support was added. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
 
 ---
 
