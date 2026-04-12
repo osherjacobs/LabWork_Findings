@@ -10,7 +10,7 @@
 
 This writeup documents a full purple team lab execution of the Bad Successor dMSA privilege escalation technique (CVE-2025-29810) against an intentionally unpatched Windows Server 2025 Domain Controller. The goal was to validate the attack chain end-to-end, capture detection telemetry in ELK, and produce a production-grade Kibana detection rule.
 
-**Result:** The KDC-side primitive is confirmed working at the protocol level. DA was not achieved due to unfixed parsing bugs in all available public tooling. This creates a gap between theoretical exploitability and practical weaponization. The detection rule is valid, tested, and ready for production deployment.
+**Result:** The KDC-side primitive is confirmed working at the protocol level. DA was not achieved due to unfixed parsing bugs in all available public tooling (that I could find...). This creates a gap between theoretical exploitability and practical weaponization. The detection rule is valid, tested, and ready for production deployment.
 
 ---
 
