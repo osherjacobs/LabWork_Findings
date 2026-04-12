@@ -225,7 +225,7 @@ not winlog.event_data.SubjectUserSid: "S-1-5-18"
 
 ## Conclusions
 
-The Bad Successor dMSA attack primitive is viable at the protocol and KDC level on unpatched Windows Server 2025 DCs. Public tooling cannot currently complete the attack chain end-to-end without modification. This creates a gap between theoretical exploitability and practical weaponization.
+The Bad Successor dMSA attack primitive is viable at the protocol and KDC level on unpatched Windows Server 2025 DCs. Public tooling -at least that I was able to find- cannot currently complete the attack chain end-to-end without modification. This creates a gap between theoretical exploitability and practical weaponization.
 
 The SpecterOps demonstration (October 2025) suggests their chain relied on functionality not currently present in public tooling.
 
