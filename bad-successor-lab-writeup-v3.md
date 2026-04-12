@@ -76,7 +76,7 @@ Defender had to be disabled on WIN-ATTACK to transfer binaries. Even with real-t
 DS Change auditing (`Directory Service Changes`) was not enabled by default. `auditpol` commands succeeded but were overridden by GPO until `gpupdate /force` was run. Object-level SACLs also needed to be set on the dMSA object itself — container-level SACLs alone were insufficient.
 
 ### Tooling Archaeology
-An outdated 2022 Rubeus build carried over from a previous HTB lab had no `/dmsa` support — three years before dMSA was implemented. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
+An outdated 2022 Rubeus build carried over from a previous HTB lab -I found worked for most things- had no `/dmsa` support — three years before dMSA was implemented. GhostPack does not use tagged releases; the version string `v2.3.3` was identical between the 2022 binary and the 2026 master build. No way to tell from version alone.
 
 ---
 
