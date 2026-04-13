@@ -308,6 +308,8 @@ CVE-2025-53779 was patched in the August 2025 Patch Tuesday update. The patch re
 
 This lab deliberately uses a pre-patch ISO (26100.0001, UBR=1) to reproduce the original vulnerability. The detection signals documented here remain valid for identifying exploitation attempts in environments that have not applied the patch, and for post-compromise forensic analysis.
 
+Akamai's post-patch analysis confirms the underlying technique survives in modified form — credential harvesting and account takeover remain viable where an attacker controls both sides of the dMSA relationship or holds write primitives on an existing dMSA.
+
 ---
 
 ## References
