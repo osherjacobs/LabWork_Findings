@@ -1,4 +1,4 @@
-# Vector 4 — BadSuccessor: dMSA Privilege Escalation on Windows Server 2025
+# BadSuccessor: dMSA Privilege Escalation on Windows Server 2025
 
 **CVE:** CVE-2025-53779  
 **Original Research:** Yuval Gordon, Akamai Security Research  
