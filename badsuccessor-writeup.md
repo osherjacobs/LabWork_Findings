@@ -323,6 +323,7 @@ Akamai's post-patch analysis confirms the underlying technique survives in modif
 
 <img width="1879" height="1036" alt="kibanaalert" src="https://github.com/user-attachments/assets/9b0c08e9-5e25-449b-9014-5b85b8718dc8" />
 
+<img width="1533" height="848" alt="isoversion" src="https://github.com/user-attachments/assets/3962aba4-4a2a-4187-b599-e35554f46c5f" />
 
 <img width="1354" height="507" alt="SHARPSUCCESSOR" src="https://github.com/user-attachments/assets/74f553f7-1b31-41ea-91b5-e89c55eba938" />
 
