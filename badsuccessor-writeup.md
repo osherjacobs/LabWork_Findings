@@ -10,6 +10,10 @@
 
 ---
 
+TL;DR: A low-privileged user with CreateChild on any OU can compromise any AD principal on an unpatched Server 2025 DC — no target modification, no group change. Patch CVE-2025-53779 (August 2025). Audit CreateChild delegations. Monitor EID 3047, Directory Service channel.
+
+
+
 ## Overview
 
 BadSuccessor abuses the delegated Managed Service Account (dMSA) feature introduced in Windows Server 2025. Any user with CreateChild rights on an OU can create a dMSA, link it to any AD principal via `msDS-ManagedAccountPrecededByLink`, and obtain a Kerberos TGS yielding the target's effective authorization context (PAC) and usable key material via the dMSA key package — without modifying the target object, changing group membership, or requiring any elevated privilege beyond OU CreateChild.
