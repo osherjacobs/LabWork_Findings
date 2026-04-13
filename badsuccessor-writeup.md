@@ -1,4 +1,4 @@
-# BadSuccessor: dMSA Privilege Escalation on Windows Server 2025
+# Vector 4 — BadSuccessor: dMSA Privilege Escalation on Windows Server 2025
 
 **CVE:** CVE-2025-53779  
 **Original Research:** Yuval Gordon, Akamai Security Research  
@@ -12,7 +12,9 @@
 
 ## Overview
 
-BadSuccessor abuses the delegated Managed Service Account (dMSA) feature introduced in Windows Server 2025. Any user with CreateChild rights on an OU can create a dMSA, link it to any AD principal via `msDS-ManagedAccountPrecededByLink`, and obtain a Kerberos TGS carrying the target's keys and Privilege Attribute Certificate — without modifying the target object, changing group membership, or requiring any elevated privilege beyond OU CreateChild.
+BadSuccessor abuses the delegated Managed Service Account (dMSA) feature introduced in Windows Server 2025. Any user with CreateChild rights on an OU can create a dMSA, link it to any AD principal via `msDS-ManagedAccountPrecededByLink`, and obtain a Kerberos TGS yielding the target's effective authorization context (PAC) and usable key material via the dMSA key package — without modifying the target object, changing group membership, or requiring any elevated privilege beyond OU CreateChild.
+
+This behavior is specific to vulnerable (pre-patch) Server 2025 domain controllers with dMSA support enabled. The patch (August 2025 Patch Tuesday, CVE-2025-53779) requires mutual linkage before the KDC will honour the relationship.
 
 This writeup documents the attack chain, the lab environment required to reproduce it, and the detection telemetry generated at each stage.
 
@@ -234,7 +236,7 @@ C:\Tools\Rubeus.exe ptt /ticket:C:\Tools\svc-attack.kirbi
 dir \\WIN-TKLFN9EMLTJ.badsuccessor.local\C$
 ```
 
-`lowpriv` reading `C$` on the DC as `svc-attack$` confirms domain compromise.
+`lowpriv` reading `C$` on the DC as `svc-attack$` confirms domain compromise. No modification to the target object, no group membership change, no traditional privilege assignment artifact — the dMSA object itself is the only forensic indicator beyond Kerberos telemetry.
 
 ---
 
