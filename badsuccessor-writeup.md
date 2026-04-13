@@ -22,7 +22,7 @@ This behavior is specific to vulnerable (pre-patch) Server 2025 domain controlle
 
 This writeup documents the attack chain, the lab environment required to reproduce it, and the detection telemetry generated at each stage.
 
-Microsoft classified CVE-2025-53779 as a "relative path traversal" — an abstraction of the concept applied to authorization context rather than filesystem paths. The more accurate framing is identity inheritance abuse: the KDC treats a low-privilege dMSA as the authorized successor to a high-privilege principal, issuing keys and PAC accordingly. Yuval Gordon's own description — "the unintended heir to a high-privilege identity" — is more precise than the CVE classification.
+Microsoft classified CVE-2025-53779 as a "relative path traversal" — an abstraction of the concept applied to authorization context rather than filesystem paths. The more accurate framing is identity inheritance abuse: the KDC treats a low-privilege dMSA as the authorized successor to a high-privilege principal, issuing keys and PAC accordingly. Yuval Gordon's own description — "the unintended heir to a high-privilege identity" — is semantically more precise than the CVE classification.
 
 ---
 
