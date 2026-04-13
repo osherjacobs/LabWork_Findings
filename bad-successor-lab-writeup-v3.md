@@ -24,6 +24,10 @@ The evaluation ISO shipped at build `26100.32230` — above the patch threshold 
 
 **Open question:** Whether the primitive surviving on a patched build reflects incomplete patching, intentional protocol behavior, or a tooling artifact that mimics a successful KDC exchange is unresolved. A confirmed RTM build is required to separate these hypotheses.
 
+Post-Patch Behavior — Protocol vs Exploit Gap
+
+An unexpected finding from this lab is that on a patched Server 2025 DC (build 26100.32230), the KDC does not outright reject dMSA TGS requests built from a one-sided relationship. Instead, the request is processed and a response is returned at the protocol level, but the resulting ticket is unusable due to failed client-side parsing (Rubeus PA_DMSA_KEY_PACKAGE crash) and likely incomplete or sanitized key material. This suggests the August 2025 patch does not eliminate the dMSA primitive itself, but rather enforces relationship validation at ticket issuance time — preventing privilege materialization without fully suppressing the exchange. In practice, this creates a distinct “middle state” where the protocol appears functional, yet exploitation fails, bridging the gap between the original pre-patch vulnerability and the fully weaponized post-patch scenario requiring mutual linkage.
+
 *Primitive survives. Exploit doesn't. More research ahead.*
 
 ---
