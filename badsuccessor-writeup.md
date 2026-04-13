@@ -41,7 +41,7 @@ This writeup documents the attack chain, the lab environment required to reprodu
 - `lowpriv` — standard domain user, CreateChild on `OU=temp`
 - Winlogbeat 8.19.14 shipping Security + Directory Service channels to ELK
 
-Note: Windows 2016 functional level is sufficient to reproduce the attack. dMSA support is "gated" on the DC binary (ntdsai.dll), not the domain functional level. The KDC on a Server 2025 DC processes dMSA key packages regardless of the functional level the domain is operating at.
+Note: Windows 2016 functional level is sufficient to reproduce the attack. dMSA support is effectively gated on the DC binary (ntdsai.dll), not the domain functional level. The KDC on a Server 2025 DC processes dMSA key packages regardless of the functional level the domain is operating at.
 
 ---
 
