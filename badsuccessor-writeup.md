@@ -329,6 +329,8 @@ Akamai's post-patch analysis confirms the underlying technique survives in modif
 
 <img width="1533" height="848" alt="isoversion" src="https://github.com/user-attachments/assets/3962aba4-4a2a-4187-b599-e35554f46c5f" />
 
+<img width="1298" height="270" alt="KDSROOTKEY" src="https://github.com/user-attachments/assets/ff7df304-e122-4f04-a106-31f3820ba897" />
+
 <img width="1354" height="507" alt="SHARPSUCCESSOR" src="https://github.com/user-attachments/assets/74f553f7-1b31-41ea-91b5-e89c55eba938" />
 
 <img width="1851" height="738" alt="RUBEUS1" src="https://github.com/user-attachments/assets/087e7bfc-b9bf-4f3e-9cb2-e8595500d72a" />
