@@ -313,5 +313,20 @@ This lab deliberately uses a pre-patch ISO (26100.0001, UBR=1) to reproduce the 
 
 ---
 
+<img width="1879" height="1036" alt="kibanaalert" src="https://github.com/user-attachments/assets/9b0c08e9-5e25-449b-9014-5b85b8718dc8" />
+
+
+<img width="1354" height="507" alt="SHARPSUCCESSOR" src="https://github.com/user-attachments/assets/74f553f7-1b31-41ea-91b5-e89c55eba938" />
+
+<img width="1851" height="738" alt="RUBEUS1" src="https://github.com/user-attachments/assets/087e7bfc-b9bf-4f3e-9cb2-e8595500d72a" />
+
+<img width="1852" height="833" alt="RUBEUS2" src="https://github.com/user-attachments/assets/86d97205-6570-42a0-af98-f3fc638d6b82" />
+
+<img width="1847" height="890" alt="rubeusDA" src="https://github.com/user-attachments/assets/7219fbee-c3dd-4de5-8834-65fa4372b188" />
+
+
+
+
+
 *Part of the AD-Lab-Research Vector series — purple team validation of high-impact AD attack chains with live detection telemetry.*  
 *github.com/osherjacobs/AD-Lab-Research*
