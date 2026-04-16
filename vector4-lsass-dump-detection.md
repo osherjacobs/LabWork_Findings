@@ -199,7 +199,7 @@ SeDebugPrivilege, High integrity, no ASR rules — none of it mattered.
 
 The comsvcs block is not a privilege issue, not a CLM issue, not an obfuscation issue, not an ASR issue. It is a default behavioral detection that fires on the invariant pattern: `rundll32 → comsvcs.dll → MiniDump → lsass`. The bad news is that removing those identifiers while keeping the same underlying primitive bypasses the detection entirely.
 
-See the repo for the code:
+See the repo for the code (one particular iteration of the obfuscation):
 
 https://github.com/login-securite/lsassy/blob/master/lsassy/dumpmethod/comsvcs_stealth.py
 
