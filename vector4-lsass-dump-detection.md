@@ -496,11 +496,33 @@ Kibana Critical alerts:           3 (after rule creation)
 - [pypykatz](https://github.com/skelsec/pypykatz)
 - [MiniDumpWriteDump — MSDN](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
 - [MITRE T1003.001 — LSASS Memory](https://attack.mitre.org/techniques/T1003/001/)
-- [nxc --no-output Detection Gap](../vector2/)
 
 ---
+<img width="1853" height="1051" alt="1kibanaalert" src="https://github.com/user-attachments/assets/9f243106-e6a0-4d34-8e89-d48b50d47f29" />
 
+<img width="1540" height="66" alt="2failurecomvsscommandpayload" src="https://github.com/user-attachments/assets/7b4c7cd5-af62-435b-a8b0-7a5d2734da68" />
 
+<img width="1427" height="383" alt="3failurecomvssredacted" src="https://github.com/user-attachments/assets/7322be27-86d4-4f2f-bf29-1ccb820a5066" />
+
+<img width="1455" height="197" alt="4comsvcsdeniedevenfromevasionshell" src="https://github.com/user-attachments/assets/7c21796b-b902-42d3-9059-0e23e100e2a7" />
+
+<img width="1778" height="87" alt="5dumplsassredacted" src="https://github.com/user-attachments/assets/9cf9d343-281b-40fa-8d7b-c46520ad50c8" />
+
+<img width="1134" height="735" alt="6AVon" src="https://github.com/user-attachments/assets/51c04ce3-a7c4-4b1a-bb64-ce43b121f7ce" />
+
+<img width="1100" height="38" alt="7smbexfilofntdss" src="https://github.com/user-attachments/assets/aeb3aab2-1031-4eac-9d5c-109c4c7ee0e7" />
+
+<img width="1128" height="410" alt="8lsassdump516am" src="https://github.com/user-attachments/assets/edbcb9c1-7bba-4084-a2ed-a05327b30b26" />
+
+<img width="1552" height="749" alt="9pypykatzoutput" src="https://github.com/user-attachments/assets/a75c250c-b52f-4a84-81b5-cbc3553cabf9" />
+
+PTH:
+<img width="1632" height="63" alt="10pth" src="https://github.com/user-attachments/assets/f53235a7-2d03-4b15-b2d5-50e59c2c5fb4" />
+
+LSASSY FAIL
+<img width="1745" height="104" alt="11LSASSYNXCFAILING" src="https://github.com/user-attachments/assets/efb06510-4e6f-4394-81d3-d2c1e769bd08" />
+
+<img width="1202" height="375" alt="12LSASSYNXCFAILINGavdefender" src="https://github.com/user-attachments/assets/9c708063-fc02-4f38-9371-ad5e022a67de" />
 
 *Lab: Windows Server 2022 Build 20348 | Windows Server 2025 Build 26100 | Sysmon 15.20 | Winlogbeat 8.19.12 | ELK*  
 *Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://linkedin.com/in/osherjacobs)*
