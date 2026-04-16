@@ -528,5 +528,10 @@ LSASSY FAIL
 
 <img width="1202" height="375" alt="12LSASSYNXCFAILINGavdefender" src="https://github.com/user-attachments/assets/9c708063-fc02-4f38-9371-ad5e022a67de" />
 
+LSASSY FILE NAME EXTENSIONS RANDOMLY FOUND ALONG THE WAY:
+
+<img width="1612" height="525" alt="image" src="https://github.com/user-attachments/assets/a3ce3794-2408-48a0-a0ba-37743aa0154f" />
+
+
 *Lab: Windows Server 2022 Build 20348 | Windows Server 2025 Build 26100 | Sysmon 15.20 | Winlogbeat 8.19.12 | ELK*  
 *Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://linkedin.com/in/osherjacobs)*
