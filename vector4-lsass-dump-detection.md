@@ -450,7 +450,7 @@ and not winlog.event_data.SourceImage: "C:\\ProgramData\\Microsoft\\Windows Defe
 
 ## What This Means
 
-Defender is not blind. It is pattern-aware. The behavioral block on comsvcs+lsass fires by default — no ASR, no special configuration required. Three separate attempts using comsvcs, including an obfuscated commercial-tool implementation, were all caught.
+Defender is not blind. It is pattern-aware. The behavioral block on comsvcs+lsass fires by default — no ASR, no special configuration required. Three separate attempts using comsvcs, including an obfuscated open-source tool implementation, were all caught.
 
 But the pattern is tied to known tradecraft, not the invariant behavior. The API call itself is not malicious — the context is. When you remove the known identifiers (LOLBins, known tool signatures, recognized execution chains), you fall below the behavioral threshold.
 
