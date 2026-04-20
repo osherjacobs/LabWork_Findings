@@ -391,7 +391,7 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 
 ## References
 
-- [goexec](https://github.com/nodauf/goexec)
+- [goexec](https://github.com/FalconOpsLLC/goexec)
 - [NetExec](https://github.com/Pennyw0rth/NetExec)
 - [pypykatz](https://github.com/skelsec/pypykatz)
 - [Sysmon — Microsoft Sysinternals](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
