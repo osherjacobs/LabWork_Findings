@@ -400,7 +400,7 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 - [MITRE T1003.001 — LSASS Memory](https://attack.mitre.org/techniques/T1003/001/)
 - [MITRE T1550.002 — Pass the Hash](https://attack.mitre.org/techniques/T1550/002/)
 - [MITRE T1053.005 — Scheduled Task](https://attack.mitre.org/techniques/T1053/005/)
-- [Vector 4 — LSASS Dump via Direct P/Invoke](../vector4-lsass-dump-detection.md)
+- [Vector 4 — LSASS Dump via Direct P/Invoke](https://github.com/osherjacobs/AD-Lab-Research/blob/main/vector4-lsass-dump-detection.md)
 
 ---
 <img width="1528" height="784" alt="kibana3alerts" src="https://github.com/user-attachments/assets/a9be39a9-7425-428f-98b6-86e2cb06070f" />
