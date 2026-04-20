@@ -407,8 +407,6 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 
 <img width="1855" height="979" alt="detettionofbinary" src="https://github.com/user-attachments/assets/9a24a9d4-c46a-414f-8388-95ddad31bca7" />
 
-<img width="1668" height="279" alt="pwned" src="https://github.com/user-attachments/assets/5fd513df-ffaf-491f-a5ae-f91ea9baa76c" />
-
 <img width="1402" height="879" alt="attackexfil" src="https://github.com/user-attachments/assets/45ced912-5715-4f20-bd41-8e6229cb5050" />
 
 <img width="1114" height="530" alt="lsassdmp" src="https://github.com/user-attachments/assets/eee09b2e-20cd-4f4b-8681-6e272d98c7c9" />
@@ -427,6 +425,8 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 <img width="1118" height="703" alt="avactivityfailwhoamivianxcDC01" src="https://github.com/user-attachments/assets/64f07b5d-82ce-4966-91b0-f192e5015637" />
 
 <img width="1589" height="928" alt="pypikatz" src="https://github.com/user-attachments/assets/a2a69b0a-3734-4275-8635-18a1bc698e78" />
+
+<img width="1668" height="279" alt="pwned" src="https://github.com/user-attachments/assets/5fd513df-ffaf-491f-a5ae-f91ea9baa76c" />
 
 <img width="1445" height="843" alt="Elmo" src="https://github.com/user-attachments/assets/d5543a32-86a4-43da-a742-00395fceef58" />
 
