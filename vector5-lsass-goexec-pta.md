@@ -131,7 +131,7 @@ goexec registers the scheduled task against WIN-ATTACK authenticating via DC01. 
   --task '\lsassdump'
 ```
 
-The task fires immediately. getit2.exe runs as SYSTEM — the default execution context for scheduled tasks without an explicit user assignment. MiniDumpWriteDump writes lsass memory to C:\Windows\Temp\lsass.dmp.
+The task fires immediately. getit2.exe runs as SYSTEM (confirmed by SourceUser: NT AUTHORITY\SYSTEM in the EID 10 event) — the default execution context for scheduled tasks without an explicit user assignment. MiniDumpWriteDump writes lsass memory to C:\Windows\Temp\lsass.dmp.
 
 Defender: silent.
 
