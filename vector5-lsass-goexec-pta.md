@@ -436,4 +436,4 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 
 
 *Lab: Windows Server 2022 Build 20348 | Windows Server 2019 Build 17763 | Sysmon 15.20 | Winlogbeat 8.19.12 | ELK 8.19.14*
-*Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://linkedin.com/in/osherjacobs)*
+*Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://www.linkedin.com/in/osher-jacobs)*
