@@ -536,4 +536,4 @@ LSASSY FILE NAME EXTENSIONS RANDOMLY FOUND ALONG THE WAY:
 
 
 *Lab: Windows Server 2022 Build 20348 | Windows Server 2025 Build 26100 | Sysmon 15.20 | Winlogbeat 8.19.12 | ELK*  
-*Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://linkedin.com/in/osherjacobs)*
+*Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://www.linkedin.com/in/osher-jacobs)*
