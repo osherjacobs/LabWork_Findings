@@ -428,6 +428,9 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 
 <img width="1589" height="928" alt="pypikatz" src="https://github.com/user-attachments/assets/a2a69b0a-3734-4275-8635-18a1bc698e78" />
 
+<img width="1445" height="843" alt="Elmo" src="https://github.com/user-attachments/assets/d5543a32-86a4-43da-a742-00395fceef58" />
+
+
 
 
 
