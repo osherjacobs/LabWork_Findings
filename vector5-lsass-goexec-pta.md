@@ -403,6 +403,34 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 - [Vector 4 — LSASS Dump via Direct P/Invoke](../vector4-lsass-dump-detection.md)
 
 ---
+<img width="1528" height="784" alt="kibana3alerts" src="https://github.com/user-attachments/assets/a9be39a9-7425-428f-98b6-86e2cb06070f" />
+
+<img width="1402" height="879" alt="attackexfil" src="https://github.com/user-attachments/assets/45ced912-5715-4f20-bd41-8e6229cb5050" />
+
+<img width="1855" height="979" alt="detettionofbinary" src="https://github.com/user-attachments/assets/9a24a9d4-c46a-414f-8388-95ddad31bca7" />
+
+<img width="1668" height="279" alt="pwned" src="https://github.com/user-attachments/assets/5fd513df-ffaf-491f-a5ae-f91ea9baa76c" />
+
+
+<img width="1114" height="530" alt="lsassdmp" src="https://github.com/user-attachments/assets/eee09b2e-20cd-4f4b-8681-6e272d98c7c9" />
+
+
+
+<img width="1871" height="967" alt="EID10" src="https://github.com/user-attachments/assets/c93f186a-6792-4aea-ae3b-a71d1ce5e625" />
+
+<img width="1102" height="134" alt="defendernotapeep" src="https://github.com/user-attachments/assets/9702ea48-14df-4370-8eb6-198494471a9d" />
+
+
+<img width="708" height="895" alt="avdefinitionsssDC01" src="https://github.com/user-attachments/assets/d5bbfa7e-c390-4bb8-9044-f84a4e6486d6" />
+
+
+<img width="732" height="891" alt="avdefinitionsss" src="https://github.com/user-attachments/assets/30efa291-a55a-4ea9-98a4-e2e355d99b5e" />
+
+
+<img width="1118" height="703" alt="avactivityfailwhoamivianxcDC01" src="https://github.com/user-attachments/assets/64f07b5d-82ce-4966-91b0-f192e5015637" />
+
+<img width="1589" height="928" alt="pypikatz" src="https://github.com/user-attachments/assets/a2a69b0a-3734-4275-8635-18a1bc698e78" />
+
 
 *Lab: Windows Server 2022 Build 20348 | Windows Server 2019 Build 17763 | Sysmon 15.20 | Winlogbeat 8.19.12 | ELK 8.19.14*
 *Author: Osher Jacobs | [GitHub](https://github.com/osherjacobs/AD-Lab-Research) | [LinkedIn](https://linkedin.com/in/osherjacobs)*
