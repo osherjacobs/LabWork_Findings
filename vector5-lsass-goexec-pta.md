@@ -405,16 +405,13 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 ---
 <img width="1528" height="784" alt="kibana3alerts" src="https://github.com/user-attachments/assets/a9be39a9-7425-428f-98b6-86e2cb06070f" />
 
-<img width="1402" height="879" alt="attackexfil" src="https://github.com/user-attachments/assets/45ced912-5715-4f20-bd41-8e6229cb5050" />
-
 <img width="1855" height="979" alt="detettionofbinary" src="https://github.com/user-attachments/assets/9a24a9d4-c46a-414f-8388-95ddad31bca7" />
 
 <img width="1668" height="279" alt="pwned" src="https://github.com/user-attachments/assets/5fd513df-ffaf-491f-a5ae-f91ea9baa76c" />
 
+<img width="1402" height="879" alt="attackexfil" src="https://github.com/user-attachments/assets/45ced912-5715-4f20-bd41-8e6229cb5050" />
 
 <img width="1114" height="530" alt="lsassdmp" src="https://github.com/user-attachments/assets/eee09b2e-20cd-4f4b-8681-6e272d98c7c9" />
-
-
 
 <img width="1871" height="967" alt="EID10" src="https://github.com/user-attachments/assets/c93f186a-6792-4aea-ae3b-a71d1ce5e625" />
 
