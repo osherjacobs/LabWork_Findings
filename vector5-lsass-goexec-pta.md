@@ -220,7 +220,7 @@ Remote execution confirmed on DC01 as LAB2019\Administrator. The --no-output fla
 
 ---
 
-What Defender Caught (and Didn’t)
+## What Defender Caught (and Didn’t)
 
 Get-MpThreatDetection on WIN-ATTACK shows the full detection history across all lab vectors. Every comsvcs-based LSASS dump is present — rundll32, lsassy obfuscation chains, encoded PowerShell variants. Tools like Rubeus and SharpSuccessor are also detected.
 
