@@ -148,7 +148,9 @@ nxc smb 192.168.1.83 \
   -x "dir C:\\Windows\\Temp\\lsass.dmp"
 ```
 
-Output confirms lsass.dmp landed at ~47MB. File visible in C:\Windows\Temp\ alongside VMware and system artifacts — no cleanup performed in this test.
+Output confirms lsass.dmp landed at ~47MB. File visible in C:\Windows\Temp\ alongside VMware and system artifacts — no cleanup performed in this test. 
+
+Note: This confirmation step uses standard nxc output retrieval without --no-output and triggers a Defender alert (VirTool:Win32/SuspRemoteCmdCommand.H) on WIN-ATTACK — consistent with the detection gap documented in Vector 2. This step is a lab verification only; in an operational context it would be skipped. The "Defender alerts: 0" count in the attack chain summary reflects the operational path.
 
 ---
 
