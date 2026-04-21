@@ -1,5 +1,19 @@
 # Remote LSASS Dump via Scheduled Task | SMB Exfil | Pass-the-Hash Lateral Movement to DC
 
+## ## ⚠️ Stop Press — April 21, 2026
+
+Defender signatures updated April 21, 2026 introduced `Trojan:Win32/LsassDump.A` — a content-based artifact detection that quarantines LSASS minidump files independent of filename or extension. `update.log` triggers the same quarantine as `lsass.dmp`.
+
+SMB access to quarantined artifacts blocked in separate test: `NT_STATUS_VIRUS_INFECTED`
+
+The dump primitive (direct P/Invoke MiniDumpWriteDump) remains undetected. The binary remains undetected. The TLS reverse shell remains undetected. Detection boundary shifted from behavior to artifact.
+
+KB5082427 (.NET Framework 4.8, same date) — controlled A/B test confirmed no effect on the primitive. Red herring.
+
+The chain as documented is disrupted on fully updated estates. Further investigation required.
+
+
+
 ## Overview
 
 Assumed breach scenario. A threat actor has obtained local administrator credentials on a domain-joined Windows Server 2022 member server. No interactive session is used during the execution chain. getit2.exe was placed locally via prior access as part of the assumed breach setup. No reverse shell. Every action is executed remotely from the attacker's machine.
