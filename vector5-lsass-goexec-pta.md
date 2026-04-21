@@ -2,9 +2,9 @@
 
 ## Overview
 
-Assumed breach scenario. A threat actor has obtained local administrator credentials on a domain-joined Windows Server 2022 member server. No interactive session exists. No reverse shell. Every action is executed remotely from the attacker's machine.
+Assumed breach scenario. A threat actor has obtained local administrator credentials on a domain-joined Windows Server 2022 member server. No interactive session is used during the execution chain. getit2.exe was placed locally via prior access as part of the assumed breach setup. No reverse shell. Every action is executed remotely from the attacker's machine.
 
-The objective: dump LSASS on the member server, exfiltrate the dump over SMB, parse credentials offline, and use a recovered hash to authenticate to the Domain Controller — without ever touching a DC directly.
+The objective: dump LSASS on the member server, exfiltrate the dump over SMB, parse credentials offline, and use a recovered hash to authenticate to the Domain Controller — without initial access to the Domain Controller.
 
 **Result:** 47MB LSASS dump recovered. Local Administrator NT hash extracted. Pass-the-hash authentication against DC01 succeeded. Remote command execution on the Domain Controller confirmed. Defender produced zero alerts across the entire credential theft chain. Kibana generated 16 alerts total — 3 on the member server, 13 on the DC.
 
@@ -233,7 +233,7 @@ The binary executed as SYSTEM, opened lsass.exe with PROCESS_ALL_ACCESS, wrote 4
 
 Detection boundary: Defender catches known implementations. It does not detect the underlying primitive.
 
-The only interaction Defender had with getit2.exe was a manual sample submission prompt during SMB transfer — not a detection, not a block.
+The only interaction Defender had with getit2.exe was a manual sample submission prompt during SMB transfer of the binary (not the dump) — not a detection, not a block. This SMB transfer variant was run as an alternative to see how far I could push the evasion/obfuscation envelope here.
 
 Note: In the documented attack chain, getit2.exe was already present on WIN-ATTACK as part of the assumed breach — no SMB transfer occurred. The submission prompt was observed separately when transferring the binary cold via SMB. Defender does not block execution, and delivery via a prior execution stage would avoid this prompt entirely.
 
