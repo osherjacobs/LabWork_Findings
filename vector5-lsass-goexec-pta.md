@@ -228,6 +228,8 @@ getit2.exe does not appear anywhere in the threat history. No ThreatID. No detec
 
 The detection boundary remains what Vector 4 established: Defender catches known implementations, not the primitive.
 
+Note on SMB delivery and sample submission: Remotely transferring getit2.exe via SMB triggers a manual sample submission prompt — Defender flags the file as unknown origin and requests cloud verification. Auto-submission was off, so no sample was sent without user confirmation. In a real attack scenario, the binary would likely be dropped via a prior execution stage rather than raw SMB transfer, avoiding this prompt entirely. And at 4AM, no one is watching the GUI anyway.
+
 ---
 
 ## Detection
