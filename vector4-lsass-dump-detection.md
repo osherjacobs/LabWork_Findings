@@ -1,24 +1,6 @@
 # LSASS Dump via Direct P/Invoke | Defender Bypass (Default configurations) | Detection Engineering
 
-## ⚠️ Stop Press — April 21, 2026
-Defender signature build 1449.228 introduced active enforcement of Trojan:Win32/LsassDump.A against LSASS minidump artifacts.
-
-Note: this signature name has existed since April 2022. The chain documented here ran clean on signature build 1449.177 just three days prior to this update. The most likely explanation: detection logic behind the signature was updated or expanded between builds 1449.177 and 1449.228. A named signature with no matching logic is just a label.
-
-Detection is content-based, not path or extension-based. update.log triggers the same quarantine as lsass.dmp. Enforcement is dual-layer:
-
-Local file quarantine on write
-SMB access blocked: NT_STATUS_VIRUS_INFECTED
-What remains undetected:
-
-The dump binary (custom P/Invoke MiniDumpWriteDump)
-The dump primitive itself
-The TLS reverse shell
-The same binary executing a different payload (reverse shell) produces no Defender alert — confirming detection targets the artifact, not the tool or execution path.
-
-KB5082427 (.NET Framework 4.8, released same date) — controlled A/B test confirmed no effect on the primitive. Red herring.
-
-The chain as documented is disrupted on fully updated estates. Whether an exfil-before-quarantine window exists requires further testing.
+⚠️ Stop Press — April 22, 2026 (Updated) Defender signature build 1449.228 (April 21) introduced active enforcement of Trojan:Win32/LsassDump.A against LSASS minidump artifacts. The chain documented below ran clean on build 1449.177 just days earlier. Detection is content-based and independent of filename/extension. Update (one day later): The mitigation can already be trivially bypassed in realistic admin-level assumed-breach scenarios using the same custom P/Invoke primitive and remote execution path. Real-time protection remains enabled throughout. The detection boundary still appears to sit at the wrong layer for cases where the actor already holds local administrator rights. The core primitive itself continues to evade Defender. The only consistent signal remains Sysmon EID 10 (when properly configured). Password reuse + lack of LAPS remains the highest-impact enabler for escalation to Domain Admin. The “fix” (again) is left as an exercise for the motivated reader.
 
 <img width="1287" height="395" alt="image" src="https://github.com/user-attachments/assets/2c429e25-ad51-436d-95bf-013e18b3b15e" />
 
