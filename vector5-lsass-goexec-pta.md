@@ -220,15 +220,22 @@ Remote execution confirmed on DC01 as LAB2019\Administrator. The --no-output fla
 
 ---
 
-## What Defender Caught (and Didn't)
+What Defender Caught (and Didn’t)
 
-`Get-MpThreatDetection` on WIN-ATTACK shows the complete threat history from all lab research. Every comsvcs-based attempt across multiple vectors is present — rundll32, lsassy obfuscated chain, encoded PowerShell variants. Rubeus and SharpSuccessor are also flagged.
+Get-MpThreatDetection on WIN-ATTACK shows the full detection history across all lab vectors. Every comsvcs-based LSASS dump is present — rundll32, lsassy obfuscation chains, encoded PowerShell variants. Tools like Rubeus and SharpSuccessor are also detected.
 
-getit2.exe does not appear anywhere in the threat history. No ThreatID. No detection event. The binary executed as SYSTEM, opened lsass with PROCESS_ALL_ACCESS, wrote 47MB of memory to disk, and left no entry in Defender's detection log.
+getit2.exe does not appear anywhere in the log.
 
-The detection boundary remains what Vector 4 established: Defender catches known implementations, not the primitive.
+No ThreatID.
+No detection event.
 
-Note on SMB delivery and sample submission: Remotely transferring getit2.exe via SMB triggers a manual sample submission prompt — Defender flags the file as unknown origin and requests cloud verification. Auto-submission was off, so no sample was sent without user confirmation. In a real attack scenario, the binary would likely be dropped via a prior execution stage rather than raw SMB transfer, avoiding this prompt entirely. And at 4AM, no one is watching the GUI anyway.
+The binary executed as SYSTEM, opened lsass.exe with PROCESS_ALL_ACCESS, wrote 47MB of memory to disk, and completed without generating a single Defender alert.
+
+Detection boundary: Defender catches known implementations. It does not detect the underlying primitive.
+
+The only interaction Defender had with getit2.exe was a manual sample submission prompt during SMB transfer — not a detection, not a block.
+
+Note: In the documented attack chain, getit2.exe was already present on WIN-ATTACK as part of the assumed breach — no SMB transfer occurred. The submission prompt was observed separately when transferring the binary cold via SMB. Defender does not block execution, and delivery via a prior execution stage would avoid this prompt entirely.
 
 ---
 
