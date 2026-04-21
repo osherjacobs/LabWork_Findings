@@ -12,6 +12,10 @@ KB5082427 (.NET Framework 4.8, same date) — controlled A/B test confirmed no e
 
 The chain as documented is disrupted on fully updated estates. Further investigation required.
 
+<img width="1287" height="395" alt="2026-04-21_17-51" src="https://github.com/user-attachments/assets/a6ecc1dd-f0a0-4723-8767-f6edc4d3c76e" />
+
+<img width="993" height="483" alt="2026-04-21_17-33" src="https://github.com/user-attachments/assets/549c063d-567e-41cd-83b9-dc8b5b38ab5f" />
+
 
 
 ## Overview
