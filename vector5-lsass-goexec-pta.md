@@ -97,7 +97,7 @@ Scheduled task delivery runs the binary as SYSTEM rather than as the authenticat
 
 ### Phase 0 — Starting Conditions
 
-Local Administrator credentials exist for WIN-ATTACK (192.168.1.83). The custom dump binary (getit2.exe) has been placed in C:\Windows\Tasks\ as part of assumed breach access. No interactive session is open (see the remarks below re. Defender). All subsequent actions are executed remotely from Kali.
+Local Administrator credentials exist for WIN-ATTACK (192.168.1.83). The custom dump binary (getit2.exe) has been placed in C:\Windows\Tasks\ {copied locally via an existing RDP session as part of the assumed breach access scenario}. No interactive session is open (see the remarks below re. Defender). All subsequent actions are executed remotely from Kali.
 
 getit2.exe is a custom C# binary targeting .NET Framework 4.8. It calls MiniDumpWriteDump directly via P/Invoke against dbghelp.dll. No LOLBins, no known tool signatures, no shellcode. Source not published — the point of this research is the detection, not the tool. The evasion is architectural: remove the LOLBin, call the API directly, deliver cleanly.
 
