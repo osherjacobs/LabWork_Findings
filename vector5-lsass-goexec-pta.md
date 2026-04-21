@@ -25,6 +25,12 @@ The chain as documented is disrupted on fully updated estates. Whether an exfil-
 
 <img width="993" height="483" alt="2026-04-21_17-33" src="https://github.com/user-attachments/assets/549c063d-567e-41cd-83b9-dc8b5b38ab5f" />
 
+This is a "before" runing on a different lab using the same artifact: Go figure....
+
+<img width="1134" height="735" alt="image" src="https://github.com/user-attachments/assets/94bb7f4f-fe9c-4dae-b204-4b369d9c6302" />
+
+
+
 
 
 ## Overview
