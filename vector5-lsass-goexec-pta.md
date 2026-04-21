@@ -400,6 +400,9 @@ Scheduled task delivery is noisier from a detection standpoint than WMI delivery
 
 ---
 
+Appendix: Defender Cloud Submission Behavior (Observed)
+During post-publication testing, getit2.exe was transferred cold via SMB to WIN-ATTACK with automatic sample submission disabled. On first transfer, Defender prompted for manual cloud submission — not a detection, not a block. The prompt was dismissed. On subsequent transfers within the same session, no prompt appeared. After a full reboot, the prompt reappeared on the next transfer. Deletion of the mpcache entries and ECS cache produced no change in behavior. No persistent disk artifact was found controlling the submission decision. The throttle state is memory-resident and reboot-clearable. Operationally, delivery via a prior execution stage — scheduled task, WMI, existing shell — avoids the SMB write inspection path entirely and this prompt is never encountered.
+
 ## References
 
 - [goexec](https://github.com/FalconOpsLLC/goexec)
