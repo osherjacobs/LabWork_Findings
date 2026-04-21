@@ -1,16 +1,25 @@
 # Remote LSASS Dump via Scheduled Task | SMB Exfil | Pass-the-Hash Lateral Movement to DC
 
-## ## ⚠️ Stop Press — April 21, 2026
+## ⚠️ Stop Press — April 21, 2026
 
-Defender signatures updated April 21, 2026 introduced `Trojan:Win32/LsassDump.A` — a content-based artifact detection that quarantines LSASS minidump files independent of filename or extension. `update.log` triggers the same quarantine as `lsass.dmp`.
+Defender signature build 1449.228 introduced active enforcement of `Trojan:Win32/LsassDump.A` against LSASS minidump artifacts.
 
-SMB access to quarantined artifacts blocked in separate test: `NT_STATUS_VIRUS_INFECTED`
+Note: this signature name has existed since April 2022. The chain documented here ran clean on signature build 1449.177 just three days prior to this update. The most likely explanation: detection logic behind the signature was updated or expanded between builds 1449.177 and 1449.228. A named signature with no matching logic is just a label.
 
-The dump primitive (direct P/Invoke MiniDumpWriteDump) remains undetected. The binary remains undetected. The TLS reverse shell remains undetected. Detection boundary shifted from behavior to artifact.
+Detection is content-based, not path or extension-based. `update.log` triggers the same quarantine as `lsass.dmp`. Enforcement is dual-layer:
+- Local file quarantine on write
+- SMB access blocked: `NT_STATUS_VIRUS_INFECTED`
 
-KB5082427 (.NET Framework 4.8, same date) — controlled A/B test confirmed no effect on the primitive. Red herring.
+What remains undetected:
+- The dump binary (custom P/Invoke MiniDumpWriteDump)
+- The dump primitive itself
+- The TLS reverse shell
 
-The chain as documented is disrupted on fully updated estates. Further investigation required.
+The same binary executing a different payload (reverse shell) produces no Defender alert — confirming detection targets the artifact, not the tool or execution path.
+
+KB5082427 (.NET Framework 4.8, released same date) — controlled A/B test confirmed no effect on the primitive. Red herring.
+
+The chain as documented is disrupted on fully updated estates. Whether an exfil-before-quarantine window exists requires further testing.
 
 <img width="1287" height="395" alt="2026-04-21_17-51" src="https://github.com/user-attachments/assets/a6ecc1dd-f0a0-4723-8767-f6edc4d3c76e" />
 
