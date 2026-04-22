@@ -1,7 +1,7 @@
 <img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/98114daf-7b49-4925-9ecc-3bf0e7ac78ca" />
 
 
-# LSASS Credential Dump via Defender Exclusion Window
+# LSASS Dump vs Defender: When the Detection Boundary Moved
 
 ## Overview
 
