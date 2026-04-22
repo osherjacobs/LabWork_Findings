@@ -264,6 +264,41 @@ Confirm Sysmon EID 10 fires in both RTP-on and RTP-off conditions. The memory ac
 - Binary-level analysis of the behavioral delta between these builds is left to researchers with access to the relevant components
 
 ---
+<img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/07ed77aa-bd67-43a4-bf2a-97028e2d6ef3" />
+
+Failure on win-attack with RTP on:
+
+<img width="1851" height="901" alt="win-attackredacted" src="https://github.com/user-attachments/assets/4b2e3f04-fe8d-40fa-a999-38930a3c3a63" />
+
+Success on win-attack with RTP off:
+
+<img width="1860" height="860" alt="working84withRTPswitchedoffredacted" src="https://github.com/user-attachments/assets/5c8f5a99-eece-4d5f-abfe-3ea0d3b3f943" />
+
+Extraction of lsass post success on win-attack with RTP off
+
+<img width="1848" height="853" alt="extractionoflsasswithRTPoffPoCredacted" src="https://github.com/user-attachments/assets/e76a62b1-4626-4e0d-9400-551568e8b633" />
+
+Attack on win-attack failure with RTP on:
+
+<img width="1851" height="901" alt="win-attackredacted" src="https://github.com/user-attachments/assets/0aa6a80f-289e-47f9-a820-39925bdd2e3a" />
+
+Failed write of lsass ("84dump"). Note file is 0KB
+
+<img width="1802" height="862" alt="dumpfailon84a" src="https://github.com/user-attachments/assets/27cebfbf-3fb2-4654-83e8-0f619fd1fa81" />
+
+<img width="1137" height="635" alt="winattackUBRandDEFENDERDEFS" src="https://github.com/user-attachments/assets/98714c45-d0a5-484c-a02a-4d8fd89c6c63" />
+
+Success on WIN-1KS84GNPAUM (192.168.1.198)
+
+<img width="1843" height="905" alt="working198redacted" src="https://github.com/user-attachments/assets/85a87999-b5e1-4798-ada4-c5a0425eddd1" />
+
+<img width="1348" height="695" alt="otherUBR+DEFENDERDFS22042026" src="https://github.com/user-attachments/assets/b48d9921-4eed-44ac-b963-ed3b1cdcec8e" />
+
+
+
+
+
+
 
 
 ## Defender logs on Win-Attack (192.168.1.84)
