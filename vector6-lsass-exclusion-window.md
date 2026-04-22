@@ -277,6 +277,715 @@ Notice 84dump is 0 kb....
 
 <img width="1106" height="619" alt="winattackdefenderlevel220426" src="https://github.com/user-attachments/assets/b6b5945d-da02-439e-8f95-6f40d0ff4d9d" />
 
+Defender logs on Win-Attack (192.168.1.84)
+
+
+
+TimeCreated : 4/21/2026 9:54:12 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 9:54:03 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 8:29:27 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 8:29:18 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:42:42 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:42:32 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:40:50 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:40:40 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:40:23 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:40:13 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:24:59 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\lsass.dmp
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:24:50 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\lsass.dmp
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:23:46 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\lsass.dmp
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 7:23:36 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\lsass.dmp
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+Defender logs on WIN-1KS84GNPAUM (192.168.1.198)
+
+TimeCreated : 4/22/2026 7:27:30 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/22/2026 7:27:13 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/22/2026 3:41:07 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.B&threatid=2147893513&enterprise=0
+               	Name: Trojan:Win32/LsassDump.B
+               	ID: 2147893513
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\dmp220426.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: System
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/22/2026 3:40:57 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.B&threatid=2147893513&enterprise=0
+               	Name: Trojan:Win32/LsassDump.B
+               	ID: 2147893513
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\dmp220426.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT Authority\System
+               	Process Name: System
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/22/2026 3:35:19 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 3:35:10 PM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=VirTool:Win32/SuspRemoteCmdCommand.H&threatid=2147851517&enterprise=0
+               	Name: VirTool:Win32/SuspRemoteCmdCommand.H
+               	ID: 2147851517
+               	Severity: Severe
+               	Category: Tool
+               	Path: CmdLine:_C:\Windows\System32\cmd.exe /Q /c whoami /priv > C:\Windows\Temp\out.txt 1> \Windows\Temp\GXNCHi 2>&1
+               	Detection Origin: Unknown
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Remove
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 3:35:02 PM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=VirTool:Win32/SuspRemoteCmdCommand.H&threatid=2147851517&enterprise=0
+               	Name: VirTool:Win32/SuspRemoteCmdCommand.H
+               	ID: 2147851517
+               	Severity: Severe
+               	Category: Tool
+               	Path: CmdLine:_C:\Windows\System32\cmd.exe /Q /c whoami /priv > C:\Windows\Temp\out.txt 1> \Windows\Temp\GXNCHi 2>&1
+               	Detection Origin: Unknown
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 3:34:07 PM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=VirTool:Win32/SuspRemoteCmdCommand.H&threatid=2147851517&enterprise=0
+               	Name: VirTool:Win32/SuspRemoteCmdCommand.H
+               	ID: 2147851517
+               	Severity: Severe
+               	Category: Tool
+               	Path: CmdLine:_C:\Windows\System32\cmd.exe /Q /c whoami /priv 1> \Windows\Temp\UPDKMa 2>&1
+               	Detection Origin: Unknown
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Remove
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 3:33:58 PM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=VirTool:Win32/SuspRemoteCmdCommand.H&threatid=2147851517&enterprise=0
+               	Name: VirTool:Win32/SuspRemoteCmdCommand.H
+               	ID: 2147851517
+               	Severity: Severe
+               	Category: Tool
+               	Path: CmdLine:_C:\Windows\System32\cmd.exe /Q /c whoami /priv 1> \Windows\Temp\UPDKMa 2>&1
+               	Detection Origin: Unknown
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 1:56:39 PM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.B&threatid=2147893513&enterprise=0
+               	Name: Trojan:Win32/LsassDump.B
+               	ID: 2147893513
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\yabadabadoo1.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: System
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 1:56:28 PM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.B&threatid=2147893513&enterprise=0
+               	Name: Trojan:Win32/LsassDump.B
+               	ID: 2147893513
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\yabadabadoo1.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT Authority\System
+               	Process Name: System
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 1:33:01 PM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\yabadabadoo1.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 1:32:51 PM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\yabadabadoo1.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 12:26:37 PM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 12:26:27 PM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 11:51:35 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 11:49:03 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 11:46:19 AM
+Id          : 1117
+Message     : Microsoft Defender Antivirus has taken action to protect this machine from malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Action: Quarantine
+               	Action Status:  No additional actions required
+               	Error Code: 0x00000000
+               	Error description: The operation completed successfully. 
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 11:45:55 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=Trojan:Win32/LsassDump.A&threatid=2147816345&enterprise=0
+               	Name: Trojan:Win32/LsassDump.A
+               	ID: 2147816345
+               	Severity: Severe
+               	Category: Trojan
+               	Path: file:_C:\Windows\Temp\update.log
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: 
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 11:34:12 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
+               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
+
+TimeCreated : 4/21/2026 11:30:35 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: System
+               	User: NT AUTHORITY\SYSTEM
+               	Process Name: Unknown
+               	Security intelligence Version: AV: 1.443.1118.0, AS: 1.443.1118.0, NIS: 1.443.1118.0
+               	Engine Version: AM: 1.1.25110.1, NIS: 1.1.25110.1
+
+TimeCreated : 4/21/2026 11:26:01 AM
+Id          : 1116
+Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
+               For more information please see the following:
+              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
+               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
+               	ID: 14994
+               	Severity: Medium
+               	Category: Settings Modifier
+               	Path: file:_C:\Windows\System32\drivers\etc\hosts
+               	Detection Origin: Local machine
+               	Detection Type: Concrete
+               	Detection Source: Real-Time Protection
+               	User: LAB\Administrator
+               	Process Name: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+               	Security intelligence Version: AV: 1.443.1118.0, AS: 1.443.1118.0, NIS: 1.443.1118.0
+               	Engine Version: AM: 1.1.25110.1, NIS: 1.1.25110.1
 
 
 
