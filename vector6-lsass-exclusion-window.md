@@ -7,7 +7,7 @@
 
 This writeup documents a post-compromise credential harvesting chain that survives Defender's artifact-based LSASS dump detection by exploiting a legitimate Windows Defender API to create a timed exclusion window. The chain was validated against Windows Server 2022 across multiple Defender signature versions in April 2026.
 
-This is a follow-on to the Vector 4/5 LSASS dump chain. The Defender signature `Trojan:Win32/LsassDump.A` was confirmed to detect the dump artifact on disk independently of filename or extension (content-based detection). This vector documents how the chain survives that detection, where the detection boundary lies, and how that boundary evolved across three consecutive signature builds.
+This is a follow-on to the Vector 4/5 LSASS dump chain. The Defender signature `Trojan:Win32/LsassDump.A` was confirmed to detect the dump artifact on disk independently of filename or extension (content-based detection). This vector documents how the chain survives that detection, where the detection boundary lies, and how that boundary evolved across two consecutive signature builds.
 
 ---
 
