@@ -5,9 +5,9 @@
 
 ## Overview
 
-This writeup documents a post-compromise credential harvesting chain that survives Defender's artifact-based LSASS dump detection by exploiting a legitimate Windows Defender API to create a timed exclusion window. The chain was validated against Windows Server 2022 across multiple Defender signature versions in April 2026.
+This writeup documents a post-compromise credential harvesting chain that survives Defender's artifact-based LSASS dump detection by exploiting a legitimate Windows Defender API to create a timed exclusion window. The chain was validated against Windows Server 2022 across two Defender signature versions in April 2026.
 
-This is a follow-on to the Vector 4/5 LSASS dump chain. The Defender signature `Trojan:Win32/LsassDump.A` was confirmed to detect the dump artifact on disk independently of filename or extension (content-based detection). This vector documents how the chain survives that detection, where the detection boundary lies, and how that boundary evolved across two consecutive signature builds.
+This is a follow-on to the Vector 4/5 LSASS dump chain. The Defender signature `Trojan:Win32/LsassDump.A` was confirmed to detect the dump artifact on disk independently of filename or extension (content-based detection). This vector documents how the chain survives that detection, where the detection boundary lies, and how that boundary evolved.
 
 ---
 
@@ -265,6 +265,52 @@ Confirm Sysmon EID 10 fires in both RTP-on and RTP-off conditions. The memory ac
 - Binary-level analysis of the behavioral delta between these builds is left to researchers with access to the relevant components
 
 ---
+
+## Appendix — Raw Defender Event Logs
+
+### Win-ATTACK (sig 1449228 — pre-exclusion-window runs)
+
+```
+TimeCreated : 4/21/2026 9:54:12 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 9:54:03 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.228.0
+TimeCreated : 4/21/2026 8:29:27 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 8:29:18 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:42:42 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:42:32 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:40:50 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:40:40 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:40:23 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:40:13 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:24:59 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\lsass.dmp | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:24:50 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\lsass.dmp | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:23:46 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\lsass.dmp | Quarantine | AV: 1.449.228.0
+TimeCreated : 4/21/2026 7:23:36 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\lsass.dmp | AV: 1.449.228.0
+```
+
+No 1116/1117 events exist on WIN-ATTACK at sig 1449240. Zero detection events across all exclusion window runs at that signature version.
+
+---
+
+### WIN-1KS84GNPAUM (sig 1449230 — exclusion window runs)
+
+```
+TimeCreated : 4/22/2026 3:41:07 AM | EID 1117 | Trojan:Win32/LsassDump.B | C:\Windows\Temp\dmp220426.log | Quarantine | AV: 1.449.230.0
+TimeCreated : 4/22/2026 3:40:57 AM | EID 1116 | Trojan:Win32/LsassDump.B | C:\Windows\Temp\dmp220426.log | AV: 1.449.230.0
+TimeCreated : 4/21/2026 1:56:39 PM | EID 1117 | Trojan:Win32/LsassDump.B | C:\Windows\Temp\yabadabadoo1.log | Quarantine | AV: 1.449.230.0
+TimeCreated : 4/21/2026 1:56:28 PM | EID 1116 | Trojan:Win32/LsassDump.B | C:\Windows\Temp\yabadabadoo1.log | AV: 1.449.230.0
+TimeCreated : 4/21/2026 1:33:01 PM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\yabadabadoo1.log | Quarantine | AV: 1.449.230.0
+TimeCreated : 4/21/2026 1:32:51 PM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\yabadabadoo1.log | AV: 1.449.230.0
+TimeCreated : 4/21/2026 12:26:37 PM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.230.0
+TimeCreated : 4/21/2026 12:26:27 PM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.230.0
+TimeCreated : 4/21/2026 11:46:19 AM | EID 1117 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | Quarantine | AV: 1.449.230.0
+TimeCreated : 4/21/2026 11:45:55 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\Windows\Temp\update.log | AV: 1.449.230.0
+```
+
+Note: The detections above fired on runs where the exclusion window was **not** active or the artifact landed outside the exclusion window. Successful chain runs (exclusion active during dump and exfil) produced zero detection events.
+
+---
+
+*Lab: lab2019.local | Author: Osher Jacobs | GitHub: osherjacobs/AD-Lab-Research*
 
 
 ---
