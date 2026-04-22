@@ -277,9 +277,7 @@ Notice 84dump is 0 kb....
 
 <img width="1106" height="619" alt="winattackdefenderlevel220426" src="https://github.com/user-attachments/assets/b6b5945d-da02-439e-8f95-6f40d0ff4d9d" />
 
-Defender logs on Win-Attack (192.168.1.84)
-
-
+## Defender logs on Win-Attack (192.168.1.84)
 
 TimeCreated : 4/21/2026 9:54:12 AM
 Id          : 1117
@@ -561,7 +559,7 @@ Message     : Microsoft Defender Antivirus has detected malware or other potenti
                	Security intelligence Version: AV: 1.449.228.0, AS: 1.449.228.0, NIS: 1.449.228.0
                	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
 
-Defender logs on WIN-1KS84GNPAUM (192.168.1.198)
+## Defender logs on WIN-1KS84GNPAUM (192.168.1.198)
 
 TimeCreated : 4/22/2026 7:27:30 AM
 Id          : 1116
