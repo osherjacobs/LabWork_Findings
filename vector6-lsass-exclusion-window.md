@@ -1,4 +1,5 @@
-<img width="1881" height="913" alt="alerts2withEID10" src="https://github.com/user-attachments/assets/1ff3f652-c335-45e3-9e6a-449f9eca4b18" /># LSASS Credential Dump via Defender Exclusion Window
+<img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/98114daf-7b49-4925-9ecc-3bf0e7ac78ca" />
+
 
 ## Overview
 
