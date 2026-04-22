@@ -967,59 +967,6 @@ Message     : Microsoft Defender Antivirus has detected malware or other potenti
                	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
                	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
 
-TimeCreated : 4/21/2026 11:34:12 AM
-Id          : 1116
-Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
-               For more information please see the following:
-              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
-               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
-               	ID: 14994
-               	Severity: Medium
-               	Category: Settings Modifier
-               	Path: file:_C:\Windows\System32\drivers\etc\hosts
-               	Detection Origin: Local machine
-               	Detection Type: Concrete
-               	Detection Source: System
-               	User: NT AUTHORITY\SYSTEM
-               	Process Name: Unknown
-               	Security intelligence Version: AV: 1.449.230.0, AS: 1.449.230.0, NIS: 1.449.230.0
-               	Engine Version: AM: 1.1.26030.3008, NIS: 1.1.26030.3008
-
-TimeCreated : 4/21/2026 11:30:35 AM
-Id          : 1116
-Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
-               For more information please see the following:
-              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
-               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
-               	ID: 14994
-               	Severity: Medium
-               	Category: Settings Modifier
-               	Path: file:_C:\Windows\System32\drivers\etc\hosts
-               	Detection Origin: Local machine
-               	Detection Type: Concrete
-               	Detection Source: System
-               	User: NT AUTHORITY\SYSTEM
-               	Process Name: Unknown
-               	Security intelligence Version: AV: 1.443.1118.0, AS: 1.443.1118.0, NIS: 1.443.1118.0
-               	Engine Version: AM: 1.1.25110.1, NIS: 1.1.25110.1
-
-TimeCreated : 4/21/2026 11:26:01 AM
-Id          : 1116
-Message     : Microsoft Defender Antivirus has detected malware or other potentially unwanted software.
-               For more information please see the following:
-              https://go.microsoft.com/fwlink/?linkid=37020&name=SettingsModifier:Win32/PossibleHostsFileHijack&threatid=14994&enterprise=0
-               	Name: SettingsModifier:Win32/PossibleHostsFileHijack
-               	ID: 14994
-               	Severity: Medium
-               	Category: Settings Modifier
-               	Path: file:_C:\Windows\System32\drivers\etc\hosts
-               	Detection Origin: Local machine
-               	Detection Type: Concrete
-               	Detection Source: Real-Time Protection
-               	User: LAB\Administrator
-               	Process Name: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-               	Security intelligence Version: AV: 1.443.1118.0, AS: 1.443.1118.0, NIS: 1.443.1118.0
-               	Engine Version: AM: 1.1.25110.1, NIS: 1.1.25110.1
 
 <img width="577" height="433" alt="3scq31" src="https://github.com/user-attachments/assets/42bc92c6-6032-4d66-a492-a2c3a24bbf51" />
 
