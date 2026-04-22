@@ -1,4 +1,4 @@
-# LSASS Credential Dump via Defender Exclusion Window
+<img width="1881" height="913" alt="alerts2withEID10" src="https://github.com/user-attachments/assets/1ff3f652-c335-45e3-9e6a-449f9eca4b18" /># LSASS Credential Dump via Defender Exclusion Window
 
 ## Overview
 
@@ -263,5 +263,22 @@ Confirm Sysmon EID 10 fires in both RTP-on and RTP-off conditions. The memory ac
 - Binary-level analysis of the behavioral delta between these builds is left to researchers with access to the relevant components
 
 ---
+<img width="1881" height="913" alt="alerts2withEID10" src="https://github.com/user-attachments/assets/4e786b1f-8c08-49ba-96a1-fe268c143f71" />
+
+<img width="1875" height="907" alt="lastattackfoeEID10+systemstatusdetails" src="https://github.com/user-attachments/assets/6c849b66-4bef-4b8a-a0cd-30db92871174" />
+
+<img width="1348" height="695" alt="otherUBR+DEFENDERDFS22042026" src="https://github.com/user-attachments/assets/d3a4c9b5-b193-4a90-9bf8-3a34e8aee97c" />
+
+<img width="1851" height="986" alt="dumpfailon84" src="https://github.com/user-attachments/assets/41e54caa-61c2-4e3c-a5ce-070bc80bbabd" />
+
+Notice 84dump is 0 kb....
+
+<img width="1802" height="862" alt="dumpfailon84a" src="https://github.com/user-attachments/assets/a37e0942-b5c7-4730-be4f-c4658bd9fa58" />
+
+<img width="1106" height="619" alt="winattackdefenderlevel220426" src="https://github.com/user-attachments/assets/b6b5945d-da02-439e-8f95-6f40d0ff4d9d" />
+
+
+
+
 
 *Lab: lab2019.local | Author: Osher Jacobs | GitHub: osherjacobs/AD-Lab-Research*
