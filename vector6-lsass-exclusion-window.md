@@ -324,6 +324,7 @@ TimeCreated : 4/21/2026 11:45:55 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\W
 Note: The detections above fired on runs where the exclusion window was **not** active or the artifact landed outside the exclusion window. Successful chain runs (exclusion active during dump and exfil) produced zero detection events.
 
 ---
+
 <img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/07ed77aa-bd67-43a4-bf2a-97028e2d6ef3" />
 
 
