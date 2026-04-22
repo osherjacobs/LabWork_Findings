@@ -29,7 +29,7 @@ Controlled testing across two Server 2022 hosts at identical OS build (20348.587
 | Signature | Machine | Exclusion Window Applied | Behavior | Detection Events |
 |-----------|---------|--------------------------|----------|-----------------|
 | 1449230 | WIN-1KS84GNPAUM | Yes | Chain completes — dump lands, artifact exfils, NT hash extracted | EID 1116/1117 suppressed during window; LsassDump.A → LsassDump.B transition observed intra-day |
-| 1449240 | WIN-ATTACK | Yes | 0kb output — chain fails | Zero detection events — no EID 1116/1117 |
+| 1449240 | WIN-ATTACK | Yes | 0kb output — chain fails | No artifact-based alerts (1116/1117). Primitive still observable via EID 10. |
 
 **At signature 1449230:** The exclusion window works. The dump lands in the excluded path, exfil completes, NT hash extracted. `Trojan:Win32/LsassDump.A` never fires during the window. Additionally, within the same day of testing at this signature version, the detection name changed from `Trojan:Win32/LsassDump.A` (ThreatID 2147816345) to `Trojan:Win32/LsassDump.B` (ThreatID 2147893513) — same artifact content, same Real-Time Protection source, different threat identifier. Microsoft was actively iterating on this detection during the same period this research was conducted and published.
 
@@ -38,6 +38,8 @@ Controlled testing across two Server 2022 hosts at identical OS build (20348.587
 A path exclusion is a filesystem control. It has no jurisdiction over memory access interception.
 
 **This technique has a signature expiry date. Observed boundary: between signature builds 1449230 and 1449240 — a delta of 10 signature builds.**
+
+The control didn't get stronger. It moved earlier. At sig 1449230, detection is bound to artifact realization — bypassable via timing and exclusion. At sig 1449240, detection is bound to primitive execution — the artifact never materializes. This closes this primitive, not the class of attack.
 
 > **Note on prior observations:** Event logs on WIN-ATTACK also show `Trojan:Win32/LsassDump.A` detections at sig 1449228 (April 21, early morning) against artifact paths `lsass.dmp` and `update.log`. These runs predate the exclusion window technique and were not part of the controlled comparison. Whether the exclusion window would have bypassed detection at sig 1449228 was not rigorously tested and cannot be stated as a finding.
 
@@ -54,7 +56,7 @@ Event log analysis of WIN-1KS84GNPAUM confirmed the following transition at sig 
 
 Same artifact content, same detection source (Real-Time Protection), same signature build — different threat name and ID. Whether `.B` represents a pattern refinement or reclassification is not determinable from event log data alone.
 
-WIN-ATTACK event logs confirmed zero 1116/1117 events at sig 1449240 — consistent with the dump being blocked prior to file creation rather than detected post-write.
+WIN-ATTACK event logs confirmed zero artifact-based alerts (1116/1117) at sig 1449240. EID 10 (LSASS process access) still fires — the primitive is observable at the memory access layer regardless of whether Defender blocks it. This is a telemetry shift, not a blind spot.
 
 ---
 
@@ -69,9 +71,10 @@ WIN-ATTACK event logs confirmed zero 1116/1117 events at sig 1449240 — consist
 
 ### What Defender catches (sig 1449240)
 
-- Observed behavior suggests interception of the dump primitive at the process level — consistent with blocking prior to filesystem write
-- Exclusion path has no effect — 0kb output, artifact never created
-- No alert, no quarantine, no EID 1116/1117 — silent block
+- Behavior is consistent with interception of the dump primitive rather than post-write scanning — the 0kb output implies the write operation is intercepted or short-circuited before completion
+- Exclusion path has no effect — artifact never materializes
+- No artifact-based alerts (1116/1117), no quarantine — silent at the filesystem layer
+- EID 10 still fires — primitive execution remains visible at the memory access layer
 
 ### What Defender does not catch (any version tested)
 
@@ -196,6 +199,8 @@ Severity: **Critical (99)** | MITRE: T1562.001
 
 No common administrative workflow performs this sequence within a short window on the same host.
 
+> **This detection outlives the technique.** The EID 5007 add→remove sequence is invariant — it fires whether the chain succeeds or fails, and survives Defender signature changes that invalidate the dump primitive entirely. Behavioral telemetry on policy manipulation is not signature-dependent.
+
 ---
 
 ### EID 10 — LSASS Process Access (Sysmon)
@@ -254,6 +259,16 @@ Confirm Sysmon EID 10 fires in both RTP-on and RTP-off conditions. The memory ac
 
 ---
 
+## Implications for Blue Teams
+
+- **Artifact-based detections are lagging indicators.** If your detection strategy starts at the filesystem, you are already behind the control plane.
+- **Policy change telemetry (EID 5007) is behavioral, not signature-bound.** It survives technique failure, signature updates, and primitive changes. Build on it.
+- **Memory access telemetry (EID 10) is primitive-level visibility.** It fires regardless of whether Defender blocks the operation or the artifact survives.
+- **Signature updates can silently invalidate both attacker techniques and defender assumptions.** A control that appears to close a bypass may shift detection in ways that invalidate existing alert logic.
+- **This closes this primitive, not the class of attack.** Alternate LSASS access paths will probe this boundary next.
+
+---
+
 ## Notes
 
 - The dump binary (getit2.exe) remained undetected across all test runs
@@ -307,11 +322,6 @@ TimeCreated : 4/21/2026 11:45:55 AM | EID 1116 | Trojan:Win32/LsassDump.A | C:\W
 ```
 
 Note: The detections above fired on runs where the exclusion window was **not** active or the artifact landed outside the exclusion window. Successful chain runs (exclusion active during dump and exfil) produced zero detection events.
-
----
-
-*Lab: lab2019.local | Author: Osher Jacobs | GitHub: osherjacobs/AD-Lab-Research*
-
 
 ---
 <img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/07ed77aa-bd67-43a4-bf2a-97028e2d6ef3" />
