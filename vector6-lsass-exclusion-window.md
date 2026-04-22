@@ -1,6 +1,8 @@
 <img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/98114daf-7b49-4925-9ecc-3bf0e7ac78ca" />
 
 
+# LSASS Credential Dump via Defender Exclusion Window
+
 ## Overview
 
 This writeup documents a post-compromise credential harvesting chain that survives Defender's artifact-based LSASS dump detection by exploiting a legitimate Windows Defender API to create a timed exclusion window. The chain was validated against Windows Server 2022 across multiple Defender signature versions in April 2026.
@@ -22,23 +24,22 @@ This is a follow-on to the Vector 4/5 LSASS dump chain. The Defender signature `
 
 ## Signature Boundary — Critical Finding
 
-Controlled testing across two Server 2022 hosts at identical OS build (20348.587) identified three distinct behavioral states across three consecutive Defender signature builds.
+Controlled testing across two Server 2022 hosts at identical OS build (20348.587) identified two distinct behavioral states across the exclusion window technique at different Defender signature versions.
 
-| Signature | Machine | Behavior | Detection Events |
-|-----------|---------|----------|-----------------|
-| 1449228 | WIN-ATTACK | Artifact caught on disk | EID 1116/1117 — Trojan:Win32/LsassDump.A |
-| 1449230 | WIN-1KS84GNPAUM | Exclusion window bypasses detection | EID 1116/1117 suppressed during window; LsassDump.A → LsassDump.B transition observed intra-day |
-| 1449240 | WIN-ATTACK | 0kb output — chain fails | Zero detection events — no EID 1116/1117 |
-
-**At signature 1449228:** `Trojan:Win32/LsassDump.A` catches the artifact on disk via Real-Time Protection. Standard artifact-based detection. Exclusion window technique not yet applied.
+| Signature | Machine | Exclusion Window Applied | Behavior | Detection Events |
+|-----------|---------|--------------------------|----------|-----------------|
+| 1449230 | WIN-1KS84GNPAUM | Yes | Chain completes — dump lands, artifact exfils, NT hash extracted | EID 1116/1117 suppressed during window; LsassDump.A → LsassDump.B transition observed intra-day |
+| 1449240 | WIN-ATTACK | Yes | 0kb output — chain fails | Zero detection events — no EID 1116/1117 |
 
 **At signature 1449230:** The exclusion window works. The dump lands in the excluded path, exfil completes, NT hash extracted. `Trojan:Win32/LsassDump.A` never fires during the window. Additionally, within the same day of testing at this signature version, the detection name changed from `Trojan:Win32/LsassDump.A` (ThreatID 2147816345) to `Trojan:Win32/LsassDump.B` (ThreatID 2147893513) — same artifact content, same Real-Time Protection source, different threat identifier. Microsoft was actively iterating on this detection during the same period this research was conducted and published.
 
-**At signature 1449240:** The exclusion window is irrelevant. The dump produces 0kb output with zero EID 1116/1117 events. Disabling real-time protection restores the dump primitive — strongly indicating Defender is blocking the operation prior to file creation. Observed behavior is consistent with process-level intervention rather than artifact detection. 
+**At signature 1449240:** The exclusion window is irrelevant. The dump produces 0kb output with zero EID 1116/1117 events. Disabling real-time protection restores the dump primitive — strongly indicating Defender is blocking the operation prior to file creation. Observed behavior is consistent with process-level intervention rather than artifact detection.
 
 A path exclusion is a filesystem control. It has no jurisdiction over memory access interception.
 
 **This technique has a signature expiry date. Observed boundary: between signature builds 1449230 and 1449240 — a delta of 10 signature builds.**
+
+> **Note on prior observations:** Event logs on WIN-ATTACK also show `Trojan:Win32/LsassDump.A` detections at sig 1449228 (April 21, early morning) against artifact paths `lsass.dmp` and `update.log`. These runs predate the exclusion window technique and were not part of the controlled comparison. Whether the exclusion window would have bypassed detection at sig 1449228 was not rigorously tested and cannot be stated as a finding.
 
 ### Intra-day Signature Evolution — LsassDump.A to LsassDump.B
 
@@ -59,7 +60,7 @@ WIN-ATTACK event logs confirmed zero 1116/1117 events at sig 1449240 — consist
 
 ## Detection Boundary Analysis
 
-### What Defender catches (sig 1449228 / 1449230)
+### What Defender catches (sig 1449230)
 
 `Trojan:Win32/LsassDump.A` / `.B` detects the LSASS minidump artifact on disk. Detection is:
 - **Content-based**, not path or filename based
@@ -262,6 +263,9 @@ Confirm Sysmon EID 10 fires in both RTP-on and RTP-off conditions. The memory ac
 - EID 10 remains the most reliable detection regardless of artifact survival or signature version
 - Do not rely on signature version as a defense boundary — it is not a static control
 - Binary-level analysis of the behavioral delta between these builds is left to researchers with access to the relevant components
+
+---
+
 
 ---
 <img width="1868" height="906" alt="transientruletoo" src="https://github.com/user-attachments/assets/07ed77aa-bd67-43a4-bf2a-97028e2d6ef3" />
