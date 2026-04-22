@@ -34,7 +34,7 @@ Controlled testing across two Server 2022 hosts at identical OS build (20348.587
 
 **At signature 1449230:** The exclusion window works. The dump lands in the excluded path, exfil completes, NT hash extracted. `Trojan:Win32/LsassDump.A` never fires during the window. Additionally, within the same day of testing at this signature version, the detection name changed from `Trojan:Win32/LsassDump.A` (ThreatID 2147816345) to `Trojan:Win32/LsassDump.B` (ThreatID 2147893513) — same artifact content, same Real-Time Protection source, different threat identifier. Microsoft was actively iterating on this detection during the same period this research was conducted and published.
 
-**At signature 1449240:** The exclusion window is irrelevant. The dump produces 0kb output with zero EID 1116/1117 events. Disabling real-time protection restores the dump primitive — strongly indicating Defender is blocking the operation prior to file creation. Observed behavior is consistent with process-level intervention rather than artifact detection. This is not tied to the previously observed CU behavior.
+**At signature 1449240:** The exclusion window is irrelevant. The dump produces 0kb output with zero EID 1116/1117 events. Disabling real-time protection restores the dump primitive — strongly indicating Defender is blocking the operation prior to file creation. Observed behavior is consistent with process-level intervention rather than artifact detection. 
 
 A path exclusion is a filesystem control. It has no jurisdiction over memory access interception.
 
