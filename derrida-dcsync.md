@@ -1,5 +1,4 @@
 # ⚠️ SATIRE ALERT ⚠️
-# This is a joke. A technically informed joke, but a joke.
 
 ---
 
