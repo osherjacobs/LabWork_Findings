@@ -3,8 +3,7 @@
 
 a critique of DCSYNC vs. ADCS in the style of Derrida
 
-15:15
-Claude responded: De la Réplication et de la Différance : Une Déconstruction du DCSync et de l'ADCS
+De la Réplication et de la Différance : Une Déconstruction du DCSync et de l'ADCS
 De la Réplication et de la Différance : Une Déconstruction du DCSync et de l'ADCS
 
 The request for replication is never simply a request. It is already a trace — a différance — the deferral of presence through the wire protocol, MS-DRSR, which does not transmit the credential itself but only its representation, already removed from the origin, already a copy of a copy. The domain controller does not have the secret; it is the site where the secret's absence is managed.
