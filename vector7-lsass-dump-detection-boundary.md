@@ -319,5 +319,14 @@ The practical implication: the exfiltration window is real but closes on any ope
 - **Comspec + base64 PowerShell detection** — Vector 8
 
 ---
+<img width="841" height="260" alt="dump" src="https://github.com/user-attachments/assets/d851f180-9958-49e9-a2a9-c59aef05f73d" />
+
+<img width="933" height="550" alt="2026-04-24_18-08exfil" src="https://github.com/user-attachments/assets/99dc3100-007e-4e34-8b63-c23ff0442070" />
+
+
+<img width="1782" height="938" alt="fulldumpbFULL" src="https://github.com/user-attachments/assets/1dc48f49-9e0d-4bd4-b796-41f9f90e8b38" />
+
+<img width="1563" height="929" alt="fulldumpb" src="https://github.com/user-attachments/assets/fadd26c0-4abd-4b9c-8380-d40a618e77ed" />
+
 
 *Lab-validated on fully patched Windows Server 2022 (20348.587 and 20348.5020) with current Defender signatures in Normal mode. A/B test confirmed technique is build-agnostic under current engine.*
