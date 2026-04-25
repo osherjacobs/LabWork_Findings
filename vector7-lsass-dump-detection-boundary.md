@@ -357,7 +357,7 @@ This section documents attack-chain constraints derived directly from lab findin
 
 <img width="1866" height="921" alt="transientruleKQL" src="https://github.com/user-attachments/assets/ca85f9f2-1c72-43fe-b22f-76c5089bf160" />
 
-EID 10 FIRING ON 3rd DUMP
+EID 10 FIRING ON 3rd DUMP (3 miliseconds apart.... probably a double whammy on the same event)
 
 <img width="1878" height="1055" alt="EID10FIRINGON3rdRUN" src="https://github.com/user-attachments/assets/8e227a34-7464-49b4-828c-9feacafa36e1" />
 
