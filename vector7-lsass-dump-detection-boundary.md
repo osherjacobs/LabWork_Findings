@@ -1,14 +1,12 @@
 <img width="1867" height="963" alt="4RULESBTEST" src="https://github.com/user-attachments/assets/a4fd80d5-6232-4b28-9fc0-438d45416e67" />
 
-**LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis**
+LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis
 
 **Technique:** Direct `MiniDumpWriteDump` via compiled C# binary (dbghelp.dll)  
 **Delivery:** SYSTEM-level reverse shell via scheduled task  
 **Outcome:** Successful credential dump on both test builds. Administrator NT hash extracted.  
-**Defender: does not learn from prior detections in a way that changes early-lifecycle detection behaviour**
+**Defender:** Does not learn from prior detections in a way that changes early-lifecycle detection behaviour  
 **Date:** April 24-25, 2026
-
-
 
 ---
 
@@ -26,7 +24,7 @@
 | Restart required | No (premature kill in earlier attempts) | No |
 | Folder exclusion required | Yes (post-write survival) | No — dump survived without exclusion |
 | No 1116/1117 on dump | ✅ | ✅ |
-| No EID 10 | ✅ | ✅ |
+| EID 10 fired | ❌ | ❌ Runs 1-2 / ✅ Run 3 only — race condition confirmed |
 
 **Key finding: OS patch level did not break the chain. Defender signature version did not break the chain.**
 
@@ -118,6 +116,8 @@ Something below the CmdLine signature layer actively interferes with the dump wr
 
 The critical observation is not that Defender "missed" the dump — it is that Defender demonstrably observed the activity (evidenced by the runtime interference and throughput degradation) while emitting no corresponding security signal. That is a harder problem than a detection gap: the control touched it, slowed it, and said nothing.
 
+On the third run on WIN-1KS84GNPAUM, Sysmon EID 10 (LSASS PROCESS_ALL_ACCESS) fired — twice — despite not firing on the two previous runs on the same host with identical configuration. This is the strongest possible evidence for the race condition framing: same binary, same host, same Defender state, different telemetry outcome across runs.
+
 ### Test A — Folder Exclusion Required (20348.587)
 
 Defender post-write remediation deleted the dump file before exfiltration. A folder exclusion was added to preserve the file:
@@ -136,9 +136,13 @@ On the patched build (20348.5020, sigs 1.449.293.0), the dump file survived post
 
 After exfiltration, the exclusion was removed (`Remove-MpPreference`). The dump file (`out2.dmp`, 50,295 KB) remained in `C:\Windows\Temp`. The VM was then rebooted — triggering a Defender startup scan. The file survived the reboot and startup scan intact. `Get-MpThreatDetection` confirmed no detection event was ever generated against the dump file at any point — not during write, not at rest, not after exclusion removal, not after reboot.
 
-The most recent threat detections on this host were against the hosts file (ThreatID 14994) and a log file from a prior session. The LSASS dump file has never appeared in Defender's threat history.
+The most recent threat detections on this host were against the hosts file (ThreatID 14994) and a log file from a prior session. The LSASS dump file never appeared in Defender's threat history.
 
-**Operational implication:** On 20348.5020 with current signatures, a completed LSASS dump file is not detected at rest. An attacker who completes the dump has an indefinite exfiltration window — no exclusion required, no time pressure from post-write remediation.
+**Interaction-triggered detection confirmed:**
+
+Right-click → Properties on the dump file surfaced the content signature — **Trojan:Win32/LsassDump.A, Severe** — and the file was quarantined within 13 seconds. Explorer selection (visual highlight) did not trigger detection. SMB-based exfiltration did not trigger detection. The trigger is a specific scan-invocation path, not passive file presence or general file access.
+
+**Defender did not learn from prior detections.** A third run on the same host — after Defender had already quarantined a previous dump via `Trojan:Win32/LsassDump.A` — produced another successful dump with no earlier detection. Prior quarantine of the same threat class on the same host did not prime Defender to detect the subsequent dump at any earlier lifecycle stage.
 
 ### Exfiltration
 ```bash
@@ -159,7 +163,7 @@ DPAPI masterkey, Kerberos session extracted
 Machine account NT hash + Kerberos plaintext password extracted
 ```
 
-**Test B results (WIN-1KS84GNPAUM, 20348.5020):**
+**Test B results (WIN-1KS84GNPAUM, 20348.5020) — three successful runs:**
 ```
 username : Administrator / WIN-1KS84GNPAUM
 NT hash  : 3c02b6b6fb6b3b17242dc33a31bc011f
@@ -210,12 +214,15 @@ This research maps four distinct layers of Defender behaviour across the LSASS d
 
 | Time | Rule | Severity | Notes |
 |---|---|---|---|
-| 21:53:12 | Defender - Exclusion Path Added | High (73) | Post-dump, pre-exfil |
-| 21:53:24 | Admin Share Access - C$ via SMB | High (73) | smbclient exfil |
+| 21:53:12 | Defender - Exclusion Path Added | High (73) | Post-dump run 1, pre-exfil |
+| 21:53:24 | Admin Share Access - C$ via SMB | High (73) | Run 1 exfil |
 | 22:12:39 | Defender - Exclusion Path Removed | High (47) | Cleanup |
-| 22:25:39 | **Defender - Transient Exclusion Window Detected** | **Critical (99)** | EQL sequence correlation |
+| 22:25:39 | Defender - Transient Exclusion Window Detected | Critical (99) | EQL sequence correlation |
+| 23:03:27 | LSASS Access - PROCESS_ALL_ACCESS | Critical (99) | EID 10 fired — run 3 (x2) |
+| 23:13:12 | Defender - Exclusion Path Added | High (73) | Run 3 pre-exfil |
+| 00:03:24 | Admin Share Access - C$ via SMB | High (73) | Run 3 exfil |
 
-**Zero alerts on the dump chain.** All detections relate to the exclusion lifecycle and exfiltration.
+**Zero alerts on the dump chain across all three runs on this host.** EID 10 fired on run 3 but not runs 1 or 2 — same host, same binary, same Defender state. Every other detection relates to the exclusion lifecycle or exfiltration.
 
 ### EID Telemetry Matrix
 
@@ -223,7 +230,7 @@ This research maps four distinct layers of Defender behaviour across the LSASS d
 |---|---|---|---|---|
 | Defender CmdLine | 1116/1117 | ✅ Fires | ❌ No | ❌ No |
 | Sysmon ProcessCreate | 1 | ✅ Fires | ✅ Fires | ✅ Fires |
-| Sysmon ProcessAccess | 10 | ❌ Killed first | ❌ Hung | ❌ Hung |
+| Sysmon ProcessAccess | 10 | ❌ Killed first | ❌ Hung | ⚠️ Non-deterministic — fired run 3, not runs 1-2 |
 | Sysmon FileCreate | 11 | ❌ Never lands | ❌ No | ❌ No |
 | Defender Config Change | 5007 | — | — | ✅ On exclusion add/remove |
 
@@ -274,7 +281,7 @@ Compressed: Defender recognizes the behavior, interferes with it, but only surfa
 
 ---
 
-1. **Successful credential dump achieved on both test builds** — 20348.587 and 20348.5020 — with current Defender signatures in Normal mode. Administrator NT hash, machine account credentials, and DPAPI master keys extracted on both.
+1. **Successful credential dump achieved on both test builds** — 20348.587 and 20348.5020 — with current Defender signatures in Normal mode. Administrator NT hash, machine account credentials, and DPAPI master keys extracted on both. Three successful dumps on WIN-1KS84GNPAUM alone.
 
 2. **OS patch level did not break the chain.** Defender signature version did not break the chain. The technique is build-agnostic under current Defender engine.
 
@@ -284,8 +291,6 @@ Compressed: Defender recognizes the behavior, interferes with it, but only surfa
 
 5. **Test B (20348.5020): dump file survivability is interaction-dependent.** The completed dump file survived exclusion removal, a full system reboot, and Defender's startup scan without triggering any detection or remediation. Explorer selection (visual highlight) also produced no alert. However, right-click → Properties triggered an on-access content read which surfaced the file signature — **Trojan:Win32/LsassDump.A, Severe** — and the file was quarantined at 13:06.
 
-This refines the finding precisely:
-
 | Interaction | Defender Response |
 |---|---|
 | Post-write presence | No detection |
@@ -294,7 +299,7 @@ This refines the finding precisely:
 | Explorer selection | No detection |
 | Right-click → Properties | **Detected — Trojan:Win32/LsassDump.A — Quarantined** |
 
-The practical implication: the exfiltration window is real but closes on any operation that forces a content read. SMB copy (already completed successfully before this interaction) does not appear to trigger the same on-access scan. SMB-based exfiltration (observed in this session) did not trigger the same inspection path that surfaces the file signature. The window between dump completion and content-read-triggered detection was operationally sufficient to complete exfiltration.
+SMB-based exfiltration (observed in this session) did not trigger the same inspection path that surfaces the file signature. The window between dump completion and content-read-triggered detection was operationally sufficient to complete exfiltration.
 
 5a. **Four distinct Defender behaviours observed across the attack chain:**
    - comsvcs/MiniDump path → CmdLine signature fires, process killed, file never lands
@@ -302,13 +307,15 @@ The practical implication: the exfiltration window is real but closes on any ope
    - Completed dump file at rest → not detected through reboot, startup scan, and passive interaction
    - File content read (right-click → Properties) → content signature fires, Trojan:Win32/LsassDump.A, quarantined
 
-6. **Zero LSASS-specific alerts fired on any dump attempt** across both test sessions. Every detection was in the exclusion lifecycle or exfiltration path.
+6. **Zero LSASS-specific alerts fired on any dump attempt** across all runs on both test hosts. Every detection was in the exclusion lifecycle or exfiltration path.
 
-7. **EID 10 did not fire on any attempt.** Under active Defender runtime enforcement, the LSASS handle open either does not complete or completes too briefly to generate a stable ProcessAccess event. This makes EID 10 non-deterministic in defended environments — its emission is dependent on race conditions with enforcement timing. The implication is worse than simple unreliability: the more protected the system, the less likely your telemetry fires cleanly. Detection rules built on EID 10 as the primary LSASS access signal are anti-reliable under protection — they degrade precisely in the environments where they matter most.
+7. **EID 10 is non-deterministic under active Defender enforcement.** It fired on the third run on WIN-1KS84GNPAUM but not the first two — same host, same binary, same Defender state. This is not a detection gap — it is race-condition dependent emission. The same technique produced different telemetry across runs with no reliable predictor of which. The implication is worse than simple unreliability: the more protected the system, the less likely your telemetry fires cleanly. Detection rules built on EID 10 as the primary LSASS access signal are anti-reliable under protection — they degrade precisely in the environments where they matter most. When EID 10 does fire, it should be treated as a high-confidence signal. When it doesn't, absence of evidence is not evidence of absence.
 
 8. **The Transient Exclusion Window EQL rule is the highest-value detection signal** — Critical severity, risk score 99, fires on the add→remove exclusion sequence. It survived lab validation on the B test session.
 
-9. **The realistic attack target is not a DC.** A 30-45 minute write with associated system stress is immediately visible on a domain controller. The extended execution time forces target selection — this is not a smash-and-grab primitive. It is a low-noise persistence-phase credential harvest: a member server, admin workstation, or jump host with a cached privileged session, in a quiet window, where sustained CPU and I/O load does not immediately trigger investigation. Same credential value, lower operational signature.
+9. **Defender does not learn from prior detections.** A third run after prior quarantine of `Trojan:Win32/LsassDump.A` on the same host produced another successful dump with no earlier lifecycle detection. Prior threat history did not change detection behaviour.
+
+10. **The realistic attack target is not a DC.** A 30-45 minute write with associated system stress is immediately visible on a domain controller. The extended execution time forces target selection — this is not a smash-and-grab primitive. It is a low-noise persistence-phase credential harvest: a member server, admin workstation, or jump host with a cached privileged session, in a quiet window, where sustained CPU and I/O load does not immediately trigger investigation. Same credential value, lower operational signature.
 
 ---
 
