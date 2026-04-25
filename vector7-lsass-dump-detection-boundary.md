@@ -364,7 +364,7 @@ EID 10 FIRING ON 3rd DUMP (3 miliseconds apart.... probably a double whammy on t
 <img width="1878" height="1055" alt="EID10FIRINGON3rdRUN" src="https://github.com/user-attachments/assets/8e227a34-7464-49b4-828c-9feacafa36e1" />
 
 
-DEFENDER DOESN'T LEARN: DUMPED FOR THE 3rd TIME: NOTE TIME ZONE... I AM SHOMER SHABBOSS...
+DEFENDER DOESN'T LEARN: DUMPED FOR THE 3rd TIME: NOTE TIME ZONE... I AM SHOMER SHABBOSS...(really...)
 
 <img width="1851" height="969" alt="doesntlearnSHABBATTIMERZONE" src="https://github.com/user-attachments/assets/96a233f8-7ecc-4e0a-a67c-d8e55da1bf8c" />
 
