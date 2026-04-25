@@ -1,9 +1,13 @@
-LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis
+<img width="1867" height="963" alt="4RULESBTEST" src="https://github.com/user-attachments/assets/a4fd80d5-6232-4b28-9fc0-438d45416e67" />
+
+**LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis**
 
 **Technique:** Direct `MiniDumpWriteDump` via compiled C# binary (dbghelp.dll)  
 **Delivery:** SYSTEM-level reverse shell via scheduled task  
 **Outcome:** Successful credential dump on both test builds. Administrator NT hash extracted.  
 **Date:** April 24-25, 2026
+**Defender** does not learn from prior detections in a way that changes early-lifecycle detection behaviour
+
 
 ---
 
