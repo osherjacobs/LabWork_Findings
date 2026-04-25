@@ -1,5 +1,8 @@
 # LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis
 
+<img width="1867" height="963" alt="4RULESBTEST" src="https://github.com/user-attachments/assets/395fbd4d-7d05-409e-8ce7-2372004d7d06" />
+
+
 **Technique:** Direct `MiniDumpWriteDump` via compiled C# binary (dbghelp.dll)  
 **Delivery:** SYSTEM-level reverse shell via scheduled task  
 **Outcome:** Successful credential dump on both test builds. Administrator NT hash extracted.  
