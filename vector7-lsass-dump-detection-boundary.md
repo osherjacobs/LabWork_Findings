@@ -348,6 +348,11 @@ This section documents attack-chain constraints derived directly from lab findin
 
 <img width="1872" height="905" alt="transientrule" src="https://github.com/user-attachments/assets/d4768330-29ac-4449-959b-ff5e85f7f811" />
 
+DEFENDER DOESN'T LEARN: DUMPED FOR THE 3rd TIME: NOTE TIME ZONE... I AM SHOMER SHABBOSS...
+
+<img width="1851" height="969" alt="doesntlearnSHABBATTIMERZONE" src="https://github.com/user-attachments/assets/96a233f8-7ecc-4e0a-a67c-d8e55da1bf8c" />
+
+
 <img width="1866" height="921" alt="transientruleKQL" src="https://github.com/user-attachments/assets/ca85f9f2-1c72-43fe-b22f-76c5089bf160" />
 
 
