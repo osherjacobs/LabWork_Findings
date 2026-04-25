@@ -341,7 +341,7 @@ This section documents attack-chain constraints derived directly from lab findin
 
 - **Runtime enforcement mechanism isolation** — determine whether the throughput degradation is memory scanning contention, minifilter throttling, or dump stream inspection. Naming the mechanism elevates this from gap analysis to partial reverse of Defender's runtime behaviour.
 - **Test A survivability validation** — confirm whether completed dump file also survives at rest on 20348.587 without exclusion
-- **Credential use validation** — pass-the-hash with extracted NT hash against DC01
+- **Credential use validation** — pass-the-hash with extracted NT hash against DC01 (Done. Screenshot below)
 - **GhostKatz / BYOVD path** — neutralise runtime enforcement to reduce dump time from ~45 minutes to seconds
 - **Comspec + base64 PowerShell detection** — Vector 8
 
