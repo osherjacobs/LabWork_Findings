@@ -2,7 +2,7 @@
 
 
 
-**LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis**
+#LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis
 
 **Technique:** Direct `MiniDumpWriteDump` via compiled C# binary (dbghelp.dll)  
 **Delivery:** SYSTEM-level reverse shell via scheduled task  
