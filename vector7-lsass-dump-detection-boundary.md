@@ -5,7 +5,7 @@
 **Technique:** Direct `MiniDumpWriteDump` via compiled C# binary (dbghelp.dll)  
 **Delivery:** SYSTEM-level reverse shell via scheduled task  
 **Outcome:** Successful credential dump on both test builds. Administrator NT hash extracted.  
-**Defender:** does not learn from prior detections in a way that changes early-lifecycle detection behaviour
+**Defender: does not learn from prior detections in a way that changes early-lifecycle detection behaviour**
 **Date:** April 24-25, 2026
 
 
