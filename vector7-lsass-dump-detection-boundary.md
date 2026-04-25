@@ -1,7 +1,4 @@
-# LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis
-
-<img width="1867" height="963" alt="4RULESBTEST" src="https://github.com/user-attachments/assets/395fbd4d-7d05-409e-8ce7-2372004d7d06" />
-
+LSASS Credential Dump via Direct API Call: Defender Evasion and Detection Analysis
 
 **Technique:** Direct `MiniDumpWriteDump` via compiled C# binary (dbghelp.dll)  
 **Delivery:** SYSTEM-level reverse shell via scheduled task  
@@ -307,6 +304,22 @@ The practical implication: the exfiltration window is real but closes on any ope
 8. **The Transient Exclusion Window EQL rule is the highest-value detection signal** — Critical severity, risk score 99, fires on the add→remove exclusion sequence. It survived lab validation on the B test session.
 
 9. **The realistic attack target is not a DC.** A 30-45 minute write with associated system stress is immediately visible on a domain controller. The extended execution time forces target selection — this is not a smash-and-grab primitive. It is a low-noise persistence-phase credential harvest: a member server, admin workstation, or jump host with a cached privileged session, in a quiet window, where sustained CPU and I/O load does not immediately trigger investigation. Same credential value, lower operational signature.
+
+---
+
+## Operational Realism
+
+This section documents attack-chain constraints derived directly from lab findings — not generic OPSEC guidance, but behaviours that follow logically from the detection telemetry observed.
+
+**Target selection is forced by write time.** A 30-45 minute write with elevated CPU and I/O is not invisible on an active system. A domain controller or heavily monitored server is the wrong target. The realistic target is an admin workstation, jump host, or member server — ideally one with a cached privileged session and no active user.
+
+**Timing matters.** 02:00-04:00 local time on an idle machine with no active session. Sustained load on an idle machine draws far less attention than the same load during business hours. The write duration makes daytime execution operationally expensive.
+
+**Session requirement.** A privileged credential must exist in LSASS. The higher the privilege of the cached session, the higher the credential value — but also the more likely the machine is actively monitored. Lateral movement to a less-monitored host that has recently been accessed by a domain admin is the realistic precondition.
+
+**Interaction discipline.** Based on lab findings: do not right-click the dump file on the target host. Right-click → Properties invokes a scan-triggering inspection path that surfaces `Trojan:Win32/LsassDump.A`. SMB-based exfiltration directly from the machine did not trigger the same path. Touch the file as little as possible on the target.
+
+**Exclusion decision.** On the patched build (20348.5020), the dump file survived without a folder exclusion. Adding and removing an exclusion generates EID 5007 events and — if the add→remove window is within 20-30 minutes — triggers the Transient Exclusion Window correlation rule (Critical, 99). On a sufficiently patched build, skip the exclusion entirely. On an older build where post-write remediation is a risk, accept the EID 5007 signal or pre-stage the exclusion well before execution to widen the correlation window beyond the rule's maxspan.
 
 ---
 
