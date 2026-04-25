@@ -357,6 +357,11 @@ This section documents attack-chain constraints derived directly from lab findin
 
 <img width="1866" height="921" alt="transientruleKQL" src="https://github.com/user-attachments/assets/ca85f9f2-1c72-43fe-b22f-76c5089bf160" />
 
+EID 10 FIRING ON 3rd DUMP
+
+<img width="1878" height="1055" alt="EID10FIRINGON3rdRUN" src="https://github.com/user-attachments/assets/8e227a34-7464-49b4-828c-9feacafa36e1" />
+
+
 DEFENDER DOESN'T LEARN: DUMPED FOR THE 3rd TIME: NOTE TIME ZONE... I AM SHOMER SHABBOSS...
 
 <img width="1851" height="969" alt="doesntlearnSHABBATTIMERZONE" src="https://github.com/user-attachments/assets/96a233f8-7ecc-4e0a-a67c-d8e55da1bf8c" />
