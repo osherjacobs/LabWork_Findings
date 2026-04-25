@@ -362,7 +362,8 @@ EID 10 FIRING ON 3rd DUMP (3 miliseconds apart.... probably a double whammy on t
 
 <img width="1878" height="1055" alt="EID10FIRINGON3rdRUN" src="https://github.com/user-attachments/assets/8e227a34-7464-49b4-828c-9feacafa36e1" />
 
-<img width="1401" height="765" alt="evilwinrm" src="https://github.com/user-attachments/assets/807a52f0-ddc8-4869-9289-dc74e58f84e0" />
+<img width="1541" height="924" alt="evilwinrm2" src="https://github.com/user-attachments/assets/20910bda-3205-41a3-80e6-43420290f0bf" />
+
 
 DC:
 
