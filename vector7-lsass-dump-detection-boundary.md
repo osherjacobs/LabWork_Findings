@@ -364,6 +364,11 @@ EID 10 FIRING ON 3rd DUMP (3 miliseconds apart.... probably a double whammy on t
 
 <img width="1401" height="765" alt="evilwinrm" src="https://github.com/user-attachments/assets/807a52f0-ddc8-4869-9289-dc74e58f84e0" />
 
+DC:
+
+<img width="1328" height="278" alt="evilwinrmDC" src="https://github.com/user-attachments/assets/5d4ba1c0-4a50-4e99-92df-d77d2bb5e2c7" />
+
+
 DEFENDER DOESN'T LEARN: DUMPED FOR THE 3rd TIME: NOTE TIME ZONE... I AM SHOMER SHABBOSS...(really...)
 
 <img width="1851" height="969" alt="doesntlearnSHABBATTIMERZONE" src="https://github.com/user-attachments/assets/96a233f8-7ecc-4e0a-a67c-d8e55da1bf8c" />
