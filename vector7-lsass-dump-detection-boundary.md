@@ -350,7 +350,6 @@ This section documents attack-chain constraints derived directly from lab findin
 
 <img width="933" height="550" alt="2026-04-24_18-08exfil" src="https://github.com/user-attachments/assets/99dc3100-007e-4e34-8b63-c23ff0442070" />
 
-
 <img width="1782" height="938" alt="fulldumpbFULL" src="https://github.com/user-attachments/assets/1dc48f49-9e0d-4bd4-b796-41f9f90e8b38" />
 
 <img width="1563" height="929" alt="fulldumpb" src="https://github.com/user-attachments/assets/fadd26c0-4abd-4b9c-8380-d40a618e77ed" />
@@ -363,6 +362,7 @@ EID 10 FIRING ON 3rd DUMP (3 miliseconds apart.... probably a double whammy on t
 
 <img width="1878" height="1055" alt="EID10FIRINGON3rdRUN" src="https://github.com/user-attachments/assets/8e227a34-7464-49b4-828c-9feacafa36e1" />
 
+<img width="1401" height="765" alt="evilwinrm" src="https://github.com/user-attachments/assets/807a52f0-ddc8-4869-9289-dc74e58f84e0" />
 
 DEFENDER DOESN'T LEARN: DUMPED FOR THE 3rd TIME: NOTE TIME ZONE... I AM SHOMER SHABBOSS...(really...)
 
