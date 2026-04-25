@@ -328,5 +328,9 @@ The practical implication: the exfiltration window is real but closes on any ope
 
 <img width="1563" height="929" alt="fulldumpb" src="https://github.com/user-attachments/assets/fadd26c0-4abd-4b9c-8380-d40a618e77ed" />
 
+<img width="1872" height="905" alt="transientrule" src="https://github.com/user-attachments/assets/d4768330-29ac-4449-959b-ff5e85f7f811" />
+
+<img width="1866" height="921" alt="transientruleKQL" src="https://github.com/user-attachments/assets/ca85f9f2-1c72-43fe-b22f-76c5089bf160" />
+
 
 *Lab-validated on fully patched Windows Server 2022 (20348.587 and 20348.5020) with current Defender signatures in Normal mode. A/B test confirmed technique is build-agnostic under current engine.*
