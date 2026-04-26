@@ -8,6 +8,10 @@ Extension of Vector 7 (Server 2022). Same technique, different target OS. Confir
 
 **Key finding:** pypykatz 0.6.10 fails on Server 2025 (`lsasrv.dll` signature gap). pypykatz **0.6.13 required**.
 
+## Research Scope
+
+This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development. The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided. No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement. The goal is to clarify detection boundaries for defenders.
+
 ---
 
 ## Lab Environment
@@ -84,8 +88,8 @@ pypykatz lsa minidump /tmp/out2_server2025.dmp
 |---|---|---|
 | Dump size | ~131MB | ~131–251MB |
 | Write time | ~8 min | ~24–32 min |
-| Administrator NT | `3c0xxxxxxxxxxxxxxxxxxxx` | ✅ same |
-| Machine account NT | `0af649184028ca3ea6b5149298bd57f4` | ✅ same |
+| Administrator NT | [redacted] | ✅ same |
+| Machine account NT | [redacted] | ✅ same |
 | Kerberos plaintext | ✅ extracted | ✅ extracted |
 | AES128/256 keys | ✅ extracted | ✅ extracted |
 | DPAPI master keys | ✅ extracted | ✅ extracted |
@@ -118,15 +122,24 @@ Two access events fired at dump initiation:
 
 ## Detection Rule (KQL)
 
+Validated in Kibana against lab telemetry — 1 result, curio.exe → lsass.exe, `0x1FFFFF`.
+
+```kql
+event.code: "10" and
+message: "lsass.exe" and
+message: "0x1FFFFF" and
+not message: ("MsMpEng" or "csrss.exe" or "wininit.exe" or "svchost.exe" or "wmiprvse.exe")
+```
+
+**Mapping note:** In Winlogbeat 8.19.x, `winlog.event_data.GrantedAccess` is indexed as `text` rather than `keyword`, so field-level KQL matching on that field is not functional. This rule uses `message` content matching as a confirmed workaround. Defenders on index templates with `keyword` mapping for that field can use the field-level form instead:
+
 ```kql
 event.code: "10" and
 winlog.event_data.TargetImage: "*lsass*" and
 winlog.event_data.GrantedAccess: ("0x1fffff" or "0x1f3fff") and
 not winlog.event_data.SourceImage: (
-  "*MsMpEng*" or
-  "*svchost*" or
-  "*wmiprvse*" or
-  "*lsass*"
+  "*MsMpEng*" or "*svchost*" or "*wmiprvse*" or
+  "*lsass*" or "*csrss*" or "*wininit*"
 )
 ```
 
@@ -153,8 +166,11 @@ Server 2025 dumps significantly faster than Server 2022 under identical conditio
 
 The dump itself may not alert. Watch the precursor: `Add-MpPreference -ExclusionPath` (EID 5007) from a non-administrative context, or from a process spawned by a scheduled task, is the window before credential material leaves the host.
 
+The exclusion path is not operational convenience — it is the attack's dependency. Removing the exclusion path while the dump file is at rest causes Defender to immediately detect and remove it as `Trojan:Win32/LsassDump.A`. EID 5007 fires on both addition and removal of the exclusion. Either event is an intervention point.
+
 ---
 
+*Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
 *Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
 
 <img width="1865" height="951" alt="attackredacted" src="https://github.com/user-attachments/assets/dca70990-62e7-4e67-bbce-bbfa14995b10" />
