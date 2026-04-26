@@ -155,4 +155,18 @@ The dump itself may not alert. Watch the precursor: `Add-MpPreference -Exclusion
 
 ---
 
+<img width="1865" height="951" alt="attackredacted" src="https://github.com/user-attachments/assets/dca70990-62e7-4e67-bbce-bbfa14995b10" />
+<img width="1651" height="640" alt="5007b" src="https://github.com/user-attachments/assets/78a438d2-aee8-44d3-b15b-17ad492169df" />
+<img width="1680" height="384" alt="5007" src="https://github.com/user-attachments/assets/1574320c-4a10-443d-9269-53e7ecb0f657" />
+
+If you're sloppy and remove the folder exclusion before deleting the dump Defender will let you know....
+
+<img width="1206" height="392" alt="image" src="https://github.com/user-attachments/assets/424dbcbc-9b4a-45e3-9cfd-249e35a475f1" />
+
+
+
+
+
+
+
 *Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
