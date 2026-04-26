@@ -158,6 +158,7 @@ The dump itself may not alert. Watch the precursor: `Add-MpPreference -Exclusion
 *Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
 
 <img width="1865" height="951" alt="attackredacted" src="https://github.com/user-attachments/assets/dca70990-62e7-4e67-bbce-bbfa14995b10" />
+<img width="1687" height="625" alt="kql" src="https://github.com/user-attachments/assets/1e16572d-0e51-43c9-9305-cc9bd12b9f77" />
 <img width="1651" height="640" alt="5007b" src="https://github.com/user-attachments/assets/78a438d2-aee8-44d3-b15b-17ad492169df" />
 <img width="1680" height="384" alt="5007" src="https://github.com/user-attachments/assets/1574320c-4a10-443d-9269-53e7ecb0f657" />
 
