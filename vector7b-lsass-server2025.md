@@ -84,7 +84,7 @@ pypykatz lsa minidump /tmp/out2_server2025.dmp
 |---|---|---|
 | Dump size | ~131MB | ~131–251MB |
 | Write time | ~8 min | ~24–32 min |
-| Administrator NT | `3c02b6b6fb6b3b17242dc33a31bc011f` | ✅ same |
+| Administrator NT | `3c02xxxxxxxxxxxxxxxxxx` | ✅ same |
 | Machine account NT | `0af649184028ca3ea6b5149298bd57f4` | ✅ same |
 | Kerberos plaintext | ✅ extracted | ✅ extracted |
 | AES128/256 keys | ✅ extracted | ✅ extracted |
