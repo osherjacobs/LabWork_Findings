@@ -1,4 +1,4 @@
-# Vector 7b — LSASS Credential Dump | Windows Server 2025 | Detection Engineering
+# LSASS Credential Dump | Windows Server 2025 | Detection Engineering
 
 ## Overview
 
