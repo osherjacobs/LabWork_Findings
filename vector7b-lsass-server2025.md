@@ -8,11 +8,15 @@ This writeup focuses on detection engineering and Microsoft Defender telemetry b
 
 ## Overview
 
-Extension of Vector 7 (Server 2022). Same technique, different target OS. Confirms the attack chain holds on Windows Server 2025 default install with Defender enabled.
+Extension of Vector 7 (Server 2022). Same technique, different target OS.
 
-**Result:** Full credential extraction — Administrator NT hash, machine account credentials, Kerberos plaintext, AES keys, DPAPI master keys.
+**Key result:** Full credential extraction on Windows Server 2025 default install with Microsoft Defender enabled.
 
-**Key finding:** pypykatz 0.6.10 fails on Server 2025 (`lsasrv.dll` signature gap). pypykatz **0.6.13 required**.
+**Key observation:** Defender generates telemetry for LSASS access (EID 10) but does not alert on it under default configuration.
+
+**Dependency identified:** Successful extraction requires a Defender exclusion path. Removal of the exclusion triggers immediate detection (`Trojan:Win32/LsassDump.A`).
+
+**Tooling note:** pypykatz 0.6.10 fails on Server 2025 (`lsasrv.dll` signature gap). **0.6.13 required.**
 
 ---
 
@@ -145,8 +149,7 @@ not winlog.event_data.SourceImage: (
 )
 ```
 
-Note: This rule is validated against a specific lab configuration (Winlogbeat 8.19.x, SwiftOnSecurity Sysmon config). Tune the exclusion list for your environment — legitimate processes touching lsass vary by OS version, installed software, and EDR. The dbgcore.DLL CallTrace anchor is more durable than the access mask and may provide broader coverage across technique variants. YMMV.
-
+**Note:** `0x1FFFFF` is common but not the only access mask `MiniDumpWriteDump` may request — the `dbgcore.DLL` CallTrace anchor is more durable across technique variants than the access mask value. This rule is validated against a specific lab configuration (Winlogbeat 8.19.x, SwiftOnSecurity Sysmon config). Tune the exclusion list for your environment — legitimate processes touching lsass vary by OS version, installed software, and EDR. YMMV.
 
 ---
 
@@ -163,22 +166,34 @@ Note: This rule is validated against a specific lab configuration (Winlogbeat 8.
 | EID 10 captured | Non-deterministic | ✅ confirmed |
 | Alert on lsass access | ❌ | ❌ |
 
-Server 2025 dumps significantly faster than Server 2022 under identical conditions — suggesting different runtime enforcement behaviour under Defender.
+Server 2025 dumps significantly faster than Server 2022 under identical conditions, suggesting a difference in Defender's runtime interference behaviour under identical dump conditions.
 
 ---
 
 ## Defensive Takeaway
 
-The dump itself may not alert. Watch the precursor: `Add-MpPreference -ExclusionPath` (EID 5007) from a non-administrative context, or from a process spawned by a scheduled task, is the window before credential material leaves the host.
+Detection does not reliably occur at the point of credential access.
 
-The exclusion path is not operational convenience — it is the attack's dependency. Removing the exclusion path while the dump file is at rest causes Defender to immediately detect and remove it as `Trojan:Win32/LsassDump.A`. EID 5007 fires on both addition and removal of the exclusion. Either event is an intervention point.
+**Primary detection opportunity:**  
+`Add-MpPreference -ExclusionPath` (EID 5007)
+
+This is not an operational convenience — it is a **functional dependency** of the attack chain.
+
+- The dump file is removed immediately as `Trojan:Win32/LsassDump.A` once the exclusion is lifted
+- EID 5007 fires on both addition and removal of the exclusion
+- Both events occur **before or during credential material exposure**
+
+**Implication:**  
+Defenders should treat Defender exclusion changes as high-signal events, particularly when originating from scheduled tasks, scripting engines, or non-interactive contexts.
+
+Catching LSASS access may fail.  
+Catching the **conditions required to make it succeed** is more reliable.
 
 ---
 
 *Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
 
 *Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
-
 
 <img width="1865" height="951" alt="attackredacted" src="https://github.com/user-attachments/assets/dca70990-62e7-4e67-bbce-bbfa14995b10" />
 <img width="1687" height="625" alt="kql" src="https://github.com/user-attachments/assets/1e16572d-0e51-43c9-9305-cc9bd12b9f77" />
@@ -189,3 +204,6 @@ If you're sloppy and remove the folder exclusion before deleting the dump Defend
 
 <img width="1206" height="392" alt="image" src="https://github.com/user-attachments/assets/424dbcbc-9b4a-45e3-9cfd-249e35a475f1" />
 
+---
+
+**No exploit. No bypass. Default behavior — gated by a removable dependency.**
