@@ -10,7 +10,7 @@
 **Defender:** Does not learn from prior detections in a way that changes early-lifecycle detection behaviour  
 **Date:** April 24-25, 2026
 
-## Research Scope and Disclosure
+## Research Scope
 
 This writeup is a detection engineering analysis, not an evasion tutorial. The compiled binary used in testing is not published and will not be released. The technique is documented at the API level using publicly available Windows documentation — sufficient for defenders to understand the detection boundary, not sufficient to operationalise without significant independent development.
 
