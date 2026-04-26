@@ -1,5 +1,11 @@
 # LSASS Credential Dump | Windows Server 2025 | Detection Engineering
 
+## Research Scope
+
+This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development. The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided. No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement. The goal is to clarify detection boundaries for defenders.
+
+---
+
 ## Overview
 
 Extension of Vector 7 (Server 2022). Same technique, different target OS. Confirms the attack chain holds on Windows Server 2025 default install with Defender enabled.
@@ -7,10 +13,6 @@ Extension of Vector 7 (Server 2022). Same technique, different target OS. Confir
 **Result:** Full credential extraction — Administrator NT hash, machine account credentials, Kerberos plaintext, AES keys, DPAPI master keys.
 
 **Key finding:** pypykatz 0.6.10 fails on Server 2025 (`lsasrv.dll` signature gap). pypykatz **0.6.13 required**.
-
-## Research Scope
-
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development. The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided. No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement. The goal is to clarify detection boundaries for defenders.
 
 ---
 
@@ -171,7 +173,9 @@ The exclusion path is not operational convenience — it is the attack's depende
 ---
 
 *Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
+
 *Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
+
 
 <img width="1865" height="951" alt="attackredacted" src="https://github.com/user-attachments/assets/dca70990-62e7-4e67-bbce-bbfa14995b10" />
 <img width="1687" height="625" alt="kql" src="https://github.com/user-attachments/assets/1e16572d-0e51-43c9-9305-cc9bd12b9f77" />
@@ -182,10 +186,3 @@ If you're sloppy and remove the folder exclusion before deleting the dump Defend
 
 <img width="1206" height="392" alt="image" src="https://github.com/user-attachments/assets/424dbcbc-9b4a-45e3-9cfd-249e35a475f1" />
 
-
-
-
-
-
-
-*Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
