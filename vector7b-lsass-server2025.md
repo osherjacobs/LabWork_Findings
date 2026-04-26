@@ -145,6 +145,9 @@ not winlog.event_data.SourceImage: (
 )
 ```
 
+Note: This rule is validated against a specific lab configuration (Winlogbeat 8.19.x, SwiftOnSecurity Sysmon config). Tune the exclusion list for your environment — legitimate processes touching lsass vary by OS version, installed software, and EDR. The dbgcore.DLL CallTrace anchor is more durable than the access mask and may provide broader coverage across technique variants. YMMV.
+
+
 ---
 
 ## Comparison vs Server 2022
