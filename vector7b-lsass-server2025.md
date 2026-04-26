@@ -10,6 +10,16 @@ Extension of Vector 7 (Server 2022). Same technique, different target OS. Confir
 
 ---
 
+## Research Scope
+
+This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
+
+The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
+
+No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
+
+The goal is to clarify detection boundaries for defenders.
+
 ## Lab Environment
 
 | Host | Role | IP |
@@ -34,16 +44,6 @@ Extension of Vector 7 (Server 2022). Same technique, different target OS. Confir
 | Winlogbeat | 8.19.14 → ELK 192.168.1.250 |
 
 ---
-
-## Research Scope
-
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
-
-The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
-
-No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
-
-The goal is to clarify detection boundaries for defenders.
 
 ## Attack Chain
 
