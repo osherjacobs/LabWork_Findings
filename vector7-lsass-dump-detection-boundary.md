@@ -12,9 +12,13 @@
 
 ## Research Scope
 
-This writeup is a detection engineering analysis, not an evasion tutorial. The compiled binary used in testing is not published and will not be released. The technique is documented at the API level using publicly available Windows documentation — sufficient for defenders to understand the detection boundary, not sufficient to operationalise without significant independent development.
+This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
 
-No vulnerability or security boundary bypass was identified. This research documents observable Defender behaviour and detection telemetry gaps. There is no exploitable bug, only a detection architecture observation.
+The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
+
+No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
+
+The goal is to clarify detection boundaries for defenders.
 
 ---
 
