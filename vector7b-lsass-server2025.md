@@ -10,16 +10,6 @@ Extension of Vector 7 (Server 2022). Same technique, different target OS. Confir
 
 ---
 
-## Research Scope
-
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
-
-The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
-
-No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
-
-The goal is to clarify detection boundaries for defenders.
-
 ## Lab Environment
 
 | Host | Role | IP |
@@ -94,7 +84,7 @@ pypykatz lsa minidump /tmp/out2_server2025.dmp
 |---|---|---|
 | Dump size | ~131MB | ~131–251MB |
 | Write time | ~8 min | ~24–32 min |
-| Administrator NT | `3c02xxxxxxxxxxxxxxxxxx` | ✅ same |
+| Administrator NT | `3c0xxxxxxxxxxxxxxxxxxxx` | ✅ same |
 | Machine account NT | `0af649184028ca3ea6b5149298bd57f4` | ✅ same |
 | Kerberos plaintext | ✅ extracted | ✅ extracted |
 | AES128/256 keys | ✅ extracted | ✅ extracted |
@@ -128,10 +118,16 @@ Two access events fired at dump initiation:
 
 ## Detection Rule (KQL)
 
-```event.code: "10" and
-message: "lsass.exe" and
-message: "0x1FFFFF" and
-not message: ("MsMpEng" or "csrss.exe" or "wininit.exe" or "svchost.exe" or "wmiprvse.exe")
+```kql
+event.code: "10" and
+winlog.event_data.TargetImage: "*lsass*" and
+winlog.event_data.GrantedAccess: ("0x1fffff" or "0x1f3fff") and
+not winlog.event_data.SourceImage: (
+  "*MsMpEng*" or
+  "*svchost*" or
+  "*wmiprvse*" or
+  "*lsass*"
+)
 ```
 
 ---
@@ -158,6 +154,8 @@ Server 2025 dumps significantly faster than Server 2022 under identical conditio
 The dump itself may not alert. Watch the precursor: `Add-MpPreference -ExclusionPath` (EID 5007) from a non-administrative context, or from a process spawned by a scheduled task, is the window before credential material leaves the host.
 
 ---
+
+*Lab-validated on Windows Server 2025 Datacenter 24H2, UBR 1, Defender 4.18.26030.3011 with current signatures. April 2026.*
 
 <img width="1865" height="951" alt="attackredacted" src="https://github.com/user-attachments/assets/dca70990-62e7-4e67-bbce-bbfa14995b10" />
 <img width="1651" height="640" alt="5007b" src="https://github.com/user-attachments/assets/78a438d2-aee8-44d3-b15b-17ad492169df" />
