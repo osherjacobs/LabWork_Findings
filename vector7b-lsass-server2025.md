@@ -128,16 +128,10 @@ Two access events fired at dump initiation:
 
 ## Detection Rule (KQL)
 
-```kql
-event.code: "10" and
-winlog.event_data.TargetImage: "*lsass*" and
-winlog.event_data.GrantedAccess: ("0x1fffff" or "0x1f3fff") and
-not winlog.event_data.SourceImage: (
-  "*MsMpEng*" or
-  "*svchost*" or
-  "*wmiprvse*" or
-  "*lsass*"
-)
+```event.code: "10" and
+message: "lsass.exe" and
+message: "0x1FFFFF" and
+not message: ("MsMpEng" or "csrss.exe" or "wininit.exe" or "svchost.exe" or "wmiprvse.exe")
 ```
 
 ---
