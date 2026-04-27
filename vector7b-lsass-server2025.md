@@ -189,6 +189,8 @@ Defenders should treat Defender exclusion changes as high-signal events, particu
 Catching LSASS access may fail.  
 Catching the **conditions required to make it succeed** is more reliable.
 
+**No exploit. No bypass. Default behavior — gated by a removable dependency.**
+
 ---
 
 *Lab environment. All credentials redacted. Do not use against systems you do not own or have explicit written permission to test.*
@@ -205,5 +207,3 @@ If you're sloppy and remove the folder exclusion before deleting the dump, Defen
 <img width="1206" height="392" alt="image" src="https://github.com/user-attachments/assets/424dbcbc-9b4a-45e3-9cfd-249e35a475f1" />
 
 ---
-
-**No exploit. No bypass. Default behavior — gated by a removable dependency.**
