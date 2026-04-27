@@ -202,7 +202,7 @@ Catching the **conditions required to make it succeed** is more reliable.
 <img width="1651" height="640" alt="5007b" src="https://github.com/user-attachments/assets/78a438d2-aee8-44d3-b15b-17ad492169df" />
 <img width="1680" height="384" alt="5007" src="https://github.com/user-attachments/assets/1574320c-4a10-443d-9269-53e7ecb0f657" />
 
-If you're sloppy and remove the folder exclusion before deleting the dump, Defender WILL let you know...
+Remove the exclusion before deleting the dump and Defender breaks its silence upon file selection — immediately.
 
 <img width="1206" height="392" alt="image" src="https://github.com/user-attachments/assets/424dbcbc-9b4a-45e3-9cfd-249e35a475f1" />
 
