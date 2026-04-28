@@ -26,7 +26,7 @@ All techniques use publicly documented Windows APIs. No custom tooling or binari
 | vector5  | Server 2022             | LSASS + goexec/nxc delivery chain              | ✅ Published    | [vector5-lsass-goexec-pta.md](vector5-lsass-goexec-pta.md) |
 | vector6  | Server 2022             | Exclusion path analysis (EID 5007)             | ✅ Published    | [vector6-lsass-exclusion-window.md](vector6-lsass-exclusion-window.md) |
 | vector7  | Server 2025 (UBR 1)     | MiniDumpWriteDump, default config              | ✅ Published    | [vector7-lsass-dump-detection-boundary.md](vector7-lsass-dump-detection-boundary.md) |
-| vector7b | Server 2025 (UBR 1742)  | Patch boundary — last build with reliable extraction | ✅ Published | [vector7b-lsass-server2025.md](vector7b-lsass-server2025.md) |
+| vector7b | Server 2025 (UBR 1742)  | Patch boundary — last build with reliable extraction | 🔄 In progress  | — |
 | vector7c | Server 2025             | PPL (RunAsPPL=2) boundary analysis             | 🔄 In progress  | — |
 
 **Series Finding:**  
