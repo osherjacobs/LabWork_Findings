@@ -22,14 +22,13 @@ All research was conducted exclusively on personal lab systems.
 
 ## Credential Access — LSASS Vector Series
 
-| Vector   | Target                  | Technique                                      | Status          |
-|----------|-------------------------|------------------------------------------------|-----------------|
-| vector4  | Server 2022             | MiniDumpWriteDump via dbghelp.dll              | ✅ Published    |
-| vector5  | Server 2022             | LSASS + goexec/nxc delivery chain              | ✅ Published    |
-| vector6  | Server 2022             | Exclusion path analysis (EID 5007)             | ✅ Published    |
-| vector7  | Server 2025 (UBR 1)     | MiniDumpWriteDump, default config              | ✅ Published    |
-| vector7b | Server 2025 (UBR 1742)  | Patch boundary — last build with reliable extraction | ✅ Published |
-| vector7c | Server 2025             | PPL (RunAsPPL=2) boundary analysis             | 🔄 In progress |
+| Vector   | Target                  | Technique                                      | Status              |
+|----------|-------------------------|------------------------------------------------|---------------------|
+| vector4  | Server 2022             | MiniDumpWriteDump via dbghelp.dll              | ✅ Published        |
+| vector5  | Server 2022             | LSASS + goexec/nxc delivery chain              | ✅ Published        |
+| vector6  | Server 2022             | Exclusion path analysis (EID 5007)             | ✅ Published        |
+| vector7  | Server 2025 (UBR 1)     | MiniDumpWriteDump, default config              | ✅ Published        |
+| vector7b | Server 2025 (UBR 1742)  | Patch boundary testing                         | 🔄 In progress      |
 
 **Series Finding:**  
 EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention point. Technique-level detection (including EID 10) is unreliable under live runtime enforcement.
