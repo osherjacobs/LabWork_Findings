@@ -90,4 +90,4 @@ EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention po
 
 **Ongoing purple team research.** New vectors added periodically.
 
-**LinkedIn:** [Osher Jacobs](https://www.linkedin.com/in/osher-jacobs/)
+**LinkedIn:** [Osher Jacobs](https://linkedin.com/in/osher-jacobs/)
