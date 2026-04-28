@@ -14,20 +14,22 @@
 ### **Research Scope & Disclaimer**
 
 This repository focuses on **detection engineering** and Microsoft Defender telemetry behavior.  
-All techniques use publicly documented Windows APIs. No custom tooling or binaries are provided.
+
+All techniques use publicly documented Windows APIs. No custom tooling or binaries are provided.  
+All research was conducted exclusively on personal lab systems.
 
 ---
 
 ## Credential Access — LSASS Vector Series
 
-| Vector   | Target                  | Technique                                      | Status          | Writeup |
-|----------|-------------------------|------------------------------------------------|-----------------|---------|
-| vector4  | Server 2022             | MiniDumpWriteDump via dbghelp.dll              | ✅ Published    | [vector4-lsass-dump-detection.md](vector4-lsass-dump-detection.md) |
-| vector5  | Server 2022             | LSASS + goexec/nxc delivery chain              | ✅ Published    | [vector5-lsass-goexec-pta.md](vector5-lsass-goexec-pta.md) |
-| vector6  | Server 2022             | Exclusion path analysis (EID 5007)             | ✅ Published    | [vector6-lsass-exclusion-window.md](vector6-lsass-exclusion-window.md) |
-| vector7  | Server 2025 (UBR 1)     | MiniDumpWriteDump, default config              | ✅ Published    | [vector7-lsass-dump-detection-boundary.md](vector7-lsass-dump-detection-boundary.md) |
-| vector7b | Server 2025 (UBR 1742)  | Patch boundary — last build with reliable extraction | 🔄 In progress  | — |
-| vector7c | Server 2025             | PPL (RunAsPPL=2) boundary analysis             | 🔄 In progress  | — |
+| Vector   | Target                  | Technique                                      | Status          |
+|----------|-------------------------|------------------------------------------------|-----------------|
+| vector4  | Server 2022             | MiniDumpWriteDump via dbghelp.dll              | ✅ Published    |
+| vector5  | Server 2022             | LSASS + goexec/nxc delivery chain              | ✅ Published    |
+| vector6  | Server 2022             | Exclusion path analysis (EID 5007)             | ✅ Published    |
+| vector7  | Server 2025 (UBR 1)     | MiniDumpWriteDump, default config              | ✅ Published    |
+| vector7b | Server 2025 (UBR 1742)  | Patch boundary — last build with reliable extraction | ✅ Published |
+| vector7c | Server 2025             | PPL (RunAsPPL=2) boundary analysis             | 🔄 In progress |
 
 **Series Finding:**  
 EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention point. Technique-level detection (including EID 10) is unreliable under live runtime enforcement.
@@ -36,9 +38,9 @@ EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention po
 
 ## Credential Access — Replication Path
 
-| Writeup              | Target                        | Technique                                              | Status       | Link |
-|----------------------|-------------------------------|--------------------------------------------------------|--------------|------|
-| DCSync / secretsdump | Server 2025 (fully patched)   | impacket-secretsdump (DRSUAPI) — no LSASS interaction | ✅ Published | [ADCSync_Writeup.md](ADCSync_Writeup.md) / [derrida-dcsync.md](derrida-dcsync.md) |
+| Writeup              | Target                        | Technique                                              | Status       |
+|----------------------|-------------------------------|--------------------------------------------------------|--------------|
+| DCSync / secretsdump | Server 2025 (fully patched)   | impacket-secretsdump (DRSUAPI) — no LSASS interaction | ✅ Published |
 
 **Key Finding:** Memory protections are irrelevant to the replication protocol path.
 
@@ -46,31 +48,25 @@ EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention po
 
 ## ADCS Abuse
 
-| Writeup | Technique | Link |
-|---------|-----------|------|
-| ESC1    | SAN abuse → certificate request → PKINIT → NT hash | [ESC1_Lab_Setup.md](ESC1_Lab_Setup.md) + [adcs-esc-reference-guide.md](adcs-esc-reference-guide.md) |
-| ESC4    | Template misconfiguration → ESC1 pivot | [esc4-dual-eku-gotcha.md](esc4-dual-eku-gotcha.md) |
-| ESC8    | NTLM relay → certsrv → certificate theft | [esc8-ntlm-relay.md](esc8-ntlm-relay.md) |
-| Kerberos CNAME → ESC8 → ESC1 | CVE-2026-20929 chain | [kerberos-cname-relay-lab.md](kerberos-cname-relay-lab.md) |
+- ESC1 – SAN abuse + PKINIT
+- ESC4 – Template misconfiguration
+- ESC8 – NTLM relay + certificate theft
+- Kerberos CNAME Relay → ESC8 → ESC1
 
 ---
 
 ## Kerberos & Delegation
 
-- [kerberos-attack-chains-sanitized.md](kerberos-attack-chains-sanitized.md)
-- [adcs-attack-paths-sanitized.md](adcs-attack-paths-sanitized.md)
-- [adcs-esc-reference-guide.md](adcs-esc-reference-guide.md)
+- Unconstrained / Constrained / RBCD abuse chains
+- Full ADCS + Kerberos attack path references
 
 ---
 
 ## Lab Infrastructure & Setup Guides
 
-| Document | Purpose | Link |
-|----------|---------|------|
-| Sysmon Setup Guide | SwiftOnSecurity config + deployment | [Sysmon_Setup_Guide.md](Sysmon_Setup_Guide.md) |
-| AD + ADCS Lab Build | Domain + CA setup | [AD_ADCS_Setup_Guide.md](AD_ADCS_Setup_Guide.md) / [ad-lab-setup.md](ad-lab-setup.md) |
-| ESC1 Lab Setup | Certificate template config | [ESC1_Lab_Setup.md](ESC1_Lab_Setup.md) |
-| ESC8 Lab Setup | NTLM relay environment | [ESC8_Lab_Setup.md](ESC8_Lab_Setup.md) |
+- Sysmon Configuration (SwiftOnSecurity + custom)
+- AD + ADCS Lab Build Guide
+- ESC1 / ESC8 Lab Setup Guides
 
 ---
 
@@ -84,10 +80,11 @@ EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention po
 | EID 10                      | Sysmon              | LSASS handle access (high confidence *when* it fires) |
 | RemoteRegistry service start| System              | Replication / DCSync abuse |
 
-> **Core Thesis:** The control surface is not aligned with the risk surface.
+> **Core Thesis:** The control surface is not aligned with the risk surface.  
+> Defender often interacts with credential access — but the signal frequently does not follow the risk.
 
 ---
 
 **Ongoing purple team research.** New vectors added periodically.
 
-**LinkedIn:** [Osher Jacobs](https://linkedin.com/in/osher-jacobs/)
+**LinkedIn:** [Osher Jacobs](https://www.linkedin.com/in/osher-jacobs/)
