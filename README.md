@@ -1,42 +1,99 @@
-Active Directory Security Research
-Controlled offensive security research conducted in enterprise-modeled lab environments.
-Emphasis on attack path realism, defensive visibility, and control failure analysis. Not tool tutorials — documented chains with raw telemetry, detection gaps, and KQL.
-Lab: Windows Server 2019/2022/2025 | Kali | Sysmon 15.20 + SwiftOnSecurity config | Winlogbeat → Elasticsearch 8.x
-All credentials and network details sanitized.
+# Active Directory Security Research
 
-Credential Access — LSASS Vector Series
-VectorTargetTechniqueStatusvector4Server 2022MiniDumpWriteDump via dbghelp.dllPublishedvector5Server 2022LSASS + goexec/nxc deliveryPublishedvector6Server 2022Exclusion path analysis (EID 5007)Publishedvector7Server 2025 (UBR 1)MiniDumpWriteDump, default configPublishedvector7bServer 2025 (UBR 1742)Patch boundary — pypykatz compatibilityPublishedvector7cServer 2025PPL boundary analysisIn progress
-Key finding across series: EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention point. Technique-level detection is unreliable under live runtime enforcement.
+> Controlled offensive security research in enterprise-modeled lab environments.
+> Attack path realism, defensive visibility, and control failure analysis — not tool tutorials.
+> Documented chains with raw telemetry, detection gaps, and KQL.
 
-Credential Access — Replication Path
-WriteupTargetTechniqueADCSYNCServer 2025 (fully patched)secretsdump DRSUAPI — no LSASS interaction
-Key finding: Memory protections are irrelevant to the replication protocol path. Detection boundary is RemoteRegistry service start, not LSASS.
+**Lab stack:** Windows Server 2019 / 2022 / 2025 · Kali · Sysmon 15.20 (SwiftOnSecurity) · Winlogbeat → Elasticsearch 8.x
 
-ADCS Abuse
-WriteupTechniqueESC1SAN abuse → certificate request → PKINITESC4Template misconfiguration → ESC1 pivotESC8NTLM relay → certsrv → certificate theftKerberos CNAME → ESC8 → ESC1 chainCVE-2026-20929 — ARP spoof → mitm6 → krbrelayx → DA
+> All credentials and network details sanitized for public documentation.
 
-Kerberos & Delegation
+---
 
-Kerberos attack chains (sanitized)
-ADCS attack paths reference guide
+## Credential Access — LSASS Vector Series
 
+| Vector | Target | Technique | Status |
+|--------|--------|-----------|--------|
+| vector4 | Server 2022 | MiniDumpWriteDump via dbghelp.dll | ✅ Published |
+| vector5 | Server 2022 | LSASS + goexec/nxc delivery chain | ✅ Published |
+| vector6 | Server 2022 | Exclusion path analysis (EID 5007) | ✅ Published |
+| vector7 | Server 2025 (UBR 1) | MiniDumpWriteDump, default config | ✅ Published |
+| vector7b | Server 2025 (UBR 1742) | Patch boundary — pypykatz compatibility | ✅ Published |
+| vector7c | Server 2025 | PPL (RunAsPPL=2) boundary analysis | 🔄 In progress |
 
-Lab Setup & Infrastructure
+**Series finding:** EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention point across all variants.
+Technique-level detection is unreliable under live runtime enforcement. Absence of EID 10 is not evidence of absence.
 
-Sysmon setup guide (SwiftOnSecurity config)
-AD/ADCS environment setup
-ESC1/ESC8 lab configuration
+---
 
+## Credential Access — Replication Path
 
-Detection Engineering Notes
-Across all vectors, the consistent finding is that technique-level detection is unreliable. The highest-confidence signals are upstream of the technique itself — operator behavior, environmental dependencies, and service state changes.
-Recurring intervention points:
+| Writeup | Target | Technique |
+|---------|--------|-----------|
+| ADCSYNC / DCSync | Server 2025 (fully patched, Defender on) | impacket-secretsdump DRSUAPI — no LSASS interaction |
 
-EID 5007 — Defender exclusion modification
-EID 5136 — AD attribute writes (Shadow Credentials, DACL changes)
-RemoteRegistry service start — replication path abuse
-EID 4768 PreAuthType 16 — PKINIT authentication
+**Finding:** Memory protections are irrelevant to the replication protocol path.
+The patch that disrupts LSASS dump parsing does not affect DCSync.
+Detection boundary: **RemoteRegistry service start** on the DC — not LSASS handle access.
 
+---
 
-Part of an ongoing purple team research series. New vectors published periodically.
-GitHub traffic and LinkedIn writeups: Osher Jacobs
+## ADCS Abuse
+
+| Writeup | Technique |
+|---------|-----------|
+| ESC1 | SAN abuse → certificate request → PKINIT → NT hash |
+| ESC4 | Template misconfiguration → ESC1 pivot |
+| ESC8 | NTLM relay → certsrv → certificate theft |
+| Kerberos CNAME → ESC8 → ESC1 | CVE-2026-20929: ARP spoof → mitm6-cname → krbrelayx → DA |
+
+---
+
+## Kerberos & Delegation
+
+- Kerberos attack chains (sanitized reference)
+- ADCS attack paths reference guide
+- ESC8 NTLM relay chain documentation
+
+---
+
+## Lab Infrastructure
+
+| Document | Purpose |
+|----------|---------|
+| Sysmon Setup Guide | SwiftOnSecurity config, deployment notes |
+| AD/ADCS Setup Guide | Domain + CA build for lab replication |
+| ESC1 Lab Setup | Certificate template configuration |
+| ESC8 Lab Setup | NTLM relay environment configuration |
+
+---
+
+## Detection Engineering — Recurring Signals
+
+Across all vectors, technique-level detection is unreliable. The highest-confidence signals sit **upstream** of the technique itself — operator behavior, environmental dependencies, and service state changes.
+
+| Event | Source | Relevance |
+|-------|--------|-----------|
+| EID 5007 | Windows Security | Defender exclusion add/remove — universal upstream signal across credential access vectors |
+| EID 5136 | AD Audit | Attribute writes — Shadow Credentials, DACL modifications |
+| EID 4768 PreAuthType 16 | Kerberos | PKINIT authentication — certificate-based logon |
+| EID 10 | Sysmon | LSASS handle access — high confidence when present, non-deterministic under live enforcement |
+| RemoteRegistry start | Windows Security | Earliest signal for replication path abuse |
+
+> **Core thesis:** The control surface is not aligned to the risk surface.
+> Defender interacts with credential access operations — and sometimes says nothing.
+> Build detection on operator behavior, not technique invocation.
+
+---
+
+## Series Context
+
+All research follows an **assumed breach** model:
+remote shell → privilege escalation → credential extraction → lateral movement → domain compromise.
+
+Each vector documents the full chain: execution path, Defender behavior, Sysmon telemetry, Kibana detection rules, and KQL.
+
+---
+
+*Ongoing purple team research series. New vectors published periodically.*
+*LinkedIn writeups: [Osher Jacobs](https://www.linkedin.com/in/osher-jacobs/)*
