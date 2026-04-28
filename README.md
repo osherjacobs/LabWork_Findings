@@ -18,7 +18,7 @@
 | vector5 | Server 2022 | LSASS + goexec/nxc delivery chain | ✅ Published |
 | vector6 | Server 2022 | Exclusion path analysis (EID 5007) | ✅ Published |
 | vector7 | Server 2025 (UBR 1) | MiniDumpWriteDump, default config | ✅ Published |
-| vector7b | Server 2025 (UBR 1742) | Patch boundary — pypykatz compatibility | ✅ Published |
+| vector7b | Server 2025 (UBR 1742) | Patch boundary — last build with reliable pypykatz extraction | ✅ Published |
 | vector7c | Server 2025 | PPL (RunAsPPL=2) boundary analysis | 🔄 In progress |
 
 **Series finding:** EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention point across all variants.
@@ -88,7 +88,7 @@ Across all vectors, technique-level detection is unreliable. The highest-confide
 
 ## Series Context
 
-A sizeable portion of the research follows an **assumed breach** model:
+All research follows an **assumed breach** model:
 remote shell → privilege escalation → credential extraction → lateral movement → domain compromise.
 
 Each vector documents the full chain: execution path, Defender behavior, Sysmon telemetry, Kibana detection rules, and KQL.
