@@ -88,7 +88,7 @@ Across all vectors, technique-level detection is unreliable. The highest-confide
 
 ## Series Context
 
-All research follows an **assumed breach** model:
+A sizeable portion of the research follows an **assumed breach** model:
 remote shell → privilege escalation → credential extraction → lateral movement → domain compromise.
 
 Each vector documents the full chain: execution path, Defender behavior, Sysmon telemetry, Kibana detection rules, and KQL.
