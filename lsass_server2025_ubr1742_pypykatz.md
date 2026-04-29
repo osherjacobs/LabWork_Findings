@@ -1535,3 +1535,6 @@ Message     : Microsoft Defender Antivirus Configuration has changed. If this is
 
 
 *Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
+
+<img width="526" height="476" alt="apdpoh" src="https://github.com/user-attachments/assets/3a4ef8a9-044b-4ecf-9e71-019c5539a75f" />
+
