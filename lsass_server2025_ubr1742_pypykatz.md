@@ -214,6 +214,8 @@ Screenshots:
 
 <img width="1870" height="943" alt="UBR1742ATTACKWITHPTH" src="https://github.com/user-attachments/assets/b00716a8-a592-4639-b3ee-9502c542f66a" />
 
+---
+
 PS C:\WINDOWS\system32> Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational" |
 >>   Where-Object { $_.TimeCreated -gt (Get-Date).AddHours(-4) } |
 >>   Select-Object TimeCreated, Id, Message |
