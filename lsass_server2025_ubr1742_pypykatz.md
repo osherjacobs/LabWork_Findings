@@ -207,10 +207,6 @@ EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writin
 
 ---
 
-*Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
-
---- 
-
 Screenshots:
 
 <img width="679" height="704" alt="DMPFILE" src="https://github.com/user-attachments/assets/e2e5118a-5f6d-4956-8157-3aa85d92558a" />
@@ -556,11 +552,6 @@ Message     : Microsoft Defender Antivirus Configuration has changed. If this is
               malware.
                 Old value: Default\IsServiceRunning = 0x0
                 New value: HKLM\SOFTWARE\Microsoft\Windows Defender\IsServiceRunning = 0x1
-
-
-
-
-
 
 
 *Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
