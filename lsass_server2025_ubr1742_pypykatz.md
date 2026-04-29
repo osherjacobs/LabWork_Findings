@@ -3,7 +3,7 @@
 **Date:** 2026-04-29  
 **Host:** WIN-52H4TKKPD9C (Windows Server 2025, Build 26100, UBR 1742)  
 **Defender Signatures:** 1.449.353.0 (current as of test date)  
-**Tooling:** goexec (tsch), smbclient, pypykatz  
+**Tooling:** goexec (tsch), curio.exe (MiniDumpWriteDump via dbghelp.dll), smbclient, pypykatz  
 **Phase:** Credential extraction baseline — no detection engineering in scope for this run
 
 ---
@@ -35,7 +35,7 @@ This is a **baseline test** — telemetry and detection rule validation are out 
 
 ### 1. Dump Delivery — Scheduled Task via goexec (tsch)
 
-A base64-encoded PowerShell payload was delivered via `goexec` using the Task Scheduler (`tsch`) module. The payload executed `comsvcs.dll MiniDump` against the LSASS process, writing output to `C:\Windows\Temp\out2.dmp`.
+A base64-encoded PowerShell payload was delivered via `goexec` using the Task Scheduler (`tsch`) module. The payload executed `curio.exe` — a compiled binary calling `MiniDumpWriteDump` directly via `dbghelp.dll` — against the LSASS process, writing output to `C:\Windows\Temp\out2.dmp`. This bypasses the `comsvcs.dll MiniDump` invocation path entirely, avoiding the CmdLine signature layer.
 
 ```bash
 # [Kali]
@@ -115,7 +115,7 @@ No domain — WORKGROUP host. No TGTs or service tickets in LSASS. Expected.
 ## Key Observations
 
 ### What worked
-- `comsvcs.dll MiniDump` via scheduled task delivery succeeded against Server 2025 at UBR 1742 with current Defender signatures
+- `curio.exe` (`MiniDumpWriteDump` via `dbghelp.dll`) via scheduled task delivery succeeded against Server 2025 at UBR 1742 with current Defender signatures — bypassing the `comsvcs MiniDump` CmdLine signature layer entirely
 - No observable structural changes in LSASS memory (MSV/DPAPI providers) impacted parsing on Server 2025 UBR 1742. pypykatz parsed the dump without issue.
 - SMB exfiltration of a 53 MB dump is trivially fast on a LAN segment
 
@@ -174,7 +174,7 @@ Event IDs **1116** (threat detected), **1117** (action taken), **1006/1007** (sc
 
 ### Notable: RTP pass-through at dump completion
 
-EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writing. The RTP filter driver briefly entered pass-through mode, meaning on-access scanning was suspended. This is a side effect of the service disruption earlier in the session, not an intentional evasion technique. However, it is worth noting: even if Defender held a behavioural signature for `comsvcs.dll MiniDump` activity, the RTP engine was momentarily blind at the precise moment the dump file reached its final size.
+EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writing. The RTP filter driver briefly entered pass-through mode, meaning on-access scanning was suspended. This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. It is worth noting regardless: even if Defender held a behavioural signature for `MiniDumpWriteDump` activity, the RTP engine was momentarily blind at the precise moment the dump file reached its final size.
 
 This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. In this run, RTP was not active at the exact moment of dump completion. A clean run with uninterrupted RTP is required to fully validate detection coverage.
 
@@ -190,6 +190,19 @@ This condition was not intentionally introduced and is attributed to earlier ser
 | `pypykatz_output.txt` | Raw parser output (sanitized — hashes redacted) |
 
 ---
+
+## References
+
+- [pypykatz](https://github.com/skelsec/pypykatz)
+- [goexec](https://github.com/bachimanchi/goexec)
+- [curio.exe — MiniDumpWriteDump via dbghelp.dll](https://github.com/osherjacobs/AD-Lab-Research)
+- [Microsoft — MiniDumpWriteDump](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
+- [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
+- [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
+
+---
+
+*Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
 
 ## References
 
