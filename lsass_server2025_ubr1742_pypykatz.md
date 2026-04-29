@@ -288,7 +288,6 @@ None of these individually explain the outcome. Together they describe a behavio
 - [Microsoft — MiniDumpWriteDump](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
 - [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
-- <img width="1858" height="925" alt="defendertelemetrydump" src="https://github.com/user-attachments/assets/2fb133c7-4fb8-402e-b3d9-15bb8b3cebb3" />
 
 ---
 
@@ -299,6 +298,8 @@ Screenshots:
 <img width="1879" height="943" alt="UBR1742ATTACKLINKEDIN" src="https://github.com/user-attachments/assets/55803d95-1494-4b0f-8bee-a5acdb00fb32" />
 
 <img width="1870" height="943" alt="UBR1742ATTACKWITHPTH" src="https://github.com/user-attachments/assets/b00716a8-a592-4639-b3ee-9502c542f66a" />
+
+- <img width="1858" height="925" alt="defendertelemetrydump" src="https://github.com/user-attachments/assets/2fb133c7-4fb8-402e-b3d9-15bb8b3cebb3" />
 
 ---
 
