@@ -204,12 +204,11 @@ This condition was not intentionally introduced and is attributed to earlier ser
 - [goexec](https://github.com/bachimanchi/goexec)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
 - [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
-- <img width="679" height="704" alt="DMPFILE" src="https://github.com/user-attachments/assets/e2e5118a-5f6d-4956-8157-3aa85d92558a" />
-
-
 ---
 
 Screenshots:
+
+<img width="679" height="704" alt="DMPFILE" src="https://github.com/user-attachments/assets/e2e5118a-5f6d-4956-8157-3aa85d92558a" />
 
 <img width="1879" height="943" alt="UBR1742ATTACKLINKEDIN" src="https://github.com/user-attachments/assets/55803d95-1494-4b0f-8bee-a5acdb00fb32" />
 
