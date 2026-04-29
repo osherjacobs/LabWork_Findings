@@ -324,11 +324,13 @@ Screenshots:
 
 <img width="679" height="704" alt="DMPFILE" src="https://github.com/user-attachments/assets/e2e5118a-5f6d-4956-8157-3aa85d92558a" />
 
+<img width="1864" height="940" alt="perfviewcurioredhandedyetnothing" src="https://github.com/user-attachments/assets/21c10f88-260f-4edd-b92a-9c2602bdada2" />
+
 <img width="1879" height="943" alt="UBR1742ATTACKLINKEDIN" src="https://github.com/user-attachments/assets/55803d95-1494-4b0f-8bee-a5acdb00fb32" />
 
 <img width="1870" height="943" alt="UBR1742ATTACKWITHPTH" src="https://github.com/user-attachments/assets/b00716a8-a592-4639-b3ee-9502c542f66a" />
 
-- <img width="1858" height="925" alt="defendertelemetrydump" src="https://github.com/user-attachments/assets/2fb133c7-4fb8-402e-b3d9-15bb8b3cebb3" />
+<img width="1858" height="925" alt="defendertelemetrydump" src="https://github.com/user-attachments/assets/2fb133c7-4fb8-402e-b3d9-15bb8b3cebb3" />
 
 ---
 
