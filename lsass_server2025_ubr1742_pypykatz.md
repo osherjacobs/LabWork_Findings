@@ -261,6 +261,21 @@ Defender hit its per-scan-cycle limit on some memory regions and stopped inspect
 
 A second 3002/3007 pair fired at **12:16–12:17 PM** — well after the dump completed and with no attack activity in progress. This confirms the RTP filter driver instability is a recurring VM resource issue, not correlated with dump activity. The 10:00 AM pass-through at dump completion was coincidental, not causal.
 
+**6. Process attribution confirmed in ETW — curio.exe named explicitly**
+
+PerfView analysis of the raw ETL file surfaces full process attribution within the stream scan events. The payload for the `Streamscanrequest/Start` event records:
+
+| Field | Value |
+|---|---|
+| **Path** | `\Device\HarddiskVolume4\Windows\Tasks\curio.exe` |
+| **Process** | `\Device\HarddiskVolume4\Windows\System32\WindowsPowerShell\v1.0\powershell.exe` |
+| **FormattedMessage** | `Start of stream scan request` |
+| **PID** | `4,656` |
+
+Defender's engine logged `curio.exe` by full device path, with `powershell.exe` as the parent process — the scheduled task delivery chain in full. This is not anonymous memory stream inspection. The engine had complete process attribution and still emitted no operational event (no 1116/1117, no remediation).
+
+This directly addresses the question of whether the `Behavior:Win32/LsassDump.AK` classification was blind to the responsible binary. It was not.
+
 ### Interpretation
 
 The ETW trace resolves the question left open by the operational log. Defender was not simply unaware of the activity — it was actively engaged: scanning memory chunks via AMSI, running engine scans, and internally classifying the behaviour as `Behavior:Win32/LsassDump.AK`. The absence of operational log events (1116/1117) means the classification did not cross whatever internal threshold triggers remediation and telemetry emission.
