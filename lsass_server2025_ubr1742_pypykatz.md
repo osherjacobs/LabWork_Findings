@@ -288,6 +288,7 @@ None of these individually explain the outcome. Together they describe a behavio
 - [Microsoft — MiniDumpWriteDump](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
 - [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
+- <img width="1858" height="925" alt="defendertelemetrydump" src="https://github.com/user-attachments/assets/2fb133c7-4fb8-402e-b3d9-15bb8b3cebb3" />
 
 ---
 
