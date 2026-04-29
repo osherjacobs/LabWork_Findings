@@ -15,13 +15,15 @@ The technique is described at the API level using publicly documented Windows fu
 No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
 The goal is to clarify detection boundaries for defenders.
 
+> **Assumed breach conditions apply throughout.** 
+Local administrator access on the target host is a prerequisite for all techniques described. This research does not cover initial access.
+
 ## Objective
 
 Determine whether pypykatz can successfully parse an LSASS minidump exfiltrated from a fully patched Windows Server 2025 host at UBR 1742, with current Defender signatures active and no Credential Guard configured.
 
 This is a **baseline test** — telemetry and detection rule validation are out of scope here. The singular question: *does the tooling work against a current build?*
 
-> **Assumed breach conditions apply throughout.** Local administrator access on the target host is a prerequisite for all techniques described. This research does not cover initial access.
 ---
 
 ## Environment
