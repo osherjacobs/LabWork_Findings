@@ -28,7 +28,7 @@ All research was conducted exclusively on personal lab systems.
 | vector5  | Server 2022             | LSASS + goexec/nxc delivery chain              | ✅ Published        |
 | vector6  | Server 2022             | Exclusion path analysis (EID 5007)             | ✅ Published        |
 | vector7  | Server 2025 (UBR 1)     | MiniDumpWriteDump, default config              | ✅ Published        |
-| vector7b | Server 2025 (UBR 1742)  | Patch boundary testing                         | 🔄 In progress      |
+| vector7b | Server 2025 (UBR 1742)  | Patch boundary testing                         | ✅ Published       |
 
 **Series Finding:**  
 EID 5007 (Defender exclusion add/remove) is the highest-fidelity intervention point. Technique-level detection (including EID 10) is unreliable under live runtime enforcement.
