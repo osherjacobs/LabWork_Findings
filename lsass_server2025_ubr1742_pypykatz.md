@@ -290,6 +290,8 @@ pypykatz parsing confirmed broken on build **26100.32370** (KB5075899, February 
 
 **UBR 1742 (November 2024 GA build) represents the last fully validated baseline prior to this structural change.** This writeup documents that boundary.
 
+A community-developed alternative, [LsaParser (KvcForensic)](https://github.com/wesmar/KvcForensic), uses a scoring-based layout detector (`DetectSessionFieldLayout`) that probes candidate struct offsets dynamically against live memory content rather than relying on hardcoded signatures. It is reported to handle post-1742 builds including 26100.32370+. For researchers working at higher patch levels where pypykatz fails, this is the current viable alternative.
+
 ---
 
 ## References
