@@ -288,6 +288,140 @@ Three contributing factors to the silent outcome:
 
 None of these individually explain the outcome. Together they describe a behavioural enforcement layer that observed the activity, partially inspected it, classified it, and emitted no external signal. The full ETW trace is appended below as a raw artifact.
 
+## Defender Decision Path Reconstruction (MOAC → Cloud → Stream)
+
+PerfView analysis of the raw ETL surfaces the complete internal decision path Defender followed for `curio.exe` — from initial file lookup through to behavioural classification.
+
+### Stage 1 — MOAC Cache Lookup
+
+```xml
+EventName="Cache/MOACLookup"
+FileName="C:\Windows\Tasks\curio.exe"
+Classification="1"
+Result="32,770"
+```
+
+`Result=32,770` (`0x8002`) — file not present in local reputation cache, classification unknown. Defender has no prior verdict for this binary. This is the expected result for a custom compiled binary with no Microsoft telemetry history.
+
+### Stage 2 — Cloud Lookup Attempted (MAPS unavailable)
+
+Cloud verdict request initiated following unknown MOAC result. MAPS was offline (`0x80072ee7` — DNS resolution failure, network adapter disabled to prevent KB5082063 download). No cloud verdict returned. Defender fell back to local behavioural engine.
+
+### Stage 3 — Stream Scanning → Classification
+
+AMSI-based memory stream scanning initiated against `curio.exe` write activity. Sustained scan start/end pairs across multiple GUIDs. Inspection budget exhausted (`reason=max_scan`). Threat classified:
+
+```xml
+<Data Name="VName">Behavior:Win32/LsassDump.AK</Data>
+ScanResult=5 (threat found, action deferred)
+```
+
+### Stage 4 — No Enforcement
+
+No operational event emitted. No 1116/1117. No remediation. Execution completed.
+
+### Decision Path Summary
+
+```
+curio.exe execution
+    └── MOAC cache lookup → Result=0x8002 (unknown, not cached)
+            └── Cloud lookup (MAPS) → failed (0x80072ee7, network offline)
+                    └── Stream scan → Behavior:Win32/LsassDump.AK (ScanResult=5)
+                            └── No enforcement → dump completed
+```
+
+### Interpretive Scope
+
+The MOAC result and cloud call failure are confirmed observable facts. Whether MAPS availability would have changed the enforcement outcome cannot be determined from this dataset. The local engine classified the activity as a threat but no remediation event followed under the tested conditions.
+
+---
+
+## ETW Telemetry Capture Workflow (Defender Engine)
+
+### 1. Start trace before execution
+
+```powershell
+# [Victim VM — PowerShell as Admin]
+logman start DefenderTrace `
+  -p "Microsoft-Antimalware-Engine" `
+  -o C:\Windows\Temp\defendertrace.etl `
+  -ets
+```
+
+### 2. Run your technique
+
+### 3. Stop trace
+
+```powershell
+logman stop DefenderTrace -ets
+```
+
+### 4. Convert to XML for raw review
+
+```powershell
+tracerpt C:\Windows\Temp\defendertrace.etl `
+  -o C:\Windows\Temp\defendertrace.xml `
+  -of XML
+```
+
+### 5. Pull to Kali for grep analysis
+
+```bash
+# [Kali]
+smbclient //TARGET/C$ -U 'user%<redacted>' \
+  -c 'get Windows\Temp\defendertrace.etl /tmp/defendertrace.etl'
+
+# Key strings to grep
+grep -i "VName" defendertrace.xml          # threat classifications
+grep -i "MOACLookup" defendertrace.xml     # reputation cache lookups
+grep -i "BmCloudCall" defendertrace.xml    # cloud verdict requests
+grep -i "max_scan" defendertrace.xml       # budget exhaustion
+grep -i "ScanResult" defendertrace.xml     # scan outcomes
+grep -i "curio\|YOUR_BINARY" defendertrace.xml  # binary-specific
+```
+
+### 6. Open in PerfView for GUI analysis
+
+```powershell
+# [Victim VM]
+Invoke-WebRequest `
+  -Uri "https://github.com/microsoft/perfview/releases/latest/download/PerfView.exe" `
+  -OutFile "C:\Windows\Temp\PerfView.exe"
+.\PerfView.exe C:\Windows\Temp\defendertrace.etl
+```
+
+### Key PerfView filters
+
+| Goal | Filter |
+|---|---|
+| Find binary by name | Text Filter: `yourbinary` |
+| Find process creation chain | Event Type: `BmProcessCreate` |
+| Find cloud calls | Event Type: `BmCloudCallStart` |
+| Find reputation lookups | Event Type: `Cache/MOACLookup` |
+| Find threat names | Text Filter: `VName` |
+| Find specific PID | Text Filter: `PID=""4,656""` |
+| Find stream scans | Event Type: `Streamscanrequest/Start` |
+
+### Additional providers worth capturing (future sessions)
+
+| Provider | Covers |
+|---|---|
+| `Microsoft-Antimalware-Engine` | Defender behavioural engine (used here) |
+| `Microsoft-Windows-WFP` | Network connections |
+| `Microsoft-Windows-Kernel-Process` | Process creation (kernel level) |
+| `Microsoft-Windows-DNS-Client` | DNS lookups |
+| `Microsoft-Antimalware-Protection` | Defender protection events |
+
+### Capture multiple providers simultaneously
+
+```powershell
+logman start FullTrace `
+  -p "Microsoft-Antimalware-Engine" `
+  -p "Microsoft-Windows-WFP" `
+  -p "Microsoft-Windows-Kernel-Process" `
+  -o C:\Windows\Temp\fulltrace.etl `
+  -ets
+```
 ---
 
 ## Files
