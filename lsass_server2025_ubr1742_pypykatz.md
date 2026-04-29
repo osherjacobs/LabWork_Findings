@@ -200,7 +200,6 @@ EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writin
 
 - [pypykatz](https://github.com/skelsec/pypykatz)
 - [goexec](https://github.com/bachimanchi/goexec)
-- [curio.exe — MiniDumpWriteDump via dbghelp.dll](https://github.com/osherjacobs/AD-Lab-Research)
 - [Microsoft — MiniDumpWriteDump](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
 - [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
