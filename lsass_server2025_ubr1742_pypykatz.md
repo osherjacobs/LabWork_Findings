@@ -636,6 +636,823 @@ Message     : Microsoft Defender Antivirus Configuration has changed. If this is
               malware.
                 Old value: Default\IsServiceRunning = 0x0
                 New value: HKLM\SOFTWARE\Microsoft\Windows Defender\IsServiceRunning = 0x1
+### DEFENDER TELEMETRY DUMP
+
+		<Data Name="Path">MemScanVfz-AMSI-865F9243-FA9B-220B-CFC4-1240285F9144</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Data Name="FirstParam">AmsiScan</Data>
+		<Data Name="Path">MemScanVfz-AMSI-865F9243-FA9B-220B-CFC4-1240285F9144</Data>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanReason">7</Data>
+		<Opcode>SmsScanStart</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanReason">7</Data>
+		<Data Name="ScanResult">2</Data>
+		<Opcode>SmsScanStop</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="Path">MemScanVfz-AMSI-9DDAE638-4B7D-D99C-A138-1F7724BC2826</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Data Name="FirstParam">AmsiScan</Data>
+		<Data Name="Path">MemScanVfz-AMSI-9DDAE638-4B7D-D99C-A138-1F7724BC2826</Data>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanReason">3</Data>
+		<Opcode>SmsScanStart</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanReason">3</Data>
+		<Data Name="ScanResult">2</Data>
+		<Opcode>SmsScanStop</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanReason">4</Data>
+		<Opcode>SmsScanStart</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanReason">4</Data>
+		<Data Name="ScanResult">2</Data>
+		<Opcode>SmsScanStop</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="Path">MemScanVfz-AMSI-86BAD65B-1BBC-3524-F684-A14FAE4116F6</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Data Name="FirstParam">AmsiScan</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="FirstParam">sigseq=0x85b351bc4771;level=M;reason=max_scan;scancnt=2</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Path">MemScanVfz-AMSI-86BAD65B-1BBC-3524-F684-A14FAE4116F6</Data>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Path">MemScanVfz-AMSI-EEB6A63D-4BFB-CF3F-C78B-D3906EA82CBA</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Data Name="FirstParam">AmsiScan</Data>
+		<Data Name="Path">MemScanVfz-AMSI-EEB6A63D-4BFB-CF3F-C78B-D3906EA82CBA</Data>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      34</Data>
+		<Task>Scan request </Task>
+		<Message>Start of engine scan request </Message>
+		<Data Name="ScanReason">2</Data>
+		<Opcode>SmsScanStart</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanReason">2</Data>
+		<Data Name="ScanResult">5</Data>
+		<Opcode>SmsScanStop</Opcode>
+		<Task>SmsScanTask</Task>
+		<Task>SmsScanTask</Task>
+		<Data Name="Scan Source">      34</Data>
+		<Task>Scan request </Task>
+		<Message>End of engine scan request </Message>
+		<Data Name="FirstParam">sigseq=0x85b351bc4771;level=1;reason=max_scan;scancnt=1</Data>
+		<Data Name="Scan Source">      34</Data>
+		<Task>Scan request </Task>
+		<Message>Start of engine scan request </Message>
+		<Data Name="ScanReason">2</Data>
+		<Opcode>SmsScanStart</Opcode>
+		<Task>SmsScanTask</Task>
+		<Data Name="ScanReason">2</Data>
+		<Data Name="ScanResult">5</Data>
+		<Opcode>SmsScanStop</Opcode>
+		<Task>SmsScanTask</Task>
+		<Task>SmsScanTask</Task>
+		<Data Name="Scan Source">      34</Data>
+		<Task>Scan request </Task>
+		<Message>End of engine scan request </Message>
+		<Data Name="FirstParam">sigseq=0x99b30a428ca6;level=1;reason=max_scan;scancnt=1</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      28</Data>
+		<Task>Scan request </Task>
+		<Message>Start of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      28</Data>
+		<Task>Scan request </Task>
+		<Message>End of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      30</Data>
+		<Task>Scan request </Task>
+		<Message>Start of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      30</Data>
+		<Task>Scan request </Task>
+		<Message>End of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      28</Data>
+		<Task>Scan request </Task>
+		<Message>Start of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      28</Data>
+		<Task>Scan request </Task>
+		<Message>End of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      30</Data>
+		<Task>Scan request </Task>
+		<Message>Start of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Scan Source">      30</Data>
+		<Task>Scan request </Task>
+		<Message>End of engine scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="VName">Behavior:Win32/LsassDump.AK</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="Path">MemScanVfz-AMSI-5CDACCAB-04BE-2F78-9120-6402E5B609AD</Data>
+		<Task>Stream scan request </Task>
+		<Message>Start of stream scan request </Message>
+		<Data Name="FirstParam">AmsiScan</Data>
+		<Data Name="Path">MemScanVfz-AMSI-5CDACCAB-04BE-2F78-9120-6402E5B609AD</Data>
+		<Task>Stream scan request </Task>
+		<Message>End of stream scan request </Message>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
+		<Data Name="ScanSource">       0</Data>
 
 
 *Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
