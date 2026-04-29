@@ -8,6 +8,13 @@
 
 ---
 
+## Research Scope
+
+This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
+The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
+No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
+The goal is to clarify detection boundaries for defenders.
+
 ## Objective
 
 Determine whether pypykatz can successfully parse an LSASS minidump exfiltrated from a fully patched Windows Server 2025 host at UBR 1742, with current Defender signatures active and no Credential Guard configured.
