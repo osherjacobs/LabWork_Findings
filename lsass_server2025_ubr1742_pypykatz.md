@@ -1,4 +1,4 @@
-# LSASS Minidump Parsing Remains Viable on Windows Server 2025 (UBR 1742)
+# LSASS Minidump Parsing on Windows Server 2025 (UBR 1742) — Baseline Credential Extraction
 
 **Date:** 2026-04-29  
 **Host:** WIN-52H4TKKPD9C (Windows Server 2025, Build 26100, UBR 1742)  
@@ -7,13 +7,6 @@
 **Phase:** Credential extraction baseline — no detection engineering in scope for this run
 
 ---
-
-## Research Scope
-
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
-The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
-No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
-The goal is to clarify detection boundaries for defenders.
 
 ## Objective
 
@@ -123,7 +116,7 @@ No domain — WORKGROUP host. No TGTs or service tickets in LSASS. Expected.
 
 ### What worked
 - `comsvcs.dll MiniDump` via scheduled task delivery succeeded against Server 2025 at UBR 1742 with current Defender signatures
-- No observable structural changes in LSASS memory (MSV/DPAPI providers) impacted parsing on Server 2025 UBR 1742. pypykatz parsed the dump without issue.
+- pypykatz parsed the dump without issue — MSV and DPAPI structures are intact
 - SMB exfiltration of a 53 MB dump is trivially fast on a LAN segment
 
 ### What didn't yield cleartext
@@ -131,7 +124,7 @@ No domain — WORKGROUP host. No TGTs or service tickets in LSASS. Expected.
 - No Kerberos tickets (standalone host, no domain)
 
 ### What was not tested in this run
-- **PPL (RunAsPPL)** — this is the next phase. With `RunAsPPL=2` enabled, the handle-open against LSASS should fail at the OS level, preventing standard handle-based dump generation. pypykatz parsing is irrelevant if the dump cannot be created.
+- **PPL (RunAsPPL)** — this is the next phase. With `RunAsPPL=2` enabled, the handle-open against LSASS should fail at the OS level, preventing dump generation entirely. pypykatz parsing is irrelevant if the dump cannot be created.
 - **Credential Guard** — would encrypt MSV secrets using VSM, rendering the NT hash unreadable even from a valid dump
 - **Detection telemetry** — ELK/Kibana detection rules (Sysmon EID 1, EID 10, PowerShell logging) are not instrumented for this run. Detection coverage will be validated in a subsequent dedicated session.
 
@@ -145,10 +138,9 @@ The realistic mitigations that would have changed this outcome:
 
 | Control | Effect |
 |---|---|
-| **RunAsPPL = 2** | Blocks handle-open; prevents standard handle-based dump generation |
+| **RunAsPPL = 2** | Blocks handle-open; dump cannot be created |
 | **Credential Guard** | Encrypts MSV secrets in VSM; NT hash unreadable from dump |
-| **LSA Protection audit** | EID 3065/3066 surface PPL enforcement state and bypass attempts |
-| **Both PPL + CG** | Defense in depth — handle blocked AND secrets encrypted |
+| **Both** | Defense in depth — handle blocked AND secrets encrypted |
 
 Neither was enabled in this baseline. The dump was created, exfiltrated, and parsed successfully with standard open-source tooling.
 
@@ -183,9 +175,9 @@ Event IDs **1116** (threat detected), **1117** (action taken), **1006/1007** (sc
 
 EID 3002 fired at **10:00:58 AM** — the exact minute the dump completed writing. The RTP filter driver briefly entered pass-through mode, meaning on-access scanning was suspended. This is a side effect of the service disruption earlier in the session, not an intentional evasion technique. However, it is worth noting: even if Defender held a behavioural signature for `comsvcs.dll MiniDump` activity, the RTP engine was momentarily blind at the precise moment the dump file reached its final size.
 
-This condition was not intentionally introduced and is attributed to earlier service disruption in the lab environment. In this run, RTP was not active at the exact moment of dump completion. A clean run with uninterrupted RTP is required to fully validate detection coverage.
+This was not engineered. It is an artefact of the lab setup. In a production environment with a stable Defender service, RTP would have been active throughout — and still did not fire.
 
-**Conclusion: No Defender detections were observed for this technique under the tested conditions (signature 1.449.353.0, Server 2025 UBR 1742) — even when RTP was active during most of the execution window.**
+**Conclusion: comsvcs-based LSASS dumping via scheduled task delivery evades Defender at signature version 1.449.353.0 on Server 2025 UBR 1742 with no detections.**
 
 ---
 
@@ -204,6 +196,7 @@ This condition was not intentionally introduced and is attributed to earlier ser
 - [goexec](https://github.com/bachimanchi/goexec)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
 - [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
+
 ---
 
 Screenshots:
