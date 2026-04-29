@@ -197,7 +197,354 @@ This condition was not intentionally introduced and is attributed to earlier ser
 - [goexec](https://github.com/bachimanchi/goexec)
 - [Microsoft — Credential Guard](https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/)
 - [Microsoft — RunAsPPL](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)
+- <img width="679" height="704" alt="DMPFILE" src="https://github.com/user-attachments/assets/e2e5118a-5f6d-4956-8157-3aa85d92558a" />
+
 
 ---
+<img width="1879" height="943" alt="UBR1742ATTACKLINKEDIN" src="https://github.com/user-attachments/assets/55803d95-1494-4b0f-8bee-a5acdb00fb32" />
+
+<img width="1870" height="943" alt="UBR1742ATTACKWITHPTH" src="https://github.com/user-attachments/assets/b00716a8-a592-4639-b3ee-9502c542f66a" />
+
+PS C:\WINDOWS\system32> Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational" |
+>>   Where-Object { $_.TimeCreated -gt (Get-Date).AddHours(-4) } |
+>>   Select-Object TimeCreated, Id, Message |
+>>   Format-List
+
+
+TimeCreated : 4/29/2026 10:01:59 AM
+Id          : 3007
+Message     : Microsoft Defender Antivirus Real-time Protection feature has restarted. It is
+              recommended that you run a full system scan to detect any items that may have
+              been missed while this agent was down.
+                Feature: On Access
+                Reason: The filter driver has restarted scanning items and is out of pass
+              through mode.
+
+TimeCreated : 4/29/2026 10:00:58 AM
+Id          : 3002
+Message     : Microsoft Defender Antivirus Real-Time Protection feature has encountered an
+              error and failed.
+                Feature: On Access
+                Error Code: 0x80004005
+                Error description: Unspecified error
+                Reason: The filter driver skipped scanning items and is in pass through
+              mode. This may be due to low resource conditions.
+
+TimeCreated : 4/29/2026 9:23:35 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\ServiceStartStates = 0x1
+                New value: Default\ServiceStartStates = 0x0
+
+TimeCreated : 4/29/2026 9:22:42 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = LoadingEngine
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = ServiceStartedSuccessfully
+
+TimeCreated : 4/29/2026 9:22:42 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x1ADAC0BC
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x194C897
+
+TimeCreated : 4/29/2026 9:22:39 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = InitEventConfig
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = LoadingEngine
+
+TimeCreated : 4/29/2026 9:22:39 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = PostPlatformUpdate
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = InitEventConfig
+
+TimeCreated : 4/29/2026 9:22:39 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: Default\ServiceStartStates = 0x0
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\ServiceStartStates = 0x1
+
+TimeCreated : 4/29/2026 9:22:38 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress =
+              InitializeMiscConfigLibrary
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = PostPlatformUpdate
+
+TimeCreated : 4/29/2026 9:22:38 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x194C897
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x1ADAC0BC
+
+TimeCreated : 4/29/2026 9:22:38 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: Default\IsServiceRunning = 0x0
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\IsServiceRunning = 0x1
+
+TimeCreated : 4/29/2026 9:20:48 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\LastSignatureUpdateResult = 0x80072EE7
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\LastSignatureUpdateResult = 0x0
+
+TimeCreated : 4/29/2026 9:20:48 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x2838C031
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x194C897
+
+TimeCreated : 4/29/2026 9:20:47 AM
+Id          : 2000
+Message     : Microsoft Defender Antivirus security intelligence version updated.
+                Current security intelligence Version: 1.449.353.0
+                Previous security intelligence Version: 1.449.328.0
+                Security intelligence Type: AntiSpyware
+                Update Type: Delta
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version: 1.1.26030.3008
+                Previous Engine Version: 1.1.26030.3008
+
+TimeCreated : 4/29/2026 9:20:47 AM
+Id          : 2000
+Message     : Microsoft Defender Antivirus security intelligence version updated.
+                Current security intelligence Version: 1.449.353.0
+                Previous security intelligence Version: 1.449.328.0
+                Security intelligence Type: AntiVirus
+                Update Type: Delta
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version: 1.1.26030.3008
+                Previous Engine Version: 1.1.26030.3008
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\LastSignatureUpdateResult = 0x0
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\LastSignatureUpdateResult = 0x80072EE7
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 2001
+Message     : Microsoft Defender Antivirus has encountered an error trying to update
+              security intelligence.
+                New security intelligence Version:
+                Previous security intelligence Version: 1.449.328.0
+                Update Source: Microsoft Malware Protection Center
+                Security intelligence Type: AntiVirus
+                Update Type: Full
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version:
+                Previous Engine Version: 1.1.26030.3008
+                Error code: 0x80072ee7
+                Error description: The server name or address could not be resolved
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 2001
+Message     : Microsoft Defender Antivirus has encountered an error trying to update
+              security intelligence.
+                New security intelligence Version:
+                Previous security intelligence Version: 1.449.328.0
+                Update Source: Microsoft Malware Protection Center
+                Security intelligence Type: AntiSpyware
+                Update Type: Full
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version:
+                Previous Engine Version: 1.1.26030.3008
+                Error code: 0x80072ee7
+                Error description: The server name or address could not be resolved
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 2001
+Message     : Microsoft Defender Antivirus has encountered an error trying to update
+              security intelligence.
+                New security intelligence Version:
+                Previous security intelligence Version: 1.449.328.0
+                Update Source: Microsoft Malware Protection Center
+                Security intelligence Type: AntiVirus
+                Update Type: Full
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version:
+                Previous Engine Version: 1.1.26030.3008
+                Error code: 0x80072ee7
+                Error description: The server name or address could not be resolved
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 2001
+Message     : Microsoft Defender Antivirus has encountered an error trying to update
+              security intelligence.
+                New security intelligence Version:
+                Previous security intelligence Version: 1.449.328.0
+                Update Source: Microsoft Malware Protection Center
+                Security intelligence Type: AntiVirus
+                Update Type: Full
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version:
+                Previous Engine Version: 1.1.26030.3008
+                Error code: 0x80072ee7
+                Error description: The server name or address could not be resolved
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 2001
+Message     : Microsoft Defender Antivirus has encountered an error trying to update
+              security intelligence.
+                New security intelligence Version:
+                Previous security intelligence Version: 1.449.328.0
+                Update Source: Microsoft Malware Protection Center
+                Security intelligence Type: AntiSpyware
+                Update Type: Full
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version:
+                Previous Engine Version: 1.1.26030.3008
+                Error code: 0x80072ee7
+                Error description: The server name or address could not be resolved
+
+TimeCreated : 4/29/2026 9:19:33 AM
+Id          : 2001
+Message     : Microsoft Defender Antivirus has encountered an error trying to update
+              security intelligence.
+                New security intelligence Version:
+                Previous security intelligence Version: 1.449.328.0
+                Update Source: Microsoft Malware Protection Center
+                Security intelligence Type: AntiVirus
+                Update Type: Full
+                User: NT AUTHORITY\SYSTEM
+                Current Engine Version:
+                Previous Engine Version: 1.1.26030.3008
+                Error code: 0x80072ee7
+                Error description: The server name or address could not be resolved
+
+TimeCreated : 4/29/2026 9:14:57 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: N/A\SpyNet\LastMAPSFailureTimeString =
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\SpyNet\LastMAPSFailureTimeString = 2026-04-29T06:14:57Z
+
+TimeCreated : 4/29/2026 9:10:00 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\ServiceStartStates = 0x1
+                New value: Default\ServiceStartStates = 0x0
+
+TimeCreated : 4/29/2026 9:09:34 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = LoadingEngine
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = ServiceStartedSuccessfully
+
+TimeCreated : 4/29/2026 9:09:34 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x3376C81A
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x2838C031
+
+TimeCreated : 4/29/2026 9:09:30 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = PostPlatformUpdate
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = LoadingEngine
+
+TimeCreated : 4/29/2026 9:09:30 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: Default\ServiceStartStates = 0x0
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\ServiceStartStates = 0x1
+
+TimeCreated : 4/29/2026 9:09:29 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress =
+              InitializeMiscConfigLibrary
+                New value: HKLM\SOFTWARE\Microsoft\Windows
+              Defender\Diagnostics\InitializingComponentProgress = PostPlatformUpdate
+
+TimeCreated : 4/29/2026 9:09:29 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x2838C031
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\CoreService\WdConfigHash
+              = 0x3376C81A
+
+TimeCreated : 4/29/2026 9:09:29 AM
+Id          : 5007
+Message     : Microsoft Defender Antivirus Configuration has changed. If this is an
+              unexpected event you should review the settings as this may be the result of
+              malware.
+                Old value: Default\IsServiceRunning = 0x0
+                New value: HKLM\SOFTWARE\Microsoft\Windows Defender\IsServiceRunning = 0x1
+
+
+
+
+
+
 
 *Part of the [AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research) series — purple team attack chains with paired detection engineering.*
