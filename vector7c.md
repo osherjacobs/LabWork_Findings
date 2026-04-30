@@ -1,28 +1,19 @@
-# Vector 7c — Windows Server 2025 UBR 32690: Parser Boundary & Credential Extraction Under Defender
+# Windows Server 2025 UBR 32690: Parser Boundary & Credential Extraction Under Defender
 
 **Series:** AD-Lab-Research | Windows Credential Extraction  
 **Target:** Windows Server 2025 — Build 26100.32690 (KB5082063, April 14 2026)  
 **Domain:** badsuccessor.local  
 **Author:** Osher Jacobs  
 
+> **Disclaimer:** This research was conducted in an isolated lab environment on systems I own and control. All techniques are presented for defensive and detection engineering purposes. Credential values are redacted. Do not reproduce against systems you do not own or have explicit written authorisation to test.
+
 ---
 
 ## Overview
 
-This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development.
-
-The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided.
-
-No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement.
-
-The goal is to clarify detection boundaries for defenders.
-
-
 This vector documents LSASS credential extraction against a fully patched Windows Server 2025 domain controller (UBR 32690 — current April 2026 security baseline), with Defender Real-Time Protection active, full Sysmon instrumentation, and ELK telemetry.
 
-The central finding: **the April 2026 patch cycle broke public parser tooling without hardening the underlying access model.** The OS shipped struct-level changes in `lsasrv.dll` that silently invalidated pypykatz. The community closed the gap faster than defenders adapted. The detection surface remained unchanged.
-
-
+The central finding: **the April 2026 patch cycle broke public parser tooling without hardening the underlying access model.** The observable detection surface did not change in this experiment.
 
 > *"2025 — New and breakable."*
 
@@ -82,7 +73,7 @@ Memory address 0x001a0018 not in process memory space
 entry.Domaine.read_string
 ```
 
-**Root cause:** Struct offset drift in `lsasrv.dll` 10.0.26100.32690. The `KIWI_MSV1_0_PRIMARY_CREDENTIAL` layout changed post-UBR 1742. pypykatz 0.6.13 hardcodes offsets derived from pre-patch builds. The `entry.Domaine.read_string` call walks to an invalid memory address — MSV extraction fails entirely. WDIGEST and DPAPI parse successfully (different struct paths), confirming this is a targeted layout break, not a wholesale access failure.
+**Observation:** Failure is isolated to the MSV struct walk on UBR 32690 in this test. WDIGEST and DPAPI parse successfully on the same dump.
 
 ---
 
@@ -119,7 +110,7 @@ domainname BADSUCCESSOR
 [*] 19 logon session(s) parsed.
 ```
 
-**Why it works:** KvcForensic uses a scoring-based `DetectSessionFieldLayout` that probes multiple candidate struct offsets and validates against known-good field patterns. It does not hardcode offsets. Post-1742 build changes are handled transparently.
+**Observation:** KvcForensic is built to handle current Server 2025 builds (26100+). Same dump, full extraction.
 
 ---
 
@@ -127,14 +118,14 @@ domainname BADSUCCESSOR
 
 | Tool | UBR 32690 | MSV NT hash | Notes |
 |---|---|---|---|
-| pypykatz 0.6.13 | ❌ FAIL | Not obtained | `entry.Domaine.read_string` — struct offset mismatch |
-| KvcForensic (wesmar) | ✅ SUCCESS | `<redacted>` | Scoring-based layout detection |
+| pypykatz 0.6.13 | ❌ FAIL | Not obtained | MSV struct walk fails on UBR 32690 in this test |
+| KvcForensic (wesmar) | ✅ SUCCESS | `<redacted>` | Handles current Server 2025 builds |
 
 Same dump. Same patch level. Same access model. Different tooling outcome.
 
 ---
 
-## Finding 3 — Sysmon EID 10 Blind Spot
+## Finding 3 — Sysmon EID 10 Not Observed
 
 Sysmon v15.20 configured with permissive ProcessAccess rule:
 
@@ -146,32 +137,29 @@ Sysmon v15.20 configured with permissive ProcessAccess rule:
 
 **No EID 10 generated for curio.exe.**
 
-curio.exe was executed as SYSTEM via remote scheduled task (goexec/tsch). 
-Despite a permissive Sysmon ProcessAccess configuration with no GrantedAccess 
-or user filters, no EID 10 was generated for the lsass handle open.
+curio.exe was executed as SYSTEM via remote scheduled task (goexec/tsch). Despite a permissive Sysmon ProcessAccess configuration with no GrantedAccess or user filters, no EID 10 was observed. The exact mechanism is not confirmed.
 
-The exact mechanism is not confirmed. The observation is: this execution path 
-does not produce a Sysmon EID 10 event on Server 2025 UBR 32690. Whether this 
-is execution context, handle inheritance, or a driver-level gap requires further 
-investigation.
+No Sysmon EID 10 observed for this execution path on Server 2025 UBR 32690 under this configuration.
 
 ---
 
 ## Detection Telemetry
 
-### What fires
+### Detection Reality
 
-**EID 5007 — Defender Exclusion Add/Remove**
+Sysmon EID 10: not observed (SYSTEM scheduled task execution path, UBR 32690)  
+LSASS access signal: not observed  
+Dump signal: not observed  
 
-Three rules triggered from WIN-A33E3D6C61G:
+What fires:
 
-| Rule | Status |
-|---|---|
-| Defender - Exclusion Path Added | ✅ |
-| Defender - Exclusion Path Removed | ✅ |
-| Defender - Transient Exclusion Window Detected | ✅ |
+- EID 5007 — Exclusion added
+- EID 5007 — Exclusion removed
+- ~50-minute blind window between events
 
-Removal immediately following addition is a strong behavioral indicator of a timed exclusion window — artifact dropped and exfiltrated while blind, exclusion cleaned to reduce forensic footprint.
+EID 10 here is execution-path dependent — not a universal invariant.
+
+That's the detection surface.
 
 **EID 4662 — DCSync (footnote)**
 
@@ -188,7 +176,7 @@ Fires reliably on secretsdump DRSUAPI replication. Unaffected by parser tooling 
 
 | Signal | Status | Reason |
 |---|---|---|
-| Sysmon EID 10 (lsass handle open) | ❌ | Execution via SYSTEM scheduled task — kernel callback not triggered |
+| Sysmon EID 10 (lsass handle open) | ❌ | Not observed in this execution path |
 | Defender memory scan block | ❌ | Exclusion window active during dump |
 
 ---
@@ -203,7 +191,7 @@ Fires reliably on secretsdump DRSUAPI replication. Unaffected by parser tooling 
 | Parser (offline) | — | No signal (offline operation) |
 | DCSync (footnote) | EID 4662 | ✅ |
 
-**The dump itself is invisible to Sysmon in this execution context.** The only on-host signals are the exclusion window bookends. A defender with EID 5007 alerting has a narrow window to respond before exfiltration completes.
+The dump produced no Sysmon EID 10 in this execution context. The only on-host signals are the exclusion window bookends. A defender with EID 5007 alerting has a narrow window to respond before exfiltration completes.
 
 ---
 
@@ -211,7 +199,7 @@ Fires reliably on secretsdump DRSUAPI replication. Unaffected by parser tooling 
 
 The April 2026 patch broke pypykatz. It did not break the underlying memory access model, the MiniDumpWriteDump API, or the DRSUAPI replication protocol. Defenders who treat "tool X doesn't work anymore" as a hardening signal are measuring the wrong thing.
 
-KvcForensic's adaptive layout detection closed the tooling gap within the same patch cycle. The detection surface did not change.
+KvcForensic closed the tooling gap within the same patch cycle. The observable detection surface did not change in this experiment.
 
 ---
 
@@ -223,6 +211,10 @@ KvcForensic's adaptive layout detection closed the tooling gap within the same p
 - Sysmon v15.20 — Microsoft Sysinternals
 
 ---
+
+*Vector 7 | Vector 7b | **Vector 7c** | Vector 8 (upcoming)*
+
+
 <img width="1881" height="1075" alt="ALERTS" src="https://github.com/user-attachments/assets/4923c4ed-c808-4b65-ab9e-fd796fdf642f" />
 
 <img width="1869" height="975" alt="attackredacted" src="https://github.com/user-attachments/assets/ed88aa94-5de4-4dd3-a39f-3047866a3a38" />
