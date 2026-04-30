@@ -223,5 +223,23 @@ KvcForensic's adaptive layout detection closed the tooling gap within the same p
 - Sysmon v15.20 — Microsoft Sysinternals
 
 ---
+<img width="1881" height="1075" alt="ALERTS" src="https://github.com/user-attachments/assets/4923c4ed-c808-4b65-ab9e-fd796fdf642f" />
 
-*Vector 7 | Vector 7b | **Vector 7c** | Vector 8 (upcoming)*
+<img width="1869" height="975" alt="attackredacted" src="https://github.com/user-attachments/assets/ed88aa94-5de4-4dd3-a39f-3047866a3a38" />
+
+<img width="666" height="107" alt="Dump0KB" src="https://github.com/user-attachments/assets/ece51004-69c0-4390-b9bf-5b03e78e3982" />
+
+<img width="721" height="292" alt="DUMP1946" src="https://github.com/user-attachments/assets/fd107879-bbf6-43e5-9ef3-c9a7d8013f8a" />
+
+<img width="1200" height="689" alt="KVMFORENSICTOOL" src="https://github.com/user-attachments/assets/03629f1d-a72c-4a1f-867e-bf3d7dec807f" />
+
+<img width="1863" height="895" alt="dumpredacted" src="https://github.com/user-attachments/assets/38f0c49f-2692-42e2-8f8f-695809bec8d3" />
+
+
+
+
+
+
+
+
+
