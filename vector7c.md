@@ -146,9 +146,14 @@ Sysmon v15.20 configured with permissive ProcessAccess rule:
 
 **No EID 10 generated for curio.exe.**
 
-curio.exe was executed as SYSTEM via remote scheduled task (goexec/tsch). Sysmon's kernel callback for `NtOpenProcess` does not intercept handle opens originating from this execution context. The event is not generated — not filtered, not suppressed — simply absent.
+curio.exe was executed as SYSTEM via remote scheduled task (goexec/tsch). 
+Despite a permissive Sysmon ProcessAccess configuration with no GrantedAccess 
+or user filters, no EID 10 was generated for the lsass handle open.
 
-This is not a configuration failure. It is a detection gap inherent to this execution path on Server 2025.
+The exact mechanism is not confirmed. The observation is: this execution path 
+does not produce a Sysmon EID 10 event on Server 2025 UBR 32690. Whether this 
+is execution context, handle inheritance, or a driver-level gap requires further 
+investigation.
 
 ---
 
