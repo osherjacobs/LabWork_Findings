@@ -49,6 +49,13 @@ Remove-MpPreference -ExclusionPath "C:\Windows\Temp"
 
 Custom C# MiniDumpWriteDump implementation via P/Invoke to `dbghelp.dll`. Executed as SYSTEM via remote scheduled task shell. Output: `C:\Windows\Temp\out2.dmp` (~135MB).
 
+curio.exe is a custom C# binary. It calls MiniDumpWriteDump directly via 
+P/Invoke against dbghelp.dll. No LOLBins, no known tool signatures. The 
+evasion is architectural — remove the LOLBin, call the API directly.
+
+Source not published. The point of this research is the detection boundary, 
+not the tool.
+
 ### Step 3 — Exfiltration
 
 Dump exfiltrated to analyst machine via SMB.
