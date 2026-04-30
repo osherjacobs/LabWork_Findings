@@ -239,6 +239,10 @@ KvcForensic's adaptive layout detection closed the tooling gap within the same p
 <img width="1863" height="895" alt="dumpredacted" src="https://github.com/user-attachments/assets/38f0c49f-2692-42e2-8f8f-695809bec8d3" />
 
 
+<img width="1876" height="951" alt="DCPWN" src="https://github.com/user-attachments/assets/3635d8d1-c6f8-4c4e-b969-3751f966f565" />
+
+
+
 
 
 
