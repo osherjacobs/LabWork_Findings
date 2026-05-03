@@ -1,8 +1,8 @@
 # LSASS Credential Dump | Windows Server 2025 | Detection Engineering
 
 ## Research Scope
-
 This writeup focuses on detection engineering and Microsoft Defender telemetry behaviour, not tool development. The technique is described at the API level using publicly documented Windows functionality. No tooling or compiled binaries are provided. No vulnerability or security boundary bypass was identified. This research examines how Defender responds to specific credential access patterns and where visibility diverges from enforcement. The goal is to clarify detection boundaries for defenders.
+Assumed breach is the starting point by design. The research question is not whether compromise is possible but what the defensive stack observes once it has occurred. Lab constraints (VM, no TPM/Secure Boot, no Credential Guard) are documented explicitly. Findings are scoped to the configurations tested. Defenders operating hardened environments with additional controls may observe different outcomes — those configurations represent separate research questions outside this scope.
 
 ---
 
