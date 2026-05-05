@@ -312,6 +312,10 @@ KvcForensic (wesmar) successfully parses the dump and extracts NT hashes on Serv
 
 Dump structure: 3 streams (SystemInfo, ModuleList, Memory64List), 88 modules captured via PEB walk, 665 memory regions, 58,844,744 bytes total.
 
+## KvcForensic
+KvcForensic is a Windows memory forensics tool developed by wesmar. It parses LSASS minidump files and extracts credential material including NT hashes, SHA1, DPAPI master keys, and Kerberos tickets. Unlike pypykatz, KvcForensic successfully navigates the struct layout changes introduced in Server 2025 post-KB5082063, making it the only parser tested in this research that achieves full MSV credential extraction against the patched lsasrv.dll.
+GitHub: https://github.com/wesmar/KvcForensic
+
 ---
 
 ## Source
