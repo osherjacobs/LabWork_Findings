@@ -3,17 +3,15 @@
 
 ---
 
-## On source and tooling:
+## On Source and Tooling
+
 This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published alongside it. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence of findings. The binary described here will not be shared.
 
-## On further detection work:
+## On Further Detection Work
+
 The detection analysis presented here is incomplete by design. Additional work is needed to fully characterize the detection surface — including ETW signal viability, behavioral baselining of the scheduled task execution path, and validation of the EID 10 / EID 3 correlation rule under real pipeline conditions. That work requires dedicated instrumentation time that was not available within this research window. It is flagged here as the logical next step rather than left as an unacknowledged gap.
 
-## On Credential Guard:
-Credential Guard was not enabled in this environment. Where it is enabled, it raises the bar — domain credentials cached via LSASS are moved into a VSM enclave and are not accessible via direct memory reads. It does not protect all credential material in memory: local account credentials, service account material, and DPAPI keys remain outside its scope.
-Virtual machine environments add a practical constraint: Credential Guard requires VBS and Hyper-V to be active. In VMware-hosted environments this requires explicit configuration and is frequently not enabled by default, meaning lab and production VM environments often run without it even where policy mandates it.
-More significantly: SpecterOps published research in October 2025 demonstrating that Credential Guard, when properly enabled, can still be bypassed under specific conditions. The implication is that even environments with Credential Guard active cannot treat it as a hard boundary.
-Credential Guard is a meaningful control. It is not a ceiling. 
+---
 
 ## Environment
 
@@ -27,6 +25,29 @@ Credential Guard is a meaningful control. It is not a ceiling.
 | Credential Guard | Not enabled |
 | Attacker | Kali 192.168.1.218 |
 | SIEM | Elastic Security 8.19.14 — Sysmon 15.14 + Winlogbeat 8.19.12 |
+
+### On Credential Guard
+
+Credential Guard was not enabled in this environment. Where it is enabled, it raises the bar — domain credentials cached via LSASS are moved into a VSM enclave and are not accessible via direct memory reads. It does not protect all credential material in memory: local account credentials, service account material, and DPAPI keys remain outside its scope.
+
+Virtual machine environments add a practical constraint: Credential Guard requires VBS and Hyper-V to be active. In VMware-hosted environments this requires explicit configuration and is frequently not enabled by default, meaning lab and production VM environments often run without it even where policy mandates it.
+
+More significantly: SpecterOps published research in October 2025 demonstrating that Credential Guard, when properly enabled, can still be bypassed under specific conditions. The implication is that even environments with Credential Guard active cannot treat it as a hard boundary.
+
+Credential Guard is a meaningful control. It is not a ceiling.
+
+### PPL Boundary Note
+
+Testing against a Windows 11 26200 workstation with `RunAsPPL=2` confirmed that curpipe fails at `NtOpenProcess` with `STATUS_ACCESS_DENIED (0xC0000022)` — even when executed as SYSTEM via scheduled task. `RunAsPPL=2` is the UEFI-locked PPL level introduced in Windows 11 24H2+ and Server 2025. It cannot be disabled from within Windows regardless of privilege level.
+
+The technique documented in Vector 8 is gated by PPL configuration, not by OS version or patch level. A patched Server 2025 DC without PPL enabled is fully exposed. A Windows 11 workstation with default `RunAsPPL=2` is not.
+
+| Target | PPL | Result |
+|--------|-----|--------|
+| Server 2025 DC (WIN-52H4TKKPD9C) | Not enabled | Full dump in 131ms |
+| Windows 11 26200 workstation | RunAsPPL=2 | Blocked at NtOpenProcess |
+
+The PPL failure is silent — no EID 3033/3063 logged on the target, no dump arrives on the attacker machine. The only evidence of the attempt is the absence of output.
 
 ---
 
@@ -164,7 +185,7 @@ Telemetry: Sysmon 15.14 + Winlogbeat 8.19.12 on WIN-52H4TKKPD9C
 | Signal | EID | Alert fired | Notes |
 |--------|-----|-------------|-------|
 | LSASS handle open | Sysmon 10 | No | tsch/SYSTEM execution path does not trigger configured ProcessAccess rules |
-| LSASS memory reads | ETW only | No | Not captured by Sysmon — requires Microsoft-Windows-Threat-Intelligence provider |
+| LSASS memory reads | ETW only | No | Not captured by Sysmon — not validated in this lab, see ETW note below |
 | Outbound TCP to attacker | Sysmon 3 | No | Raw event present. Rule saturated by winlogbeat false positives |
 | Task file creation | Sysmon 11 | No | Raw event present |
 | Binary execution from Tasks | Sysmon 1 | Yes — +93s | Zeroed IMPHASH rule |
@@ -230,9 +251,7 @@ winlog.event_data.ParentCommandLine: *Schedule*
 
 Tighter than the generic zeroed IMPHASH rule. Scopes to the scheduled task execution context specifically.
 
-## Caveat: The zeroed IMPHASH condition is brittle. Any .NET binary using pure P/Invoke runtime resolution will produce a zeroed IMPHASH legitimately — the CLR handles import resolution without a PE import table. An aware adversary defeats this rule with a single dummy DllImport declaration, which produces a non-zero IMPHASH and bypasses the condition entirely. The Company: "-" filter has the same weakness — a one-line assembly manifest change removes it.
-
-This rule catches unsophisticated or unmodified tooling. It is not a reliable control against an adversary who knows it exists.
+**Caveat:** The zeroed IMPHASH condition is brittle. Any .NET binary using pure P/Invoke runtime resolution will produce a zeroed IMPHASH legitimately — the CLR handles import resolution without a PE import table. An aware adversary defeats this rule with a single dummy `DllImport` declaration, which produces a non-zero IMPHASH and bypasses the condition entirely. The `Company: "-"` filter has the same weakness — a one-line assembly manifest change removes it. This rule catches unsophisticated or unmodified tooling. It is not a reliable control against an adversary who knows it exists.
 
 ### 2. EID 10 + EID 3 correlation — pre-correlated, streaming (High confidence, architectural requirement)
 
@@ -261,7 +280,7 @@ NOT (winlog.event_data.Image: "*winlogbeat*" AND
 
 ### 4. ETW — Microsoft-Windows-Threat-Intelligence provider
 
-`NtReadVirtualMemory` call volume against lsass during a memory walk is extremely high — hundreds of calls in under 30ms. This is visible at the kernel level via the `Microsoft-Windows-Threat-Intelligence` ETW provider, which is the mechanism commercial EDRs use for LSASS protection. This signal is not available via standard Sysmon configuration and represents the highest-confidence detection path against this class of technique. Quantifying signal-to-noise and verifying whether a 131ms burst remains visible is a direction for future research.
+`NtReadVirtualMemory` call volume against lsass during a memory walk is extremely high — hundreds of calls in under 30ms. The documented detection path at the kernel level is the `Microsoft-Windows-Threat-Intelligence` ETW provider, which is the mechanism commercial EDRs use for LSASS protection. This signal is not available via standard Sysmon configuration. Whether the 131ms burst duration produces a reliable and actionable signal — and what the signal-to-noise ratio looks like in practice — was not validated in this lab and remains a direction for future research.
 
 ---
 
@@ -300,6 +319,7 @@ Dump structure: 3 streams (SystemInfo, ModuleList, Memory64List), 88 modules cap
 Research series: [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
 
 No tooling or source code published. Screenshots only.
+
 
 Executed remotely:
 <img width="1872" height="644" alt="ATTACKREMOTEredacted" src="https://github.com/user-attachments/assets/37e728c2-fb30-41f3-b649-f793f19c7f32" />
