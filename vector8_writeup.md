@@ -9,6 +9,12 @@ This document is a detection and telemetry record. No source code, compiled tool
 ## On further detection work:
 The detection analysis presented here is incomplete by design. Additional work is needed to fully characterize the detection surface — including ETW signal viability, behavioral baselining of the scheduled task execution path, and validation of the EID 10 / EID 3 correlation rule under real pipeline conditions. That work requires dedicated instrumentation time that was not available within this research window. It is flagged here as the logical next step rather than left as an unacknowledged gap.
 
+## On Credential Guard:
+Credential Guard was not enabled in this environment. Where it is enabled, it raises the bar — domain credentials cached via LSASS are moved into a VSM enclave and are not accessible via direct memory reads. It does not protect all credential material in memory: local account credentials, service account material, and DPAPI keys remain outside its scope.
+Virtual machine environments add a practical constraint: Credential Guard requires VBS and Hyper-V to be active. In VMware-hosted environments this requires explicit configuration and is frequently not enabled by default, meaning lab and production VM environments often run without it even where policy mandates it.
+More significantly: SpecterOps published research in October 2025 demonstrating that Credential Guard, when properly enabled, can still be bypassed under specific conditions. The implication is that even environments with Credential Guard active cannot treat it as a hard boundary.
+Credential Guard is a meaningful control. It is not a ceiling. 
+
 ## Environment
 
 | Component | Details |
