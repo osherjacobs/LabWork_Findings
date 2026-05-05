@@ -3,6 +3,9 @@
 
 ---
 
+## On source and tooling:
+This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published alongside it. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence of findings. The binary described here will not be shared.
+
 ## Environment
 
 | Component | Details |
@@ -284,3 +287,18 @@ Dump structure: 3 streams (SystemInfo, ModuleList, Memory64List), 88 modules cap
 Research series: [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
 
 No tooling or source code published. Screenshots only.
+
+<img width="1872" height="644" alt="ATTACKREMOTEredacted" src="https://github.com/user-attachments/assets/37e728c2-fb30-41f3-b649-f793f19c7f32" />
+
+<img width="938" height="680" alt="2026-05-05_09-22" src="https://github.com/user-attachments/assets/e14deffd-63a0-4e36-bd75-4718b27978b2" />
+
+<img width="1823" height="994" alt="ELASTICBINARYALERT" src="https://github.com/user-attachments/assets/e5e486b1-a770-489f-a237-b51db17e77b4" />
+
+
+
+
+
+
+
+
+
