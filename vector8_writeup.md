@@ -230,6 +230,10 @@ winlog.event_data.ParentCommandLine: *Schedule*
 
 Tighter than the generic zeroed IMPHASH rule. Scopes to the scheduled task execution context specifically.
 
+## Caveat: The zeroed IMPHASH condition is brittle. Any .NET binary using pure P/Invoke runtime resolution will produce a zeroed IMPHASH legitimately — the CLR handles import resolution without a PE import table. An aware adversary defeats this rule with a single dummy DllImport declaration, which produces a non-zero IMPHASH and bypasses the condition entirely. The Company: "-" filter has the same weakness — a one-line assembly manifest change removes it.
+
+This rule catches unsophisticated or unmodified tooling. It is not a reliable control against an adversary who knows it exists.
+
 ### 2. EID 10 + EID 3 correlation — pre-correlated, streaming (High confidence, architectural requirement)
 
 ```kql
