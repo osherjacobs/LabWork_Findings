@@ -297,9 +297,12 @@ Research series: [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD
 
 No tooling or source code published. Screenshots only.
 
+Executed remotely:
 <img width="1872" height="644" alt="ATTACKREMOTEredacted" src="https://github.com/user-attachments/assets/37e728c2-fb30-41f3-b649-f793f19c7f32" />
 
+Executed locally to demonstrate patching levels and RTP
 <img width="938" height="680" alt="2026-05-05_09-22" src="https://github.com/user-attachments/assets/e14deffd-63a0-4e36-bd75-4718b27978b2" />
+
 
 <img width="1823" height="994" alt="ELASTICBINARYALERT" src="https://github.com/user-attachments/assets/e5e486b1-a770-489f-a237-b51db17e77b4" />
 
