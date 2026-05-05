@@ -316,6 +316,7 @@ Executed remotely:
 Executed locally to demonstrate patching levels and RTP
 <img width="938" height="680" alt="2026-05-05_09-22" src="https://github.com/user-attachments/assets/e14deffd-63a0-4e36-bd75-4718b27978b2" />
 
+Kvc Forensic output
 <img width="1226" height="622" alt="KVFORENSIC3" src="https://github.com/user-attachments/assets/0916a1db-e4a1-4af1-b9a9-cdcdb3f3c9f8" />
 
 <img width="1823" height="994" alt="ELASTICBINARYALERT" src="https://github.com/user-attachments/assets/e5e486b1-a770-489f-a237-b51db17e77b4" />
