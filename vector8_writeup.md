@@ -253,22 +253,7 @@ Tighter than the generic zeroed IMPHASH rule. Scopes to the scheduled task execu
 
 **Caveat:** The zeroed IMPHASH condition is brittle. Any .NET binary using pure P/Invoke runtime resolution will produce a zeroed IMPHASH legitimately — the CLR handles import resolution without a PE import table. An aware adversary defeats this rule with a single dummy `DllImport` declaration, which produces a non-zero IMPHASH and bypasses the condition entirely. The `Company: "-"` filter has the same weakness — a one-line assembly manifest change removes it. This rule catches unsophisticated or unmodified tooling. It is not a reliable control against an adversary who knows it exists.
 
-### 2. EID 10 + EID 3 correlation — pre-correlated, streaming (High confidence, architectural requirement)
-
-```kql
-// Step 1: EID 10 — LSASS handle open
-winlog.event_id: "10" AND
-winlog.event_data.TargetImage: "*lsass*"
-
-// Step 2: Correlate ProcessGuid within 5 seconds to EID 3
-winlog.event_id: "3" AND
-winlog.event_data.Initiated: "true" AND
-NOT winlog.event_data.DestinationIp: ("192.168.1.250" OR "127.*")
-```
-
-This correlation is architecturally correct — LSASS handle followed by outbound TCP from the same process within a 5-second window is a high-confidence detection regardless of tooling. However, it requires near-real-time streaming evaluation. A 5-minute rule interval means the correlation window closes before the rule runs. This is a pipeline architecture problem, not a query problem.
-
-### 3. Fix the false positive masking the outbound TCP signal
+### 2. Fix the false positive masking the outbound TCP signal
 
 The `Sysmon - Outbound Network Connection from Windows Tasks Binary` rule was generating 198 alerts per cycle — all from winlogbeat, which resides in `C:\Windows\Tasks\`. The real signal (curpipe TCP to attacker) was present in telemetry and invisible behind the noise.
 
@@ -278,7 +263,7 @@ NOT (winlog.event_data.Image: "*winlogbeat*" AND
      winlog.event_data.DestinationIp: "192.168.1.250")
 ```
 
-### 4. ETW — Microsoft-Windows-Threat-Intelligence provider
+### 3. ETW — Microsoft-Windows-Threat-Intelligence provider
 
 `NtReadVirtualMemory` call volume against lsass during a memory walk is extremely high — hundreds of calls in under 30ms. The documented detection path at the kernel level is the `Microsoft-Windows-Threat-Intelligence` ETW provider, which is the mechanism commercial EDRs use for LSASS protection. This signal is not available via standard Sysmon configuration. Whether the 131ms burst duration produces a reliable and actionable signal — and what the signal-to-noise ratio looks like in practice — was not validated in this lab and remains a direction for future research.
 
