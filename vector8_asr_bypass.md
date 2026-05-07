@@ -8,6 +8,10 @@
 - **RTP:** Enabled
 - **ASR Rule:** `9e6c4e1f-7d60-472f-ba1a-a39ef669e4b0` — Block mode (action=1)
 
+## On Source and Tooling
+
+This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published alongside it. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence of findings. The binary described here will not be shared.
+
 ## Technique
 
 Custom C# tool. Pure NTAPI memory walk. Minidump assembled in memory. No MiniDumpWriteDump. No dbghelp.dll. No comsvcs. Streamed over TCP to attacker machine. Nothing written to disk.
