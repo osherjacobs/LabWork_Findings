@@ -87,7 +87,7 @@ No tooling published. No source code. Screenshots only. Lab infrastructure, owne
 
 - ASR rule documentation: [Block credential stealing from the Windows local security authority subsystem](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/attack-surface-reduction-rules-reference)
 
-- SpecterOps Credential Guard research: October 2025
+- SpecterOps Credential Guard research: October 2025 https://specterops.io/blog/2025/10/23/catching-credential-guard-off-guard/
 
 <img width="1878" height="778" alt="AttackWithASRRUleCENSORED" src="https://github.com/user-attachments/assets/bbd5f7be-a95c-4796-b0bd-4454d06262d2" />
 
