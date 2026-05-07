@@ -71,3 +71,22 @@ No tooling published. No source code. Screenshots only. Lab infrastructure, owne
 
 - [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
 - ASR rule documentation: [Block credential stealing from the Windows local security authority subsystem](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/attack-surface-reduction-rules-reference)
+
+<img width="1878" height="778" alt="AttackWithASRRUleCENSORED" src="https://github.com/user-attachments/assets/bbd5f7be-a95c-4796-b0bd-4454d06262d2" />
+
+<img width="1152" height="490" alt="CredsKVCFORENSICCENSORED" src="https://github.com/user-attachments/assets/ee0e16e4-c93c-4e0f-b8b0-e556c8a521bb" />
+
+<img width="1205" height="717" alt="FROMWINDOWSMACHINE" src="https://github.com/user-attachments/assets/47127551-b555-44d4-b254-9cab1e1650a7" />
+
+<img width="999" height="539" alt="DUMPDIRECTFROMWINDOWSMACHINE" src="https://github.com/user-attachments/assets/b198efa5-c588-4623-a5b1-2adbece8ce11" />
+
+<img width="1850" height="649" alt="UBRRTPASR" src="https://github.com/user-attachments/assets/e0691b5c-80ef-4cd4-a489-dcde1e68d41a" />
+
+
+
+
+
+
+
+
+
