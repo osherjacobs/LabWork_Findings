@@ -74,6 +74,8 @@ No tooling published. No source code. Screenshots only. Lab infrastructure, owne
 
 <img width="1878" height="778" alt="AttackWithASRRUleCENSORED" src="https://github.com/user-attachments/assets/bbd5f7be-a95c-4796-b0bd-4454d06262d2" />
 
+<img width="1009" height="423" alt="Dumps" src="https://github.com/user-attachments/assets/c179bad9-ba63-4d08-be98-471ed70889a5" />
+
 <img width="1152" height="490" alt="CredsKVCFORENSICCENSORED" src="https://github.com/user-attachments/assets/ee0e16e4-c93c-4e0f-b8b0-e556c8a521bb" />
 
 <img width="1205" height="717" alt="FROMWINDOWSMACHINE" src="https://github.com/user-attachments/assets/47127551-b555-44d4-b254-9cab1e1650a7" />
