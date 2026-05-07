@@ -147,6 +147,10 @@ This illustrates a broader point: instrumentation matters, but so does what you 
 
 ## Detection Recommendations
 
+This technique does not generate a dedicated detection signal at the point of 
+credential access. Detection depends on identifying Defender policy modification 
+(EID 5007) and correlating it with prior blocked activity (EID 1121).
+
 - **Alert on EID 5007** — specifically targeting `ASROnlyExclusions` registry path modifications. The event text includes an explicit malware warning. Validate whether this event is captured by your SIEM pipeline.
 - **Alert on EID 1121** — ASR block events against lsass.exe. If firing, something is attempting LSASS access and being blocked. Worth correlating with subsequent EID 5007 exclusion additions.
 - **Correlate EID 5007 exclusion additions with subsequent LSASS access events** — the sequence is the attack chain.
