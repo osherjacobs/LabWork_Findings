@@ -63,6 +63,20 @@ The finding is narrow: this specific technique, in this configuration, at this p
 
 Whether this reflects a gap in rule coverage, a detection logic limitation, or a configuration dependency is not yet determined. Further research is indicated.
 
+## Credential Guard Note
+
+Credential Guard, where enabled and correctly configured, provides meaningful mitigation against LSASS credential extraction — specifically for the material it protects (NT hashes, TGTs in certain configurations).
+
+However, two caveats apply:
+
+1. **Coverage is not universal.** Not all credential material is protected. DPAPI master keys and certain Kerberos artifacts may remain accessible depending on configuration.
+
+2. **Credential Guard itself has documented bypass paths.** SpecterOps research (October 2025) demonstrated that Credential Guard can be circumvented under specific conditions. This limits its value as a standalone control.
+
+Neither observation is a reason to avoid enabling Credential Guard — it raises the bar meaningfully. But it reinforces the core finding: no single control can be assumed to hold unconditionally.
+
+Layered defenses remain the correct posture. Further research is indicated across all of these boundaries.
+
 ## Scope
 
 No tooling published. No source code. Screenshots only. Lab infrastructure, owned and operated by the researcher.
@@ -70,7 +84,10 @@ No tooling published. No source code. Screenshots only. Lab infrastructure, owne
 ## References
 
 - [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
+
 - ASR rule documentation: [Block credential stealing from the Windows local security authority subsystem](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/attack-surface-reduction-rules-reference)
+
+- SpecterOps Credential Guard research: October 2025
 
 <img width="1878" height="778" alt="AttackWithASRRUleCENSORED" src="https://github.com/user-attachments/assets/bbd5f7be-a95c-4796-b0bd-4454d06262d2" />
 
