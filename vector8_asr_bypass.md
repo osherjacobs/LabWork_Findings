@@ -96,6 +96,38 @@ Neither observation is a reason to avoid enabling Credential Guard — it raises
 
 Layered defenses remain the correct posture. Further research is indicated across all of these boundaries.
 
+## ELK/Sysmon Telemetry
+
+While ASR produced no telemetry, a pre-instrumented Sysmon/ELK stack detected activity within the same execution window. 321 alerts fired against WIN-52H4TKKPD9C, all HIGH severity.
+
+### Alerts fired
+
+**Sysmon - Outbound Network Connection from Windows Tasks Binary** — 309 alerts (HIGH)  
+Primary volume signal. An outbound TCP connection from a binary executing in C:\Windows\Tasks is anomalous by definition. This rule fired on the network egress component of the operation.
+
+**Sysmon - Binary Execution from Windows Tasks** — 6 alerts (HIGH)  
+Location-based detection. Any binary executing from C:\Windows\Tasks is flagged regardless of behavior. Rule is execution-path aware, not payload-aware.
+
+**Sysmon - Unsigned Binary with Zeroed IMPHASH** — 5 alerts (MEDIUM)  
+PE characteristic detection. curpipe.exe presents with IMPHASH=00000000000000000000000000000000 and Company="-" — indicators of a custom compiled binary with no publisher signature. This fires on binary properties, not on what the binary does.
+
+**Sysmon - WMI Remote Process Execution** — 1 alert (HIGH)  
+Delivery artifact. DismHost.exe spawned by WmiPrvSE.exe — a side effect of the goexec/tsch execution chain, not of the dump operation itself.
+
+<img width="1920" height="916" alt="SIEM2" src="https://github.com/user-attachments/assets/9749e088-9240-40f5-a82c-c04f867a157b" />
+
+<img width="1877" height="974" alt="SIEM" src="https://github.com/user-attachments/assets/48bcef0b-0107-4b4e-8987-382362da97aa" />
+
+
+### Important caveat
+
+None of these rules detected the credential theft itself. What fired was the delivery context, the execution path, and the binary's PE characteristics. The LSASS memory walk, the minidump assembly, and the credential exfiltration over TCP produced no dedicated alert.
+
+An attacker delivering a signed binary with a valid IMPHASH from a less-monitored path would evade all four rules. The operation would remain invisible to both ASR and these behavioral detections.
+
+This is the core finding: the technique is detectable — but only if the environment is instrumented for it, and only at the wrapper level. The credential material itself left the host without triggering a single dedicated alert.
+
+
 ## Open Questions
 
 - **Microsoft Defender for Endpoint (MDE):** This test was conducted against vanilla Defender with ASR enabled. MDE's kernel-mode EDR sensor operates at a different layer and may detect this technique where ASR does not. This has not been tested and represents a significant open variable. Organizations relying on MDE rather than standalone Defender may have different visibility into this technique.
