@@ -115,6 +115,17 @@ The signal exists. EID 5007 with `ASROnlyExclusions` in the registry path is an 
 
 ---
 
+---
+
+## Part 3b — Impact Validation: Pass-the-Hash Against Domain Controller
+
+The NT hash extracted from WIN-52H4TKKPD9C was validated via pass-the-hash 
+against DC02 (192.168.1.4, badsuccessor.local) using nxc:
+
+
+<img width="1875" height="547" alt="PTH" src="https://github.com/user-attachments/assets/4d7ef435-0b7a-40b6-be3f-99e50a0492ae" />
+
+
 ## Part 4 — ELK/Sysmon Telemetry
 
 A pre-instrumented Sysmon/ELK stack was running throughout. With the outbound network connection rule suppressed (to reduce noise), two alerts fired against WIN-52H4TKKPD9C:
