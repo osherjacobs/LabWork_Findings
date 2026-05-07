@@ -156,6 +156,13 @@ Three caveats:
 
 Enabling Credential Guard raises the bar meaningfully. It is not a reason to skip it. But it is not an unconditional boundary.
 
+**Note:** The target in this test is a standalone WORKGROUP machine. 
+Credential Guard's primary protection — isolating domain credential material 
+in the Virtual Secure Mode — does not apply in this configuration. 
+The Credential Guard discussion in this writeup is included for completeness 
+and applies to domain-joined environments where this technique would 
+more typically be deployed.
+
 ---
 
 ## Open Questions
