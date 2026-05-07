@@ -100,11 +100,7 @@ Layered defenses remain the correct posture. Further research is indicated acros
 
 - **Microsoft Defender for Endpoint (MDE):** This test was conducted against vanilla Defender with ASR enabled. MDE's kernel-mode EDR sensor operates at a different layer and may detect this technique where ASR does not. This has not been tested and represents a significant open variable. Organizations relying on MDE rather than standalone Defender may have different visibility into this technique.
 - **ASR detection mechanism:** Whether rule 9e6c4e1f pattern-matches specific API calls (MiniDumpWriteDump, dbghelp.dll) or uses a broader behavioral heuristic is not confirmed. The practical result is identical — no telemetry — but the underlying reason has implications for what variations of this technique would or would not trigger detection.
-- **Higher patch levels:** Testing at additional UBR levels is indicated to determine whether this behaviour is patch-level dependent.
-
-## On Source and Tooling
-
-This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published alongside it. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence of findings. The binary described here will not be shared.
+- **Higher patch levels:** Patch level context: Testing was conducted at the current highest UBR (26100.32690) as of 2026-05-07. Whether earlier patch levels exhibit different ASR behaviour is an open question but outside the scope of this test.
 
 ## Scope
 
