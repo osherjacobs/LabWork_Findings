@@ -150,7 +150,7 @@ This illustrates a broader point: instrumentation matters, but so does what you 
 - **Alert on EID 5007** — specifically targeting `ASROnlyExclusions` registry path modifications. The event text includes an explicit malware warning. Validate whether this event is captured by your SIEM pipeline.
 - **Alert on EID 1121** — ASR block events against lsass.exe. If firing, something is attempting LSASS access and being blocked. Worth correlating with subsequent EID 5007 exclusion additions.
 - **Correlate EID 5007 exclusion additions with subsequent LSASS access events** — the sequence is the attack chain.
-- **Sysmon EID 10** — LSASS process access with GrantedAccess 0x1410 or 0x1010 remains a primary detection primitive regardless of ASR state.
+- **Sysmon EID 10** — LSASS process access with GrantedAccess 0x1410 or 0x1010 remains a valuable detection primitive when properly configured, though coverage depends on Sysmon configuration and may not capture all access paths.
 - **Network anomaly** — outbound TCP from a binary in C:\Windows\Tasks with high data-to-time ratio (~60MB in under 200ms) is a clear outlier worth flagging.
 
 ---
