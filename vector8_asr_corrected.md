@@ -1,0 +1,159 @@
+# Vector 8 — LSASS Dump Against ASR Rule 9e6c4e1f on Server 2025
+
+## Background
+
+This vector extends the LSASS dump series (Vectors 5–7b) by testing the behaviour of ASR rule `9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2` — "Block credential stealing from the Windows local security authority subsystem (lsass.exe)" — against the same custom C# tool documented in the earlier vectors.
+
+**Technique:** Pure NTAPI memory walk. Minidump assembled in memory. No MiniDumpWriteDump. No dbghelp.dll. No comsvcs. Streamed over TCP to attacker machine. Nothing written to disk.
+
+---
+
+## Environment
+
+- **Target:** WIN-52H4TKKPD9C (Windows Server 2025, 24H2)
+- **Build:** 26100.32690
+- **Defender Signatures:** 1.449.490.0 (updated 2026-05-07)
+- **RTP:** Enabled
+
+---
+
+## Part 1 — Mistaken Finding (Documented for Transparency)
+
+### What happened
+
+During initial testing, the ASR rule was configured using an incorrect GUID:
+
+```
+9e6c4e1f-7d60-472f-ba1a-a39ef669e4b0  ← incorrect (b0)
+9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2  ← correct (b2)
+```
+
+Windows accepted the invalid GUID silently. Get-MpPreference reported it as active with action=1 (Block mode). No error was returned.
+
+```powershell
+AttackSurfaceReductionRules_Ids        AttackSurfaceReductionRules_Actions
+-------------------------------        -----------------------------------
+{9e6c4e1f-7d60-472f-ba1a-a39ef669e4b0} {1}
+```
+
+Because the GUID did not correspond to a real rule, no enforcement occurred. The dump succeeded and full credential extraction was achieved. This was initially misread as an ASR bypass.
+
+### Lesson
+
+Windows does not validate ASR GUIDs on input. An invalid GUID is silently accepted and reported as configured. This is worth noting for anyone scripting ASR rule deployment — there is no native enforcement that the GUID corresponds to a real rule.
+
+---
+
+## Part 2 — Correct Testing
+
+### ASR Rule Active (Correct GUID)
+
+```powershell
+AttackSurfaceReductionRules_Ids        AttackSurfaceReductionRules_Actions
+-------------------------------        -----------------------------------
+{9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2} {1}
+```
+
+### Result — Rule Blocks
+
+With the correct GUID in Block mode, both local and remote execution produced a dump of **152 bytes** — an empty minidump shell with no LSASS memory content. Full credential extraction failed.
+
+EID 1121 fired on both execution attempts:
+
+```
+Microsoft Defender Exploit Guard has blocked an operation that is not allowed by your IT administrator.
+ID: 9E6C4E1F-7D60-472F-BA1A-A39EF669E4B2
+Path: C:\Windows\Tasks\curpipe.exe
+Process Name: C:\Windows\System32\lsass.exe
+```
+
+**The rule works as documented.**
+
+---
+
+## Part 3 — ASR Folder Exclusion Bypass
+
+### Technique
+
+Same attack dependency as Vector 6 (Defender folder exclusion). With admin/SYSTEM access:
+
+```powershell
+Add-MpPreference -AttackSurfaceReductionOnlyExclusions "C:\Windows\Tasks\curpipe.exe"
+```
+
+### Result — Full Dump Reinstated
+
+Local execution (119ms):
+- Regions walked: 670 — 59,236,352 bytes in 25ms
+- Built: 59,262,792 bytes in 53ms
+- Sent: 41ms
+- **Total: 119ms**
+
+Remote execution via scheduled task (~236ms):
+- Full dump received on attacker machine
+- NT hash, SHA1, DPAPI material — full extraction confirmed via KvcForensic
+
+### Telemetry
+
+EID 5007 logged the exclusion addition:
+
+```
+Microsoft Defender Antivirus Configuration has changed. If this is an unexpected event 
+you should review the settings as this may be the result of malware.
+
+New value: HKLM\SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\
+ASR\ASROnlyExclusions\C:\Windows\Tasks\curpipe.exe = 0x0
+```
+
+The signal exists. EID 5007 with `ASROnlyExclusions` in the registry path is an actionable detection primitive. Most environments do not alert on this event.
+
+---
+
+## Detection Recommendations
+
+- **Alert on EID 5007** — specifically targeting `ASROnlyExclusions` registry path modifications. The event text includes an explicit malware warning.
+- **Alert on EID 1121** — ASR block events against lsass.exe. If firing, something is attempting to access LSASS.
+- **Correlate EID 5007 exclusion additions with subsequent LSASS access events** — the sequence is the attack chain.
+- **Sysmon EID 10** — LSASS process access with GrantedAccess 0x1410 or 0x1010 remains a primary detection primitive regardless of ASR state.
+
+---
+
+## Credential Guard Note
+
+Credential Guard, where enabled and correctly configured, provides meaningful mitigation against LSASS credential extraction for the material it protects.
+
+Two caveats:
+
+1. **Coverage is not universal.** DPAPI master keys and certain Kerberos artifacts may remain accessible depending on configuration.
+2. **Documented bypass paths exist.** SpecterOps research (October 2025) demonstrated Credential Guard can be circumvented under specific conditions.
+3. **Deployment friction is real.** Compatibility issues with smartcard drivers, PAM solutions, and backup agents mean some environments cannot enable it without breaking legitimate tooling.
+
+Enabling Credential Guard raises the bar meaningfully. It is not a reason to skip it. But it is not an unconditional boundary.
+
+---
+
+## Open Questions
+
+- **Object access auditing (EID 4656/4663):** Not monitored during this test. If enabled, Windows security auditing may log LSASS handle access independently of ASR telemetry.
+- **Microsoft Defender for Endpoint (MDE):** This test was conducted against vanilla Defender. MDE's kernel-mode EDR sensor operates at a different layer and may detect this technique where ASR does not. Not yet tested.
+- **Tamper Protection:** If enabled, modification of ASR rules and exclusions via PowerShell is blocked. This test was conducted without Tamper Protection active.
+
+---
+
+## On Source and Tooling
+
+This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence. The binary will not be shared.
+
+---
+
+## Scope
+
+Lab infrastructure, owned and operated by the researcher.
+
+---
+
+## References
+
+- [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
+- [ASR rule reference — Microsoft Learn](https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-reference)
+- [SpecterOps Credential Guard research — October 2025](https://specterops.io/blog/2025/10/23/catching-credential-guard-off-guard/)
