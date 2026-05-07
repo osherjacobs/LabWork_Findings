@@ -167,6 +167,12 @@ Enabling Credential Guard raises the bar meaningfully. It is not a reason to ski
 
 This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence. The binary will not be shared.
 
+## Tooling Credit
+
+Credential parsing in this vector was performed using **KvcForensic**, a memory forensics tool for parsing LSASS minidumps. KvcForensic successfully extracted NT hashes, SHA1, and DPAPI master keys from dumps produced in this lab environment where pypykatz failed due to struct offset mismatches introduced at higher Server 2025 UBR levels (documented in Vector 7b).
+
+KvcForensic is the work of [wesmar](https://github.com/wesmar). Repository: [https://github.com/wesmar/KvcForensic](https://github.com/wesmar/KvcForensic).
+
 ---
 
 ## Scope
@@ -180,3 +186,27 @@ Lab infrastructure, owned and operated by the researcher.
 - [osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
 - [ASR rule reference — Microsoft Learn](https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-reference)
 - [SpecterOps Credential Guard research — October 2025](https://specterops.io/blog/2025/10/23/catching-credential-guard-off-guard/)
+
+SCREENSHOTS
+
+LOCAL EXECUTION WITH ASR FOLDER EXECUTION
+<img width="1520" height="853" alt="LOCALWITHFOLDEREXCLUSIONRULE" src="https://github.com/user-attachments/assets/c0086987-d0ee-4a12-80bc-4a96ed80019d" />
+
+REMOTE
+<img width="1874" height="1013" alt="REMOTEWITHASREXCLUSION" src="https://github.com/user-attachments/assets/d4472baf-88c0-4b16-97f2-beb0cb05ce53" />
+
+CREDENTIAL MATERIAL (Extracted with KvC Forensic)
+
+<img width="1121" height="555" alt="KvcForesnsicCREDS" src="https://github.com/user-attachments/assets/cc50a489-d5be-4445-9b33-7be1d20d5fe6" />
+
+LOCAL TELEMETRY
+
+<img width="1867" height="948" alt="LocalTelemetry" src="https://github.com/user-attachments/assets/b29d6b4b-060e-414e-9fc8-c2026400ea0e" />
+
+<img width="1867" height="940" alt="LocalTelemetry2" src="https://github.com/user-attachments/assets/d8871edd-895a-406e-a277-176e2d4307a7" />
+
+SIEM ALERTS:
+
+<img width="1877" height="962" alt="SIEMALERTS" src="https://github.com/user-attachments/assets/6a92e321-53b5-4106-b939-13f7d9e23250" />
+
+
