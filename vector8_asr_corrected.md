@@ -21,6 +21,17 @@ This vector extends the LSASS dump series (Vectors 5–7b) by testing the behavi
 
 ---
 
+## MITRE ATT&CK Mapping
+
+| Technique | ID | Notes |
+|-----------|-----|-------|
+| OS Credential Dumping: LSASS Memory | T1003.001 | Core technique — pure NTAPI memory walk against lsass.exe. No MiniDumpWriteDump, no dbghelp.dll |
+| Scheduled Task/Job: Scheduled Task | T1053.005 | Remote task creation for execution via MS-TSCH (goexec tsch) — no interactive session required |
+| Impair Defenses: Disable or Modify Tools | T1562.001 | Modification of Microsoft Defender ASR policy via Add-MpPreference to reduce LSASS protection scope |
+| Exfiltration Over C2 Channel | T1041 | LSASS-derived minidump streamed over custom TCP channel to attacker machine — no disk artifact |
+| Pass the Hash | T1550.002 | NT hash extracted from dump passed against DC02 (badsuccessor.local\administrator) via nxc SMB |
+| Valid Accounts: Local Accounts | T1078.003 | Local Windows account (ubuntu) used for scheduled task authentication on target |
+
 ## Part 1 — Mistaken Finding (Documented for Transparency)
 
 ### What happened
