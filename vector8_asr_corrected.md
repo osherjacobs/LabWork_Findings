@@ -10,10 +10,14 @@ This vector extends the LSASS dump series (Vectors 5–7b) by testing the behavi
 
 ## Environment
 
-- **Target:** WIN-52H4TKKPD9C (Windows Server 2025, 24H2)
-- **Build:** 26100.32690
+- **Target:** WIN-52H4TKKPD9C
+- **OS:** Windows Server 2025 Datacenter
+- **Version:** 24H2 (Build 26100.32690)
 - **Defender Signatures:** 1.449.490.0 (updated 2026-05-07)
 - **RTP:** Enabled
+- **Domain:** WORKGROUP (standalone server, not domain-joined)
+- **Virtualization-based Security:** Running — VBS active, Credential Guard not configured
+- **Configuration:** VMware VM, 2x Intel Core, 4GB RAM
 
 ---
 
