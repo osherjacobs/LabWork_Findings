@@ -12,9 +12,14 @@
 
 This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published alongside it. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence of findings. The binary described here will not be shared.
 
+
 ## Technique
 
 Custom C# tool. Pure NTAPI memory walk. Minidump assembled in memory. No MiniDumpWriteDump. No dbghelp.dll. No comsvcs. Streamed over TCP to attacker machine. Nothing written to disk.
+
+The approach operates below the level of standard user-mode hooks. By avoiding MiniDumpWriteDump and dbghelp.dll entirely, the technique bypasses the API-level patterns that many host-based controls pattern-match against. Whether ASR rule 9e6c4e1f specifically looks for these call patterns or uses a different detection mechanism is not yet determined — but the result is the same: no telemetry, no block.
+
+By assembling the minidump in heap memory and streaming directly over TCP, no file object is created on the target. This eliminates the filesystem filter driver trigger that catches traditional credential dumpers at the write stage.
 
 ## Execution Contexts Tested
 
@@ -59,13 +64,23 @@ Rule confirmed active via Get-MpPreference immediately after execution in both c
 
 ## Observations
 
-Both remote and local execution contexts bypass ASR rule `9e6c4e1f` without triggering any telemetry. The bypass does not appear to be execution-context dependent.
+Both remote and local execution contexts bypass ASR rule `9e6c4e1f` without triggering any telemetry. The bypass does not appear to be execution-context dependent — suggesting the rule logic is not parent-process aware in a way that would differentiate these scenarios.
 
 This is a single test against a single technique in a controlled lab environment. No conclusions are drawn about the general effectiveness of ASR rules or Defender.
 
 The finding is narrow: this specific technique, in this configuration, at this patch level, produced no ASR telemetry and was not blocked in either execution context.
 
 Whether this reflects a gap in rule coverage, a detection logic limitation, or a configuration dependency is not yet determined. Further research is indicated.
+
+## Detection Indicators for Defenders
+
+ASR and standard Defender signatures failed to detect this technique. Defenders should consider behavioral indicators:
+
+- **Sysmon EID 10** — Process access events where TargetImage is lsass.exe and GrantedAccess includes 0x1410 or 0x1010, particularly where the call stack origin is unexpected or unknown.
+- **Network anomaly** — Any process communicating over non-standard ports with an unusually high data-to-time ratio. ~60MB transmitted in under 200ms is a clear outlier worth flagging regardless of destination.
+- **NtReadVirtualMemory call patterns** — ETW-based telemetry targeting direct NTAPI calls to LSASS address space, pre-correlated with network egress events in the same process lifetime.
+
+Pre-correlated detection across process access, memory read, and network egress is required. In most environments that correlation does not happen within the sub-second window this technique operates in.
 
 ## Credential Guard Note
 
@@ -81,9 +96,19 @@ Neither observation is a reason to avoid enabling Credential Guard — it raises
 
 Layered defenses remain the correct posture. Further research is indicated across all of these boundaries.
 
+## Open Questions
+
+- **Microsoft Defender for Endpoint (MDE):** This test was conducted against vanilla Defender with ASR enabled. MDE's kernel-mode EDR sensor operates at a different layer and may detect this technique where ASR does not. This has not been tested and represents a significant open variable. Organizations relying on MDE rather than standalone Defender may have different visibility into this technique.
+- **ASR detection mechanism:** Whether rule 9e6c4e1f pattern-matches specific API calls (MiniDumpWriteDump, dbghelp.dll) or uses a broader behavioral heuristic is not confirmed. The practical result is identical — no telemetry — but the underlying reason has implications for what variations of this technique would or would not trigger detection.
+- **Higher patch levels:** Testing at additional UBR levels is indicated to determine whether this behaviour is patch-level dependent.
+
+## On Source and Tooling
+
+This document is a detection and telemetry record. No source code, compiled tooling, or operational instructions are published alongside it. The technique is documented to the degree necessary to understand the detection surface — not to enable reproduction. Screenshots are provided as evidence of findings. The binary described here will not be shared.
+
 ## Scope
 
-No tooling published. No source code. Screenshots only. Lab infrastructure, owned and operated by the researcher.
+Lab infrastructure, owned and operated by the researcher.
 
 ## References
 
@@ -92,6 +117,7 @@ No tooling published. No source code. Screenshots only. Lab infrastructure, owne
 - ASR rule documentation: [Block credential stealing from the Windows local security authority subsystem](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/attack-surface-reduction-rules-reference)
 
 - SpecterOps Credential Guard research: October 2025 https://specterops.io/blog/2025/10/23/catching-credential-guard-off-guard/
+
 
 <img width="1878" height="778" alt="AttackWithASRRUleCENSORED" src="https://github.com/user-attachments/assets/bbd5f7be-a95c-4796-b0bd-4454d06262d2" />
 
