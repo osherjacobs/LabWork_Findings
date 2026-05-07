@@ -210,6 +210,11 @@ CREDENTIAL MATERIAL (Extracted with KvC Forensic)
 
 <img width="1121" height="555" alt="KvcForesnsicCREDS" src="https://github.com/user-attachments/assets/cc50a489-d5be-4445-9b33-7be1d20d5fe6" />
 
+PTH
+
+<img width="1875" height="547" alt="PTH" src="https://github.com/user-attachments/assets/6a1e2d5c-0464-49dd-b17a-413d95c50731" />
+
+
 LOCAL TELEMETRY
 
 <img width="1867" height="948" alt="LocalTelemetry" src="https://github.com/user-attachments/assets/b29d6b4b-060e-414e-9fc8-c2026400ea0e" />
