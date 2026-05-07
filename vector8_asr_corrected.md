@@ -93,7 +93,7 @@ Remote execution via scheduled task (~236ms):
 - Full dump received on attacker machine
 - NT hash, SHA1, DPAPI material — full extraction confirmed via KvcForensic
 
-### Telemetry
+### ASR Telemetry
 
 EID 5007 logged the exclusion addition:
 
@@ -105,16 +105,38 @@ New value: HKLM\SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Gua
 ASR\ASROnlyExclusions\C:\Windows\Tasks\curpipe.exe = 0x0
 ```
 
-The signal exists. EID 5007 with `ASROnlyExclusions` in the registry path is an actionable detection primitive. Most environments do not alert on this event.
+EID 1121 block events also present from the pre-exclusion test runs, confirming the correct rule was active before the exclusion was added.
+
+The signal exists. EID 5007 with `ASROnlyExclusions` in the registry path is an actionable detection primitive. Whether this event can be ingested and alerted on via a SIEM pipeline (Winlogbeat → ELK or equivalent) warrants further testing — it has not yet been validated end to end in this lab. If ingestible, a rule alerting on `ASROnlyExclusions` modifications would provide early warning of this bypass pattern.
+
+---
+
+## Part 4 — ELK/Sysmon Telemetry
+
+A pre-instrumented Sysmon/ELK stack was running throughout. With the outbound network connection rule suppressed (to reduce noise), two alerts fired against WIN-52H4TKKPD9C:
+
+- **Sysmon - Binary Execution from Windows Tasks** — HIGH (risk score 73)
+- **Sysmon - Unsigned Binary with Zeroed IMPHASH** — MEDIUM (risk score 50)
+
+### Important caveat
+
+Neither rule detected the credential theft itself. What fired was the execution path and the binary's PE characteristics — location and identity, not behaviour. The LSASS memory walk, minidump assembly, and TCP exfiltration produced no dedicated alert.
+
+An attacker delivering a signed binary with a valid IMPHASH from a less-monitored path would evade both rules. The credential material would leave the host without triggering a single dedicated alert.
+
+The unfiltered alert count for the full session was 321 HIGH severity alerts — dominated by outbound network connection events from a binary in C:\Windows\Tasks. This signal is real but noisy. A tuned analyst view suppressing that rule leaves only the execution-context signals above.
+
+This illustrates a broader point: instrumentation matters, but so does what you instrument for and how you tune it.
 
 ---
 
 ## Detection Recommendations
 
-- **Alert on EID 5007** — specifically targeting `ASROnlyExclusions` registry path modifications. The event text includes an explicit malware warning.
-- **Alert on EID 1121** — ASR block events against lsass.exe. If firing, something is attempting to access LSASS.
+- **Alert on EID 5007** — specifically targeting `ASROnlyExclusions` registry path modifications. The event text includes an explicit malware warning. Validate whether this event is captured by your SIEM pipeline.
+- **Alert on EID 1121** — ASR block events against lsass.exe. If firing, something is attempting LSASS access and being blocked. Worth correlating with subsequent EID 5007 exclusion additions.
 - **Correlate EID 5007 exclusion additions with subsequent LSASS access events** — the sequence is the attack chain.
 - **Sysmon EID 10** — LSASS process access with GrantedAccess 0x1410 or 0x1010 remains a primary detection primitive regardless of ASR state.
+- **Network anomaly** — outbound TCP from a binary in C:\Windows\Tasks with high data-to-time ratio (~60MB in under 200ms) is a clear outlier worth flagging.
 
 ---
 
@@ -122,7 +144,7 @@ The signal exists. EID 5007 with `ASROnlyExclusions` in the registry path is an 
 
 Credential Guard, where enabled and correctly configured, provides meaningful mitigation against LSASS credential extraction for the material it protects.
 
-Two caveats:
+Three caveats:
 
 1. **Coverage is not universal.** DPAPI master keys and certain Kerberos artifacts may remain accessible depending on configuration.
 2. **Documented bypass paths exist.** SpecterOps research (October 2025) demonstrated Credential Guard can be circumvented under specific conditions.
@@ -134,6 +156,7 @@ Enabling Credential Guard raises the bar meaningfully. It is not a reason to ski
 
 ## Open Questions
 
+- **EID 5007 SIEM ingestion:** Whether EID 5007 ASR exclusion events are captured by standard Winlogbeat pipelines and alertable via ELK has not been validated in this lab. This is the next test.
 - **Object access auditing (EID 4656/4663):** Not monitored during this test. If enabled, Windows security auditing may log LSASS handle access independently of ASR telemetry.
 - **Microsoft Defender for Endpoint (MDE):** This test was conducted against vanilla Defender. MDE's kernel-mode EDR sensor operates at a different layer and may detect this technique where ASR does not. Not yet tested.
 - **Tamper Protection:** If enabled, modification of ASR rules and exclusions via PowerShell is blocked. This test was conducted without Tamper Protection active.
