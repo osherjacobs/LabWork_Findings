@@ -11,6 +11,10 @@ This document is a detection and telemetry record. No source code, compiled tool
 
 The detection analysis presented here is incomplete by design. Additional work is needed to fully characterize the detection surface — including ETW signal viability, behavioral baselining of the scheduled task execution path, and validation of an EID 10 / EID 3 correlation rule under real pipeline conditions. That work requires dedicated instrumentation time that was not available within this research window. It is flagged here as the logical next step rather than left as an unacknowledged gap.
 
+## On Assumed Breach
+
+This research operates under an assumed breach methodology. Privilege is the starting condition, not the finding. The question being asked is not how an attacker obtains access — it is what happens after they have it: what telemetry exists, how fast it can be correlated, and whether detection infrastructure can act before the operation is complete. That framing is not an oversight. It is the point.
+
 ---
 
 ## Environment
