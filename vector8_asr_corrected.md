@@ -8,7 +8,13 @@ This vector extends the LSASS dump series (Vectors 5–7b) by testing the behavi
 
 ## On Assumed Breach
 
-This research operates under an assumed breach methodology. Privilege is the starting condition, not the finding. The question being asked is not how an attacker obtains access — it is what happens after they have it: what telemetry exists, how fast it can be correlated, and whether detection infrastructure can act before the operation is complete. That framing is not an oversight. It is the point.
+This research operates under an assumed breach methodology. Privilege is the starting condition, not the finding. The question is not how an attacker obtains access — it is what happens after they have it.
+
+There is a school of thought that assumed breach scenarios are a distraction. That the focus should be on keeping attackers out, not modelling what happens after. That if the attacker has admin, the game is already over and the exercise is pointless.
+
+That position confuses a starting condition with a conclusion. Real environments get compromised. Admin contexts get reached. The question assumed breach asks is specific: what telemetry exists after that point, how fast can it be correlated, and how much time does the defender actually have?
+
+In this case: milliseconds. And very little, if unprepared. That is not a reason to despair. It is a reason to instrument.
 
 ---
 
