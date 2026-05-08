@@ -6,11 +6,11 @@ Assumed breach is a methodology, not an oversight. It deliberately begins after 
 
 These are not academic questions. They determine whether a breach is contained or becomes catastrophic.
 
-There is a school of thought that treats post-compromise research as incomplete or irrelevant unless it also demonstrates the entire kill chain from low privileges. That position is both disputable and refutable.
+There is a school of thought that treats post-compromise research as incomplete or irrelevant unless it also demonstrates the entire kill chain from low privileges. That objection is both factually wrong and logically inconsistent.
 
-It is disputable because the premise is false: elevated access in real environments is not a rare theoretical edge case. It is a documented, recurring outcome of lateral movement, token theft, delegation abuse, and misconfigured service accounts. Attackers do not need to be handed credentials. They need time and one weak link — both of which exist in most enterprises. The starting condition is not invented. It is observed.
+It is factually wrong because elevated access is commonplace in real intrusions. It is routinely achieved through lateral movement, token theft, delegation abuse, and misconfigured service accounts — not just by being handed credentials. The starting condition is not invented. It is observed.
 
-It is refutable because even if the premise were granted, the conclusion does not follow. Assumed breach does not claim prevention always fails. It models what happens when it fails — which it does, reliably, against determined attackers. A methodology that stress-tests post-compromise detection is not invalidated by the existence of perimeter controls. It is made more necessary by their limitations.
+It is logically inconsistent because assumed breach does not claim that prevention always fails. It models what happens when it fails — which it does, reliably, against determined attackers. Research that stress-tests post-compromise detection is not invalidated by the existence of perimeter controls. It is made more necessary by their limitations.
 
 Dismissing post-compromise research because the full kill chain wasn't demonstrated is like rejecting a medical study on heart attack treatment because the researchers didn't study how the patient developed atherosclerosis in the first place. The argument sounds technical. It isn't. It is a demand for infinite regression dressed up as rigor.
 
