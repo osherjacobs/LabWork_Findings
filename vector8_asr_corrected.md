@@ -12,7 +12,7 @@ This research operates under an assumed breach methodology. Privilege is the sta
 
 There is a school of thought that assumed breach scenarios are a distraction. That the focus should be on keeping attackers out, not modelling what happens after. That if the attacker has admin, the game is already over and the exercise is pointless.
 
-That position confuses a starting condition with a conclusion. Real environments get compromised. Admin contexts get reached. The question assumed breach asks is specific: what telemetry exists after that point, how fast can it be correlated, and how much time does the defender actually have?
+That position confuses a starting condition with a conclusion. Real environments get compromised. Admin contexts get reached. The question assumed breach asks is specific: what telemetry exists after that point, how fast can it be correlated, and how much time oes the defender actually have?
 
 In this case: milliseconds. And very little, if unprepared. That is not a reason to despair. It is a reason to instrument.
 
