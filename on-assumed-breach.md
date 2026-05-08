@@ -1,4 +1,4 @@
-# On Assumed Breach
+# On Assumed Breach and atherosclerosis
 
 A tendency I've noticed in discussions around post-compromise research: the finding is often declared invalid unless the full attack path from low-privileged initial access all the way to total compromise is shown in a single, contiguous demonstration. As if that somehow proves there are no realistic paths to admin other than being handed credentials through authorized means.
 
