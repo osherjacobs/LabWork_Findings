@@ -12,6 +12,8 @@ It is factually wrong because elevated access is commonplace in real intrusions.
 
 It is logically inconsistent because assumed breach does not claim that prevention always fails. It models what happens when it fails — which it does, reliably, against determined attackers. Research that stress-tests post-compromise detection is not invalidated by the existence of perimeter controls. It is made more necessary by their limitations.
 
+Those who have actually performed lateral movement in a real environment don't ask 'but how did you get admin?' They ask 'what did the pipeline see?
+
 Dismissing post-compromise research because the full kill chain wasn't demonstrated is like rejecting a medical study on heart attack treatment because the researchers didn't study how the patient developed atherosclerosis in the first place. The argument sounds technical. It isn't. It is a most curious demand for infinite regression dressed up as rigor.
 
 Furthermore, the irony is clear: publishing a full, novel execution chain from initial access to Domain Admin on a public forum would be labeled irresponsible disclosure by the very same people calling post-elevation research "incomplete." It is a rhetorical trap designed to keep the real detection gap unaddressed.
