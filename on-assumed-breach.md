@@ -16,7 +16,7 @@ Those fluent in privilege escalation and lateral movement techniques don't ask '
 
 Dismissing post-compromise research because the full kill chain wasn't demonstrated is like rejecting a medical study on heart attack treatment because the researchers didn't study how the patient developed atherosclerosis in the first place. The argument sounds technical. It isn't. It is a most curious demand for infinite regression dressed up as rigor.
 
-Furthermore, the irony is clear: publishing a full, novel execution chain from initial access to Domain Admin on a public forum would be labeled irresponsible disclosure by the very same people calling post-elevation research "incomplete." It is a rhetorical trap designed to keep the real detection gap unaddressed.
+Furthermore, the irony is clear: publishing a full, novel execution chain from initial access to Domain Admin on a public forum would be labeled irresponsible disclosure by the very same people calling post-elevation research "incomplete." It is a rhetorical trap resulting in the real detection gap going unaddressed.
 
 The reflex to invalidate these findings because "the full path wasn't shown" is a major contributing factor to why breaches continue to succeed at scale. It allows organizations to avoid confronting what actually happens once elevated context is reached — which occurs routinely through lateral movement, delegation, token theft, and misconfigurations.
 
