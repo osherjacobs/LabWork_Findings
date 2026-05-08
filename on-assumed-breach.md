@@ -8,7 +8,7 @@ These are not academic questions. They determine whether a breach is contained o
 
 There is a school of thought that treats post-compromise research as incomplete or irrelevant unless it also demonstrates the entire kill chain from low privileges. That position is understandable but flawed. It conflates initial access problems with post-compromise reality and ignores the many legitimate ways elevated access is routinely obtained in real environments.
 
-Furthermore, the irony is clear: detailing a full, novel execution chain from initial entry to Domain Admin on a public forum would be labeled irresponsible disclosure. Yet starting the demonstration at the post-elevation phase is labeled incomplete. It is a rhetorical trap that serves only to keep the detection gap unaddressed.
+Furthermore, the irony is clear: detailing a full, novel execution chain from initial entry to Domain Admin on a public forum would be labeled irresponsible disclosure by the very people making the aforementioned objection of incompleteness / irrelevance. Yet starting the demonstration at the post-elevation phase is labeled incomplete. It is a rhetorical trap that serves only to keep the detection gap unaddressed.
 
 The reflex to invalidate these findings because "the full path wasn't shown" is a major contributing factor to why breaches continue to succeed at scale. It allows organizations to avoid confronting what actually happens once elevated context is reached — which occurs routinely through lateral movement, delegation, token theft, and misconfigurations.
 
