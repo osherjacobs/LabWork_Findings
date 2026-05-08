@@ -1,14 +1,20 @@
 # On Assumed Breach
 
-A tendency I've noticed in discussions around post-compromise research: the finding is often declared invalid unless the full attack path from low-privileged initial access all the way to total compromise is shown in a single, contiguous demonstration. As if somehow that means there are no realistic paths to admin other than being handed credentials through authorized means.
+A tendency I've noticed in discussions around post-compromise research: the finding is often declared invalid unless the full attack path from low-privileged initial access all the way to total compromise is shown in a single, contiguous demonstration. As if that somehow proves there are no realistic paths to admin other than being handed credentials through authorized means.
 
 Assumed breach is a methodology, not an oversight. It deliberately begins after elevated access has been achieved — because that is exactly the phase real intrusions enter once prevention has failed. The relevant questions are operational: What telemetry is actually generated? How fast can it be correlated? How much time does the defender realistically have?
 
 These are not academic questions. They determine whether a breach is contained or becomes catastrophic.
 
-There is a school of thought that treats post-compromise research as incomplete or irrelevant unless it also demonstrates the entire kill chain from low privileges. That position is understandable but flawed. It conflates initial access problems with post-compromise reality and ignores the many legitimate ways elevated access is routinely obtained in real environments.
+There is a school of thought that treats post-compromise research as incomplete or irrelevant unless it also demonstrates the entire kill chain from low privileges. That position is both disputable and refutable.
 
-Furthermore, the irony is clear: detailing a full, novel execution chain from initial entry to Domain Admin on a public forum would be labeled irresponsible disclosure by the very people making the aforementioned objection of incompleteness / irrelevance. Yet starting the demonstration at the post-elevation phase is labeled incomplete. It is a rhetorical trap that serves only to keep the detection gap unaddressed.
+It is disputable because the premise is false: elevated access in real environments is not a rare theoretical edge case. It is a documented, recurring outcome of lateral movement, token theft, delegation abuse, and misconfigured service accounts. Attackers do not need to be handed credentials. They need time and one weak link — both of which exist in most enterprises. The starting condition is not invented. It is observed.
+
+It is refutable because even if the premise were granted, the conclusion does not follow. Assumed breach does not claim prevention always fails. It models what happens when it fails — which it does, reliably, against determined attackers. A methodology that stress-tests post-compromise detection is not invalidated by the existence of perimeter controls. It is made more necessary by their limitations.
+
+Dismissing post-compromise research because the full kill chain wasn't demonstrated is like rejecting a medical study on heart attack treatment because the researchers didn't study how the patient developed atherosclerosis in the first place. The argument sounds technical. It isn't. It is a demand for infinite regression dressed up as rigor.
+
+Furthermore, the irony is clear: publishing a full, novel execution chain from initial access to Domain Admin on a public forum would be labeled irresponsible disclosure by the very same people calling post-elevation research "incomplete." It is a rhetorical trap designed to keep the real detection gap unaddressed.
 
 The reflex to invalidate these findings because "the full path wasn't shown" is a major contributing factor to why breaches continue to succeed at scale. It allows organizations to avoid confronting what actually happens once elevated context is reached — which occurs routinely through lateral movement, delegation, token theft, and misconfigurations.
 
