@@ -6,6 +6,10 @@ This vector extends the LSASS dump series (Vectors 5–7b) by testing the behavi
 
 **Technique:** Pure NTAPI memory walk. Minidump assembled in memory. No MiniDumpWriteDump. No dbghelp.dll. No comsvcs. Streamed over TCP to attacker machine. Nothing written to disk.
 
+## On Assumed Breach
+
+This research operates under an assumed breach methodology. Privilege is the starting condition, not the finding. The question being asked is not how an attacker obtains access — it is what happens after they have it: what telemetry exists, how fast it can be correlated, and whether detection infrastructure can act before the operation is complete. That framing is not an oversight. It is the point.
+
 ---
 
 ## Environment
