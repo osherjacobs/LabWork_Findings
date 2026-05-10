@@ -1,5 +1,8 @@
 # On Assumed Breach and atherosclerosis
 
+<img width="822" height="587" alt="lsassinitelligent" src="https://github.com/user-attachments/assets/9e9fc5c9-5d85-442c-a376-a655c9907438" />
+
+
 A tendency I've noticed in discussions around post-compromise research: the finding is often declared invalid unless the full attack path from low-privileged initial access all the way to total compromise is shown in a single, contiguous demonstration. As if that somehow proves there are no realistic paths to admin other than being handed credentials through authorized means.
 
 Assumed breach is a methodology, not an oversight. It deliberately begins after elevated access has been achieved — because that is exactly the phase real intrusions enter once prevention has failed. The relevant questions are operational: What telemetry is actually generated? How fast can it be correlated? How much time does the defender realistically have?
