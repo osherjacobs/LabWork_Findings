@@ -40,7 +40,6 @@ A standard domain user with no special privileges escalated to Domain Admin via 
 **Winlogbeat → Elasticsearch/Kibana 8.19.14**  
 **Sysmon deployed on SRV02 and WIN-ATTACK**
 
-Fair point — VMware doesn't expose Hyper-V by default and CG explicitly requires it. Tweak:
 
 ---
 
