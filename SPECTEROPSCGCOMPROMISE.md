@@ -1,4 +1,4 @@
-# Vector 7d — Credential Guard Bypass via Remote Credential Guard Protocol Abuse
+# Credential Guard Bypass via Remote Credential Guard Protocol Abuse (SpecterOps research testing)
 
 **Author:** Osher Jacobs (Garbageman)  
 **Series:** AD/Identity Security Research — Vector Series  
@@ -259,3 +259,47 @@ All testing conducted in an isolated lab environment. No production systems were
 ---
 
 *Osher Jacobs | Silent Service | github.com/osherjacobs/AD-Lab-Research*
+
+Lowpriv to admin via ESC3:
+
+<img width="1879" height="999" alt="attackredacted" src="https://github.com/user-attachments/assets/443cb765-d0ad-49f5-aae4-27d3265dbd06" />
+
+Dumpguard
+
+<img width="1856" height="235" alt="dumpguard" src="https://github.com/user-attachments/assets/ed4e025d-5093-4e6e-810d-b5419632a18d" />
+
+Credential material retrieved using dumpguard remotely via nxc
+
+<img width="1031" height="278" alt="credmaterialretrievedwithdumpguardvianxc" src="https://github.com/user-attachments/assets/4a2d127d-0749-4cde-8059-6b52e22d8c1b" />
+
+Hashcat cracking of credential material to obtain plaintext password
+
+<img width="1668" height="655" alt="hashcatcrack" src="https://github.com/user-attachments/assets/092cf5ff-3d6f-42c8-ac3d-de6636c4a98a" />
+
+PTH
+
+<img width="1868" height="105" alt="PTH" src="https://github.com/user-attachments/assets/a1850404-1d22-47f1-acf6-f292600cdd77" />
+
+SIEM:
+
+<img width="1870" height="964" alt="LSASSALERTS_NONCGRELATED" src="https://github.com/user-attachments/assets/05b25dcf-2874-472b-8604-a85e40961e9b" />
+
+<img width="1877" height="967" alt="Deliverymechanismoutpuittxtretrieval" src="https://github.com/user-attachments/assets/9c8ecd95-194a-492d-8ff2-05977d0609fb" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
