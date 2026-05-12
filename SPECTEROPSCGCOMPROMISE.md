@@ -201,7 +201,7 @@ DumpGuard impersonates tokens for each LUID on the server and drives this authen
 
 ### Detection conclusion
 
-Defenders who operationalize Credential Guard as "no LSASS dump = credentials protected" will miss this entirely. The credential extraction generates no LSASS telemetry — because LSASS was never touched. The usable credential material was never extracted from LSASS memory. The attack bypassed LSASS entirely and abused the authentication flow itself.
+Defenders who operationalize Credential Guard as "no LSASS dump = credentials protected" may possibly miss this entirely. The credential extraction generates no LSASS telemetry — because LSASS was never touched. The usable credential material was never extracted from LSASS memory. The attack bypassed LSASS entirely and abused the authentication flow itself.
 
 The attack surface visible to the detection stack is:
 
