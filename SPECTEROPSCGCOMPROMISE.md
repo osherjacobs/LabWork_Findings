@@ -158,7 +158,8 @@ hashcat -m 5500 "Administrator::::531b******************************************
 
 Result: `j***********` — DA plaintext recovered.
 
-Alternatively submit the NTLMv1 response to ntlmv1.com for rainbow table lookup (requires account).
+Alternatively submit the NTLMv1 response to for rainbow table lookup. Google is your friend. 
+I'm sure no OPSEC warnings are necessary if you've gotten this far.
 
 **Step 7 — PTH to DC**
 ```bash
