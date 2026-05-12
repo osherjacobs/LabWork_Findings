@@ -1,6 +1,6 @@
 # Credential Guard Bypass via Remote Credential Guard Protocol Abuse (SpecterOps research testing)
 
-**Author:** Osher Jacobs (Garbageman)  
+**Author:** Osher Jacobs
 **Series:** AD/Identity Security Research — Vector Series  
 **Date:** May 2026  
 **Research Credit:** SpecterOps — Valdemar Carøe, "Catching Credential Guard Off Guard" (October 2025)  
