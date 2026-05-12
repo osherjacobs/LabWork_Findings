@@ -44,7 +44,7 @@ Fair point — VMware doesn't expose Hyper-V by default and CG explicitly requir
 
 ---
 
-**Lab infrastructure note:** Getting Credential Guard operational in a VMware VM is not a one-liner. It requires enabling nested virtualization on the host, exposing Hyper-V to the guest via VMX configuration, and a UEFI/TPM setup that VMware doesn't hand you by default. RDP with Remote Credential Guard then has to be deliberately provisioned as part of the attack terrain — the right client configuration with CG enabled, an active session that actually routes through RCG.
+**Lab infrastructure note:** Getting Credential Guard operational in a VMware VM running on a Linux host is not a one-liner. It requires enabling nested virtualization via VMX configuration to expose hardware virtualization extensions to the Windows guest — allowing Windows to bring up the Hyper-V/VBS stack that CG depends on — plus a UEFI/TPM setup that VMware doesn't hand you by default. RDP with Remote Credential Guard then requires the right client configuration with CG enabled and an active session that actually routes through RCG. The setup reflects a real enterprise deployment pattern. That's the point.
 
 
 ---
