@@ -261,7 +261,7 @@ All testing conducted in an isolated lab environment. No production systems were
 
 ---
 
-*Osher Jacobs | Silent Service | github.com/osherjacobs/AD-Lab-Research*
+*Osher Jacobs | github.com/osherjacobs/AD-Lab-Research*
 
 Lowpriv to admin via ESC3:
 
