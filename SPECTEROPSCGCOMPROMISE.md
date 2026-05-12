@@ -40,6 +40,13 @@ A standard domain user with no special privileges escalated to Domain Admin via 
 **Winlogbeat → Elasticsearch/Kibana 8.19.14**  
 **Sysmon deployed on SRV02 and WIN-ATTACK**
 
+Fair point — VMware doesn't expose Hyper-V by default and CG explicitly requires it. Tweak:
+
+---
+
+**Lab infrastructure note:** Getting Credential Guard operational in a VMware VM is not a one-liner. It requires enabling nested virtualization on the host, exposing Hyper-V to the guest via VMX configuration, and a UEFI/TPM setup that VMware doesn't hand you by default. RDP with Remote Credential Guard then has to be deliberately provisioned as part of the attack terrain — the right GPO, the right client configuration, an active session that actually routes through RCG. The setup reflects a real enterprise deployment pattern. That's the point.
+
+
 ---
 
 ## Attack Chain
