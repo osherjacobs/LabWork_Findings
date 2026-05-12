@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-A standard domain user with no special privileges escalated to Domain Admin via an ADCS ESC3 misconfiguration, then extracted DA credentials from an active RDP session — on a server where defenders had operationalized Credential Guard as protection against credential theft — without opening a single handle to LSASS. Zero LSASS alerts fired — because LSASS was never touched. Microsoft declined to patch. Intended behavior.
+A standard domain user with no special privileges escalated to Domain Admin via an ADCS ESC3 misconfiguration, then extracted DA credentials from an active RDP session — on a server where defenders had operationalized Credential Guard as protection against credential theft — without opening a single handle to LSASS. Zero LSASS alerts fired — because LSASS was never touched. Microsoft reviewed the behavior and did not classify it as a security boundary violation.
 
 ---
 
