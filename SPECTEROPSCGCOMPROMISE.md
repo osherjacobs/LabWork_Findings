@@ -238,7 +238,7 @@ The LSASS PROCESS_ALL_ACCESS rule (EID 10) should exclude known system processes
 ## Important Caveats
 
 - This technique requires SYSTEM on the RDP target server. DA implies SYSTEM on any domain machine via WMI/service creation. This is not an additional assumption — it follows directly from Phase 1.
-- NTLMv1 cracking is the weak link. Against strong passwords not in wordlists, the NTLMv1 response is not crackable without rainbow tables. The NT hash recovered via PKINIT in Phase 1 bypasses this entirely — cracking is only required if the Phase 2 hash is the sole output.
+- NTLMv1 cracking is the weak link. Against strong passwords absent from both wordlists and precomputed rainbow tables, the response is not crackable. The NT hash recovered via PKINIT in Phase 1 bypasses this entirely — cracking is only required if the Phase 2 response is the sole output.
 - Microsoft's actual security boundary for CG is nuanced. The correct framing is not "CG is defeated" but "authentication abuse opportunities exist without LSASS telemetry once SYSTEM is achieved on an RDP host with active RCG sessions."
 - NTLMv2 enforcement via GPO prevents DumpGuard's `/command:ntlmv1` from working. `/command:msv10` (the MSV1_0 interface variant) may work differently — see SpecterOps paper for details.
 
