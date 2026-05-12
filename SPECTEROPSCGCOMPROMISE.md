@@ -287,6 +287,8 @@ SIEM:
 
 <img width="1877" height="967" alt="Deliverymechanismoutpuittxtretrieval" src="https://github.com/user-attachments/assets/9c8ecd95-194a-492d-8ff2-05977d0609fb" />
 
+<img width="1662" height="492" alt="telemetryoutputtxt" src="https://github.com/user-attachments/assets/9b7a23e5-9fb7-4e84-8d1e-1443cce3ae2b" />
+
 
 
 
