@@ -14,7 +14,7 @@ Documented chains with raw telemetry, detection gaps, and KQL.
 
 ### Research Philosophy
 
-This research operates at the **no-patch boundary** — where Microsoft has made a deliberate architectural or compatibility decision that leaves an exploitable gap, and where no direct vendor remediation is expected under the current boundary classification.
+This research strives to operate at the **no-patch boundary** — where Microsoft has made a deliberate architectural or compatibility decision that leaves an exploitable gap, and where no direct vendor remediation is expected under the current boundary classification.
 
 Three classes of finding are in scope:
 
