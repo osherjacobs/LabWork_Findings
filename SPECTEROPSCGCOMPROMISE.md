@@ -4,13 +4,17 @@
 **Series:** AD/Identity Security Research — Vector Series  
 **Date:** May 2026  
 **Research Credit:** SpecterOps — Valdemar Carøe, "Catching Credential Guard Off Guard" (October 2025)  
-**PoC Tool:** [DumpGuard v2.2](https://github.com/bytewreck/DumpGuard)
+**PoC Tool:** [DumpGuard v2.2](https://github.com/bytewreck/DumpGuard) — NTLMv2 and Kerberos capable, single C binary
+
+---
+
+> **Correction note:** After publication, Valdemar Carøe (the SpecterOps researcher who authored the original Credential Guard research) reached out to clarify two points incorporated below: (1) RCG is an independent RDP protocol for safe credential delegation — it does not rely on CG, though it can leverage CG functionality where present. The original framing implied a dependency that does not exist. (2) DumpGuard v2.2 (released the week of this writing) now supports NTLMv2 and Kerberos service ticket requests and has been ported to C as a single binary.
 
 ---
 
 ## TL;DR
 
-A standard domain user with no special privileges escalated to Domain Admin via an ADCS ESC3 misconfiguration, then extracted DA credentials from an active RDP session — on a server where defenders had operationalized Credential Guard as protection against credential theft — without opening a single handle to LSASS. Zero LSASS alerts fired — because LSASS was never touched. Microsoft reviewed the behavior and did not classify it as a security boundary violation.
+A standard domain user with no special privileges escalated to Domain Admin via an ADCS ESC3 misconfiguration, then extracted DA credentials from an active RDP session via Remote Credential Guard protocol abuse — on a server where defenders had operationalized Credential Guard as protection against credential theft — without opening a single handle to LSASS. Zero LSASS alerts fired — because LSASS was never touched. Microsoft reviewed the behavior and did not classify it as a security boundary violation.
 
 ---
 
@@ -22,7 +26,7 @@ A standard domain user with no special privileges escalated to Domain Admin via 
 
 **Defensive assumption under test:** "Credential Guard protects DA credentials even under host compromise. LSASS dump on the RDP server returns nothing useful."
 
-**Finding:** That assumption is incomplete. The RCG protocol layer bridges VTL0 and VTL1 in ways that allow credential material to be brokered without LSASS access. DumpGuard exploits this. Microsoft considers it intended behavior.
+**Finding:** That assumption is incomplete. Remote Credential Guard is an independent RDP protocol for safe credential delegation — where CG is present on the client, it handles authentication operations inside VTL1. DumpGuard abuses the RCG authentication flow itself, never touching LSASS. Microsoft considers it intended behavior.
 
 ---
 
@@ -40,11 +44,9 @@ A standard domain user with no special privileges escalated to Domain Admin via 
 **Winlogbeat → Elasticsearch/Kibana 8.19.14**  
 **Sysmon deployed on SRV02 and WIN-ATTACK**
 
-
 ---
 
 **Lab infrastructure note:** Getting Credential Guard operational in a VMware VM running on a Linux host is not a one-liner. It requires enabling nested virtualization via VMX configuration to expose hardware virtualization extensions to the Windows guest — allowing Windows to bring up the Hyper-V/VBS stack that CG depends on — plus a UEFI/TPM setup that VMware doesn't hand you by default. RDP with Remote Credential Guard then requires the right client configuration with CG enabled and an active session that actually routes through RCG. The setup reflects a real enterprise deployment pattern. That's the point.
-
 
 ---
 
@@ -164,7 +166,7 @@ hashcat -m 5500 "Administrator::::531b******************************************
 
 Result: `j***********` — DA plaintext recovered.
 
-Alternatively submit the NTLMv1 response to for rainbow table lookup. Google is your friend. 
+Alternatively submit the NTLMv1 response for rainbow table lookup. Google is your friend.  
 I'm sure no OPSEC warnings are necessary if you've gotten this far.
 
 **Step 7 — PTH to DC**
@@ -180,7 +182,7 @@ Output: `(Pwn3d!)`
 
 CG isolates credential material in VTL1 (LsaIso.exe). Direct LSASS access from VTL0 is blocked — `NtOpenProcess` returns `0xC0000022` (ACCESS_DENIED) against LSASS when PPL/CG is active.
 
-However, the Remote Credential Guard protocol is designed to proxy authentication operations from an RDP server back to the client. The RDP server calls `MsV1_0Lm20GetChallengeResponse` for a given logon session LUID. For RCG-backed sessions, Windows transparently routes this call back to the client where CG handles it and returns the response.
+Remote Credential Guard is an independent RDP protocol for safe credential delegation — it proxies authentication operations from the RDP server back to the client. The two are complementary, not dependent: RCG can operate without CG, and CG does not depend on RCG. Where CG is present on the client, it handles those brokered authentication operations inside VTL1. The RDP server calls `MsV1_0Lm20GetChallengeResponse` for a given logon session LUID; for RCG-backed sessions, Windows transparently routes this call back to the client.
 
 DumpGuard impersonates tokens for each LUID on the server and drives this authentication flow with a static challenge (`1122334455667788`). The response is captured. CG on WIN-CLIENT processed the request exactly as designed — and that was the problem.
 
@@ -207,7 +209,7 @@ DumpGuard impersonates tokens for each LUID on the server and drives this authen
 
 ### Detection conclusion
 
-Defenders who operationalize Credential Guard as "no LSASS dump = credentials protected" may possibly miss this entirely. The credential extraction generates no LSASS telemetry — because LSASS was never touched. The usable credential material was never extracted from LSASS memory. The attack bypassed LSASS entirely and abused the authentication flow itself.
+Defenders who operationalize Credential Guard as "no LSASS dump = credentials protected" may miss this entirely. The credential extraction generates no LSASS telemetry — because LSASS was never touched. The usable credential material was never extracted from LSASS memory. The attack bypassed LSASS entirely and abused the authentication flow itself.
 
 The attack surface visible to the detection stack is:
 
@@ -246,7 +248,7 @@ The LSASS PROCESS_ALL_ACCESS rule (EID 10) should exclude known system processes
 - This technique requires SYSTEM on the RDP target server. DA implies SYSTEM on any domain machine via WMI/service creation. This is not an additional assumption — it follows directly from Phase 1.
 - NTLMv1 cracking is the weak link. Against strong passwords absent from both wordlists and precomputed rainbow tables, the response is not crackable. The NT hash recovered via PKINIT in Phase 1 bypasses this entirely — cracking is only required if the Phase 2 response is the sole output.
 - Microsoft's actual security boundary for CG is nuanced. The correct framing is not "CG is defeated" but "authentication abuse opportunities exist without LSASS telemetry once SYSTEM is achieved on an RDP host with active RCG sessions."
-- NTLMv2 enforcement via GPO prevents DumpGuard's `/command:ntlmv1` from working. `/command:msv10` (the MSV1_0 interface variant) may work differently — see SpecterOps paper for details.
+- NTLMv2 enforcement via GPO prevents DumpGuard's `/command:ntlmv1` from working. DumpGuard v2.2 adds `/command:ntlmv2` and Kerberos service ticket support — see SpecterOps paper and the updated DumpGuard release for details.
 - In this lab demonstration the extracted account matches the account used for deployment — a constraint of the single-DA test environment. In production the value is extracting credential material from sessions belonging to accounts the attacker has no prior knowledge of.
 - DumpGuard will be caught by mature EDR with signature-based detection. The evasion question is a separate research thread — the finding here is the protocol-level technique and the detection gap, not the specific binary.
 
