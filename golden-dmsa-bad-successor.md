@@ -161,4 +161,14 @@ Semperis documents a sanitization path involving KDS root key rotation. Key cave
 - CVE-2025-53779 (Bad Successor)
 - [Semperis — Golden gMSA recovery guidance](https://www.semperis.com)
 - [goldendMSA tool](https://github.com/Semperis/GoldenDMSA)
-- Full detection rules and lab infrastructure: [github.com/osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
+
+
+Initial attack
+
+
+
+
+
+
+
+
