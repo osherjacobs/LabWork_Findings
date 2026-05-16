@@ -127,13 +127,22 @@ None of this telemetry is wired up in default configurations. The detection wind
 
 ## Remediation
 
-The behavior is inherent to the current KDS/gMSA architecture. No vendor patch or architectural mitigation exists as of May 2026.
+The behavior is **inherent to the current KDS/gMSA/dMSA architecture**. No vendor patch exists as of May 2026, and Microsoft treats it as expected design (KDS root key access requires DA/EA/SYSTEM).
 
-Semperis documents a sanitization path involving KDS root key rotation. Key caveats apply:
+Semperis documents a sanitization path involving **KDS root key rotation** (primarily detailed for gMSAs, with similar principles applying to dMSAs). Microsoft provides official recovery guidance for Golden **gMSA** attacks, but **no dedicated dMSA-specific remediation documentation** exists from Microsoft as of May 2026.
 
-- gMSA password caching means derived credentials may remain valid on endpoints that have cached the managed password, even after key rotation
-- No dMSA-specific remediation guidance exists from Microsoft as of May 2026
-- The rotation procedure is complex and absent from most IR runbooks
+**Key caveats apply:**
+
+- **Password caching** on endpoints (especially for dMSAs) means previously derived/used credentials may remain valid even after key rotation, until the cache expires or the service restarts and re-requests the password.
+- Rotating the KDS root key does **not** automatically invalidate all cached managed passwords on member machines.
+- The rotation + recovery procedure is complex (involves new KDS key creation, KDS service restarts across all DCs, authoritative restores for affected accounts, and careful validation). It is absent from most standard IR runbooks.
+- In worst-case scenarios (unknown exposure scope), full forest recovery or mass recreation of managed service accounts may be required.
+
+**Minimum defensive posture (pre- and post-compromise):**
+- Add a SACL on the KDS container (`CN=Master Root Keys...`) to generate EID 4662 on reads.
+- Enable Directory Service Access auditing.
+- Include KDS root key extraction assessment and rotation in every DA-level IR playbook.
+- Limit creation/delegation of dMSAs/gMSAs and monitor privileged group membership for them.
 
 **Minimum defensive posture:**
 
