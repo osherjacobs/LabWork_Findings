@@ -1,4 +1,4 @@
-# Golden dMSA
+# Golden dMSA — KDS Root Key Credential Derivation
 ## Offline Credential Derivation from the KDS Root Key
 
 **Platform:** Windows Server 2025  
@@ -11,7 +11,9 @@
 
 ## Overview
 
-The Golden dMSA attack, disclosed as CVE-2025-53779 and commonly referred to as Bad Successor, allows an attacker with Domain Admin access to derive valid, current credentials for any Group Managed Service Account (gMSA) or Delegated Managed Service Account (dMSA). Once the KDS root key is obtained from a domain controller, credential derivation becomes entirely offline — no LSASS, no DCSync, no password to reset.
+The Golden dMSA attack allows an attacker with Domain Admin access to derive valid, current credentials for any Group Managed Service Account (gMSA) or Delegated Managed Service Account (dMSA). Once the KDS root key is obtained from a domain controller, credential derivation becomes entirely offline — no LSASS, no DCSync, no password to reset.
+
+> **Note:** This technique is distinct from BadSuccessor (CVE-2025-53779), which is a separate dMSA privilege escalation vulnerability requiring no prior DA. Golden dMSA requires DA-level access and targets the KDS root key as a persistence mechanism. The goldendMSA tool is published by Semperis.
 
 The point is not the initial compromise. The point is what survives IR.
 
@@ -158,10 +160,10 @@ Semperis documents a sanitization path involving KDS root key rotation. Key cave
 
 ## References
 
-- CVE-2025-53779 (Bad Successor)
 - [Semperis — Golden gMSA recovery guidance](https://www.semperis.com)
-- [goldendMSA tool](https://github.com/Semperis/GoldenDMSA)
-
+- [goldendMSA tool — Semperis](https://github.com/Semperis/GoldenDMSA)
+- [BadSuccessor (CVE-2025-53779) — Akamai, distinct technique](https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory)
+- Full detection rules and lab infrastructure: [github.com/osherjacobs/AD-Lab-Research](https://github.com/osherjacobs/AD-Lab-Research)
 
 Initial attack
 
