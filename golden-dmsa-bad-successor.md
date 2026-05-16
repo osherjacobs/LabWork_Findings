@@ -144,13 +144,6 @@ Semperis documents a sanitization path involving **KDS root key rotation** (prim
 - Include KDS root key extraction assessment and rotation in every DA-level IR playbook.
 - Limit creation/delegation of dMSAs/gMSAs and monitor privileged group membership for them.
 
-**Minimum defensive posture:**
-
-- Add SACL to `CN=Master Root Keys,CN=Group Key Distribution Service,CN=Services,CN=Configuration` — enables EID 4662 visibility
-- Enable DS Access auditing: `auditpol /set /subcategory:"Directory Service Access" /success:enable`
-- Deploy Sysmon with zeroed IMPHASH and encoded CommandLine detection rules
-- Include KDS root key assessment and rotation in IR runbooks for any domain compromise scenario
-
 ---
 
 ## Research Taxonomy
