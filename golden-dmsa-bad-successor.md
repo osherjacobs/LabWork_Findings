@@ -160,7 +160,7 @@ Semperis documents a sanitization path involving KDS root key rotation. Key cave
 
 ## References
 
-- [Semperis — Golden gMSA recovery guidance](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/)
+- [Semperis — Golden gMSA attack](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/)
 - [goldendMSA tool — Semperis](https://github.com/Semperis/GoldenDMSA)
 
 SCREENSHOTS:
