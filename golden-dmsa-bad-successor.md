@@ -31,6 +31,8 @@ The security assumption baked into the design is that the KDS root key is inacce
 
 Resetting privileged accounts does not invalidate credentials previously derived from the KDS root key. Unless the key itself is rotated — a procedure absent from most IR playbooks and difficult to execute safely at scale — the trust relationship persists.
 
+Think of it this way: the KDS root key is the mint. Once an attacker has it, they can generate valid credentials for any managed service account in the domain on demand, indefinitely — until the mint itself is invalidated.
+
 ---
 
 ## The IR Survivability Problem
@@ -71,7 +73,9 @@ New-ADServiceAccount -Name "svc-golden" -DNSHostName "svc-golden.badsuccessor.lo
 Add-ADGroupMember -Identity "Backup Operators" -Members "svc-golden$"
 ```
 
-`svc-golden$` is created and added to Backup Operators. A realistic service account in a privileged group — exactly the kind of account that survives a cursory post-incident review.
+`svc-golden$` is created as a gMSA and added to Backup Operators. A realistic service account in a privileged group — exactly the kind of account that survives a cursory post-incident review.
+
+The lab also enumerated a pre-existing dMSA (`svc-backup$`) and extracted its associated KDS key — confirming the technique applies equally to both account types. The full bruteforce against the dMSA path was not executed in this run.
 
 ### Offline Credential Derivation
 
@@ -85,12 +89,7 @@ Result: NTLM hash, AES-256, AES-128, and a valid Kerberos ticket — imported di
 
 ### Authentication
 
-```bash
-netexec smb 192.168.1.76 -u 'svc-golden$' -H <NTLM> -d badsuccessor.local
-# [+] badsuccessor.local\svc-golden$
-```
-
-Valid. Backup Operators membership confirmed via LDAP. Both NTLM and Kerberos authentication paths succeed.
+Backup Operators membership confirmed via LDAP — `svc-golden$` is the sole member. Authentication events captured in telemetry (EID 4624, EID 4768). See telemetry section for detail.
 
 ---
 
@@ -119,7 +118,7 @@ Even filtered, noise from other machine accounts remains. EID 4662 is best treat
 
 **EID 4768** is clean. One TGT request for a service account outside of normal service startup windows is anomalous. In this lab, a single event fired — directly tied to the bruteforce ticket import.
 
-**EID 4624** captured both auth paths: NTLM from Kali (192.168.1.218) and Kerberos from the domain-joined member (192.168.1.188). The shared Logon GUID across Kerberos sessions enables correlation.
+**EID 4624** captured Kerberos authentication from the domain-joined member (192.168.1.188) and NTLM authentication from the attacker machine (192.168.1.218). The shared Logon GUID across Kerberos sessions enables correlation.
 
 None of this telemetry is wired up in default configurations. The detection window closes the moment the Defender exclusion is removed.
 
@@ -127,22 +126,26 @@ None of this telemetry is wired up in default configurations. The detection wind
 
 ## Remediation
 
-The behavior is **inherent to the current KDS/gMSA/dMSA architecture**. No vendor patch exists as of May 2026, and Microsoft treats it as expected design (KDS root key access requires DA/EA/SYSTEM).
+The behavior is inherent to the current KDS/gMSA/dMSA architecture. No vendor patch exists as of May 2026, and Microsoft treats it as expected design — KDS root key access requires DA/EA/SYSTEM by design.
 
-Semperis documents a sanitization path involving **KDS root key rotation** (primarily detailed for gMSAs, with similar principles applying to dMSAs). Microsoft provides official recovery guidance for Golden **gMSA** attacks, but **no dedicated dMSA-specific remediation documentation** exists from Microsoft as of May 2026.
+Semperis documents a sanitization path involving KDS root key rotation, primarily detailed for gMSAs. Microsoft provides official recovery guidance for Golden gMSA attacks but no dedicated dMSA-specific remediation documentation exists as of May 2026.
 
-**Key caveats apply:**
+The rotation process is not equivalent to krbtgt double reset. It cannot be executed cleanly in a single maintenance window and carries significant service disruption risk due to caching behaviour across endpoints.
 
-- **Password caching** on endpoints (especially for dMSAs) means previously derived/used credentials may remain valid even after key rotation, until the cache expires or the service restarts and re-requests the password.
-- Rotating the KDS root key does **not** automatically invalidate all cached managed passwords on member machines.
-- The rotation + recovery procedure is complex (involves new KDS key creation, KDS service restarts across all DCs, authoritative restores for affected accounts, and careful validation). It is absent from most standard IR runbooks.
-- In worst-case scenarios (unknown exposure scope), full forest recovery or mass recreation of managed service accounts may be required.
+**Key caveats:**
 
-**Minimum defensive posture (pre- and post-compromise):**
-- Add a SACL on the KDS container (`CN=Master Root Keys...`) to generate EID 4662 on reads.
-- Enable Directory Service Access auditing.
-- Include KDS root key extraction assessment and rotation in every DA-level IR playbook.
-- Limit creation/delegation of dMSAs/gMSAs and monitor privileged group membership for them.
+- Password caching on endpoints means previously derived credentials may remain valid after key rotation, until the cache expires or the service re-requests the password
+- Rotating the KDS root key does not automatically invalidate cached managed passwords on member machines
+- The rotation procedure is complex — new KDS key creation, KDS service restarts across all DCs, authoritative restores for affected accounts, careful validation — and is absent from most IR runbooks
+- In worst-case scenarios, full forest recovery or mass recreation of managed service accounts may be required
+
+**Minimum defensive posture:**
+
+- Add SACL to `CN=Master Root Keys,CN=Group Key Distribution Service,CN=Services,CN=Configuration` — enables EID 4662 visibility
+- Enable DS Access auditing: `auditpol /set /subcategory:"Directory Service Access" /success:enable`
+- Deploy Sysmon with zeroed IMPHASH and encoded CommandLine detection rules
+- Include KDS root key assessment and rotation in IR runbooks for any domain compromise scenario
+- Monitor privileged group membership for service accounts
 
 ---
 
@@ -164,6 +167,7 @@ Semperis documents a sanitization path involving **KDS root key rotation** (prim
 
 - [Semperis — Golden dMSA attack](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/)
 - [goldendMSA tool — Semperis](https://github.com/Semperis/GoldenDMSA)
+
 
 SCREENSHOTS:
 
