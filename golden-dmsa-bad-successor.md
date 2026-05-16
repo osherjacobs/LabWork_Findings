@@ -1,4 +1,4 @@
-# Golden dMSA (Bad Successor) — CVE-2025-53779
+# Golden dMSA
 ## Offline Credential Derivation from the KDS Root Key
 
 **Platform:** Windows Server 2025  
