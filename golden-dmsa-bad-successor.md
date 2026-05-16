@@ -154,7 +154,7 @@ Semperis documents a sanitization path involving KDS root key rotation. Key cave
 
 **Classification:** No patch or architectural mitigation exists as of May 2026. The attack surface is a function of the KDS design, not an implementation defect.
 
-**Assumptions broken:** Password reset = credential invalidation. This assumption does not hold for gMSA/dMSA credentials derived from the KDS root key prior to key rotation.
+**Assumptions broken:** Password reset = credential invalidation. This assumption does not hold for gMSA/dMSA credentials while the KDS root key remains unrotated — and rotation itself carries operational caveats around cached passwords that mean full remediation is not always what it appears.
 
 ---
 
