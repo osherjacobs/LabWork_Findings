@@ -212,10 +212,6 @@ Keys extracted
 
 <img width="1907" height="774" alt="passwordextraction" src="https://github.com/user-attachments/assets/3a6cd5e6-741a-4286-b7f4-a06b199c5b4b" />
 
-Privs. of account created:
-
-<img width="1261" height="610" alt="privsaccount" src="https://github.com/user-attachments/assets/a6bc7afa-b525-4656-82b7-f29f1606fa9d" />
-
 TELEMETRY:
 
 <img width="1918" height="1045" alt="GOEXEC" src="https://github.com/user-attachments/assets/411a7bae-3dba-474c-a1d4-10762e078846" />
