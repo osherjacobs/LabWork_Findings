@@ -4,7 +4,7 @@
 **Platform:** Windows Server 2025  
 **UBR:** 26100.32690  
 **Domain:** badsuccessor.local  
-**Status:** Microsoft considers this behavior by design; no security update is planned as of May 2026.
+**Status:** KDS root key–based credential derivation is operating within its intended trust model. Microsoft explicitly defines domain controller compromise as a security boundary violation outside the protection scope of these mechanisms. As such, no security fix is planned because the behavior is considered architectural, not a defect.
 **Series:** Vector Research — Identity & Credential Attack Surface
 
 ---
