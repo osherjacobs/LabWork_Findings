@@ -10,7 +10,7 @@
 
 ## Overview
 
-The Golden dMSA attack was discovered and documented by [Adi Malyanker](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/), Security Researcher at Semperis. This lab seeks to validate his findings.
+The Golden dMSA attack was discovered and documented by [Adi Malyanker](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/), Security Researcher at Semperis. This lab seeks to reproduce his findings.
 
 The attack allows an attacker with Domain Admin access to derive valid, current credentials for any Group Managed Service Account (gMSA) or Delegated Managed Service Account (dMSA). Once the KDS root key is obtained from a domain controller, credential derivation becomes entirely offline — no LSASS, no DCSync, no password to reset.
 
