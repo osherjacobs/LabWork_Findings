@@ -169,7 +169,7 @@ MFA on privileged accounts, Privileged Access Workstations, and restrictions on 
 
 ## References
 
-- [Semperis — Golden dMSA attack](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/)
+- [Semperis — Golden dMSA attack — Adi Malyanker](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/)
 - [goldendMSA tool — Semperis](https://github.com/Semperis/GoldenDMSA)
 
 
