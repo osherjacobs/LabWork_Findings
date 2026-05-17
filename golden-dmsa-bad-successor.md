@@ -147,6 +147,10 @@ The rotation process is not equivalent to krbtgt double reset. It cannot be exec
 - Include KDS root key assessment and rotation in IR runbooks for any domain compromise scenario
 - Monitor privileged group membership for service accounts
 
+## A Note on Commonly Suggested Mitigations
+
+MFA on privileged accounts, Privileged Access Workstations, and restrictions on machine account interactions are all sound defence-in-depth measures — they raise the bar for initial compromise and should be in place. None of them address this attack surface. Golden dMSA does not authenticate as an admin account post-exploitation. It derives credentials for a service account using key material extracted before any of those controls became relevant. The only remediation that addresses the root cause is KDS root key rotation — and as noted above, that process is complex, disruptive, and absent from most IR runbooks. Everything else is hardening against the entry condition, not the persistence mechanism.
+
 ---
 
 ## Research Taxonomy
