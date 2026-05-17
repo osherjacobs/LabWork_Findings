@@ -4,7 +4,7 @@
 **Platform:** Windows Server 2025  
 **UBR:** 26100.32690  
 **Domain:** badsuccessor.local  
-**Status:** No patch or architectural mitigation exists as of May 2026  
+**Status:** Microsoft considers this behavior by design; no security update is planned as of May 2026.
 **Series:** Vector Research — Identity & Credential Attack Surface
 
 ---
