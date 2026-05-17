@@ -92,6 +92,21 @@ Both NTLM (from Kali) and Kerberos (from domain-joined machine) paths succeeded.
 
 ---
 
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | ID | Notes |
+|--------|-----------|-----|-------|
+| Execution | PowerShell | T1059.001 | Fileless encoded payload via -EncodedCommand |
+| Execution | Scheduled Task/Job | T1053.005 | goexec tsch delivery — no binary on disk |
+| Defense Evasion | Impair Defenses: Disable or Modify Tools | T1562.001 | Defender exclusion window to stage goldendMSA |
+| Credential Access | Unsecured Credentials: Private Keys | T1552.004 | KDS root key extraction from DC |
+| Credential Access | Steal or Forge Kerberos Tickets | T1558 | Kerberos ticket generated and imported directly |
+| Credential Access | Brute Force: Password Cracking | T1110.002 | 1,024-space ManagedPasswordId offline bruteforce |
+| Discovery | Account Discovery: Domain Account | T1087.002 | LDAP enumeration of gMSA/dMSA accounts and SIDs |
+| Persistence | Account Manipulation: Additional Group Membership | T1098 | svc-golden$ added to Backup Operators |
+| Persistence | Create Account | T1136 | gMSA created as persistent credential vehicle |
+| Use Alternate Authentication | Use Alternate Authentication Material: Pass the Ticket | T1550.003 | Kerberos ticket imported and used for authentication |
+
 ## Telemetry
 
 | EID | Signal | Host | Default? |
