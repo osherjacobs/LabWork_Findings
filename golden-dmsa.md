@@ -10,12 +10,13 @@
 
 ## Overview
 
-The Golden dMSA attack allows an attacker with Domain Admin access to derive valid, current credentials for any Group Managed Service Account (gMSA) or Delegated Managed Service Account (dMSA). Once the KDS root key is obtained from a domain controller, credential derivation becomes entirely offline — no LSASS, no DCSync, no password to reset.
+The Golden dMSA attack was discovered and documented by [Adi Malyanker](https://www.semperis.com/blog/golden-dmsa-what-is-dmsa-authentication-bypass/), Security Researcher at Semperis. This lab seeks to validate his findings.
+
+The attack allows an attacker with Domain Admin access to derive valid, current credentials for any Group Managed Service Account (gMSA) or Delegated Managed Service Account (dMSA). Once the KDS root key is obtained from a domain controller, credential derivation becomes entirely offline — no LSASS, no DCSync, no password to reset.
 
 > **Note:** This technique is distinct from BadSuccessor (CVE-2025-53779), which is a separate dMSA privilege escalation vulnerability requiring no prior DA. Golden dMSA requires DA-level access and targets the KDS root key as a persistence mechanism. The goldendMSA tool is published by Semperis.
 
 The point is not the initial compromise. The point is what survives IR.
-
 ---
 
 ## Why This Is Different
