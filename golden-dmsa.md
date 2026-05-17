@@ -77,7 +77,11 @@ The goldendMSA tool is published by Semperis and available at:
 Clone or download the repository and build from source using Visual Studio. The compiled binary and its dependency (`CommandLine.dll`) are found at:
 
 GoldendMSA\bin\x64\Release\goldendMSA.exe
+
 GoldendMSA\bin\x64\Release\CommandLine.dll
+
+
+Both files are required. Transfer them to your attack platform (Kali HTTP server) before execution.
 
 ### Prerequisites
 
