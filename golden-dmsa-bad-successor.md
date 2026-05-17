@@ -30,7 +30,7 @@ The security assumption baked into the design is that the KDS root key is inacce
 
 Resetting privileged accounts does not invalidate credentials previously derived from the KDS root key. Unless the key itself is rotated — a procedure absent from most IR playbooks and difficult to execute safely at scale — the trust relationship persists.
 
-Think of it this way: the KDS root key is the mint. Once an attacker has it, they can generate valid credentials for any managed service account in the domain on demand, indefinitely — until the mint itself is invalidated.
+Think of it this way: the KDS root key is the mint. Once an attacker has it, they can generate valid credentials for any managed service account in the domain on demand, indefinitely — until the mint itself is invalidated. The derivation space is bounded — only 1,024 possible ManagedPasswordId combinations exist per account — making bruteforce computationally trivial.
 
 ---
 
