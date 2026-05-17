@@ -161,7 +161,7 @@ MFA on privileged accounts, Privileged Access Workstations, and restrictions on 
 
 **Telemetry surface:** EID 4662 requires explicit SACL configuration; Sysmon rules require explicit deployment; neither is present by default
 
-**Classification:** No patch or architectural mitigation exists as of May 2026. The attack surface is a function of the KDS design, not an implementation defect.
+**Classification:** No patch exists as of May 2026. The attack surface is a function of the KDS design, not an implementation defect.
 
 **Assumptions broken:** Password reset = credential invalidation. This assumption does not hold for gMSA/dMSA credentials while the KDS root key remains unrotated — and rotation itself carries operational caveats around cached passwords that mean full remediation is not always what it appears.
 
