@@ -4,7 +4,7 @@
 **Platform:** Windows Server 2025  
 **UBR:** 26100.32690  
 **Domain:** badsuccessor.local  
-**Status:** KDS root key–based credential derivation is operating within its intended trust model. Microsoft explicitly defines domain controller compromise as a security boundary violation outside the protection scope of these mechanisms. As such, no security fix is planned because the behavior is considered architectural, not a defect.
+**Status:** The observed behavior reflects a design assumption in the KDS architecture: once Domain Controller-level compromise occurs, the domain’s cryptographic trust anchors (including the KDS root key) are considered exposed. Under this model, offline derivation of gMSA/dMSA credentials is an expected consequence of key availability rather than a separate security flaw.
 **Series:** Vector Research — Identity & Credential Attack Surface
 
 ---
