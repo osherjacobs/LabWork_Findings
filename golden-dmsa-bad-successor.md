@@ -31,7 +31,7 @@ The security assumption baked into the design is that the KDS root key is inacce
 
 Resetting privileged accounts does not invalidate credentials previously derived from the KDS root key. Unless the key itself is rotated — a procedure absent from most IR playbooks and difficult to execute safely at scale — the trust relationship persists.
 
-Think of it this way: the KDS root key is the mint. Once an attacker has it, they can generate valid credentials for any managed service account in the domain on demand, indefinitely — until the mint itself is invalidated.
+## Think of it this way: the KDS root key is the mint. Once an attacker has it, they can generate valid credentials for any managed service account in the domain on demand, indefinitely — until the mint itself is invalidated.
 
 ---
 
@@ -128,7 +128,7 @@ None of this telemetry is wired up in default configurations. The detection wind
 
 The behavior is inherent to the current KDS/gMSA/dMSA architecture. No vendor patch exists as of May 2026, and Microsoft treats it as expected design — KDS root key access requires DA/EA/SYSTEM by design.
 
-Semperis documents a sanitization path involving KDS root key rotation, primarily detailed for gMSAs. Microsoft provides official recovery guidance for Golden gMSA attacks but no dedicated dMSA-specific remediation documentation exists as of May 2026.
+Semperis documents a sanitization path involving KDS root key rotation (primarily detailed for gMSAs, with similar principles applicable to dMSAs). Microsoft provides official recovery guidance for Golden gMSA attacks but no dedicated dMSA-specific remediation documentation exists as of May 2026.
 
 The rotation process is not equivalent to krbtgt double reset. It cannot be executed cleanly in a single maintenance window and carries significant service disruption risk due to caching behaviour across endpoints.
 
