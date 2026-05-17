@@ -33,7 +33,8 @@ Resetting privileged accounts does not invalidate credentials previously derived
 
 Think of it this way: the KDS root key is the mint. Once an attacker has it, they can generate valid credentials for any managed service account in the domain on demand, indefinitely — until the mint itself is invalidated. The derivation space is bounded — only 1,024 possible ManagedPasswordId combinations exist per account — making bruteforce computationally trivial.
 
-<img width="676" height="501" alt="Screenshot From 2026-05-17 16-27-27" src="https://github.com/user-attachments/assets/05f784be-3382-4455-ab7e-6de84d58f265" />
+<img width="1239" height="886" alt="Screenshot From 2026-05-17 18-08-46" src="https://github.com/user-attachments/assets/fdaef806-45c1-4cb6-850c-c1fba3db332c" />
+
 
 ---
 
