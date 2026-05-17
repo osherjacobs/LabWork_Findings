@@ -4,7 +4,7 @@
 **Platform:** Windows Server 2025  
 **UBR:** 26100.32690  
 **Domain:** badsuccessor.local  
-**Status:** The observed behavior reflects a design assumption in the KDS architecture: once Domain Controller-level compromise occurs, the domain’s cryptographic trust anchors (including the KDS root key) are considered exposed. Under this model, offline derivation of gMSA/dMSA credentials is an expected consequence of key availability rather than a separate security flaw.
+**Status:** Microsoft considers this behavior by design; no security update is planned as of May 2026.
 
 ---
 
