@@ -135,7 +135,7 @@ Even filtered, noise from other machine accounts remains. EID 4662 is best treat
 
 **EID 4624** captured Kerberos authentication from the domain-joined member (192.168.1.188) and NTLM authentication from the attacker machine (192.168.1.218). The shared Logon GUID across Kerberos sessions enables correlation.
 
-None of this telemetry is wired up in default configurations. The detection window closes the moment the Defender exclusion is removed.
+Pretty much none of this telemetry is wired up in default configurations — and none of it alerts without explicit tuning.
 
 ---
 
