@@ -87,9 +87,9 @@ goldendMSA.exe bruteforce -s <SID> -i <KDS-GUID> -k <KDS-Base64> -d badsuccessor
 
 Result: NTLM hash, AES-256, AES-128, and a valid Kerberos ticket — imported directly.
 
-### Authentication
 
-Backup Operators membership confirmed via LDAP — `svc-golden$` is the sole member. Authentication events captured in telemetry (EID 4624, EID 4768). See telemetry section for detail.
+### Authentication
+Both NTLM (from Kali) and Kerberos (from domain-joined machine) paths succeeded. Backup Operators membership was confirmed via LDAP query (`svc-golden$` was the only member). See telemetry section for EID 4624 and 4768 details.
 
 ---
 
