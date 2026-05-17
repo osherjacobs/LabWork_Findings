@@ -68,6 +68,34 @@ C:\Windows\Temp\goldendMSA.exe kds --domain badsuccessor.local
 
 Two keys returned — GUIDs and Base64 blobs. This is the only step requiring DC access. Everything that follows is offline.
 
+### Obtaining the tool
+
+The goldendMSA tool is published by Semperis and available at:
+
+[https://github.com/Semperis/GoldenDMSA](https://github.com/Semperis/GoldenDMSA)
+
+Clone or download the repository and build from source using Visual Studio. The compiled binary and its dependency (`CommandLine.dll`) are found at:
+
+GoldendMSA\bin\x64\Release\goldendMSA.exe
+GoldendMSA\bin\x64\Release\CommandLine.dll
+
+### Prerequisites
+
+goldendMSA requires `CommandLine.dll` to be present in the same directory as the binary. Both files must be staged together — the binary will fail silently or error without the DLL present.
+
+```cmd
+C:\Windows\Temp\goldendMSA.exe   ← main binary
+C:\Windows\Temp\CommandLine.dll  ← required dependency
+```
+
+Defender will flag both on download. A folder exclusion must be in place before staging:
+
+```powershell
+Add-MpPreference -ExclusionPath 'C:\Windows\Temp'
+```
+
+Stage after the exclusion is confirmed active.
+
 ### Account Creation and Weaponization
 
 ```powershell
