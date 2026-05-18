@@ -60,7 +60,6 @@ def uac_not_flag(name):
     return f"(!(userAccountControl:1.2.840.113556.1.4.803:={UAC[name]}))"
 
 
-
 # ── Security descriptor helpers ───────────────────────────────────────────────
 
 BINARY_ATTRS = {
@@ -89,11 +88,19 @@ def parse_msa_principals(raw_bytes):
         sids.append(f"[SD parse error: {e}]")
     return sids
 
+def parse_kds_guid(hex_blob):
+    """Extract KDS root key GUID from msDS-ManagedPasswordId blob."""
+    try:
+        raw = bytes.fromhex(hex_blob)
+        if len(raw) < 40:
+            return None
+        return str(uuid.UUID(bytes_le=raw[24:40]))
+    except Exception:
+        return None
 
 
 # ── ACL / DACL edge parser ────────────────────────────────────────────────────
 
-# Extended rights GUID -> edge name (MS-ADTS + BloodHound edge definitions)
 EXTENDED_RIGHTS = {
     '00299570-246d-11d0-a768-00aa006e0529': 'ForceChangePassword',
     '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2': 'DS-Replication-Get-Changes',
@@ -105,7 +112,6 @@ EXTENDED_RIGHTS = {
     '72e39547-7b18-11d1-adef-00c04fd8d5cd': 'Validated-DNS-Host-Name',
 }
 
-# Property write GUIDs -> edge name
 WRITE_PROPERTY_GUIDS = {
     'bf9679c0-0de6-11d0-a285-00aa003049e2': 'WriteMember',
     '00fbf30c-91fe-11d1-aebc-0000f80367c1': 'WriteAllowedToAct',
@@ -120,10 +126,7 @@ def _guid_from_bytes(b):
         return None
 
 def parse_dacl_edges(raw_sd, object_dn, domain_sid=None):
-    """
-    Parse nTSecurityDescriptor binary and return BloodHound-style edges.
-    Each edge: {from: name/SID, to: DN, edge: EdgeName}
-    """
+    """Parse nTSecurityDescriptor binary and return BloodHound-style edges."""
     edges = []
     try:
         sd = SR_SECURITY_DESCRIPTOR()
@@ -134,7 +137,6 @@ def parse_dacl_edges(raw_sd, object_dn, domain_sid=None):
 
         for ace in dacl['Data']:
             ace_type = ace['AceType']
-            # 0x00 = ACCESS_ALLOWED_ACE, 0x05 = ACCESS_ALLOWED_OBJECT_ACE
             if ace_type not in (0x00, 0x05):
                 continue
             try:
@@ -144,46 +146,33 @@ def parse_dacl_edges(raw_sd, object_dn, domain_sid=None):
             except Exception:
                 continue
 
-            # Skip well-known noise SIDs
             if sid in ('S-1-1-0', 'S-1-5-11', 'S-1-5-10', 'S-1-3-0'):
                 continue
 
-            # GenericAll / FullControl
             if mask & 0x10000000 or (mask & 0x000f01ff) == 0x000f01ff:
                 edges.append({'from': sid, 'to': object_dn, 'edge': 'GenericAll'})
                 continue
 
-            # WriteDACL
             if mask & 0x00040000:
                 edges.append({'from': sid, 'to': object_dn, 'edge': 'WriteDacl'})
-
-            # WriteOwner
             if mask & 0x00080000:
                 edges.append({'from': sid, 'to': object_dn, 'edge': 'WriteOwner'})
-
-            # GenericWrite (write all properties, non-object ACE)
             if ace_type == 0x00 and mask & 0x00000020:
                 edges.append({'from': sid, 'to': object_dn, 'edge': 'GenericWrite'})
 
-            # Object ACE — contains GUIDs
             if ace_type == 0x05:
                 try:
                     flags    = int(ace['Ace']['Flags'])
                     obj_guid = None
                     if flags & 0x01:
                         obj_guid = _guid_from_bytes(ace['Ace']['ObjectType'])
-
-                    # Extended right (DS_CONTROL_ACCESS = 0x100)
                     if mask & 0x00000100 and obj_guid:
                         right = EXTENDED_RIGHTS.get(obj_guid, f'ExtendedRight:{obj_guid}')
                         edges.append({'from': sid, 'to': object_dn, 'edge': right})
-
-                    # Write property (DS_WRITE_PROPERTY = 0x20)
                     if mask & 0x00000020 and obj_guid:
                         prop = WRITE_PROPERTY_GUIDS.get(obj_guid)
                         if prop:
                             edges.append({'from': sid, 'to': object_dn, 'edge': prop})
-
                 except Exception:
                     pass
 
@@ -273,22 +262,18 @@ def resolve_sid(sid, domain_sid=None):
 
 # ── ADCS ESC detection constants ─────────────────────────────────────────────
 
-# msPKI-Certificate-Name-Flag bits
 CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT          = 0x00000001
 CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT_ALT_NAME = 0x00010000
-
-# msPKI-Enrollment-Flag bits
 CT_FLAG_NO_SECURITY_EXTENSION              = 0x00080000
 
-# EKUs that enable domain authentication (ESC1/ESC2)
 CLIENT_AUTH_OIDS = {
-    '1.3.6.1.5.5.7.3.2',       # Client Authentication
-    '1.3.6.1.5.2.3.4',         # PKINIT Client Auth
-    '1.3.6.1.4.1.311.20.2.2',  # Smart Card Logon
-    '2.5.29.37.0',              # Any Purpose
+    '1.3.6.1.5.5.7.3.2',
+    '1.3.6.1.5.2.3.4',
+    '1.3.6.1.4.1.311.20.2.2',
+    '2.5.29.37.0',
 }
 
-CERT_REQUEST_AGENT_OID = '1.3.6.1.4.1.311.20.2.1'  # ESC3
+CERT_REQUEST_AGENT_OID = '1.3.6.1.4.1.311.20.2.1'
 
 LOW_PRIV_SIDS = {
     'Everyone', 'Authenticated Users', 'Domain Users',
@@ -301,11 +286,12 @@ HIGH_PRIV_SIDS = {
     'Schema Admins', 'Group Policy Creator Owners',
     'Domain Controllers', 'Enterprise Domain Controllers',
 }
-EDITF_ATTRIBUTESUBJECTALTNAME2 = 0x00040000  # ESC6 CA flag
+
+EDITF_ATTRIBUTESUBJECTALTNAME2 = 0x00040000
 
 def _esc_enrollees(sd_raw, domain_sid):
     """Extract SIDs with enroll/autoenroll rights from template SD."""
-    ENROLL_GUID  = 'a05b8cc2-17bc-4802-a710-e7c15ab866a2'
+    ENROLL_GUID     = 'a05b8cc2-17bc-4802-a710-e7c15ab866a2'
     AUTOENROLL_GUID = '0e10c968-78fb-11d2-90d4-00c04f79dc55'
     sids = set()
     try:
@@ -321,7 +307,6 @@ def _esc_enrollees(sd_raw, domain_sid):
                 sid_raw = ace['Ace']['Sid'].formatCanonical()
                 sid     = resolve_sid(sid_raw, domain_sid)
                 mask    = int(ace['Ace']['Mask']['Mask'])
-                # GenericAll or full control
                 if mask & 0x10000000 or (mask & 0x000f01ff) == 0x000f01ff:
                     sids.add(sid)
                     continue
@@ -331,7 +316,7 @@ def _esc_enrollees(sd_raw, domain_sid):
                         g = _guid_from_bytes(ace['Ace']['ObjectType'])
                         if g in (ENROLL_GUID, AUTOENROLL_GUID) and mask & 0x100:
                             sids.add(sid)
-                elif mask & 0x100:  # DS_CONTROL_ACCESS on non-object ACE = enroll
+                elif mask & 0x100:
                     sids.add(sid)
             except Exception:
                 pass
@@ -353,7 +338,6 @@ def entry_to_dict(entry, fields=None):
         for v in attr['vals']:
             raw = v.asOctets()
             if name == 'msDS-GroupMSAMembership':
-                # Security descriptor - extract principal SIDs
                 sids = parse_msa_principals(raw)
                 vals = sids if sids else ['[empty SD]']
                 break
@@ -380,7 +364,7 @@ def print_entries(label, entries, fields=None):
 
 # ── Core class ────────────────────────────────────────────────────────────────
 
-class ADRecon:
+class BadRecon:
     def __init__(self, dc, user, password):
         if '@' in user:
             uname  = user.split('@')[0]
@@ -394,7 +378,6 @@ class ADRecon:
 
         self._conn = impacket_ldap.LDAPConnection(f'ldap://{dc}', baseDN=self.base)
         self._conn.login(uname, password, domain=domain)
-        # Extract domain SID from base DN
         self.domain_sid = self._get_domain_sid()
         print(f"[+] Bound as: {uname}@{domain}")
         print(f"[+] Base DN:  {self.base}")
@@ -402,7 +385,6 @@ class ADRecon:
             print(f"[+] Domain SID: {self.domain_sid}")
 
     def _get_domain_sid(self):
-        """Extract domain SID from the domain object."""
         try:
             entries = self._search_raw('(objectClass=domain)',
                                        attributes=['objectSid'], base=self.base)
@@ -410,7 +392,6 @@ class ADRecon:
                 for attr in e['attributes']:
                     if str(attr['type']) == 'objectSid':
                         raw = attr['vals'][0].asOctets()
-                        # Parse SID from binary
                         rev = raw[0]
                         sub_count = raw[1]
                         auth = int.from_bytes(raw[2:8], 'big')
@@ -423,13 +404,12 @@ class ADRecon:
             pass
         return None
 
-
     def _search_config(self, ldap_filter, attributes=None, base=None):
-        """Search configuration partition with SD flags control to retrieve nTSecurityDescriptor."""
+        """Search configuration partition with SD flags control."""
         target = base or self.config
         attrs  = [] if (attributes is None or attributes == ['*']) else attributes
         sc     = impacket_ldap.SimplePagedResultsControl(size=200)
-        sd_ctl = SDFlagsControl(criticality=True, flags=7)  # OWNER+GROUP+DACL
+        sd_ctl = SDFlagsControl(criticality=True, flags=7)
         results = []
         try:
             resp = self._conn.search(
@@ -447,7 +427,6 @@ class ADRecon:
         return results
 
     def _search_raw(self, ldap_filter, attributes=None, base=None):
-        """Raw search without SID resolution (used internally)."""
         target = base or self.base
         attrs  = [] if (attributes is None or attributes == ['*']) else attributes
         sc     = impacket_ldap.SimplePagedResultsControl(size=200)
@@ -557,7 +536,6 @@ class ADRecon:
     def get_computers_by_os(self, os_string):
         safe = escape_filter_chars(os_string).replace(r'\2a', '*')
         return self.get_computers(f"(operatingsystem={safe})")
-
 
     # ── Managed Service Accounts ──────────────────────────────────
 
@@ -670,11 +648,8 @@ class ADRecon:
     def custom(self, ldap_filter, attributes=None, base=None):
         return self._search(ldap_filter, attributes=attributes, base=base)
 
-
     def get_acl_edges(self, target_filter='(objectClass=*)', target_dn=None):
-        """
-        Enumerate nTSecurityDescriptor on objects and return DACL edges.
-        """
+        """Enumerate nTSecurityDescriptor on objects and return DACL edges."""
         base = target_dn or self.base
         entries = self._search(
             target_filter,
@@ -700,7 +675,6 @@ class ADRecon:
             if dn and raw_sd:
                 edges = parse_dacl_edges(raw_sd, dn, self.domain_sid)
                 all_edges.extend(edges)
-        # Deduplicate
         seen = set()
         deduped = []
         for e in all_edges:
@@ -710,11 +684,9 @@ class ADRecon:
                 deduped.append(e)
         return deduped
 
-
     # ── ADCS enumeration ──────────────────────────────────────────
 
     def get_cas(self):
-        """Enumerate Certificate Authority objects."""
         ca_base = f"CN=Enrollment Services,CN=Public Key Services,CN=Services,{self.config}"
         return self._search_config(
             "(objectClass=pKIEnrollmentService)",
@@ -724,7 +696,6 @@ class ADRecon:
         )
 
     def get_cert_templates(self):
-        """Enumerate all certificate templates."""
         tmpl_base = f"CN=Certificate Templates,CN=Public Key Services,CN=Services,{self.config}"
         return self._search_config(
             "(objectClass=pKICertificateTemplate)",
@@ -740,13 +711,9 @@ class ADRecon:
         )
 
     def enumerate_adcs(self):
-        """
-        Full ADCS enumeration with ESC1-ESC7 classification.
-        Returns dict with cas, templates, and findings.
-        """
+        """Full ADCS enumeration with ESC1-ESC7/ESC9 classification."""
         results = {'cas': [], 'templates': [], 'findings': []}
 
-        # ── CAs ───────────────────────────────────────────────────
         for e in self.get_cas():
             ca = {}
             raw_sd = None
@@ -769,7 +736,6 @@ class ADRecon:
                     except Exception:
                         ca[name] = attr['vals'][0].asOctets().hex()
 
-            # ESC6: EDITF_ATTRIBUTESUBJECTALTNAME2 on CA flags
             try:
                 flags = int(ca.get('flags', '0'))
                 if flags & EDITF_ATTRIBUTESUBJECTALTNAME2:
@@ -781,7 +747,6 @@ class ADRecon:
             except Exception:
                 pass
 
-            # ESC7: low-priv manage CA / manage certificates
             if raw_sd:
                 ca_edges = parse_dacl_edges(raw_sd, ca.get('distinguishedName', ''), self.domain_sid)
                 manage_rights = {'GenericAll', 'WriteDacl', 'WriteOwner', 'GenericWrite'}
@@ -795,7 +760,6 @@ class ADRecon:
 
             results['cas'].append(ca)
 
-        # ── Templates ─────────────────────────────────────────────
         for e in self.get_cert_templates():
             tmpl = {}
             raw_sd = None
@@ -829,57 +793,42 @@ class ADRecon:
                 app_policy = [app_policy]
             all_ekus = set(ekus) | set(app_policy)
 
-            # Enrollee SIDs
             enrollee_sids = set()
             if raw_sd:
                 enrollee_sids = _esc_enrollees(raw_sd, self.domain_sid)
-            
-            #if tmpl.get('cn') == 'VulnEnrollmentAgent':
-            #    print(f"[DEBUG] VulnEnrollmentAgent keys: {list(tmpl.keys())}")
-            #    print(f"[DEBUG] all_ekus: {all_ekus}")
-            #    print(f"[DEBUG] ra_sig: {ra_sig}")
-            #    print(f"[DEBUG] raw_sd is None: {raw_sd is None}")
-            #    print(f"[DEBUG] enrollee_sids: {enrollee_sids}")
-            #    edges = parse_dacl_edges(raw_sd, 'VulnEnrollmentAgent', self.domain_sid)
-            #    print(f"[DEBUG] DACL edges: {edges}")
-            tmpl_name = tmpl.get('cn', tmpl.get('displayName', '?'))
-            # ESC1
-            has_san   = bool(name_flag & CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT)
-            has_auth  = bool(all_ekus & CLIENT_AUTH_OIDS)
-            low_priv  = bool(enrollee_sids - HIGH_PRIV_SIDS)
+
+            tmpl_name  = tmpl.get('cn', tmpl.get('displayName', '?'))
+            has_san    = bool(name_flag & CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT)
+            has_auth   = bool(all_ekus & CLIENT_AUTH_OIDS)
+            low_priv   = bool(enrollee_sids - HIGH_PRIV_SIDS)
             sd_missing = raw_sd is None
+
             if has_san and has_auth and (low_priv or sd_missing):
                 results['findings'].append({
                     'esc':      'ESC1',
                     'template': tmpl_name,
                     'detail':   'Enrollee supplies SAN + client auth EKU + low-priv enrollment',
-                    'enrollees': list(enrollee_sids & LOW_PRIV_SIDS)
+                    'enrollees': list(enrollee_sids - HIGH_PRIV_SIDS) if not sd_missing else ['[unverified]']
                 })
 
-            # ESC2
             has_any = ('2.5.29.37.0' in all_ekus) or len(all_ekus) == 0
             if has_any and (low_priv or sd_missing):
                 results['findings'].append({
                     'esc':      'ESC2',
                     'template': tmpl_name,
                     'detail':   'Any Purpose EKU or no EKU restriction + low-priv enrollment',
-                    'enrollees': list(enrollee_sids & LOW_PRIV_SIDS)
+                    'enrollees': list(enrollee_sids - HIGH_PRIV_SIDS) if not sd_missing else ['[unverified]']
                 })
 
-            # If no SD returned, flag ESC checks as unverifiable
-            sd_missing = raw_sd is None
-
-            # ESC3
             if CERT_REQUEST_AGENT_OID in all_ekus and (low_priv or sd_missing) and ra_sig == 0:
                 results['findings'].append({
                     'esc':      'ESC3',
                     'template': tmpl_name,
                     'detail':   'Certificate Request Agent EKU + low-priv enrollment',
-                    'enrollees': list(enrollee_sids & LOW_PRIV_SIDS)
+                    'enrollees': list(enrollee_sids - HIGH_PRIV_SIDS) if not sd_missing else ['[unverified]']
                 })
 
-            # ESC4: low-priv write on template DACL
-            if raw_sd and not sd_missing:
+            if raw_sd:
                 tmpl_edges = parse_dacl_edges(raw_sd, tmpl_name, self.domain_sid)
                 write_rights = {'GenericAll', 'WriteDacl', 'WriteOwner', 'GenericWrite'}
                 for edge in tmpl_edges:
@@ -890,7 +839,6 @@ class ADRecon:
                             'detail':   f"{edge['from']} has {edge['edge']} on template"
                         })
 
-            # ESC9: no security extension flag
             if enrollment_flag & CT_FLAG_NO_SECURITY_EXTENSION:
                 results['findings'].append({
                     'esc':      'ESC9',
@@ -909,7 +857,7 @@ class ADRecon:
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def parse_args():
-    p = argparse.ArgumentParser(description='BadRecon - LDAP enumeration')
+    p = argparse.ArgumentParser(description='BadRecon - Active Directory enumeration and attack surface mapping')
     p.add_argument('-d', '--dc',       required=True,  help='DC hostname or IP')
     p.add_argument('-u', '--user',     required=True,  help='user@domain.local')
     p.add_argument('-p', '--password', required=True,  help='Password')
@@ -926,11 +874,11 @@ def parse_args():
 
 def main():
     args = parse_args()
-    r = ADRecon(args.dc, args.user, args.password)
+    r = BadRecon(args.dc, args.user, args.password)
     m = args.module
 
     if args.filter:
-        base = args.base if hasattr(args, 'base') and args.base else None
+        base = args.base if args.base else None
         print_entries("Custom filter", r.custom(args.filter, base=base))
         r.disconnect()
         return
@@ -998,11 +946,9 @@ def main():
         else:
             print("  [+] No ESC vulnerabilities detected")
 
-
     if m in ('acledges',):
         print("\n[*] Enumerating ACL edges on privileged objects...")
         print("[*] This queries nTSecurityDescriptor — may be slow on large domains\n")
-        # High value targets: users, computers, groups, GPOs, domain root
         filters = [
             ("Users",     "(&(samAccountType=805306368)(adminCount=1))"),
             ("Computers", "(&(samAccountType=805306369))"),
@@ -1022,7 +968,6 @@ def main():
                     else:
                         print(json.dumps(e, indent=2))
 
-
     if m in ('all', 'acl'):
         print_entries("Extended Rights", r.get_extended_rights(), ['name', 'rightsGuid'])
 
@@ -1033,10 +978,31 @@ def main():
         print_entries("DFS v1", r.get_dfs_v1())
         print_entries("DFS v2", r.get_dfs_v2())
 
-
     if m in ('all', 'msa'):
-        print_entries("gMSA Accounts",   r.get_gmsa(),  ['sAMAccountName', 'distinguishedName', 'msDS-ManagedPasswordInterval', 'msDS-ManagedPasswordId', 'PrincipalsAllowedToRetrieveManagedPassword', 'whenCreated', 'whenChanged'])
-        print_entries("dMSA Accounts",   r.get_dmsa(),  ['sAMAccountName', 'distinguishedName', 'msDS-ManagedPasswordInterval', 'msDS-ManagedPasswordId', 'msDS-DelegatedMSAState', 'msDS-SupersededServiceAccountDN', 'PrincipalsAllowedToRetrieveManagedPassword', 'whenCreated', 'whenChanged'])
+        gmsa_fields = ['sAMAccountName', 'distinguishedName', 'msDS-ManagedPasswordInterval',
+                       'msDS-ManagedPasswordId', 'PrincipalsAllowedToRetrieveManagedPassword',
+                       'whenCreated', 'whenChanged']
+        dmsa_fields = ['sAMAccountName', 'distinguishedName', 'msDS-ManagedPasswordInterval',
+                       'msDS-ManagedPasswordId', 'msDS-DelegatedMSAState',
+                       'msDS-SupersededServiceAccountDN', 'PrincipalsAllowedToRetrieveManagedPassword',
+                       'whenCreated', 'whenChanged']
+
+        def print_msa(label, entries, fields):
+            print(f"\n{'='*60}")
+            print(f"  {label} ({len(entries)} results)")
+            print(f"{'='*60}")
+            for e in entries:
+                row = entry_to_dict(e, fields)
+                if row:
+                    blob = row.get('msDS-ManagedPasswordId')
+                    if blob:
+                        guid = parse_kds_guid(blob)
+                        if guid:
+                            row['kds_root_key_guid'] = guid
+                    print(json.dumps(row, indent=2))
+
+        print_msa("gMSA Accounts", r.get_gmsa(), gmsa_fields)
+        print_msa("dMSA Accounts", r.get_dmsa(), dmsa_fields)
 
     if args.group_dn:
         print_entries("Recursive Group Members",
