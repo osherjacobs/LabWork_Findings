@@ -2,6 +2,11 @@
 # BadRecon — Active Directory enumeration and attack surface mapping
 # Copyright (c) 2026 Osher Jacobs
 # https://github.com/osherjacobs/AD-Lab-Research
+# 
+# Research and lab tool — not hardened for production use!
+# Developed and validated in a controlled lab environment!
+# For authorized security testing and defensive analysis only!
+#
 #
 # README: https://github.com/osherjacobs/AD-Lab-Research/blob/main/BADRECON_README.md
 #
