@@ -8,7 +8,7 @@ BadRecon is a Python-based Active Directory and AD CS enumeration framework focu
 
 It was built as a byproduct of lab work reproducing Bad Successor (CVE-2025-53779) and Golden dMSA attack chains on Windows Server 2025. The immediate problem: every existing Python LDAP library failed the bind against LDAP-signing-enforced Server 2025. BadRecon solves that using impacket's NTLM backend.
 
-The goal is not enumeration for its own sake. It is structured visibility into identity relationships, delegation boundaries, certificate issuance risk surfaces — and the detection signal each one generates.
+This is a research and lab tool, not a production-grade framework. The goal is not enumeration for its own sake — it is structured visibility into identity relationships, delegation boundaries, certificate issuance risk surfaces, and the detection signal each one generates.
 
 Built with assistance from Claude (Anthropic). Each module builds on existing research and tooling; the implementation, assembly, and detection framing are original contributions. Origins are documented in the credits table below.
 
