@@ -1,11 +1,27 @@
 #!/usr/bin/env python3
+# BadRecon — Active Directory enumeration and attack surface mapping
+# Copyright (c) 2026 Osher Jacobs
+# https://github.com/osherjacobs/AD-Lab-Research
+#
+# MIT License
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 """
-ADRecon - PowerView-equivalent LDAP enumeration
-Author: research use / detection engineering
-Target: run from Kali against domain
-Usage:  python3 adrecon.py -d 192.168.1.76 -u administrator@badsuccessor.local -p 'password'
+BadRecon - Active Directory enumeration and attack surface mapping
+Author: Osher Jacobs — research use / detection engineering
+Usage:  python3 badrecon.py -d <DC_IP> -u <user@domain.local> -p '<password>'
 """
-
 import argparse
 import json
 import uuid
@@ -893,7 +909,7 @@ class ADRecon:
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def parse_args():
-    p = argparse.ArgumentParser(description='ADRecon - LDAP enumeration')
+    p = argparse.ArgumentParser(description='BadRecon - LDAP enumeration')
     p.add_argument('-d', '--dc',       required=True,  help='DC hostname or IP')
     p.add_argument('-u', '--user',     required=True,  help='user@domain.local')
     p.add_argument('-p', '--password', required=True,  help='Password')
