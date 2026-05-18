@@ -8,7 +8,7 @@ It was built as a byproduct of lab work reproducing Bad Successor (CVE-2025-5377
 
 The goal is not enumeration for its own sake. It is structured visibility into identity relationships, delegation boundaries, certificate issuance risk surfaces — and the detection signal each one generates.
 
-Built with Claude. Each module builds on existing research and tooling; the implementation, assembly, and detection framing are original contributions. Origins are documented in the credits table below.
+Built with assistance from Claude (Anthropic). Each module builds on existing research and tooling; the implementation, assembly, and detection framing are original contributions. Origins are documented in the credits table below.
 
 ---
 
@@ -69,7 +69,7 @@ python3 badrecon.py -d <DC_IP> -u <user@domain.local> -p '<password>' [--module 
 - All groups with distinguished names
 - Recursive group membership via `LDAP_MATCHING_RULE_IN_CHAIN` (`--group-dn`)
 
-LDAP filters derived from PowerView (PowerShellMafia/HarmJ0y) — MIT licensed.
+LDAP filters adapted from PowerView (PowerShellMafia/HarmJ0y) — MIT licensed.
 
 **Detection note:** `LDAP_MATCHING_RULE_IN_CHAIN` (OID `1.2.840.113556.1.4.1941`) in EID 1644 logs is a high-fidelity signal. Legitimate tooling rarely uses it.
 
@@ -209,15 +209,27 @@ Tested against:
 
 ## Research Foundations & Credits
 
-| Component | Source |
-|-----------|--------|
-| LDAP filter set | Derived from PowerView (Harmj0y / PowerShellMafia) — MIT license |
-| LDAP transport | impacket (Fortra) — Apache 2.0 |
-| Filter escaping | ldap3 (Giovanni Cannata) — LGPL |
-| Golden dMSA / MSA module framing | Adi Malyanker, Semperis |
-| ADCS ESC classification | SpecterOps ESC research framework (where applicable) |
-| Python scaffolding | Claude (Anthropic) |
-| Lab infrastructure & assembly | Osher Jacobs |
+| Component | Source | License |
+|-----------|--------|---------|
+| LDAP filter set | Adapted from PowerView (Harmj0y / PowerShellMafia) | MIT |
+| LDAP transport | impacket (Fortra) | Apache 2.0 |
+| Filter escaping | ldap3 (Giovanni Cannata) | LGPL |
+| Golden dMSA / MSA module framing | Adi Malyanker, Semperis | Published research |
+| ADCS ESC classification | SpecterOps ESC research framework (where applicable) | Published research |
+| LLM-assisted development | Claude (Anthropic) | Tooling aid |
+| Implementation & detection engineering | Osher Jacobs | Original work |
+
+---
+
+---
+
+## NOTICE
+
+BadRecon is an independent implementation and does not include or redistribute proprietary code from referenced research or tooling projects.
+
+All third-party components are used under their respective licenses (MIT, Apache 2.0, LGPL) and remain the property of their original authors.
+
+This project does not claim endorsement by any referenced researchers or organizations.
 
 ---
 
