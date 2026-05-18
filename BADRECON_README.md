@@ -10,6 +10,26 @@ The goal is not enumeration for its own sake. It is structured visibility into i
 
 Built with assistance from Claude (Anthropic). Each module builds on existing research and tooling; the implementation, assembly, and detection framing are original contributions. Origins are documented in the credits table below.
 
+## Licence
+
+# BadRecon — Active Directory enumeration and attack surface mapping
+# Copyright (c) 2026 Osher Jacobs
+# https://github.com/osherjacobs/AD-Lab-Research
+#
+# MIT License
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ---
 
 ## Design Goals
