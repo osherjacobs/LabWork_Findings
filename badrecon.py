@@ -504,6 +504,15 @@ class BadRecon:
         return results
 
 
+
+    def get_shadow_cred_targets(self):
+        """Accounts with msDS-KeyCredentialLink set — review for legitimacy."""
+        return self._search(
+            "(msDS-KeyCredentialLink=*)",
+            attributes=['sAMAccountName', 'distinguishedName',
+                        'msDS-KeyCredentialLink', 'whenChanged']
+        )
+
     def get_password_policy(self):
         """Retrieve domain password and lockout policy."""
         return self._search(
@@ -960,6 +969,7 @@ def main():
         print_entries("Password Never Expires", r.get_password_never_expires(), ['sAMAccountName'])
         print_entries("No Password Required",   r.get_no_password_required(),   ['sAMAccountName'])
         print_entries("Disabled Users",         r.get_disabled_users(),         ['sAMAccountName'])
+        print_entries("KeyCredentialLink Set",  r.get_shadow_cred_targets(), ['sAMAccountName', 'distinguishedName', 'whenChanged'])
 
     if m in ('all', 'kerberoast'):
         print_entries("Kerberoastable", r.get_kerberoastable(), ['sAMAccountName', 'servicePrincipalName'])
