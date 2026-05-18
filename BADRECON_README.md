@@ -20,6 +20,7 @@ Built with assistance from Claude (Anthropic). Each module builds on existing re
 - This tool was developed and validated in a controlled lab environment. It is not hardened for production use.
 - Use of this tool against systems you do not own or do not have explicit written permission to test may violate applicable laws.
 - The author assumes **no liability** for any misuse, damage, or legal consequences resulting from the use of this software.
+- BadRecon performs LDAP enumeration only. It does not implement credential extraction, ticket operations, certificate enrollment, privilege escalation, or exploitation primitives. Enumeration itself carries risk — always operate within authorized scope.
 - **Use entirely at your own risk.**
 
 By using BadRecon, you acknowledge that you are responsible for ensuring full compliance with all relevant laws, regulations, and organizational policies.
