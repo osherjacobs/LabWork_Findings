@@ -3,6 +3,8 @@
 # Copyright (c) 2026 Osher Jacobs
 # https://github.com/osherjacobs/AD-Lab-Research
 #
+# README: https://github.com/osherjacobs/AD-Lab-Research/blob/main/BADRECON_README.md
+#
 # MIT License
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -17,6 +19,7 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
 """
 BadRecon - Active Directory enumeration and attack surface mapping
 Author: Osher Jacobs — research use / detection engineering
