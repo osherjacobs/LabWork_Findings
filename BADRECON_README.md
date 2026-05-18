@@ -17,7 +17,7 @@ Built with assistance from Claude (Anthropic). Each module builds on existing re
 ## Important Warning / Disclaimer
 
 **This tool is provided for authorized security research, defensive analysis, and authorized penetration testing only.**
-
+- This tool was developed and validated in a controlled lab environment. It is not hardened for production use.
 - Use of this tool against systems you do not own or do not have explicit written permission to test may violate applicable laws.
 - The author assumes **no liability** for any misuse, damage, or legal consequences resulting from the use of this software.
 - **Use entirely at your own risk.**
