@@ -214,8 +214,8 @@ Tested against:
 | LDAP filter set | Adapted from PowerView (Harmj0y / PowerShellMafia) | MIT |
 | LDAP transport | impacket (Fortra) | Apache 2.0 |
 | Filter escaping | ldap3 (Giovanni Cannata) | LGPL |
-| Golden dMSA / MSA module framing | Adi Malyanker, Semperis | Published research |
-| ADCS ESC classification | SpecterOps ESC research framework (where applicable) | Published research |
+| Golden dMSA / MSA module framing | Adi Malyanker, Semperis | Publicly documented research |
+| ADCS ESC classification | SpecterOps ESC research framework (where applicable) | Publicly documented research |
 | LLM-assisted development | Claude (Anthropic) | Tooling aid |
 | Implementation & detection engineering | Osher Jacobs | Original work |
 
