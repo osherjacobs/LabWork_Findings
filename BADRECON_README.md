@@ -257,6 +257,12 @@ This project does not claim endorsement by any referenced researchers or organiz
 
 ---
 
+## Development Note
+
+Portions of this codebase were generated with assistance from Anthropic's Claude LLM.  
+The overall architecture, module design, custom parsers, detection framing, integration, and final implementation are the original work of the author.  
+No proprietary, closed-source, or unlicensed code was used.
+
 ## Disclaimer
 
 This tool is intended for authorized security testing, research, and defensive analysis only. Users are responsible for ensuring compliance with applicable laws and organizational policies.
