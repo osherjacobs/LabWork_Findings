@@ -99,6 +99,43 @@ def parse_kds_guid(hex_blob):
         return None
 
 
+def parse_pwd_age(val):
+    """Convert Windows FILETIME interval to days."""
+    try:
+        v = int(val)
+        if v == 0:
+            return "0 (no expiry)"
+        days = abs(v) // 864000000000
+        return f"{days} days"
+    except Exception:
+        return val
+
+def parse_pwd_properties(val):
+    """Decode pwdProperties bitmask."""
+    try:
+        v = int(val)
+        flags = []
+        if v & 1:  flags.append("Complexity required")
+        if v & 2:  flags.append("Reversible encryption")
+        if v & 8:  flags.append("Lockout admins")
+        if v & 16: flags.append("No anon change")
+        if v & 32: flags.append("No clear change")
+        return flags if flags else ["No restrictions"]
+    except Exception:
+        return val
+
+def parse_lockout_duration(val):
+    """Convert Windows FILETIME interval to minutes."""
+    try:
+        v = int(val)
+        if v == 0:
+            return "0 (manual unlock required)"
+        mins = abs(v) // 600000000
+        return f"{mins} minutes"
+    except Exception:
+        return val
+
+
 # ── ACL / DACL edge parser ────────────────────────────────────────────────────
 
 EXTENDED_RIGHTS = {
@@ -465,6 +502,19 @@ class BadRecon:
         except Exception as e:
             print(f"[-] Search error ({ldap_filter}): {e}")
         return results
+
+
+    def get_password_policy(self):
+        """Retrieve domain password and lockout policy."""
+        return self._search(
+            "(objectClass=domain)",
+            attributes=[
+                'minPwdLength', 'maxPwdAge', 'minPwdAge',
+                'pwdHistoryLength', 'pwdProperties',
+                'lockoutThreshold', 'lockoutDuration',
+                'lockOutObservationWindow'
+            ]
+        )
 
     # ── Users ─────────────────────────────────────────────────────
 
@@ -884,6 +934,27 @@ def main():
         return
 
     if m in ('all', 'users'):
+        # Password policy with parsed values
+        pp_fields = ['minPwdLength', 'maxPwdAge', 'minPwdAge', 'pwdHistoryLength',
+                     'pwdProperties', 'lockoutThreshold', 'lockoutDuration', 'lockOutObservationWindow']
+        pp_entries = r.get_password_policy()
+        print(f"\n{'='*60}")
+        print(f"  Password Policy")
+        print(f"{'='*60}")
+        for e in pp_entries:
+            row = entry_to_dict(e, pp_fields)
+            parsed = {}
+            for k, v in row.items():
+                if k in ('maxPwdAge', 'minPwdAge'):
+                    parsed[k] = parse_pwd_age(v)
+                elif k == 'pwdProperties':
+                    parsed[k] = parse_pwd_properties(v)
+                elif k in ('lockoutDuration', 'lockOutObservationWindow'):
+                    parsed[k] = parse_lockout_duration(v)
+                else:
+                    parsed[k] = v
+            print(json.dumps(parsed, indent=2))
+
         print_entries("All Users",              r.get_users(),                  ['sAMAccountName', 'distinguishedName'])
         print_entries("AdminCount=1",           r.get_admincount(),             ['sAMAccountName', 'adminCount'])
         print_entries("Password Never Expires", r.get_password_never_expires(), ['sAMAccountName'])
