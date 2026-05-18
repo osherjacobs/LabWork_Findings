@@ -4,11 +4,11 @@ https://github.com/osherjacobs/AD-Lab-Research/blob/main/badrecon.py
 
 BadRecon is a Python-based Active Directory and AD CS enumeration framework focused on identity graph extraction and detection engineering signal generation in modern hardened Windows environments.
 
-It was built as a byproduct of lab work reproducing Bad Successor (CVE-2025-53779) and Golden dMSA attack chains on Windows Server 2025. The immediate problem: every existing Python LDAP library failed the bind against LDAP-signing-enforced Server 2025. BadRecon solves that using impacket's NTLM transport, which is what tools like NetExec already use under the hood.
+It was built as a byproduct of lab work reproducing Bad Successor (CVE-2025-53779) and Golden dMSA attack chains on Windows Server 2025. The immediate problem: every existing Python LDAP library failed the bind against LDAP-signing-enforced Server 2025. BadRecon solves that using impacket's NTLM backend.
 
 The goal is not enumeration for its own sake. It is structured visibility into identity relationships, delegation boundaries, certificate issuance risk surfaces — and the detection signal each one generates.
 
-Built with Claude. The LDAP filters, transport backend, MSA module, ACL edge parser, and ADCS ESC classification are documented below with their origins.
+Built with Claude. Each module builds on existing research and tooling; the implementation, assembly, and detection framing are original contributions. Origins are documented in the credits table below.
 
 ---
 
@@ -69,7 +69,7 @@ python3 badrecon.py -d <DC_IP> -u <user@domain.local> -p '<password>' [--module 
 - All groups with distinguished names
 - Recursive group membership via `LDAP_MATCHING_RULE_IN_CHAIN` (`--group-dn`)
 
-LDAP filters extracted from PowerView source (PowerShellMafia/PowerSploit) — credit Harmj0y.
+LDAP filters derived from PowerView (PowerShellMafia/HarmJ0y) — MIT licensed.
 
 **Detection note:** `LDAP_MATCHING_RULE_IN_CHAIN` (OID `1.2.840.113556.1.4.1941`) in EID 1644 logs is a high-fidelity signal. Legitimate tooling rarely uses it.
 
@@ -125,7 +125,7 @@ Golden dMSA research by Adi Malyanker, Semperis.
 
 ### AD CS Enumeration — `--module adcs`
 
-CA discovery and certificate template enumeration with ESC classification:
+CA discovery and certificate template enumeration with ESC classification based on SpecterOps ESC research framework (where applicable):
 
 | ESC | Condition |
 |-----|-----------|
@@ -138,8 +138,6 @@ CA discovery and certificate template enumeration with ESC classification:
 | ESC9 | `CT_FLAG_NO_SECURITY_EXTENSION` set |
 
 Output separates CA details, template catalog, and ESC findings.
-
-ESC research by SpecterOps.
 
 ---
 
@@ -189,7 +187,7 @@ None of these alert without explicit configuration.
 ## Architecture
 
 - Pure Python
-- LDAP transport: impacket (NTLM + signing, port 389)
+- LDAP transport: impacket NTLM backend (port 389)
 - Security descriptor parsing: impacket `SR_SECURITY_DESCRIPTOR`
 - SID resolution: well-known SIDs + domain RID table, domain SID auto-detected at bind
 - Output: structured JSON to stdout
@@ -213,11 +211,11 @@ Tested against:
 
 | Component | Source |
 |-----------|--------|
-| LDAP filter set | PowerView (Harmj0y / PowerShellMafia) — MIT license |
+| LDAP filter set | Derived from PowerView (Harmj0y / PowerShellMafia) — MIT license |
 | LDAP transport | impacket (Fortra) — Apache 2.0 |
 | Filter escaping | ldap3 (Giovanni Cannata) — LGPL |
 | Golden dMSA / MSA module framing | Adi Malyanker, Semperis |
-| ADCS ESC classification | SpecterOps ESC research |
+| ADCS ESC classification | SpecterOps ESC research framework (where applicable) |
 | Python scaffolding | Claude (Anthropic) |
 | Lab infrastructure & assembly | Osher Jacobs |
 
