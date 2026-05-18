@@ -231,6 +231,8 @@ BadRecon was built alongside detection engineering work, not after it. Each modu
 
 None of these alert without explicit configuration.
 
+BadRecon operates over standard LDAP (port 389) from a remote host. Without DS Access auditing explicitly configured, most queries generate no alertable telemetry. Network-level detection remains possible for environments with NDR/NTA coverage on internal LDAP traffic.
+
 ---
 
 ## Architecture
