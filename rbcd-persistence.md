@@ -185,7 +185,7 @@ Administrative SMB access to the target system was successfully obtained post-re
 
 ### Phase 6 — Explicit Remediation
 
-What IR would need to do but doesn't:
+What IR would need to do but sometimes doesn't:
 
 ```powershell
 Set-ADComputer WIN-ATTACK -Clear msDS-AllowedToActOnBehalfOfOtherIdentity
