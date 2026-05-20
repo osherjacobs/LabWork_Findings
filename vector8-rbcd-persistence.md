@@ -286,6 +286,54 @@ Neither is commonly included in credential-focused remediation workflows. Both m
 
 ---
 
+## Detection Telemetry — Lab Validation
+
+Both detection signals were confirmed in ELK (Winlogbeat 8.19.14 → Kibana) during the lab run.
+
+### EID 5136 — Attribute Write Confirmed
+
+Three `msDS-AllowedToActOnBehalfOfOtherIdentity` modification events were captured on `CN=WIN-ATTACK,CN=Computers,DC=lab2019,DC=local`:
+
+| Timestamp | Operation | Subject |
+|---|---|---|
+| 2026-05-20 17:49 | Value Added | Administrator |
+| 2026-05-20 18:27 | Value Deleted | Administrator |
+| 2026-05-20 20:33 | Value Added | Administrator |
+
+The attribute value is logged as "Malformed Security Descriptor" — expected behaviour. Windows event logging cannot render the binary ACL blob as a readable SID. The attribute name and operation type are the detection signal, not the value field.
+
+<img width="1918" height="682" alt="5136" src="https://github.com/user-attachments/assets/282aa070-8e2c-4d4d-a286-521c5a26d86a" />
+
+
+### EID 4769 — S4U2Proxy Chain Confirmed
+
+Multiple EID 4769 events were generated during each `impacket-getST` invocation. The S4U2proxy fingerprint is visible in the `Transited Services` field:
+
+```
+Account Name:     RBCDATTACKER$@LAB2019.LOCAL
+Service Name:     WIN-ATTACK$
+Ticket Options:   0x40830000
+Transited Services: RBCDATTACKER$@LAB2019.LOCAL
+```
+
+`Ticket Options: 0x40830000` indicates S4U2proxy. `Transited Services` populated with the delegating account is the chain identifier — it distinguishes S4U2proxy requests from standard service ticket requests where this field is empty.
+
+EID 4769 alone is high volume. Without correlation to EID 5136 and awareness that RBCDATTACKER$ is an attacker-created account, these events are indistinguishable from normal Kerberos service ticket traffic. The detection anchor is EID 5136 on write. EID 4769 with a populated `Transited Services` field is the confirmation signal.
+
+<img width="1611" height="261" alt="4769" src="https://github.com/user-attachments/assets/14ab9dd4-d6c9-4c95-b717-2b509407927d" />
+
+
+**KQL — S4U2proxy activity:**
+
+```kql
+event.code: 4769 AND winlog.event_data.TransmittedServices: *
+```
+
+Combined with EID 5136 on the same object within a reasonable time window, this constitutes a high-fidelity detection opportunity — provided the SACL is pre-configured.
+
+
+
+
 ## Tools Used
 
 | Tool | Purpose |
