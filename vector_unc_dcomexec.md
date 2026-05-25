@@ -28,6 +28,8 @@ The resulting telemetry includes a distinctive EID 4663 process representation (
 
 ---
 
+> **Note on operational detail:** The custom binary used in this research is not released. Specific obfuscation parameters, PE manipulation techniques, and implementation details of the memory walker are intentionally omitted. This document is focused on defensive telemetry characterization — what the stack observes, where prevention occurs, and where it does not — rather than capability transfer.
+
 ## The Memory Walker
 
 The credential extraction component is a custom .NET implementation that acquires LSASS process memory and produces a structurally valid minidump parseable by standard forensic tooling (pypykatz, KvcForensic). Internal implementation details are intentionally omitted — this document is focused on telemetry characterization, not capability transfer.
