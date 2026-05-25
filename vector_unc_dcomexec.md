@@ -113,11 +113,11 @@ logon_server WIN-JOCP945SK51
                 Domain: LAB2019
                 LM: NA
                 NT: 3c02b6b6fb6b3b17<redacted>
-                SHA1: af61169243da7612a6<redacted>
+                SHA1: af611<redacted>
         == Kerberos ==
                 Username: Administrator
                 Domain: LAB2019.LOCAL
-                AES256 Key: e481d8013b3cde25<redacted>
+                AES256 Key: e481<redacted>
 ```
 
 ---
