@@ -255,7 +255,7 @@ SubmitSamplesConsent  MpCloudBlockLevel  CloudBlockThreshold
                    0
 ```
 
-No `MpCloudBlockLevel` configured — under default settings, behavior is consistent with an allow-first, classify-after pattern. The binary lands.
+With `MpCloudBlockLevel` unset on this host (output blank, defaulting to level 0 — standard cloud protection), the cloud verdict does not hold the write synchronously. Behavior at this level is consistent with an allow-first, classify-after pattern. The binary lands.
 
 ### Execution window
 
@@ -402,6 +402,8 @@ Findings should be interpreted as behavioral observations under these specific c
 *Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
 *Test date: 25 May 2026*  
 *Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
+
+
 
 SCREENSHOTS:
 
