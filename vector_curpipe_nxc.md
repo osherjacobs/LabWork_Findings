@@ -414,3 +414,1212 @@ SELECTED SCREENSHOTS:
 <img width="1902" height="1026" alt="curnxcwineid" src="https://github.com/user-attachments/assets/0b29b7fa-7250-4dcc-a04f-a2efe1fcd9f7" />
 
 <img width="1291" height="994" alt="defender1" src="https://github.com/user-attachments/assets/788f8562-d23f-4d22-85cc-cba44a7213d1" />
+
+
+
+#################################################################
+
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\Users\Administrator> # LSASS handle requests
+PS C:\Users\Administrator> Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4656} -MaxEvents 20 | Select-Object TimeCreated, Message | Format-List
+
+
+TimeCreated : 5/25/2026 7:57:44 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\Floppy0
+                Handle ID:              0x684
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xc88
+                Process Name:           C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:41 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\EnterpriseCertificates\Root\Certificates
+                Handle ID:              0x234
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1aac
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               DELETE
+                                        READ_CONTROL
+                                        Query key value
+                                        Set key value
+                                        Create sub-key
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x3001F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:41 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Policies\Microsoft\SystemCertificates\Root\Certificates
+                Handle ID:              0x210
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1aac
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               DELETE
+                                        READ_CONTROL
+                                        Query key value
+                                        Set key value
+                                        Create sub-key
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x3001F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:41 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\SystemCertificates\ROOT\Certificates
+                Handle ID:              0x650
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1aac
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               DELETE
+                                        READ_CONTROL
+                                        Query key value
+                                        Set key value
+                                        Create sub-key
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x3001F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:41 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WSMAN
+                Handle ID:              0x5cc
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1aac
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        Query key value
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x20019
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:41 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            C:\Windows\WinSxS\FileMaps\$$_system32_windowspowershell_v1.0_3f102d555ee05d33.cdf-ms
+                Handle ID:              0x1284
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x55c
+                Process Name:           C:\Windows\explorer.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         READ_CONTROL:   Granted by      D:(A;;0x1200a9;;;BA)
+                                        SYNCHRONIZE:    Granted by      D:(A;;0x1200a9;;;BA)
+                                        ReadData (or ListDirectory):    Granted by      D:(A;;0x1200a9;;;BA)
+                                        ReadEA: Granted by      D:(A;;0x1200a9;;;BA)
+                                        ReadAttributes: Granted by      D:(A;;0x1200a9;;;BA)
+
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:41 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            C:\Windows\WinSxS\FileMaps\$$_system32_windowspowershell_v1.0_3f102d555ee05d33.cdf-ms
+                Handle ID:              0x1058
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x55c
+                Process Name:           C:\Windows\explorer.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         READ_CONTROL:   Granted by      D:(A;;0x1200a9;;;BA)
+                                        SYNCHRONIZE:    Granted by      D:(A;;0x1200a9;;;BA)
+                                        ReadData (or ListDirectory):    Granted by      D:(A;;0x1200a9;;;BA)
+                                        ReadEA: Granted by      D:(A;;0x1200a9;;;BA)
+                                        ReadAttributes: Granted by      D:(A;;0x1200a9;;;BA)
+
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:40 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          SC Manager
+                Object Type:            SERVICE OBJECT
+                Object Name:            WSearch
+                Handle ID:              0x0
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x27c
+                Process Name:           C:\Windows\System32\services.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               Query status of service
+
+                Access Reasons:         -
+                Access Mask:            0x4
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:39 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          SC Manager
+                Object Type:            SERVICE OBJECT
+                Object Name:            WSearch
+                Handle ID:              0x0
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x27c
+                Process Name:           C:\Windows\System32\services.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               Query status of service
+
+                Access Reasons:         -
+                Access Mask:            0x4
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:39 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          SC Manager
+                Object Type:            SERVICE OBJECT
+                Object Name:            WSearch
+                Handle ID:              0x0
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x27c
+                Process Name:           C:\Windows\System32\services.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               Query status of service
+
+                Access Reasons:         -
+                Access Mask:            0x4
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:36 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0
+                Handle ID:              0x2f8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x15dc
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:36 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\Floppy0
+                Handle ID:              0x308
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x15dc
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:36 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0
+                Handle ID:              0x2f8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x15dc
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        WriteData (or AddFile)
+                                        AppendData (or AddSubdirectory or CreatePipeInstance)
+                                        ReadEA
+                                        WriteEA
+                                        ReadAttributes
+                                        WriteAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x12019F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:36 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\Floppy0
+                Handle ID:              0x2f8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x15dc
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        WriteData (or AddFile)
+                                        AppendData (or AddSubdirectory or CreatePipeInstance)
+                                        ReadEA
+                                        WriteEA
+                                        ReadAttributes
+                                        WriteAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x12019F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:57:14 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\Floppy0
+                Handle ID:              0x474
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xc88
+                Process Name:           C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:56:44 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\Floppy0
+                Handle ID:              0x3d4
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xc88
+                Process Name:           C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        SYNCHRONIZE
+                                        ReadData (or ListDirectory)
+                                        ReadEA
+                                        ReadAttributes
+
+                Access Reasons:         -
+                Access Mask:            0x120089
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:56:24 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\EnterpriseCertificates\Root\Certificates
+                Handle ID:              0x5e0
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x26c
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               DELETE
+                                        READ_CONTROL
+                                        Query key value
+                                        Set key value
+                                        Create sub-key
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x3001F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:56:24 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Policies\Microsoft\SystemCertificates\Root\Certificates
+                Handle ID:              0x5dc
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x26c
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               DELETE
+                                        READ_CONTROL
+                                        Query key value
+                                        Set key value
+                                        Create sub-key
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x3001F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:56:24 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\SystemCertificates\ROOT\Certificates
+                Handle ID:              0x5d8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x26c
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               DELETE
+                                        READ_CONTROL
+                                        Query key value
+                                        Set key value
+                                        Create sub-key
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x3001F
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+TimeCreated : 5/25/2026 7:56:24 AM
+Message     : A handle to an object was requested.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x872DE
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WSMAN
+                Handle ID:              0x78
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x26c
+                Process Name:           C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+              Access Request Information:
+                Transaction ID:         {00000000-0000-0000-0000-000000000000}
+                Accesses:               READ_CONTROL
+                                        Query key value
+                                        Enumerate sub-keys
+                                        Notify about changes to keys
+
+                Access Reasons:         -
+                Access Mask:            0x20019
+                Privileges Used for Access Check:       -
+                Restricted SID Count:   0
+
+
+
+PS C:\Users\Administrator>
+PS C:\Users\Administrator> # Object access
+PS C:\Users\Administrator> Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4663} -MaxEvents 20 | Select-Object TimeCreated, Message | Format-List
+
+
+TimeCreated : 5/25/2026 7:47:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0xCA474
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0x48
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x19b8
+                Process Name:           C:\ProgramData\curnxc.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:47:31 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0xda4
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xcb4
+                Process Name:           C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26040.7-0\MsMpEng.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:43:15 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0
+                Handle ID:              0x39c
+                Resource Attributes:    S:
+
+              Process Information:
+                Process ID:             0x1374
+                Process Name:           C:\Windows\System32\vds.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:43:13 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\WMI\Autologger\EventLog-System\{11cd958a-c507-4ef3-b3f2-5fd9dfbd2c78}
+                Handle ID:              0x1e0
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x12c8
+                Process Name:           C:\Windows\System32\wevtutil.exe
+
+              Access Request Information:
+                Accesses:               Set key value
+
+                Access Mask:            0x2
+
+TimeCreated : 5/25/2026 7:43:13 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\WMI\Autologger\EventLog-System\{11cd958a-c507-4ef3-b3f2-5fd9dfbd2c78}
+                Handle ID:              0x1d8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1298
+                Process Name:           C:\Windows\System32\wevtutil.exe
+
+              Access Request Information:
+                Accesses:               DELETE
+
+                Access Mask:            0x10000
+
+TimeCreated : 5/25/2026 7:42:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0\autorun.inf
+                Handle ID:              0x280
+                Resource Attributes:
+
+              Process Information:
+                Process ID:             0x6c0
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:42:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0\autorun.inf
+                Handle ID:              0x284
+                Resource Attributes:
+
+              Process Information:
+                Process ID:             0x6c0
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:42:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0\autorun.inf
+                Handle ID:              0x284
+                Resource Attributes:
+
+              Process Information:
+                Process ID:             0x6c0
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:42:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0\autorun.inf
+                Handle ID:              0x284
+                Resource Attributes:
+
+              Process Information:
+                Process ID:             0x6c0
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:42:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0\autorun.inf
+                Handle ID:              0x284
+                Resource Attributes:
+
+              Process Information:
+                Process ID:             0x6c0
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:42:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\BackgroundModel\Policy
+                Handle ID:              0x348
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x368
+                Process Name:           C:\Windows\System32\svchost.exe
+
+              Access Request Information:
+                Accesses:               Notify about changes to keys
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:37:57 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x1D51FA
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0x308
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x15cc
+                Process Name:           C:\ProgramData\curnxc.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:33:49 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x1B5650
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0x304
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xf20
+                Process Name:           C:\ProgramData\curnxc.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:30:20 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0xae4
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xc80
+                Process Name:           C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26040.7-0\MsMpEng.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:21:59 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0xDF088
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0x2fc
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1780
+                Process Name:           C:\ProgramData\curnxc.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:18:14 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-21-3984567624-304424726-3877085034-500
+                Account Name:           Administrator
+                Account Domain:         LAB2019
+                Logon ID:               0x5DBC4
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0x328
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x1f18
+                Process Name:           C:\ProgramData\curnxc_obf.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:16:02 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Process
+                Object Name:            \Device\HarddiskVolume4\Windows\System32\lsass.exe
+                Handle ID:              0xce8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0xc80
+                Process Name:           C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26040.7-0\MsMpEng.exe
+
+              Access Request Information:
+                Accesses:               Read from process memory
+
+                Access Mask:            0x10
+
+TimeCreated : 5/25/2026 7:15:22 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            File
+                Object Name:            \Device\CdRom0
+                Handle ID:              0x36c
+                Resource Attributes:    S:
+
+              Process Information:
+                Process ID:             0x1340
+                Process Name:           C:\Windows\System32\vds.exe
+
+              Access Request Information:
+                Accesses:               ReadData (or ListDirectory)
+
+                Access Mask:            0x1
+
+TimeCreated : 5/25/2026 7:15:21 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\WMI\Autologger\EventLog-System\{11cd958a-c507-4ef3-b3f2-5fd9dfbd2c78}
+                Handle ID:              0x1d4
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x13c0
+                Process Name:           C:\Windows\System32\wevtutil.exe
+
+              Access Request Information:
+                Accesses:               Set key value
+
+                Access Mask:            0x2
+
+TimeCreated : 5/25/2026 7:15:21 AM
+Message     : An attempt was made to access an object.
+
+              Subject:
+                Security ID:            S-1-5-18
+                Account Name:           WIN-JOCP945SK51$
+                Account Domain:         LAB2019
+                Logon ID:               0x3E7
+
+              Object:
+                Object Server:          Security
+                Object Type:            Key
+                Object Name:            \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\WMI\Autologger\EventLog-System\{11cd958a-c507-4ef3-b3f2-5fd9dfbd2c78}
+                Handle ID:              0x1d8
+                Resource Attributes:    -
+
+              Process Information:
+                Process ID:             0x12bc
+                Process Name:           C:\Windows\System32\wevtutil.exe
+
+              Access Request Information:
+                Accesses:               DELETE
+
+                Access Mask:            0x10000
+
+
+
+PS C:\Users\Administrator> auditpol /get /subcategory:"Handle Manipulation"
+System audit policy
+Category/Subcategory                      Setting
+Object Access
+  Handle Manipulation                     Success and Failure
+PS C:\Users\Administrator> auditpol /get /subcategory:"Kernel Object"
+System audit policy
+Category/Subcategory                      Setting
+Object Access
+  Kernel Object                           Success and Failure
+PS C:\Users\Administrator>
