@@ -1,4 +1,4 @@
-# Remote LSASS Credential Access via UNC Execution and DCOM Lateral Movement
+# Vector — Remote LSASS Credential Access via UNC Execution and DCOM Lateral Movement
 
 **Target:** Windows Server 2019 Standard Evaluation (Build 17763, KB5082123 — April 2026 CU) — Primary Domain Controller  
 **Role:** lab2019.local DC — WIN-JOCP945SK51  
@@ -14,7 +14,7 @@
 
 Given assumed breach on a domain controller, can credential material be extracted from LSASS entirely remotely — without the attacking binary ever touching the target filesystem — and what does the defensive stack actually observe?
 
-The resulting telemetry includes a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) that directly fingerprints UNC-hosted execution against LSASS — observed in this setting.
+The resulting telemetry includes a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) that directly fingerprints UNC-hosted execution against LSASS — surfaced here for the first time in this research context.
 
 ---
 
@@ -112,12 +112,12 @@ logon_server WIN-JOCP945SK51
                 Username: Administrator
                 Domain: LAB2019
                 LM: NA
-                NT: 3c0<redacted>
-                SHA1: af611<redacted>
+                NT: 3c02b6b6fb6b3b17<redacted>
+                SHA1: af61169243da7612a6<redacted>
         == Kerberos ==
                 Username: Administrator
                 Domain: LAB2019.LOCAL
-                AES256 Key: e481<redacted>
+                AES256 Key: e481d8013b3cde25<redacted>
 ```
 
 ---
@@ -293,7 +293,7 @@ The dump file is the only artifact on the target disk. The executable is not per
 
 Observed behavior is consistent with a hash/reputation-driven evaluation path similar to the on-write scan. A binary with a known-malicious hash gets caught at the network fetch stage (`Detection Origin: Network share`). A binary with an unknown hash passes through.
 
-Observed behavior suggests a cached reputation/verdict state during repeated execution — the same binary hash ran twice without triggering blocking or reclassification after the initial successful run. Both runs in this session used the same binary with no recompile, and neither triggered Defender. This is a more stable execution path than the SMB upload chain, where the on-write scan re-evaluates on every upload.
+Critically — Observed behavior suggests a cached reputation/verdict state during repeated execution in this configuration — repeated executions of the same binary hash did not trigger blocking or reclassification after the initial successful run. Both runs in this session used the same binary with no recompile, and neither triggered Defender. This is a more stable execution path than the SMB upload chain, where the on-write scan re-evaluates on every upload.
 
 Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the execution window is one recompile — but with UNC execution the need to recompile is less frequent since the same hash remains usable across repeated runs.
 
@@ -301,27 +301,52 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 
 ## Scope and Validity Constraints
 
-- Same lab conditions as previous Vector — single DC, Defender AV only, no MDE, no WDAC (https://github.com/osherjacobs/AD-Lab-Research/blob/main/vector_curpipe_nxc.md)
+- Primary target: single DC, Defender AV only, no MDE, no WDAC
 - `SubmitSamplesConsent: 0` on this host — non-default, extends verdict cache window
 - Anonymous SMB share on Kali — production environments may restrict outbound SMB (445) from DCs to unknown hosts; not tested here
 - dcomexec MMC20 requires DCOM ports (135 + dynamic RPC range) to be reachable — standard in domain environments
 - Credential Guard not enabled — with CG active, LSASS memory access would succeed structurally but yield no usable credential material from protected secrets; DCSync via DRSUAPI remains unaffected regardless
 
-## Tools Used
+---
 
-- [Impacket](https://github.com/fortra/impacket) — `dcomexec.py`, `smbserver.py`
-- [NetExec (nxc)](https://github.com/Pennyw0rth/NetExec) — SMB dump retrieval via `--get-file`
-- [ConfuserEx](https://github.com/mkaring/ConfuserEx) — .NET obfuscation (rename, control flow, constants encoding)
-- [pypykatz](https://github.com/skelsec/pypykatz) — minidump parsing and credential extraction
-- [Elasticsearch / Kibana / winlogbeat](https://www.elastic.co) — telemetry collection and alert correlation
-- [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) — process creation telemetry (EID 1)
+## Cross-Version Validation — Windows Server 2022
+
+The chain was run against a second target in the same domain:
+
+**Target:** Windows Server 2022 (Build 20348) — member server WIN-1KS84GNPAUM  
+**Defender signatures:** AV 1.449.595.0 (12 days out of date)  
+**RTP:** Enabled
+
+```
+SMB  192.168.1.198  445  WIN-1KS84GNPAUM  [+] File "\ProgramData\lsass.dmp" was downloaded
+```
+
+Dump retrieved and parsed. pypykatz extracted MSV, Kerberos, and WDIGEST credential material. SSP package parse failed on build 20348 — known pypykatz compatibility boundary at higher Server 2022 UBRs.
+
+**EID 4663 on Server 2022:**
+
+```
+Process Name:  \Device\Mup\192.168.1.218\share\curnxc1.exe
+Object Name:   \Device\HarddiskVolume3\Windows\System32\lsass.exe
+Access Mask:   0x10
+Subject:       Administrator / LAB2019
+```
+
+`\Device\Mup\` appears identically on Server 2022. The telemetry fingerprint is consistent across OS versions — the kernel UNC path representation is not a Server 2019 artifact.
+
+**Sysmon EID 1 on Server 2022:** The `Sysmon - Unsigned Binary with Zeroed IMPHASH` rule fired on both targets. Two alerts visible in Kibana — one from the Server 2019 DC run, one from the Server 2022 member server run — identical structure, identical IMPHASH, identical UNC image path.
+
+The detection logic generalizes. The `\Device\Mup\` hunt query and the zeroed IMPHASH correlation are valid across Server 2019 and Server 2022 in this lab configuration.
 
 ---
 
-*Target: Windows Server 2019 Build 17763 — lab2019.local PDC*  
-*Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
-*Test date: 25 May 2026*  
+*Primary target: Windows Server 2019 Build 17763 — lab2019.local PDC*  
+*Secondary target: Windows Server 2022 Build 20348 — lab2019.local member server*  
+*Defender AV (primary): 1.451.93.0 / Engine: 1.1.26040.8*  
+*Defender AV (secondary): 1.449.595.0 / Engine: 1.1.26030.3008*  
+*Test date: 25–26 May 2026*  
 *Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
+
 
 SELECTED SCREENSHOTS:
 
