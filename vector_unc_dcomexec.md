@@ -1,4 +1,4 @@
-# Vector — Remote LSASS Credential Access via UNC Execution and DCOM Lateral Movement
+# Remote LSASS Credential Access via UNC Execution and DCOM Lateral Movement
 
 **Target:** Windows Server 2019 Standard Evaluation (Build 17763, KB5082123 — April 2026 CU) — Primary Domain Controller  
 **Role:** lab2019.local DC — WIN-JOCP945SK51  
@@ -14,17 +14,25 @@
 
 Given assumed breach on a domain controller, can credential material be extracted from LSASS entirely remotely — without the attacking binary ever touching the target filesystem — and what does the defensive stack actually observe?
 
+The resulting telemetry includes a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) that directly fingerprints UNC-hosted execution against LSASS — surfaced here for the first time in this research context.
+
 ---
 
-> **Note on operational detail:** The custom binary used in this research is not released. Specific obfuscation parameters, PE manipulation techniques, and implementation details of the memory walker are intentionally omitted. This document is focused on defensive telemetry characterization — what the stack observes, where prevention occurs, and where it does not — rather than capability transfer.
+## Key Findings
+
+- UNC-hosted execution removed the local on-write scan surface but shifted inspection to network-share retrieval
+- EID 4663 captured LSASS access regardless of delivery path — local or UNC
+- UNC execution surfaced as `\Device\Mup\...` in process telemetry — the kernel's representation of a UNC-hosted executable, and a directly huntable signal
+- A custom Sysmon rule combining zeroed IMPHASH + UNC image path + absent PE metadata fired consistently
+- Prevention and telemetry diverged under tested conditions: telemetry remained available while Defender prevention did not trigger on repeated execution of the fresh-obfuscated binary
+
+---
 
 ## The Memory Walker
 
-The credential extraction capability in this chain is a custom .NET LSASS dumper that operates without `MiniDumpWriteDump` or `dbghelp.dll`. It uses direct NT API calls to open a handle to the LSASS process, walk the PEB for loaded module enumeration, traverse committed memory regions, and construct a structurally valid minidump in memory before writing it to a specified output path.
+The credential extraction component is a custom .NET implementation that acquires LSASS process memory and produces a structurally valid minidump parseable by standard forensic tooling (pypykatz, KvcForensic). Internal implementation details are intentionally omitted — this document is focused on telemetry characterization, not capability transfer.
 
-The resulting dump is parseable by pypykatz and KvcForensic and contains the full credential material present in LSASS at the time of execution — NT hashes, Kerberos keys, and session data.
-
-The binary is passed through ConfuserEx prior to deployment. ConfuserEx is a .NET obfuscator originally designed for IP protection. Applied here with rename, control flow mangling, and constants encoding protections, it produces a non-deterministic output — each compile produces a different binary with a different hash. This shifts the cloud ML verdict below Defender's block threshold. The tradeoff: ConfuserEx also zeroes the IMPHASH and strips PE publisher metadata, which introduces a separate Sysmon-detectable anomaly documented in the telemetry section below.
+The binary is passed through ConfuserEx prior to deployment — a .NET obfuscator originally designed for IP protection, applied here with rename, control flow mangling, and constants encoding. It produces non-deterministic output: each compile yields a different binary with a different hash, observed to shift the cloud ML verdict below Defender's block threshold under these lab conditions. In the tested configuration, the obfuscation pipeline produced binaries with a zeroed IMPHASH and absent PE publisher metadata, introducing a separate Sysmon-visible anomaly documented in the telemetry section below.
 
 ---
 
@@ -252,7 +260,7 @@ winlog.event_data.Hashes: *IMPHASH=00000000000000000000000000000000* AND
 
 ---
 
-## Defender Telemetry
+## Observed Enforcement and Telemetry Surfaces
 
 | Surface | SMB upload chain | UNC dcomexec chain |
 |---|---|---|
@@ -304,7 +312,6 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 *Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
 *Test date: 25 May 2026*  
 *Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
-
 
 SELECTED SCREENSHOTS:
 
