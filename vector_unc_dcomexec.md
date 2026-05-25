@@ -16,6 +16,8 @@ Given assumed breach on a domain controller, can credential material be extracte
 
 ---
 
+> **Note on operational detail:** The custom binary used in this research is not released. Specific obfuscation parameters, PE manipulation techniques, and implementation details of the memory walker are intentionally omitted. This document is focused on defensive telemetry characterization — what the stack observes, where prevention occurs, and where it does not — rather than capability transfer.
+
 ## The Memory Walker
 
 The credential extraction capability in this chain is a custom .NET LSASS dumper that operates without `MiniDumpWriteDump` or `dbghelp.dll`. It uses direct NT API calls to open a handle to the LSASS process, walk the PEB for loaded module enumeration, traverse committed memory regions, and construct a structurally valid minidump in memory before writing it to a specified output path.
