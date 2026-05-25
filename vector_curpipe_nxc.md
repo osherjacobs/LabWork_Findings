@@ -87,12 +87,12 @@ logon_server WIN-JOCP945SK51
                 Username: Administrator
                 Domain: LAB2019
                 LM: NA
-                NT: 3c02<redacted>
-                SHA1: af61<redacted>
+                NT: 3c02b6b6fb6b3b17<redacted>
+                SHA1: af61169243da7612a6<redacted>
         == Kerberos ==
                 Username: Administrator
                 Domain: LAB2019.LOCAL
-                AES256 Key: e481<redacted>
+                AES256 Key: e481d8013b3cde25<redacted>
 ```
 
 ---
@@ -229,12 +229,12 @@ logon_server WIN-JOCP945SK51
                 Username: Administrator
                 Domain: LAB2019
                 LM: NA
-                NT: 3c02<redacted>
-                SHA1: af61<redacted>
+                NT: 3c02b6b6fb6b3b17<redacted>
+                SHA1: af61169243da7612a6<redacted>
         == Kerberos ==
                 Username: Administrator
                 Domain: LAB2019.LOCAL
-                AES256 Key: e481d8<redacted>
+                AES256 Key: e481d8013b3cde25<redacted>
 ```
 
 The chain ran successfully across multiple successive executions with the same binary, including post-reboot cold Defender state.
@@ -245,7 +245,7 @@ The chain ran successfully across multiple successive executions with the same b
 
 ### On-write behavior
 
-Defender intercepts the SMB write and holds the connection open while querying the cloud. With `SubmitSamplesConsent: 0` ("always prompt"), the verdict is gated on user response. Once dismissed or timed out, the write completes.
+Defender intercepts the SMB write and holds the connection open while querying the cloud. With `SubmitSamplesConsent: 0` on this host ("always prompt"), the verdict is gated on user response — a non-default configuration. Once dismissed or timed out, the write completes. In a standard installation where submission is automatic, this prompt does not appear and the cloud verdict arrives without user interaction.
 
 ```
 PS> Get-MpPreference | Select SubmitSamplesConsent, MpCloudBlockLevel, CloudBlockThreshold
@@ -267,7 +267,7 @@ On cold state (post-reboot), the Defender alert fires during the write — visib
 
 After the first cloud lookup resolves to "unknown/clean" (not blocked), the local cache retains that verdict. Subsequent runs with the same hash complete without a cloud hold. No alert fires on repeated execution.
 
-This is not a permanent evasion — it is a verdict cache artifact. The binary will eventually be classified if samples accumulate in the Microsoft corpus. `SubmitSamplesConsent: 0` suppresses auto-submission in this lab, which extends the window indefinitely. In a production environment with auto-submit enabled, the window closes faster.
+This is not a permanent evasion — it is a verdict cache artifact. The binary will eventually be classified if samples accumulate in the Microsoft corpus. `SubmitSamplesConsent: 0` in this lab suppresses automatic submission entirely, which is a non-default configuration — standard Defender installations default to `1` (send safe samples automatically) or higher. In a default or hardened enterprise configuration, samples submit without prompting and the cloud verdict arrives faster, narrowing the window compared to what was observed here.
 
 When the window does close — when a hash is classified and quarantined — a fresh ConfuserEx compile resets it. Each obfuscation pass produces a new hash, a new first-seen event, and a new execution window. The cost of resetting is one recompile.
 
@@ -393,10 +393,16 @@ Findings should be interpreted as behavioral observations under these specific c
 - No WDAC or AppLocker in place
 - No Credential Guard or PPL enabled
 - Evaluation build — not a production image
-- `SubmitSamplesConsent: 0` — auto-submission suppressed, extending verdict cache window beyond what a production environment with auto-submit would exhibit
+- `SubmitSamplesConsent: 0` on this host — automatic sample submission disabled, replaced by user prompt. This is non-default; standard Defender installations default to `1` (safe samples auto-submitted). This extended the verdict cache window beyond what a default or enterprise-managed configuration would exhibit.
 - Default Defender configuration; Tamper Protection at system default; no ASR rule tuning beyond documented settings
 
 ---
+
+*Target: Windows Server 2019 Build 17763 — lab2019.local PDC*  
+*Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
+*Test date: 25 May 2026*  
+*Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
+
 SCREENSHOTS:
 
 <img width="1910" height="1051" alt="attack" src="https://github.com/user-attachments/assets/f0d89074-16fa-411c-b1fb-ae612c3d303c" />
