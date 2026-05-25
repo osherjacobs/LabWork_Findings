@@ -293,7 +293,7 @@ The dump file is the only artifact on the target disk. The executable is not per
 
 Observed behavior is consistent with a hash/reputation-driven evaluation path similar to the on-write scan. A binary with a known-malicious hash gets caught at the network fetch stage (`Detection Origin: Network share`). A binary with an unknown hash passes through.
 
-Critically — Observed behavior suggests a cached reputation/verdict state during repeated execution in this configuration — repeated executions of the same binary hash did not trigger blocking or reclassification after the initial successful run. Both runs in this session used the same binary with no recompile, and neither triggered Defender. This is a more stable execution path than the SMB upload chain, where the on-write scan re-evaluates on every upload.
+Observed behavior suggests a cached reputation/verdict state during repeated execution — the same binary hash ran twice without triggering blocking or reclassification after the initial successful run. Both runs in this session used the same binary with no recompile, and neither triggered Defender. This is a more stable execution path than the SMB upload chain, where the on-write scan re-evaluates on every upload.
 
 Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the execution window is one recompile — but with UNC execution the need to recompile is less frequent since the same hash remains usable across repeated runs.
 
