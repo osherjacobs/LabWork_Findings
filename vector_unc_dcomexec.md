@@ -369,9 +369,17 @@ EID 4663
 
 <img width="1900" height="1044" alt="4663" src="https://github.com/user-attachments/assets/ac06933f-8cd9-4d29-8169-1e2ac4f860ea" />
 
-ZEROED IMPHASH
+4663 SERVER 2022
+
+<img width="1917" height="887" alt="4336SERVER2022" src="https://github.com/user-attachments/assets/104645b8-3170-4170-8c15-92a37ae62a1f" />
+
+
+ZEROED IMPHASH 2019
 <img width="1914" height="1080" alt="zeroedimphash1" src="https://github.com/user-attachments/assets/a0670df8-375e-4182-a73a-884cb620d4e7" />
 
+ZEROED IMPHASH 2022
+
+<img width="1915" height="1076" alt="EID1SERVER2022" src="https://github.com/user-attachments/assets/77cef0fc-d626-44a0-868d-e31725e8664f" />
 
 
 
