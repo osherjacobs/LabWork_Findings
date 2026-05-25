@@ -313,7 +313,7 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 
 The chain was run against a second target in the same domain:
 
-**Target:** Windows Server 2022 (Build 20348) — member server WIN-1KS84GNPAUM  
+**Target:** Windows Server 2022 Standard Evaluation (Build 20348, KB5082427) — domain member server WIN-1KS84GNPAUM in lab2019.local  
 **Defender signatures:** AV 1.449.595.0 (12 days out of date)  
 **RTP:** Enabled
 
