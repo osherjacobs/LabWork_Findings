@@ -306,6 +306,15 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 - Anonymous SMB share on Kali — production environments may restrict outbound SMB (445) from DCs to unknown hosts; not tested here
 - dcomexec MMC20 requires DCOM ports (135 + dynamic RPC range) to be reachable — standard in domain environments
 
+## Tools Used
+
+- [Impacket](https://github.com/fortra/impacket) — `dcomexec.py`, `smbserver.py`
+- [NetExec (nxc)](https://github.com/Pennyw0rth/NetExec) — SMB dump retrieval via `--get-file`
+- [ConfuserEx](https://github.com/mkaring/ConfuserEx) — .NET obfuscation (rename, control flow, constants encoding)
+- [pypykatz](https://github.com/skelsec/pypykatz) — minidump parsing and credential extraction
+- [Elasticsearch / Kibana / winlogbeat](https://www.elastic.co) — telemetry collection and alert correlation
+- [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) — process creation telemetry (EID 1)
+
 ---
 
 *Target: Windows Server 2019 Build 17763 — lab2019.local PDC*  
