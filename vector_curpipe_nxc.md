@@ -397,6 +397,18 @@ Findings should be interpreted as behavioral observations under these specific c
 - Default Defender configuration; Tamper Protection at system default; no ASR rule tuning beyond documented settings
 
 ---
+SCREENSHOTS:
+
+<img width="1910" height="1051" alt="attack" src="https://github.com/user-attachments/assets/f0d89074-16fa-411c-b1fb-ae612c3d303c" />
+
+<img width="1910" height="1051" alt="confuser" src="https://github.com/user-attachments/assets/0f2ef5b7-4449-490a-83a4-5db6c791c107" />
+
+<img width="1902" height="1026" alt="curnxcwineid" src="https://github.com/user-attachments/assets/0b29b7fa-7250-4dcc-a04f-a2efe1fcd9f7" />
+
+<img width="1291" height="994" alt="defender1" src="https://github.com/user-attachments/assets/788f8562-d23f-4d22-85cc-cba44a7213d1" />
+
+
+
 
 *Target: Windows Server 2019 Build 17763 — lab2019.local PDC*  
 *Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
