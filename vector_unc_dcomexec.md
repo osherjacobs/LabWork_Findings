@@ -14,7 +14,7 @@
 
 Given assumed breach on a domain controller, can credential material be extracted from LSASS entirely remotely — without the attacking binary ever touching the target filesystem — and what does the defensive stack actually observe?
 
-The resulting telemetry includes a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) that directly fingerprints UNC-hosted execution against LSASS — surfaced here for the first time in this research context.
+The resulting telemetry included a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) consistent with UNC-hosted execution against LSASS in this setting.
 
 ---
 
@@ -152,7 +152,7 @@ Access Request Information:
 
 The critical field is `Process Name: \Device\Mup\192.168.1.218\share\curnxc1.exe`.
 
-`\Device\Mup\` is the Windows Multiple UNC Provider — the kernel-level UNC path resolver. The process name in EID 4663 reflects the full UNC path rather than a local filesystem path. This is the forensic signature of UNC execution in the audit log.
+`\Device\Mup\` is the Windows Multiple UNC Provider — the kernel-level UNC path resolver. The process name in EID 4663 reflects the full UNC path rather than a local filesystem path. In this telemetry path, `\Device\Mup\...` functions as a strong hunt signal for UNC-hosted execution rather than a local filesystem path.
 
 **Comparison:**
 
@@ -220,9 +220,9 @@ Hashes:            MD5=A84112EC246DB8E541B8C5B06A083894
                    IMPHASH=00000000000000000000000000000000
 ```
 
-**Why the IMPHASH is zeroed:** ConfuserEx scrambles the binary's import table as part of its obfuscation pipeline. The Import Hash is calculated from that table — when the imports are sufficiently mangled, the result is an all-zero IMPHASH. This is a known PE manipulation indicator.
+**Why the IMPHASH is zeroed:** In the tested configuration, the ConfuserEx-obfuscated binary produced an all-zero IMPHASH and absent PE publisher metadata. Because IMPHASH derives from PE import structure, the observation is consistent with import-table changes introduced during obfuscation — though this writeup does not establish the exact transformation responsible.
 
-**The tradeoff:** ConfuserEx defeats Defender's static ML signature (`Bearfoos`) but introduces a Sysmon-detectable PE anomaly. The same obfuscation that shifts the cloud verdict also zeroes the IMPHASH and strips publisher metadata — three correlated signals in a single Sysmon EID 1 event:
+**The tradeoff:** In this lab configuration, the obfuscation pipeline correlated with both a shifted Defender outcome and a Sysmon-visible anomaly — zeroed IMPHASH, absent PE metadata, and UNC image path appearing as three correlated signals in a single Sysmon EID 1 event:
 
 1. `IMPHASH=00000000000000000000000000000000` — zeroed import hash
 2. `Image: \\192.168.1.218\share\curnxc1.exe` — UNC-hosted binary
@@ -275,7 +275,7 @@ winlog.event_data.Hashes: *IMPHASH=00000000000000000000000000000000* AND
 
 ## How the Chain Works
 
-`impacket-dcomexec` connects to the target via DCOM using the MMC20 Application object. The command is executed by a child process of the MMC20 COM server running as SYSTEM. That process resolves the UNC path `\\192.168.1.218\share\curnxc1.exe` over SMB, fetches and executes the binary directly from the UNC path without persisting it to local disk. The binary:
+`impacket-dcomexec` connects to the target via DCOM using the MMC20 Application object. In this test, the observed process tree showed `cmd.exe` launched via the MMC20 COM object (visible in Sysmon EID 1 as `ParentImage: C:\Windows\System32\cmd.exe`), which resolved and executed the UNC-hosted binary. The binary:
 
 1. Runs from the network path — never touches the target filesystem
 2. Opens an LSASS handle via `NtOpenProcess`
@@ -291,7 +291,7 @@ The dump file is the only artifact on the target disk. The executable is not per
 
 ## The Hash Dependency
 
-Observed behavior is consistent with a hash/reputation-driven evaluation path similar to the on-write scan. A binary with a known-malicious hash gets caught at the network fetch stage (`Detection Origin: Network share`). A binary with an unknown hash passes through.
+Observed behavior is consistent with a reputation- or hash-influenced evaluation path, though Defender's internal decision logic is not observable from telemetry alone.
 
 Critically — Observed behavior suggests a cached reputation/verdict state during repeated execution in this configuration — repeated executions of the same binary hash did not trigger blocking or reclassification after the initial successful run. Both runs in this session used the same binary with no recompile, and neither triggered Defender. This is a more stable execution path than the SMB upload chain, where the on-write scan re-evaluates on every upload.
 
@@ -336,7 +336,17 @@ Subject:       Administrator / LAB2019
 
 **Sysmon EID 1 on Server 2022:** The `Sysmon - Unsigned Binary with Zeroed IMPHASH` rule fired on both targets. Two alerts visible in Kibana — one from the Server 2019 DC run, one from the Server 2022 member server run — identical structure, identical IMPHASH, identical UNC image path.
 
-The detection logic generalizes. The `\Device\Mup\` hunt query and the zeroed IMPHASH correlation are valid across Server 2019 and Server 2022 in this lab configuration.
+The detection logic generalizes. The `\Device\Mup\` hunt query and the zeroed IMPHASH correlation are valid across Server 2019 and Server 2022 in this lab configuration. The telemetry pattern reproduced across both builds, reducing the likelihood the observation is build-specific.
+
+---
+
+## Operational Takeaway
+
+- Removing disk ingress removed the local on-write enforcement point
+- UNC execution shifted inspection toward network retrieval and execution telemetry
+- EID 4663 and Sysmon EID 1 remained observable across Server 2019 and Server 2022 in this configuration
+- Prevention and visibility diverged: blocking failed while telemetry remained available
+- The detection surface didn't disappear — it moved
 
 ---
 
@@ -346,7 +356,6 @@ The detection logic generalizes. The `\Device\Mup\` hunt query and the zeroed IM
 *Defender AV (secondary): 1.449.595.0 / Engine: 1.1.26030.3008*  
 *Test date: 25–26 May 2026*  
 *Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
-
 
 SELECTED SCREENSHOTS:
 
