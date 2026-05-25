@@ -379,8 +379,6 @@ This holds the SMB write open until a cloud verdict returns rather than proceedi
 
 This recommendation addresses the first-seen execution window documented here. It does not materially change post-compromise risk once tooling is reputation-established, allow-listed, or the hash has been seen and cleared by the cloud — as the repeated-run results in this paper demonstrate.
 
-This addresses the execution window observed here. It does not substitute for broader controls — application allow-listing (WDAC, AppLocker), tiered admin models, Defender for Endpoint behavioral detections, and credential guard all apply at different layers and were outside the scope of this test.
-
 ---
 
 ## Scope and Validity Constraints
