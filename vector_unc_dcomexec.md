@@ -301,7 +301,7 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 
 ## Scope and Validity Constraints
 
-- Same lab conditions as previous Vector — single DC, Defender AV only, no MDE, no WDAC
+- Same lab conditions as previous Vector — single DC, Defender AV only, no MDE, no WDAC (https://github.com/osherjacobs/AD-Lab-Research/blob/main/vector_curpipe_nxc.md)
 - `SubmitSamplesConsent: 0` on this host — non-default, extends verdict cache window
 - Anonymous SMB share on Kali — production environments may restrict outbound SMB (445) from DCs to unknown hosts; not tested here
 - dcomexec MMC20 requires DCOM ports (135 + dynamic RPC range) to be reachable — standard in domain environments
