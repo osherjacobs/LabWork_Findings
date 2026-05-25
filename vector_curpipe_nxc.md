@@ -1,4 +1,4 @@
-# Vector — Remote LSASS Credential Access via Custom Dumper, nxc Integration, and .NET Obfuscation
+# Remote LSASS Credential Access via Custom Dumper, nxc Integration, and .NET Obfuscation
 
 **Target:** Windows Server 2019 Standard Evaluation (Build 17763, KB5087061) — Primary Domain Controller  
 **Role:** lab2019.local DC — WIN-JOCP945SK51  
