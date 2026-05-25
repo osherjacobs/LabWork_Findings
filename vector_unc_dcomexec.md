@@ -1,29 +1,38 @@
 # Vector — Remote LSASS Credential Access via UNC Execution and DCOM Lateral Movement
 
-**Target:** Windows Server 2019 Standard Evaluation (Build 17763) — Primary Domain Controller  
+**Target:** Windows Server 2019 Standard Evaluation (Build 17763, KB5082123 — April 2026 CU) — Primary Domain Controller  
 **Role:** lab2019.local DC — WIN-JOCP945SK51  
-**Defender signatures:** AV 1.451.93.0 / Engine 1.1.26040.8  
+**UBR:** 17763.8644  
+**Defender signatures:** AV 1.451.93.0 / Engine 1.1.26040.8 (current as of 25 May 2026)  
+**Real-time protection:** Enabled — `AMRunningMode: Normal`  
 **Context:** Assumed breach — valid Domain Administrator credentials in hand  
-**Prerequisite:** Previous Vector — custom LSASS dumper (curpipe) operational, ConfuserEx obfuscation confirmed working  
 **Methodology:** Operational assumption analysis — documenting where defensive stack assumptions exceed their actual guarantees
 
 ---
 
 ## Research Question
 
-The previous Vector established that under these lab conditions, Defender's primary intervention point appeared to be the SMB write — the binary landing on the target disk via `put_file_single` triggers an on-write scan regardless of delivery method. Can the ingress problem be solved by executing the binary directly from a UNC path without writing it to the target disk at all?
+Given assumed breach on a domain controller, can credential material be extracted from LSASS entirely remotely — without the attacking binary ever touching the target filesystem — and what does the defensive stack actually observe?
+
+---
+
+## The Memory Walker
+
+The credential extraction capability in this chain is a custom .NET LSASS dumper that operates without `MiniDumpWriteDump` or `dbghelp.dll`. It uses direct NT API calls to open a handle to the LSASS process, walk the PEB for loaded module enumeration, traverse committed memory regions, and construct a structurally valid minidump in memory before writing it to a specified output path.
+
+The resulting dump is parseable by pypykatz and KvcForensic and contains the full credential material present in LSASS at the time of execution — NT hashes, Kerberos keys, and session data.
+
+The binary is passed through ConfuserEx prior to deployment. ConfuserEx is a .NET obfuscator originally designed for IP protection. Applied here with rename, control flow mangling, and constants encoding protections, it produces a non-deterministic output — each compile produces a different binary with a different hash. This shifts the cloud ML verdict below Defender's block threshold. The tradeoff: ConfuserEx also zeroes the IMPHASH and strips PE publisher metadata, which introduces a separate Sysmon-detectable anomaly documented in the telemetry section below.
 
 ---
 
 ## The Ingress Problem
 
-In the previous chain, every successful run required:
+Copying the binary to the target disk via SMB triggers Defender's on-write scan. Under this lab configuration, `DetectionType: FastPath` — a cloud-assisted ML verdict — fires on the binary bytes as they land, regardless of the destination path. The detection surface is the write event itself.
 
-1. Binary uploaded to `C:\ProgramData\` via SMB (`put_file_single`)
-2. Defender scans the file on write — `FastPath` cloud ML verdict
-3. Fresh ConfuserEx hash required to stay below the block threshold
+The question: can execution be achieved without a local write, eliminating the on-write scan surface entirely?
 
-The on-write scan is Defender's primary intervention point. Remove the local disk ingress point, shift the scan surface to network retrieval.
+Answer: yes — via UNC-hosted execution. The binary is served from Kali over SMB and executed directly from the network path. The target fetches and runs it without persisting it to local disk. Remove the local disk ingress point, shift the scan surface to network retrieval.
 
 ---
 
@@ -293,6 +302,7 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 *Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
 *Test date: 25 May 2026*  
 *Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
+
 
 SELECTED SCREENSHOTS:
 
