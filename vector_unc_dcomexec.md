@@ -14,7 +14,7 @@
 
 Given assumed breach on a domain controller, can credential material be extracted from LSASS entirely remotely — without the attacking binary ever touching the target filesystem — and what does the defensive stack actually observe?
 
-The resulting telemetry includes a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) that directly fingerprints UNC-hosted execution against LSASS — surfaced here for the first time in this research context.
+The resulting telemetry includes a distinctive EID 4663 process representation (`\Device\Mup\192.168.1.218\share\curnxc1.exe`) that directly fingerprints UNC-hosted execution against LSASS — observed in this setting.
 
 ---
 
