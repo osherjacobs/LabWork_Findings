@@ -112,7 +112,7 @@ logon_server WIN-JOCP945SK51
                 Username: Administrator
                 Domain: LAB2019
                 LM: NA
-                NT: 3c02b6b6fb6b3b17<redacted>
+                NT: 3c0<redacted>
                 SHA1: af611<redacted>
         == Kerberos ==
                 Username: Administrator
