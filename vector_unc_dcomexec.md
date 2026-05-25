@@ -305,6 +305,7 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 - `SubmitSamplesConsent: 0` on this host — non-default, extends verdict cache window
 - Anonymous SMB share on Kali — production environments may restrict outbound SMB (445) from DCs to unknown hosts; not tested here
 - dcomexec MMC20 requires DCOM ports (135 + dynamic RPC range) to be reachable — standard in domain environments
+- Credential Guard not enabled — with CG active, LSASS memory access would succeed structurally but yield no usable credential material from protected secrets; DCSync via DRSUAPI remains unaffected regardless
 
 ## Tools Used
 
