@@ -319,6 +319,8 @@ PS> auditpol /get /subcategory:"Kernel Object"
   Kernel Object          Success and Failure
 ```
 
+The audit infrastructure was clearly active — the 4656 log contains concurrent handle requests from vmtoolsd.exe, PowerShell, services.exe, and svchost.exe against files, registry keys, and service objects. The absence of a process handle entry for lsass specifically is the signal, not a general audit failure.
+
 No EID 4656 was observed for the `NtOpenProcess` call in this lab, despite Handle Manipulation auditing being enabled on both success and failure. Comparative testing against a conventional `OpenProcess` implementation would be needed to isolate whether this reflects a causal difference in the syscall path, a SACL configuration artifact, or an interaction with LSASS protection state. The observation stands: memory access (4663) is logged; handle acquisition (4656) was not. That visibility gap warrants further controlled investigation.
 
 ### Defender EID 1116/1117
