@@ -405,7 +405,7 @@ Findings should be interpreted as behavioral observations under these specific c
 
 
 
-SCREENSHOTS:
+SELECTED SCREENSHOTS:
 
 <img width="1910" height="1051" alt="attack" src="https://github.com/user-attachments/assets/f0d89074-16fa-411c-b1fb-ae612c3d303c" />
 
@@ -414,11 +414,3 @@ SCREENSHOTS:
 <img width="1902" height="1026" alt="curnxcwineid" src="https://github.com/user-attachments/assets/0b29b7fa-7250-4dcc-a04f-a2efe1fcd9f7" />
 
 <img width="1291" height="994" alt="defender1" src="https://github.com/user-attachments/assets/788f8562-d23f-4d22-85cc-cba44a7213d1" />
-
-
-
-
-*Target: Windows Server 2019 Build 17763 — lab2019.local PDC*  
-*Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
-*Test date: 25 May 2026*  
-*Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
