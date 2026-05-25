@@ -293,3 +293,23 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 *Defender AV: 1.451.93.0 / Engine: 1.1.26040.8*  
 *Test date: 25 May 2026*  
 *Methodology: Operational assumption analysis — trust assumptions as attack surfaces*
+
+SELECTED SCREENSHOTS:
+
+<img width="1912" height="1062" alt="attack" src="https://github.com/user-attachments/assets/53fa32ad-af80-44a3-b386-8511009aed9a" />
+
+<img width="1803" height="1039" alt="filedumpandrtp" src="https://github.com/user-attachments/assets/425bf42d-0caa-4b25-8f12-e189758ef8a4" />
+
+<img width="1324" height="480" alt="ubr+rtp" src="https://github.com/user-attachments/assets/ab3014a4-d234-4e39-bb38-399f5e248edb" />
+
+<img width="1776" height="889" alt="confuser" src="https://github.com/user-attachments/assets/5eaf624a-8df0-4966-811c-67d5063fd606" />
+
+<img width="1900" height="1044" alt="4663" src="https://github.com/user-attachments/assets/ac06933f-8cd9-4d29-8169-1e2ac4f860ea" />
+
+<img width="1914" height="1080" alt="zeroedimphash1" src="https://github.com/user-attachments/assets/a0670df8-375e-4182-a73a-884cb620d4e7" />
+
+
+
+
+
+
