@@ -277,6 +277,8 @@ Scan 2 (on-close):
 
 **Connection to prior research:** In earlier research (April 2026, Vector 4), Defender's runtime enforcement layer was observed to degrade dump write throughput by approximately 30-45x — from seconds to 30-45 minutes — without blocking completion and without emitting any standard audit events (no EID 1116/1117, no EID 10). The precise mechanism was not isolated in that session. The current ETW trace may be observing components of that mechanism: the AMFilter intercepts at file open time (§3.3), the behavior-monitor-triggered processmemoryscan at runtime (§3.5), and the 2,331ms on-close scan of lsass.dmp are all candidates. Whether any of these individually or in combination accounts for the throughput degradation observed in April remains an open question requiring controlled isolation testing.
 
+**Note on comparability:** The binary used in Vector 4 was a minimal ~17-line C# implementation — a deliberately sparse scan surface presenting almost no behavioral or structural profile to the engine. The memory walker used in this chain is substantially more complex (~200-300 lines). The throughput degradation observed in April therefore occurred against the simpler binary, which makes it the more striking finding: a minimal implementation with almost no observable surface still triggered runtime enforcement significant enough to degrade write throughput 30-45x. Whether the more complex implementation used here would produce materially different runtime enforcement behavior under a local-write scenario remains untested in a controlled side-by-side.
+
 ---
 
 ### 3.9 Cloud Interaction (Spynet/MAPS)
