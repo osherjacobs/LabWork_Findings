@@ -275,7 +275,7 @@ Scan 2 (on-close):
 
 **Observed:** Defender scanned lsass.dmp on both write (11ms) and close (2,331ms). The on-close scan was materially longer than both the binary stream scan (38ms) and runtime memory scan (29ms). No prevention or detection action is observable from either scan.
 
-**Historical context:** In earlier research (April 2026), a Defender classification against a dump file appeared after approximately 45 minutes following an initial clean verdict. That finding is relevant here: "no observable action at time of scan" is not equivalent to "permanently undetected." Post-execution cloud-assisted re-evaluation may assign a verdict after the relevant operational window has closed. Whether that occurred in this session was not captured in this trace window.
+**Connection to prior research:** In earlier research (April 2026, Vector 4), Defender's runtime enforcement layer was observed to degrade dump write throughput by approximately 30-45x — from seconds to 30-45 minutes — without blocking completion and without emitting any standard audit events (no EID 1116/1117, no EID 10). The precise mechanism was not isolated in that session. The current ETW trace may be observing components of that mechanism: the AMFilter intercepts at file open time (§3.3), the behavior-monitor-triggered processmemoryscan at runtime (§3.5), and the 2,331ms on-close scan of lsass.dmp are all candidates. Whether any of these individually or in combination accounts for the throughput degradation observed in April remains an open question requiring controlled isolation testing.
 
 ---
 
