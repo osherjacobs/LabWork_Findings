@@ -1,7 +1,5 @@
 <img width="1915" height="1080" alt="PERFVIEW1" src="https://github.com/user-attachments/assets/0a91498c-bf1c-4fa1-baf0-73d7d4f900a6" />
 
-
-
 # Defender Engine Telemetry — UNC-Hosted LSASS Credential Access
 ## ETW Analysis via Microsoft-Antimalware-Engine Provider
 
@@ -100,7 +98,40 @@ Result:     MISS
 
 ---
 
-### 3.3 Stream Scan — Binary Execution
+### 3.3 AMFilter Intercept — Kernel Minifilter Layer
+
+**Provider:** `Microsoft-Antimalware-AMFilter/AMFilter_FileScan`
+
+Two `AMFilter_FileScan` events were surfaced by filtering PerfView on process name `nxc`:
+
+```
+Event 1:
+  Time:                    34,289.598ms
+  Process:                 cmd (7936)
+  FileName:                \Device\Mup\192.168.1.218\share\curnxc1.exe
+  Reason:                  OnOpen
+  IoStatusBlockForNewFile: 4,294,967,295
+
+Event 2:
+  Time:                    34,811.434ms
+  Process:                 curnxc1 (7728)
+  FileName:                \Device\HarddiskVolume4\ProgramData\lsass.dmp
+  Reason:                  OnOpen
+```
+
+**Observed:** The AMFilter kernel minifilter driver intercepted two file open operations: the UNC binary open by cmd.exe, and the lsass.dmp open by curnxc1.exe. Both events carry `Reason=OnOpen` — these are filter-level intercepts at file open time, not scan results.
+
+**Timing relationship:** The AMFilter intercept of the UNC binary (34,289.598ms) precedes the StreamScanRequest Start (34,289.752ms) by approximately 0.15ms. The observable sequence is: minifilter intercept → engine scan request. This ordering is consistent with the expected architecture: the filter driver intercepts the file operation and hands off to the engine for evaluation.
+
+**IoStatusBlockForNewFile: 4,294,967,295 (0xFFFFFFFF):** This field on the UNC binary open event is observable but its precise interpretation in this context is unknown. The value is consistent with a read-only network share fetch rather than a local file creation, though other interpretations are possible. This is noted as an observation rather than a conclusion.
+
+**What this adds:** The AMFilter events confirm that the Defender filter driver layer observed both file open operations at the kernel level — the UNC binary fetch and the dump file write. The filter layer is a distinct instrumentation surface from the engine scan layer documented in §3.5 and §3.9. Observation at the filter layer does not in itself imply any particular engine verdict or action.
+
+**What this does not show:** The AMFilter_FileScan events do not include verdict or action fields in this capture. Whether the filter layer passed, blocked, or deferred either file open cannot be determined from these events alone — the absence of a block is inferred from the successful execution documented in the primary writeup, not from these events directly.
+
+---
+
+### 3.4 Stream Scan — Binary Execution
 
 **Provider:** `Microsoft-Antimalware-Engine/StreamScanRequestTask`
 
@@ -124,11 +155,11 @@ Stop:
 
 **Context:** This is the same scan surface that produced `Detection Origin: Network share / DetectionType: FastPath / Name: Trojan:Win32/Bearfoos.B!ml` with the previously-classified binary hash. The same scan path fired with the fresh ConfuserEx hash and produced no observable action.
 
-**\Device\Mup\ consistency:** The UNC path representation in the stream scan Process field matches the representation observed in EID 4663 and BmProcessContextStart (§3.5). The `\Device\Mup\` notation is the kernel's canonical representation of UNC-hosted executables — consistent across the security audit subsystem, the behavior monitor, and the stream scan engine.
+**\Device\Mup\ consistency:** The UNC path representation in the stream scan Process field matches the representation observed in EID 4663 and BmProcessContextStart (§3.6). The `\Device\Mup\` notation is the kernel's canonical representation of UNC-hosted executables — consistent across the security audit subsystem, the behavior monitor, and the stream scan engine.
 
 ---
 
-### 3.4 Runtime Memory Scan
+### 3.5 Runtime Memory Scan
 
 **Provider:** `Microsoft-Antimalware-Engine/ScanRequestTask`
 
@@ -157,7 +188,7 @@ Stop:
 
 ---
 
-### 3.5 Behavior Monitor Execution Context
+### 3.6 Behavior Monitor Execution Context
 
 **Provider:** `Microsoft-Antimalware-Engine/BehaviorMonitorTask/BmProcessContextStart`
 
@@ -192,7 +223,7 @@ Result:           [no verdict fields]
 
 ---
 
-### 3.6 LSASS Handle Acquisition — Visibility Gap
+### 3.7 LSASS Handle Acquisition — Visibility Gap
 
 **Provider:** `Microsoft-Antimalware-Engine/BehaviorMonitorTask/BmOpenProcess`
 
@@ -216,7 +247,7 @@ WasHardened: False
 
 ---
 
-### 3.7 Dump File Scanning
+### 3.8 Dump File Scanning
 
 **Provider:** `Microsoft-Antimalware-Engine/StreamScanRequestTask`
 
@@ -248,7 +279,7 @@ Scan 2 (on-close):
 
 ---
 
-### 3.8 Cloud Interaction (Spynet/MAPS)
+### 3.9 Cloud Interaction (Spynet/MAPS)
 
 **Provider:** `Microsoft-Antimalware-Service`
 
