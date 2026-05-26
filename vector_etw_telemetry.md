@@ -1,3 +1,7 @@
+<img width="1915" height="1080" alt="PERFVIEW1" src="https://github.com/user-attachments/assets/0a91498c-bf1c-4fa1-baf0-73d7d4f900a6" />
+
+
+
 # Defender Engine Telemetry — UNC-Hosted LSASS Credential Access
 ## ETW Analysis via Microsoft-Antimalware-Engine Provider
 
