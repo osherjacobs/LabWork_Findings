@@ -306,6 +306,7 @@ Fresh ConfuserEx compile resets the hash when needed. The cost of resetting the 
 - Anonymous SMB share on Kali — production environments may restrict outbound SMB (445) from DCs to unknown hosts; not tested here
 - dcomexec MMC20 requires DCOM ports (135 + dynamic RPC range) to be reachable — standard in domain environments
 - Credential Guard not enabled — with CG active, LSASS memory access would succeed structurally but yield no usable credential material from protected secrets; DCSync via DRSUAPI remains unaffected regardless
+ > **Note:** The relative contribution of ConfuserEx obfuscation versus UNC-hosted execution to the observed evasion outcome was not ablation-tested in this session. Each component is expected to address a distinct detection surface — binary ML verdict and on-write scan respectively — but controlled testing with each variable isolated remains as a follow-on.
 
 ---
 
