@@ -1,5 +1,5 @@
 # Vector — Remote LSASS Credential Access via UNC Execution and DCOM Lateral Movement
-
+(For a deeper analysis of how defender analyzes this attack see this writeup: https://github.com/osherjacobs/AD-Lab-Research/blob/main/vector_etw_telemetry.md)
 **Target:** Windows Server 2019 Standard Evaluation (Build 17763, KB5082123 — April 2026 CU) — Primary Domain Controller  
 **Role:** lab2019.local DC — WIN-JOCP945SK51  
 **UBR:** 17763.8644  
