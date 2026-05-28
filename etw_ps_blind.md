@@ -1,3 +1,6 @@
+<img width="1880" height="954" alt="defenderonpowerview" src="https://github.com/user-attachments/assets/9cd9296c-e8a7-46a5-8a74-50bc6f06499e" />
+
+
 # Blinding the Microsoft-Windows-PowerShell ETW Provider
 ### Managed Reflection Handle Zeroing + AMSI Bypass — Lab Notes
 **Platform:** Windows Server 2019 (Build 17763.8644)  
@@ -384,6 +387,22 @@ Operationalizing detection against this technique is non-trivial:
 - **`net use` credential exposure** — credentials passed via `net use` appear verbatim in Sysmon EID 1 CommandLine regardless of ETW or AMSI state. No PS-layer evasion technique affects process create telemetry. This is a hard boundary worth operationalizing as a detection rule if not already present.
 
 The strongest available primitive remains the 4104 gap: a PS session with process lifetime but absent script block telemetry is an anomaly worth investigating. Difficult to operationalize reliably, but it survives technique evolution.
+
+SELECTED SCREENSHOTS:
+
+<img width="1900" height="940" alt="revshella" src="https://github.com/user-attachments/assets/000c80ad-e89a-4490-a003-4de1d8b3c040" />
+
+
+<img width="1365" height="878" alt="checkandsetup" src="https://github.com/user-attachments/assets/e0e68e2c-b16d-4077-8abf-4d676c7eb78a" />
+
+<img width="1886" height="960" alt="powerviewFROMDCETWDISABLEDWINDOW" src="https://github.com/user-attachments/assets/6ba2676b-2547-41b4-b3f8-ebc283dbf53b" />
+
+<img width="1882" height="565" alt="powerviewFROMDCETWDISABLEDWINDOWa" src="https://github.com/user-attachments/assets/4b8a9982-8072-4db8-8176-d7b67afa39fc" />
+
+<img width="1210" height="698" alt="revshell" src="https://github.com/user-attachments/assets/d6b77495-4ec5-465b-a8ad-7da16ffe1eb8" />
+
+
+
 
 ---
 
