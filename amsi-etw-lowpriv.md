@@ -1,4 +1,4 @@
-# Vector 8 — AMSI/ETW Bypass from Unprivileged Context: Assumed Breach Without Admin
+# AMSI/ETW Bypass from Unprivileged Context: Assumed Breach Without Admin
 
 **Environment:** Windows Server 2019 (lab2019.local), Defender RTP enabled, AMSI enabled, ETW enabled, no exclusions.
 
