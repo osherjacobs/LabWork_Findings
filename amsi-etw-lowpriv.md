@@ -50,9 +50,7 @@ Implementation details are intentionally omitted. The mechanism is well-document
 
 The full implementation — including exact reflection targets, field names, construction patterns, and execution sequencing — was validated in lab and is documented in private notes. It is not published here.
 
-This is a deliberate choice. The finding and its detection implications are fully communicable without providing a copy-paste operational chain. A researcher or defender who understands the mechanism described above has everything they need. Someone looking to reduce discovery cost does not.
-
-If you work in detection engineering, purple team, or identity security and want to discuss the implementation in a professional context — I'm reachable. I'm also actively looking for my next role in exactly these areas.
+This is a deliberate choice. The finding and its detection implications are fully communicable without providing a copy-paste operational chain. A researcher or defender who understands the mechanism described above has everything they need. Someone looking to reduce discovery cost may not.
 
 ---
 
