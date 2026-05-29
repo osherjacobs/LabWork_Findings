@@ -1,3 +1,6 @@
+
+<img width="1881" height="986" alt="attacksanitized" src="https://github.com/user-attachments/assets/31c9f509-b317-40be-82b1-47697bb1563b" />
+
 # AMSI/ETW Bypass from Unprivileged Context: Assumed Breach Without Admin
 
 **Environment:** Windows Server 2019 (lab2019.local), Defender RTP enabled, AMSI enabled, ETW enabled, no exclusions.
