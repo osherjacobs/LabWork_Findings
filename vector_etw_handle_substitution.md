@@ -128,6 +128,8 @@ Authentication telemetry (4624), process ancestry, network activity, LDAP activi
 
 This is not process invisibility, network invisibility, or a persistence mechanism.
 
+In tested sessions, authentication telemetry confirmed the session remained active and tracked throughout. ScriptBlock telemetry did not consistently reflect execution within that same session. A defender observing both would see a legitimate domain-authenticated session with normal network activity but no corresponding PowerShell execution visibility — not because execution was absent, but because that telemetry layer had degraded. The monitoring stack appeared intact; the visibility was not
+
 ---
 
 ## Operational Tradeoff
