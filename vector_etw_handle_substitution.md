@@ -9,7 +9,7 @@
 **Defender RTP:** Enabled · **ScriptBlock logging:** Enabled (registry/GPO)
 **Test date:** May 2026
 
-**Acknowledgment:** A public discussion with Adrian Cepero Corcho of Fortisec following earlier ETW provider-interference testing prompted exploration of handle substitution as a related direction. The testing, characterization, and telemetry analysis presented here reflect independent lab work under the conditions described.
+**Acknowledgment:** A public discussion with Adrian Cepero Corcho (Fortisec) following earlier ETW provider-interference testing prompted exploration of handle substitution as a related direction. The testing, characterization, and telemetry analysis presented here reflect independent lab work under the conditions described.
 
 ---
 
