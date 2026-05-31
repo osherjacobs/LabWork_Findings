@@ -124,7 +124,7 @@ In tested sessions, 4104 captured reflection activity against ETW provider inter
 EID 4104 (ScriptBlock content), EID 4103 (module logging), post-substitution PowerShell content visibility.
 
 **What does not disappear:**
-Authentication telemetry (4624, 4776), process ancestry, network activity, LDAP activity, Sysmon process and network events.
+Authentication telemetry (4624), process ancestry, network activity, LDAP activity, Sysmon process and network events.
 
 This is not process invisibility, network invisibility, or a persistence mechanism.
 
