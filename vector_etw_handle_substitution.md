@@ -1,3 +1,6 @@
+<img width="1916" height="679" alt="4104" src="https://github.com/user-attachments/assets/d50bef62-658a-45e2-b67f-7dfbf3c7a7b9" />
+
+
 # ETW Handle Substitution — ScriptBlock Logging Suppression via Throwaway Provider
 
 **Series:** Operational Assumption Analysis
@@ -153,3 +156,6 @@ The finding is not that ScriptBlock logging can be disabled.
 The narrower observation is that a policy-enabled telemetry control may remain configured yet become operationally unreliable within a session boundary under tested conditions.
 
 The defensive question is therefore not simply whether a control is configured, but whether telemetry continuity can be trusted at runtime and assumed to hold throughout uptime.
+
+<img width="1918" height="957" alt="4624" src="https://github.com/user-attachments/assets/1be5725e-4668-4564-88fe-a69c48759a46" />
+
