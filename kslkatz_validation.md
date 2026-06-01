@@ -178,6 +178,16 @@ Server 2025 UBR 32690
 
 <img width="1535" height="865" alt="2025NOCREDSUBR" src="https://github.com/user-attachments/assets/768fe520-c21f-466f-b600-ff470d2f60b0" />
 
+Defender detection
+
+Server 2022 pre-obfuscation
+
+<img width="1319" height="736" alt="defendercaugthon2022" src="https://github.com/user-attachments/assets/631ffb5a-d0e8-4424-b162-7d9e153a1014" />
+
+Server 2025 pre-rename
+
+<img width="890" height="886" alt="2025CAUGHTPRERENAME" src="https://github.com/user-attachments/assets/19959ba3-cd16-4cc5-bfbf-045074f617ce" />
+
 
 ELK JSON 
 
