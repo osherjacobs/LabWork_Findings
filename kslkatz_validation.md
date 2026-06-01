@@ -15,8 +15,8 @@
 |-------|-------------|
 | PPL bypass | Confirmed |
 | Credential extraction | Partially confirmed |
-| Build-based support matrix | Contradicted |
-| UBR sensitivity | Observed |
+| Build-based support matrix | Not fully tested / Needs more work |
+| UBR sensitivity | Strongly suggested |
 | Defender evasion | Inconsistent across builds |
 | Registry IOC (EID 13) | Consistent across all hosts |
 
