@@ -134,6 +134,7 @@ The restore write confirms execution completed. The attack write is the primary 
 
 Expected false-positive rate is extremely low: the legitimate KslD service path always resolves to `drivers\wd\KslD.sys`, and any deviation is highly suspicious. This is not a heuristic — it is a structural requirement of the attack chain.
 
+
 No detailed telemetry analysis was performed beyond confirming event presence and field values. A thorough analysis — covering process ancestry, handle telemetry, driver load events, and behavioral clustering — would be a significant undertaking beyond the scope of this validation. The audience is invited to extend that work. Telemetry screenshots from this lab are included for reference.
 
 ---
@@ -157,6 +158,8 @@ These findings reflect a single lab environment and should not be treated as def
 KslKatz is clearly a well-engineered tool and the underlying technique is sound. I was not able to reliably reproduce the expected results across the full claimed support matrix — but that is a reflection of my environment and the UBR sensitivity of the pattern matching, not necessarily a fundamental flaw in the approach. The UBR dependency hypothesis is the most parsimonious explanation for the observed outcomes, but confirming it would require systematic testing across multiple UBRs on the same base build — something outside the scope of this lab session.
 
 Independent replication across additional UBRs — particularly Server 2022 between UBR 588–5019 — would help validate or falsify the UBR sensitivity hypothesis. Testing on Server 2025 is outside the tool's claimed support matrix but may be of interest to researchers. I used this test on Sever 2025 as a vehicle to test Defender / evasion behaviour.
+
+Note: testing was conducted against Windows Defender only. Behaviour against EDR solutions or MDE with advanced hunting enabled was not assessed.
 
 Server 2019 UBR 8755
 
