@@ -78,7 +78,7 @@ Root cause: `walk_primary()` in `lsa.cpp` gates credential extraction on `!dec[0
 |------|----|-------|-----|-----------------|--------|---------|-----------------|-------|
 | WIN-JOCP945SK51 | Windows Server 2019 | 17763 | 8755 | rename only | ✅ | ❌ | Off | WDigest disabled by default |
 | WIN-ATTACK | Windows Server 2022 | 20348 | 587 | rename + morphkatz | ✅ | ❌ | Off | WDigest disabled by default |
-| WIN-1KS84GNPAUM | Windows Server 2022 | 20348 | 5020 | rename | ❌ | ❌ | Off | LogonSessionList signature miss. Unable to reproduce expected results |
+| WIN-1KS84GNPAUM | Windows Server 2022 | 20348 | 5020 | rename only | ❌ | ❌ | Off | LogonSessionList signature miss. Unable to reproduce expected results |
 | DC02 | Windows Server 2025 | 26100 | 32690 | rename only | ❌ | ❌ | Off (VBS not enabled) | LogonSessionList + WDigest signature miss. Unable to reproduce expected results. Native vulnerable driver present. App Control for Business enforced |
 
 ---
