@@ -111,6 +111,8 @@ One observation worth noting on the morphkatz workflow: the `--target-defender` 
 
 In practice, the dev machine's Defender did not flag KslKatz even with real-time protection enabled and signatures updated, so bisection produced no anchors and the code rewriter generated zero candidate rewrites regardless. The data-morph pass — driven by a manually written YARA rule targeting known KslKatz strings — was the only effective component. This is consistent with an ML detection that scores on aggregate PE features rather than discrete byte sequences, and confirms that bisection-based feedback loops only work when the scanning engine on the dev machine matches the detection posture of the target environment.
 
+Note: testing was conducted against Windows Defender only. Behaviour against EDR solutions or MDE with advanced hunting enabled was not assessed.
+
 ---
 
 ## Detection
@@ -159,7 +161,6 @@ KslKatz is clearly a well-engineered tool and the underlying technique is sound.
 
 Independent replication across additional UBRs — particularly Server 2022 between UBR 588–5019 — would help validate or falsify the UBR sensitivity hypothesis. Testing on Server 2025 is outside the tool's claimed support matrix but may be of interest to researchers. I used this test on Sever 2025 as a vehicle to test Defender / evasion behaviour.
 
-Note: testing was conducted against Windows Defender only. Behaviour against EDR solutions or MDE with advanced hunting enabled was not assessed.
 
 Server 2019 UBR 8755
 
