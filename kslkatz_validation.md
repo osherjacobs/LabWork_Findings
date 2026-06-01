@@ -1,3 +1,6 @@
+<img width="1914" height="958" alt="EIDACCROSSHOSTS13" src="https://github.com/user-attachments/assets/cc7c9722-af34-402d-9e92-0a8a9719d52d" />
+
+
 # KslKatz Lab Validation — Operational Assumption Analysis
 
 **Tool:** [KslKatz](https://github.com/S1lky/KslKatz) — BYOVD credential extractor using Microsoft Defender's KslD.sys  
@@ -154,3 +157,5 @@ These findings reflect a single lab environment and should not be treated as def
 KslKatz is clearly a well-engineered tool and the underlying technique is sound. I was not able to reliably reproduce the expected results across the full claimed support matrix — but that is a reflection of my environment and the UBR sensitivity of the pattern matching, not necessarily a fundamental flaw in the approach. The UBR dependency hypothesis is the most parsimonious explanation for the observed outcomes, but confirming it would require systematic testing across multiple UBRs on the same base build — something outside the scope of this lab session.
 
 Independent replication across additional UBRs — particularly Server 2022 between UBR 588–5019 — would help validate or falsify the UBR sensitivity hypothesis. Testing on Server 2025 is outside the tool's claimed support matrix but may be of interest to researchers.
+
+
