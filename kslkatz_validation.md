@@ -181,783 +181,244 @@ Server 2025 UBR 32690
 
 ELK JSON 
 
-"WIN-ATTACK"
-
-{
-  "_index": ".ds-winlogbeat-8.19.12-2026.03.19-000001",
-  "_id": "ReTKhJ4BW3PCqUwNj6kz",
-  "_version": 1,
-  "_source": {
-    "@timestamp": "2026-06-01T20:05:21.952Z",
-    "agent": {
-      "ephemeral_id": "bb727259-ce37-43c5-917c-7dd56ef33f6c",
-      "id": "3d29cd4b-344b-43dc-a6cd-fbda0a2d60f8",
-      "name": "WIN-ATTACK",
-      "type": "winlogbeat",
-      "version": "8.19.12"
-    },
-    "winlog": {
-      "computer_name": "WIN-ATTACK.lab2019.local",
-      "user": {
-        "identifier": "S-1-5-18",
-        "domain": "NT AUTHORITY",
-        "name": "SYSTEM",
-        "type": "User"
-      },
-      "version": 2,
-      "event_data": {
-        "UtcTime": "2026-06-01 20:05:21.952",
-        "EventType": "SetValue",
-        "ProcessGuid": "{b5c63fd8-e41c-6a1d-0b00-000000002400}",
-        "ProcessId": "708",
-        "Details": "system32\\drivers\\wd\\KslD.sys",
-        "Image": "C:\\Windows\\system32\\services.exe",
-        "User": "NT AUTHORITY\\SYSTEM",
-        "RuleName": "T1031,T1050",
-        "TargetObject": "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath"
-      },
-      "record_id": 5844,
-      "task": "Registry value set (rule: RegistryEvent)",
-      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
-      "provider_name": "Microsoft-Windows-Sysmon",
-      "api": "wineventlog",
-      "event_id": "13",
-      "opcode": "Info",
-      "process": {
-        "pid": 2772,
-        "thread": {
-          "id": 4608
-        }
-      },
-      "channel": "Microsoft-Windows-Sysmon/Operational"
-    },
-    "event": {
-      "provider": "Microsoft-Windows-Sysmon",
-      "action": "Registry value set (rule: RegistryEvent)",
-      "created": "2026-06-01T20:05:23.768Z",
-      "code": "13",
-      "kind": "event"
-    },
-    "log": {
-      "level": "information"
-    },
-    "message": "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 20:05:21.952\nProcessGuid: {b5c63fd8-e41c-6a1d-0b00-000000002400}\nProcessId: 708\nImage: C:\\Windows\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: system32\\drivers\\wd\\KslD.sys\nUser: NT AUTHORITY\\SYSTEM",
-    "host": {
-      "name": "WIN-ATTACK.lab2019.local"
-    },
-    "ecs": {
-      "version": "8.0.0"
-    }
-  },
-  "fields": {
-    "winlog.process.thread.id": [
-      4608
-    ],
-    "winlog.event_data.ProcessGuid": [
-      "{b5c63fd8-e41c-6a1d-0b00-000000002400}"
-    ],
-    "winlog.provider_guid": [
-      "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
-    ],
-    "winlog.provider_name": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "winlog.computer_name": [
-      "WIN-ATTACK.lab2019.local"
-    ],
-    "winlog.process.pid": [
-      2772
-    ],
-    "winlog.user.type": [
-      "User"
-    ],
-    "agent.type": [
-      "winlogbeat"
-    ],
-    "winlog.record_id": [
-      "5844"
-    ],
-    "winlog.api": [
-      "wineventlog"
-    ],
-    "log.level": [
-      "information"
-    ],
-    "agent.name": [
-      "WIN-ATTACK"
-    ],
-    "host.name": [
-      "WIN-ATTACK.lab2019.local"
-    ],
-    "winlog.event_data.UtcTime": [
-      "2026-06-01 20:05:21.952"
-    ],
-    "winlog.event_data.Details": [
-      "system32\\drivers\\wd\\KslD.sys"
-    ],
-    "event.kind": [
-      "event"
-    ],
-    "winlog.event_data.ProcessId": [
-      "708"
-    ],
-    "winlog.user.identifier": [
-      "S-1-5-18"
-    ],
-    "winlog.version": [
-      2
-    ],
-    "winlog.task": [
-      "Registry value set (rule: RegistryEvent)"
-    ],
-    "winlog.user.domain": [
-      "NT AUTHORITY"
-    ],
-    "winlog.event_data.RuleName": [
-      "T1031,T1050"
-    ],
-    "winlog.event_data.TargetObject": [
-      "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath"
-    ],
-    "winlog.event_data.User": [
-      "NT AUTHORITY\\SYSTEM"
-    ],
-    "agent.hostname": [
-      "WIN-ATTACK"
-    ],
-    "message": [
-      "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 20:05:21.952\nProcessGuid: {b5c63fd8-e41c-6a1d-0b00-000000002400}\nProcessId: 708\nImage: C:\\Windows\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: system32\\drivers\\wd\\KslD.sys\nUser: NT AUTHORITY\\SYSTEM"
-    ],
-    "winlog.event_id": [
-      "13"
-    ],
-    "winlog.user.name": [
-      "SYSTEM"
-    ],
-    "winlog.event_data.Image": [
-      "C:\\Windows\\system32\\services.exe"
-    ],
-    "event.action": [
-      "Registry value set (rule: RegistryEvent)"
-    ],
-    "event.provider": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "@timestamp": [
-      "2026-06-01T20:05:21.952Z"
-    ],
-    "event.code": [
-      "13"
-    ],
-    "agent.id": [
-      "3d29cd4b-344b-43dc-a6cd-fbda0a2d60f8"
-    ],
-    "winlog.channel": [
-      "Microsoft-Windows-Sysmon/Operational"
-    ],
-    "ecs.version": [
-      "8.0.0"
-    ],
-    "winlog.event_data.EventType": [
-      "SetValue"
-    ],
-    "event.created": [
-      "2026-06-01T20:05:23.768Z"
-    ],
-    "winlog.opcode": [
-      "Info"
-    ],
-    "agent.ephemeral_id": [
-      "bb727259-ce37-43c5-917c-7dd56ef33f6c"
-    ],
-    "agent.version": [
-      "8.19.12"
-    ]
-  }
-}
-
-DC02:
-
-{
-  "_index": ".ds-winlogbeat-8.19.12-2026.03.19-000001",
-  "_id": "vuTChJ4BW3PCqUwNap4t",
-  "_version": 1,
-  "_source": {
-    "@timestamp": "2026-06-01T19:56:23.021Z",
-    "event": {
-      "created": "2026-06-01T19:56:24.605Z",
-      "code": "13",
-      "kind": "event",
-      "provider": "Microsoft-Windows-Sysmon",
-      "action": "Process Create (rule: ProcessCreate)"
-    },
-    "log": {
-      "level": "information"
-    },
-    "message": "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 19:56:23.020\nProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}\nProcessId: 788\nImage: C:\\WINDOWS\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: system32\\drivers\\wd\\KslD.sys\nUser: NT AUTHORITY\\SYSTEM",
-    "host": {
-      "name": "DC02.badsuccessor.local"
-    },
-    "ecs": {
-      "version": "8.0.0"
-    },
-    "agent": {
-      "version": "8.19.12",
-      "ephemeral_id": "ee78f402-ae21-429b-adcf-98798c958a90",
-      "id": "d03fb57b-7222-4253-b677-4d8eba92e648",
-      "name": "DC02",
-      "type": "winlogbeat"
-    },
-    "winlog": {
-      "task": "Process Create (rule: ProcessCreate)",
-      "channel": "Microsoft-Windows-Sysmon/Operational",
-      "api": "wineventlog",
-      "event_id": "13",
-      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
-      "user": {
-        "identifier": "S-1-5-18",
-        "domain": "NT AUTHORITY",
-        "name": "SYSTEM",
-        "type": "User"
-      },
-      "process": {
-        "pid": 2256,
-        "thread": {
-          "id": 3932
-        }
-      },
-      "computer_name": "DC02.badsuccessor.local",
-      "opcode": "Info",
-      "version": 2,
-      "event_data": {
-        "RuleName": "T1031,T1050",
-        "ProcessGuid": "{65f03206-9d40-6a1d-0b00-000000002100}",
-        "ProcessId": "788",
-        "Image": "C:\\WINDOWS\\system32\\services.exe",
-        "EventType": "SetValue",
-        "TargetObject": "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath",
-        "Details": "system32\\drivers\\wd\\KslD.sys",
-        "UtcTime": "2026-06-01 19:56:23.020",
-        "User": "NT AUTHORITY\\SYSTEM"
-      },
-      "record_id": 34568,
-      "provider_name": "Microsoft-Windows-Sysmon"
-    }
-  },
-  "fields": {
-    "winlog.process.thread.id": [
-      3932
-    ],
-    "winlog.event_data.ProcessGuid": [
-      "{65f03206-9d40-6a1d-0b00-000000002100}"
-    ],
-    "winlog.provider_guid": [
-      "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
-    ],
-    "winlog.provider_name": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "winlog.computer_name": [
-      "DC02.badsuccessor.local"
-    ],
-    "winlog.process.pid": [
-      2256
-    ],
-    "winlog.user.type": [
-      "User"
-    ],
-    "agent.type": [
-      "winlogbeat"
-    ],
-    "winlog.record_id": [
-      "34568"
-    ],
-    "winlog.api": [
-      "wineventlog"
-    ],
-    "log.level": [
-      "information"
-    ],
-    "agent.name": [
-      "DC02"
-    ],
-    "host.name": [
-      "DC02.badsuccessor.local"
-    ],
-    "winlog.event_data.UtcTime": [
-      "2026-06-01 19:56:23.020"
-    ],
-    "winlog.event_data.Details": [
-      "system32\\drivers\\wd\\KslD.sys"
-    ],
-    "event.kind": [
-      "event"
-    ],
-    "winlog.event_data.ProcessId": [
-      "788"
-    ],
-    "winlog.user.identifier": [
-      "S-1-5-18"
-    ],
-    "winlog.version": [
-      2
-    ],
-    "winlog.task": [
-      "Process Create (rule: ProcessCreate)"
-    ],
-    "winlog.user.domain": [
-      "NT AUTHORITY"
-    ],
-    "winlog.event_data.RuleName": [
-      "T1031,T1050"
-    ],
-    "winlog.event_data.TargetObject": [
-      "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath"
-    ],
-    "winlog.event_data.User": [
-      "NT AUTHORITY\\SYSTEM"
-    ],
-    "agent.hostname": [
-      "DC02"
-    ],
-    "message": [
-      "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 19:56:23.020\nProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}\nProcessId: 788\nImage: C:\\WINDOWS\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: system32\\drivers\\wd\\KslD.sys\nUser: NT AUTHORITY\\SYSTEM"
-    ],
-    "winlog.event_id": [
-      "13"
-    ],
-    "winlog.user.name": [
-      "SYSTEM"
-    ],
-    "winlog.event_data.Image": [
-      "C:\\WINDOWS\\system32\\services.exe"
-    ],
-    "event.action": [
-      "Process Create (rule: ProcessCreate)"
-    ],
-    "event.provider": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "@timestamp": [
-      "2026-06-01T19:56:23.021Z"
-    ],
-    "event.code": [
-      "13"
-    ],
-    "agent.id": [
-      "d03fb57b-7222-4253-b677-4d8eba92e648"
-    ],
-    "winlog.channel": [
-      "Microsoft-Windows-Sysmon/Operational"
-    ],
-    "ecs.version": [
-      "8.0.0"
-    ],
-    "winlog.event_data.EventType": [
-      "SetValue"
-    ],
-    "event.created": [
-      "2026-06-01T19:56:24.605Z"
-    ],
-    "winlog.opcode": [
-      "Info"
-    ],
-    "agent.ephemeral_id": [
-      "ee78f402-ae21-429b-adcf-98798c958a90"
-    ],
-    "agent.version": [
-      "8.19.12"
-    ]
-  }
-}
-
-WIN-1KS84GNPAUM.lab2019.local
-
-{
-  "_index": ".ds-winlogbeat-8.19.12-2026.03.19-000001",
-  "_id": "IuTBhJ4BW3PCqUwNQ57y",
-  "_version": 1,
-  "_source": {
-    "@timestamp": "2026-06-01T19:55:12.889Z",
-    "host": {
-      "name": "WIN-1KS84GNPAUM.lab2019.local"
-    },
-    "winlog": {
-      "process": {
-        "pid": 2124,
-        "thread": {
-          "id": 4968
-        }
-      },
-      "provider_name": "Microsoft-Windows-Sysmon",
-      "record_id": 27872,
-      "api": "wineventlog",
-      "opcode": "Info",
-      "event_data": {
-        "RuleName": "T1031,T1050",
-        "EventType": "SetValue",
-        "UtcTime": "2026-06-01 19:55:12.888",
-        "ProcessGuid": "{8ac51e87-d71b-6a1d-0b00-000000001a00}",
-        "Image": "C:\\Windows\\system32\\services.exe",
-        "TargetObject": "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath",
-        "Details": "system32\\drivers\\wd\\KslD.sys",
-        "ProcessId": "736",
-        "User": "NT AUTHORITY\\SYSTEM"
-      },
-      "channel": "Microsoft-Windows-Sysmon/Operational",
-      "user": {
-        "identifier": "S-1-5-18",
-        "domain": "NT AUTHORITY",
-        "name": "SYSTEM",
-        "type": "User"
-      },
-      "task": "Registry value set (rule: RegistryEvent)",
-      "computer_name": "WIN-1KS84GNPAUM.lab2019.local",
-      "version": 2,
-      "event_id": "13",
-      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
-    },
-    "event": {
-      "provider": "Microsoft-Windows-Sysmon",
-      "action": "Registry value set (rule: RegistryEvent)",
-      "created": "2026-06-01T19:55:14.337Z",
-      "code": "13",
-      "kind": "event"
-    },
-    "ecs": {
-      "version": "8.0.0"
-    },
-    "agent": {
-      "id": "04c179b6-32f0-4f95-8ecb-30ede9282c39",
-      "name": "WIN-1KS84GNPAUM",
-      "type": "winlogbeat",
-      "version": "8.19.12",
-      "ephemeral_id": "1f95c2f3-7a1d-4ffd-8a10-9b34b1e8741d"
-    },
-    "log": {
-      "level": "information"
-    },
-    "message": "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 19:55:12.888\nProcessGuid: {8ac51e87-d71b-6a1d-0b00-000000001a00}\nProcessId: 736\nImage: C:\\Windows\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: system32\\drivers\\wd\\KslD.sys\nUser: NT AUTHORITY\\SYSTEM"
-  },
-  "fields": {
-    "winlog.process.thread.id": [
-      4968
-    ],
-    "winlog.event_data.ProcessGuid": [
-      "{8ac51e87-d71b-6a1d-0b00-000000001a00}"
-    ],
-    "winlog.provider_guid": [
-      "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
-    ],
-    "winlog.provider_name": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "winlog.computer_name": [
-      "WIN-1KS84GNPAUM.lab2019.local"
-    ],
-    "winlog.process.pid": [
-      2124
-    ],
-    "winlog.user.type": [
-      "User"
-    ],
-    "agent.type": [
-      "winlogbeat"
-    ],
-    "winlog.record_id": [
-      "27872"
-    ],
-    "winlog.api": [
-      "wineventlog"
-    ],
-    "log.level": [
-      "information"
-    ],
-    "agent.name": [
-      "WIN-1KS84GNPAUM"
-    ],
-    "host.name": [
-      "WIN-1KS84GNPAUM.lab2019.local"
-    ],
-    "winlog.event_data.UtcTime": [
-      "2026-06-01 19:55:12.888"
-    ],
-    "winlog.event_data.Details": [
-      "system32\\drivers\\wd\\KslD.sys"
-    ],
-    "event.kind": [
-      "event"
-    ],
-    "winlog.event_data.ProcessId": [
-      "736"
-    ],
-    "winlog.user.identifier": [
-      "S-1-5-18"
-    ],
-    "winlog.version": [
-      2
-    ],
-    "winlog.task": [
-      "Registry value set (rule: RegistryEvent)"
-    ],
-    "winlog.user.domain": [
-      "NT AUTHORITY"
-    ],
-    "winlog.event_data.RuleName": [
-      "T1031,T1050"
-    ],
-    "winlog.event_data.TargetObject": [
-      "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath"
-    ],
-    "winlog.event_data.User": [
-      "NT AUTHORITY\\SYSTEM"
-    ],
-    "agent.hostname": [
-      "WIN-1KS84GNPAUM"
-    ],
-    "message": [
-      "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 19:55:12.888\nProcessGuid: {8ac51e87-d71b-6a1d-0b00-000000001a00}\nProcessId: 736\nImage: C:\\Windows\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: system32\\drivers\\wd\\KslD.sys\nUser: NT AUTHORITY\\SYSTEM"
-    ],
-    "winlog.event_id": [
-      "13"
-    ],
-    "winlog.user.name": [
-      "SYSTEM"
-    ],
-    "winlog.event_data.Image": [
-      "C:\\Windows\\system32\\services.exe"
-    ],
-    "event.action": [
-      "Registry value set (rule: RegistryEvent)"
-    ],
-    "event.provider": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "@timestamp": [
-      "2026-06-01T19:55:12.889Z"
-    ],
-    "event.code": [
-      "13"
-    ],
-    "agent.id": [
-      "04c179b6-32f0-4f95-8ecb-30ede9282c39"
-    ],
-    "winlog.channel": [
-      "Microsoft-Windows-Sysmon/Operational"
-    ],
-    "ecs.version": [
-      "8.0.0"
-    ],
-    "winlog.event_data.EventType": [
-      "SetValue"
-    ],
-    "event.created": [
-      "2026-06-01T19:55:14.337Z"
-    ],
-    "winlog.opcode": [
-      "Info"
-    ],
-    "agent.ephemeral_id": [
-      "1f95c2f3-7a1d-4ffd-8a10-9b34b1e8741d"
-    ],
-    "agent.version": [
-      "8.19.12"
-    ]
-  }
-}
-
-WIN-JOCP945SK51
-
-{
-  "_index": ".ds-winlogbeat-8.19.14-2026.05.13-000002",
-  "_id": "BeS_hJ4BW3PCqUwN354h",
-  "_version": 1,
-  "_source": {
-    "@timestamp": "2026-06-01T19:53:37.612Z",
-    "ecs": {
-      "version": "8.0.0"
-    },
-    "agent": {
-      "id": "aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6",
-      "name": "WIN-JOCP945SK51",
-      "type": "winlogbeat",
-      "version": "8.19.14",
-      "ephemeral_id": "82295209-cc3e-4275-8f94-e4db72e6816e"
-    },
-    "winlog": {
-      "version": 2,
-      "record_id": 20164,
-      "task": "Registry value set (rule: RegistryEvent)",
-      "opcode": "Info",
-      "user": {
-        "identifier": "S-1-5-18",
-        "domain": "NT AUTHORITY",
-        "name": "SYSTEM",
-        "type": "User"
-      },
-      "event_id": "13",
-      "computer_name": "WIN-JOCP945SK51.lab2019.local",
-      "process": {
-        "pid": 3432,
-        "thread": {
-          "id": 4312
-        }
-      },
-      "channel": "Microsoft-Windows-Sysmon/Operational",
-      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
-      "event_data": {
-        "ProcessGuid": "{6e4a868b-da32-6a1d-0b00-000000002700}",
-        "Details": "System32\\drivers\\vKslD.sys",
-        "User": "NT AUTHORITY\\SYSTEM",
-        "EventType": "SetValue",
-        "UtcTime": "2026-06-01 19:53:37.611",
-        "RuleName": "T1031,T1050",
-        "ProcessId": "684",
-        "Image": "C:\\Windows\\system32\\services.exe",
-        "TargetObject": "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath"
-      },
-      "provider_name": "Microsoft-Windows-Sysmon",
-      "api": "wineventlog"
-    },
-    "event": {
-      "created": "2026-06-01T19:53:39.334Z",
-      "code": "13",
-      "kind": "event",
-      "provider": "Microsoft-Windows-Sysmon",
-      "action": "Registry value set (rule: RegistryEvent)"
-    },
-    "log": {
-      "level": "information"
-    },
-    "message": "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 19:53:37.611\nProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}\nProcessId: 684\nImage: C:\\Windows\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: System32\\drivers\\vKslD.sys\nUser: NT AUTHORITY\\SYSTEM",
-    "host": {
-      "name": "WIN-JOCP945SK51.lab2019.local"
-    }
-  },
-  "fields": {
-    "winlog.process.thread.id": [
-      4312
-    ],
-    "winlog.event_data.ProcessGuid": [
-      "{6e4a868b-da32-6a1d-0b00-000000002700}"
-    ],
-    "winlog.provider_guid": [
-      "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
-    ],
-    "winlog.provider_name": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "winlog.computer_name": [
-      "WIN-JOCP945SK51.lab2019.local"
-    ],
-    "winlog.process.pid": [
-      3432
-    ],
-    "winlog.user.type": [
-      "User"
-    ],
-    "agent.type": [
-      "winlogbeat"
-    ],
-    "winlog.record_id": [
-      "20164"
-    ],
-    "winlog.api": [
-      "wineventlog"
-    ],
-    "log.level": [
-      "information"
-    ],
-    "agent.name": [
-      "WIN-JOCP945SK51"
-    ],
-    "host.name": [
-      "WIN-JOCP945SK51.lab2019.local"
-    ],
-    "winlog.event_data.UtcTime": [
-      "2026-06-01 19:53:37.611"
-    ],
-    "winlog.event_data.Details": [
-      "System32\\drivers\\vKslD.sys"
-    ],
-    "event.kind": [
-      "event"
-    ],
-    "winlog.event_data.ProcessId": [
-      "684"
-    ],
-    "winlog.user.identifier": [
-      "S-1-5-18"
-    ],
-    "winlog.version": [
-      2
-    ],
-    "winlog.task": [
-      "Registry value set (rule: RegistryEvent)"
-    ],
-    "winlog.user.domain": [
-      "NT AUTHORITY"
-    ],
-    "winlog.event_data.RuleName": [
-      "T1031,T1050"
-    ],
-    "winlog.event_data.TargetObject": [
-      "HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath"
-    ],
-    "winlog.event_data.User": [
-      "NT AUTHORITY\\SYSTEM"
-    ],
-    "agent.hostname": [
-      "WIN-JOCP945SK51"
-    ],
-    "message": [
-      "Registry value set:\nRuleName: T1031,T1050\nEventType: SetValue\nUtcTime: 2026-06-01 19:53:37.611\nProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}\nProcessId: 684\nImage: C:\\Windows\\system32\\services.exe\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\KslD\\ImagePath\nDetails: System32\\drivers\\vKslD.sys\nUser: NT AUTHORITY\\SYSTEM"
-    ],
-    "winlog.event_id": [
-      "13"
-    ],
-    "winlog.user.name": [
-      "SYSTEM"
-    ],
-    "winlog.event_data.Image": [
-      "C:\\Windows\\system32\\services.exe"
-    ],
-    "event.action": [
-      "Registry value set (rule: RegistryEvent)"
-    ],
-    "event.provider": [
-      "Microsoft-Windows-Sysmon"
-    ],
-    "@timestamp": [
-      "2026-06-01T19:53:37.612Z"
-    ],
-    "event.code": [
-      "13"
-    ],
-    "agent.id": [
-      "aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"
-    ],
-    "winlog.channel": [
-      "Microsoft-Windows-Sysmon/Operational"
-    ],
-    "ecs.version": [
-      "8.0.0"
-    ],
-    "winlog.event_data.EventType": [
-      "SetValue"
-    ],
-    "event.created": [
-      "2026-06-01T19:53:39.334Z"
-    ],
-    "winlog.opcode": [
-      "Info"
-    ],
-    "agent.ephemeral_id": [
-      "82295209-cc3e-4275-8f94-e4db72e6816e"
-    ],
-    "agent.version": [
-      "8.19.14"
-    ]
-  }
-}
-
+"'@timestamp"	"_id"	"_ignored"	"_index"	"_score"	"agent.ephemeral_id"	"agent.hostname"	"agent.id"	"agent.name"	"agent.type"	"agent.version"	"ecs.version"	"event.action"	"event.code"	"event.created"	"event.kind"	"event.provider"	"host.name"	"log.level"	message	"winlog.api"	"winlog.channel"	"winlog.computer_name"	"winlog.event_data.Details"	"winlog.event_data.EventType"	"winlog.event_data.Image"	"winlog.event_data.ProcessGuid"	"winlog.event_data.ProcessId"	"winlog.event_data.RuleName"	"winlog.event_data.TargetObject"	"winlog.event_data.User"	"winlog.event_data.UtcTime"	"winlog.event_id"	"winlog.opcode"	"winlog.process.pid"	"winlog.process.thread.id"	"winlog.provider_guid"	"winlog.provider_name"	"winlog.record_id"	"winlog.task"	"winlog.user.domain"	"winlog.user.identifier"	"winlog.user.name"	"winlog.user.type"	"winlog.version"
+"Jun 1, 2026 @ 23:05:21.952"	ReTKhJ4BW3PCqUwNj6kz	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"bb727259-ce37-43c5-917c-7dd56ef33f6c"	"WIN-ATTACK"	"3d29cd4b-344b-43dc-a6cd-fbda0a2d60f8"	"WIN-ATTACK"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 23:05:23.768"	event	"Microsoft-Windows-Sysmon"	"WIN-ATTACK.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 20:05:21.952
+ProcessGuid: {b5c63fd8-e41c-6a1d-0b00-000000002400}
+ProcessId: 708
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-ATTACK.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{b5c63fd8-e41c-6a1d-0b00-000000002400}"	708	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 20:05:21.952"	13	Info	"2,772"	"4,608"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	5844	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 23:05:18.845"	ROTKhJ4BW3PCqUwNj6kz	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"bb727259-ce37-43c5-917c-7dd56ef33f6c"	"WIN-ATTACK"	"3d29cd4b-344b-43dc-a6cd-fbda0a2d60f8"	"WIN-ATTACK"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 23:05:20.765"	event	"Microsoft-Windows-Sysmon"	"WIN-ATTACK.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 20:05:18.844
+ProcessGuid: {b5c63fd8-e41c-6a1d-0b00-000000002400}
+ProcessId: 708
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-ATTACK.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{b5c63fd8-e41c-6a1d-0b00-000000002400}"	708	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 20:05:18.844"	13	Info	"2,772"	"4,608"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	5843	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:56:23.021"	vuTChJ4BW3PCqUwNap4t	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"ee78f402-ae21-429b-adcf-98798c958a90"	DC02	"d03fb57b-7222-4253-b677-4d8eba92e648"	DC02	winlogbeat	"8.19.12"	"8.0.0"	"Process Create (rule: ProcessCreate)"	13	"Jun 1, 2026 @ 22:56:24.605"	event	"Microsoft-Windows-Sysmon"	"DC02.badsuccessor.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:56:23.020
+ProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}
+ProcessId: 788
+Image: C:\WINDOWS\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"DC02.badsuccessor.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\WINDOWS\system32\services.exe"	"{65f03206-9d40-6a1d-0b00-000000002100}"	788	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:56:23.020"	13	Info	"2,256"	"3,932"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	34568	"Process Create (rule: ProcessCreate)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:56:19.930"	vOTChJ4BW3PCqUwNQp4U	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"ee78f402-ae21-429b-adcf-98798c958a90"	DC02	"d03fb57b-7222-4253-b677-4d8eba92e648"	DC02	winlogbeat	"8.19.12"	"8.0.0"	"Process Create (rule: ProcessCreate)"	13	"Jun 1, 2026 @ 22:56:21.603"	event	"Microsoft-Windows-Sysmon"	"DC02.badsuccessor.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:56:19.930
+ProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}
+ProcessId: 788
+Image: C:\WINDOWS\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"DC02.badsuccessor.local"	"System32\drivers\KslD.sys"	SetValue	"C:\WINDOWS\system32\services.exe"	"{65f03206-9d40-6a1d-0b00-000000002100}"	788	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:56:19.930"	13	Info	"2,256"	"3,932"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	34567	"Process Create (rule: ProcessCreate)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:55:12.889"	IuTBhJ4BW3PCqUwNQ57y	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"1f95c2f3-7a1d-4ffd-8a10-9b34b1e8741d"	"WIN-1KS84GNPAUM"	"04c179b6-32f0-4f95-8ecb-30ede9282c39"	"WIN-1KS84GNPAUM"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:55:14.337"	event	"Microsoft-Windows-Sysmon"	"WIN-1KS84GNPAUM.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:55:12.888
+ProcessGuid: {8ac51e87-d71b-6a1d-0b00-000000001a00}
+ProcessId: 736
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-1KS84GNPAUM.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{8ac51e87-d71b-6a1d-0b00-000000001a00}"	736	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:55:12.888"	13	Info	"2,124"	"4,968"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	27872	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:55:09.803"	IeTBhJ4BW3PCqUwNQ57y	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"1f95c2f3-7a1d-4ffd-8a10-9b34b1e8741d"	"WIN-1KS84GNPAUM"	"04c179b6-32f0-4f95-8ecb-30ede9282c39"	"WIN-1KS84GNPAUM"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:55:11.332"	event	"Microsoft-Windows-Sysmon"	"WIN-1KS84GNPAUM.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:55:09.802
+ProcessGuid: {8ac51e87-d71b-6a1d-0b00-000000001a00}
+ProcessId: 736
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-1KS84GNPAUM.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{8ac51e87-d71b-6a1d-0b00-000000001a00}"	736	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:55:09.802"	13	Info	"2,124"	"4,968"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	27871	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:53:40.696"	"BuS_hJ4BW3PCqUwN354h"	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:53:42.338"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:53:40.696
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:53:40.696"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20165	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:53:37.612"	"BeS_hJ4BW3PCqUwN354h"	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:53:39.334"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:53:37.611
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:53:37.611"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20164	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:50:57.914"	buS9hJ4BW3PCqUwNYp0E	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:50:59.233"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:50:57.914
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:50:57.914"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20157	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:50:54.834"	beS9hJ4BW3PCqUwNYp0E	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:50:56.231"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:50:54.834
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:50:54.834"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20156	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:46:17.400"	"W-S5hJ4BW3PCqUwNG5yJ"	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:46:19.045"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:46:17.400
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:46:17.400"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20149	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:46:14.242"	WuS5hJ4BW3PCqUwNG5yJ	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:46:16.043"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:46:14.241
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:46:14.241"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20148	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:42:00.072"	buS1hJ4BW3PCqUwNJZvO	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"ee78f402-ae21-429b-adcf-98798c958a90"	DC02	"d03fb57b-7222-4253-b677-4d8eba92e648"	DC02	winlogbeat	"8.19.12"	"8.0.0"	"Process Create (rule: ProcessCreate)"	13	"Jun 1, 2026 @ 22:42:01.109"	event	"Microsoft-Windows-Sysmon"	"DC02.badsuccessor.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:42:00.071
+ProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}
+ProcessId: 788
+Image: C:\WINDOWS\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"DC02.badsuccessor.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\WINDOWS\system32\services.exe"	"{65f03206-9d40-6a1d-0b00-000000002100}"	788	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:42:00.071"	13	Info	"2,256"	"3,932"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	34487	"Process Create (rule: ProcessCreate)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:41:56.959"	beS1hJ4BW3PCqUwNJZvO	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"ee78f402-ae21-429b-adcf-98798c958a90"	DC02	"d03fb57b-7222-4253-b677-4d8eba92e648"	DC02	winlogbeat	"8.19.12"	"8.0.0"	"Process Create (rule: ProcessCreate)"	13	"Jun 1, 2026 @ 22:41:58.106"	event	"Microsoft-Windows-Sysmon"	"DC02.badsuccessor.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:41:56.958
+ProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}
+ProcessId: 788
+Image: C:\WINDOWS\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"DC02.badsuccessor.local"	"System32\drivers\KslD.sys"	SetValue	"C:\WINDOWS\system32\services.exe"	"{65f03206-9d40-6a1d-0b00-000000002100}"	788	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:41:56.958"	13	Info	"2,256"	"3,932"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	34486	"Process Create (rule: ProcessCreate)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:40:14.837"	"e-SzhJ4BW3PCqUwNkJqk"	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:40:16.807"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:40:14.836
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:40:14.836"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20136	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:40:11.742"	euSzhJ4BW3PCqUwNkJqk	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:40:12.803"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:40:11.741
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:40:11.741"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20135	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:25:50.076"	VeSmhJ4BW3PCqUwNXJfe	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:25:51.260"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:25:50.076
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:25:50.076"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20112	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:25:46.989"	SOSmhJ4BW3PCqUwNXJfe	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:25:48.252"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:25:46.989
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:25:46.989"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	20110	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:18:25.934"	yOSfhJ4BW3PCqUwNn5Nh	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:18:27.880"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:18:25.933
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:18:25.933"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	19941	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:18:22.845"	"x-SfhJ4BW3PCqUwNn5Nh"	" - "	".ds-winlogbeat-8.19.14-2026.05.13-000002"	"'-"	"82295209-cc3e-4275-8f94-e4db72e6816e"	"WIN-JOCP945SK51"	"aecf2b7e-1c30-46b5-b3f8-cbbfea77b7a6"	"WIN-JOCP945SK51"	winlogbeat	"8.19.14"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:18:23.876"	event	"Microsoft-Windows-Sysmon"	"WIN-JOCP945SK51.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:18:22.844
+ProcessGuid: {6e4a868b-da32-6a1d-0b00-000000002700}
+ProcessId: 684
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-JOCP945SK51.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{6e4a868b-da32-6a1d-0b00-000000002700}"	684	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:18:22.844"	13	Info	"3,432"	"4,312"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	19940	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:12:30.786"	"v-SahJ4BW3PCqUwNKY9j"	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"1f95c2f3-7a1d-4ffd-8a10-9b34b1e8741d"	"WIN-1KS84GNPAUM"	"04c179b6-32f0-4f95-8ecb-30ede9282c39"	"WIN-1KS84GNPAUM"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:12:32.632"	event	"Microsoft-Windows-Sysmon"	"WIN-1KS84GNPAUM.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:12:30.786
+ProcessGuid: {8ac51e87-d71b-6a1d-0b00-000000001a00}
+ProcessId: 736
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-1KS84GNPAUM.lab2019.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{8ac51e87-d71b-6a1d-0b00-000000001a00}"	736	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:12:30.786"	13	Info	"2,124"	"4,968"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	27807	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 22:12:27.689"	vuSahJ4BW3PCqUwNKY9j	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"1f95c2f3-7a1d-4ffd-8a10-9b34b1e8741d"	"WIN-1KS84GNPAUM"	"04c179b6-32f0-4f95-8ecb-30ede9282c39"	"WIN-1KS84GNPAUM"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 22:12:29.629"	event	"Microsoft-Windows-Sysmon"	"WIN-1KS84GNPAUM.lab2019.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 19:12:27.689
+ProcessGuid: {8ac51e87-d71b-6a1d-0b00-000000001a00}
+ProcessId: 736
+Image: C:\Windows\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\vKslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"WIN-1KS84GNPAUM.lab2019.local"	"System32\drivers\vKslD.sys"	SetValue	"C:\Windows\system32\services.exe"	"{8ac51e87-d71b-6a1d-0b00-000000001a00}"	736	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 19:12:27.689"	13	Info	"2,124"	"4,968"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	27806	"Registry value set (rule: RegistryEvent)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 21:59:55.335"	VuSVhJ4BW3PCqUwNEo3S	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"ee78f402-ae21-429b-adcf-98798c958a90"	DC02	"d03fb57b-7222-4253-b677-4d8eba92e648"	DC02	winlogbeat	"8.19.12"	"8.0.0"	"Process Create (rule: ProcessCreate)"	13	"Jun 1, 2026 @ 21:59:56.584"	event	"Microsoft-Windows-Sysmon"	"DC02.badsuccessor.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 18:59:55.335
+ProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}
+ProcessId: 788
+Image: C:\WINDOWS\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: system32\drivers\wd\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"DC02.badsuccessor.local"	"system32\drivers\wd\KslD.sys"	SetValue	"C:\WINDOWS\system32\services.exe"	"{65f03206-9d40-6a1d-0b00-000000002100}"	788	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 18:59:55.335"	13	Info	"2,256"	"3,932"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	34295	"Process Create (rule: ProcessCreate)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
+"Jun 1, 2026 @ 21:59:52.220"	VeSVhJ4BW3PCqUwNEo3S	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"ee78f402-ae21-429b-adcf-98798c958a90"	DC02	"d03fb57b-7222-4253-b677-4d8eba92e648"	DC02	winlogbeat	"8.19.12"	"8.0.0"	"Process Create (rule: ProcessCreate)"	13	"Jun 1, 2026 @ 21:59:53.581"	event	"Microsoft-Windows-Sysmon"	"DC02.badsuccessor.local"	information	"Registry value set:
+RuleName: T1031,T1050
+EventType: SetValue
+UtcTime: 2026-06-01 18:59:52.218
+ProcessGuid: {65f03206-9d40-6a1d-0b00-000000002100}
+ProcessId: 788
+Image: C:\WINDOWS\system32\services.exe
+TargetObject: HKLM\System\CurrentControlSet\Services\KslD\ImagePath
+Details: System32\drivers\KslD.sys
+User: NT AUTHORITY\SYSTEM"	wineventlog	"Microsoft-Windows-Sysmon/Operational"	"DC02.badsuccessor.local"	"System32\drivers\KslD.sys"	SetValue	"C:\WINDOWS\system32\services.exe"	"{65f03206-9d40-6a1d-0b00-000000002100}"	788	"T1031,T1050"	"HKLM\System\CurrentControlSet\Services\KslD\ImagePath"	"NT AUTHORITY\SYSTEM"	"2026-06-01 18:59:52.218"	13	Info	"2,256"	"3,932"	"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"	"Microsoft-Windows-Sysmon"	34294	"Process Create (rule: ProcessCreate)"	"NT AUTHORITY"	"S-1-5-18"	SYSTEM	User	2
