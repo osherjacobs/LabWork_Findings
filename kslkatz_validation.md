@@ -181,6 +181,8 @@ Server 2025 UBR 32690
 
 ELK JSON 
 
+The following samples show representative events from each host. The WIN-JOCP945SK51 sample shows the attack write (embedded payload deployed); the remaining three show the restore write. Both event types were observed on all hosts
+
 "'@timestamp"	"_id"	"_ignored"	"_index"	"_score"	"agent.ephemeral_id"	"agent.hostname"	"agent.id"	"agent.name"	"agent.type"	"agent.version"	"ecs.version"	"event.action"	"event.code"	"event.created"	"event.kind"	"event.provider"	"host.name"	"log.level"	message	"winlog.api"	"winlog.channel"	"winlog.computer_name"	"winlog.event_data.Details"	"winlog.event_data.EventType"	"winlog.event_data.Image"	"winlog.event_data.ProcessGuid"	"winlog.event_data.ProcessId"	"winlog.event_data.RuleName"	"winlog.event_data.TargetObject"	"winlog.event_data.User"	"winlog.event_data.UtcTime"	"winlog.event_id"	"winlog.opcode"	"winlog.process.pid"	"winlog.process.thread.id"	"winlog.provider_guid"	"winlog.provider_name"	"winlog.record_id"	"winlog.task"	"winlog.user.domain"	"winlog.user.identifier"	"winlog.user.name"	"winlog.user.type"	"winlog.version"
 "Jun 1, 2026 @ 23:05:21.952"	ReTKhJ4BW3PCqUwNj6kz	" - "	".ds-winlogbeat-8.19.12-2026.03.19-000001"	"'-"	"bb727259-ce37-43c5-917c-7dd56ef33f6c"	"WIN-ATTACK"	"3d29cd4b-344b-43dc-a6cd-fbda0a2d60f8"	"WIN-ATTACK"	winlogbeat	"8.19.12"	"8.0.0"	"Registry value set (rule: RegistryEvent)"	13	"Jun 1, 2026 @ 23:05:23.768"	event	"Microsoft-Windows-Sysmon"	"WIN-ATTACK.lab2019.local"	information	"Registry value set:
 RuleName: T1031,T1050
