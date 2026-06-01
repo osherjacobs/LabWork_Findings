@@ -158,4 +158,26 @@ KslKatz is clearly a well-engineered tool and the underlying technique is sound.
 
 Independent replication across additional UBRs — particularly Server 2022 between UBR 588–5019 — would help validate or falsify the UBR sensitivity hypothesis. Testing on Server 2025 is outside the tool's claimed support matrix but may be of interest to researchers.
 
+Server 2019 UBR 8755
+
+<img width="1875" height="870" alt="2019" src="https://github.com/user-attachments/assets/8a588b83-b801-4940-b5e6-7806424fb64b" />
+
+2022 UBR 587
+
+<img width="1172" height="220" alt="2022MORPHKATZEDGOTCREDSDEFENDERCAUGHTITBEFORE_UBR" src="https://github.com/user-attachments/assets/805169d6-3b7f-43cb-b61b-54b6cc2b4004" />
+
+<img width="1593" height="937" alt="2022MORPHKATZEDGOTCREDSDEFENDERCAUGHTITBEFORE" src="https://github.com/user-attachments/assets/0a281531-0fa1-4001-a89d-e6b0ea573a29" />
+
+2022 UBR 5020
+
+<img width="1890" height="941" alt="2022HIGHUBR" src="https://github.com/user-attachments/assets/822ab409-8ebb-4978-ae2a-ba98d7d64552" />
+
+Server 2025 UBR 32690
+
+<img width="1027" height="884" alt="2025NOCREDS" src="https://github.com/user-attachments/assets/ece0959b-9e6d-40f6-80b8-566281876723" />
+
+<img width="1535" height="865" alt="2025NOCREDSUBR" src="https://github.com/user-attachments/assets/768fe520-c21f-466f-b600-ff470d2f60b0" />
+
+
+
 
