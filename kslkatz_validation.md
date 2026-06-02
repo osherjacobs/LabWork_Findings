@@ -24,7 +24,7 @@
 
 ## Inspiration
 
-This validation was prompted by the Weekly Purple Team video [Herding Katz to Steal Creds](https://www.youtube.com/watch?v=m2KTm7UYMuc) (May 30, 2026), which walks through the MorphKatz + KslKatz workflow from both red and blue team perspectives. The video demonstrates the technique working cleanly and pairs it with Elastic detection rules.
+This validation was prompted by the Weekly Purple Team video [Herding Katz to Steal Creds](https://www.youtube.com/watch?v=m2KTm7UYMuc) (May 30, 2026), which walks through the MorphKatz + KslKatz workflow from both red and blue team perspectives. The video demonstrates the technique working cleanly and pairs it with detection rules.
 
 My testing covers a range of OS versions, patch levels, and build configurations. The results are mixed. UBR sensitivity, evasion consistency, and credential extraction reliability all vary accross the tested Windows versions.
 
