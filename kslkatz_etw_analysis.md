@@ -1,3 +1,6 @@
+<img width="1907" height="932" alt="nameditdidnothing2022" src="https://github.com/user-attachments/assets/af9da242-99fd-4233-954a-3b1769fc788c" />
+
+
 # KslKatz — Defender ETW Telemetry Analysis
 ## Microsoft-Antimalware-Engine Provider: Two-Host Comparative
 
