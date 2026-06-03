@@ -251,6 +251,15 @@ Failing on 03-06-2026
 
 <img width="1907" height="932" alt="flotexethatworked2daysagoonthismachneweird" src="https://github.com/user-attachments/assets/1b395927-8d46-45f8-9c67-709c68987b13" />
 
+Code fix in lsa.cpp
+
+<img width="1894" height="938" alt="codefixinlsacpp" src="https://github.com/user-attachments/assets/1a622710-29d3-48b7-86cf-7f466086befd" />
+
+Succesful run 03-06-2026
+
+<img width="1907" height="932" alt="succesfulrun03062026" src="https://github.com/user-attachments/assets/17eb4d7b-a5fd-4e72-9f78-676fdb5712f9" />
+
+
 
 
 
