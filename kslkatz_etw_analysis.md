@@ -259,6 +259,7 @@ Code fix in lsa.cpp
 
 Succesful run 03-06-2026
 
+<img width="1907" height="932" alt="succesfulrun03062026" src="https://github.com/user-attachments/assets/8d74b3b0-e393-4819-b8e5-990956ad90a2" />
 
 
 
