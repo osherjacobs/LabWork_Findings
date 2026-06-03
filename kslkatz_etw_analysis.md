@@ -84,7 +84,9 @@ Both traces recorded `Behavior:Win32/PSCodeInjector.A` with Result=1. No enforce
 
 ## MOAC Cache Analysis
 
-The WIN-ATTACK trace was examined for MOAC (Microsoft Online Antimalware Catalog) cache events — `MOACLookup`, `MOACAdd`, and `MOACRevoke` — to determine whether prior execution history on this host had influenced the engine's handling of flot.exe.
+The WIN-ATTACK trace was examined for MOAC cache events — `MOACLookup`, `MOACAdd`, and `MOACRevoke` — to determine whether prior execution history on this host had influenced the engine's handling of flot.exe. Here, **MOAC** is used as shorthand for an apparent Defender cache/catalog subsystem; the expansion “Microsoft Online Antimalware Catalog” is inferential and has not been independently verified in publicly available Microsoft documentation.
+
+
 
 **Findings:**
 
