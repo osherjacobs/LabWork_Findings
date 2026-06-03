@@ -312,7 +312,7 @@ SeImpersonatePrivilege: Enabled
 High Mandatory Level
 ```
 
-No Defender alert observed. No 4104 generated. The only noise during the session was a sample submission popup in a separate unblinded PS window — not the operational window, not blocking.
+No Defender alert observed. No 4104 generated. The only noise during the session was a sample submission popup — source unattributed, not blocking, and not correlating to activity in the operational window.
 
 ---
 
