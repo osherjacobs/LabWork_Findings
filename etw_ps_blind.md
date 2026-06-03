@@ -354,7 +354,7 @@ Sysmon gave the analyst the pipe. ETW provider interference removed the water.
 | Telemetry Surface | Observed Status |
 |---|---|
 | EID 4104 (script block logging) | No events observed after provider interference — PowerView load, enumeration, reverse shell all unlogged |
-| DefenderApiLogger | Shares the same provider registration path; no downstream validation performed in this lab |
+| DefenderApiLogger | is an MDE telemetry consumer on this provider path. Whether handle zeroing suppresses MDE cloud telemetry was not tested — this lab ran plain Defender without MDE enrollment. |
 | Sysmon (interference operation itself) | No events observed — managed reflection produced no Sysmon-visible kernel calls in this configuration |
 | Defender real-time (PowerView sig) | No alert observed via HTTP delivery post-AMSI bypass |
 | Defender real-time (reverse shell) | No alert observed — payload executed inside interfered session |
