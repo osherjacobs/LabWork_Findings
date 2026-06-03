@@ -175,13 +175,11 @@ After applying the fix, rebuilding, and running through MorphKatz:
 
 ### What Remains Unresolved
 
-The bug explains the mechanism. It does not explain the trigger.
+The bug fix worked. What we cannot explain is why the bug surfaced on this run when the same binary on the same machine had succeeded two days prior.
 
-The same binary, the same machine, the same tool code — worked two days prior, failed on this run. The `head != list_ptr` check had always been there. Something in the runtime state of WIN-ATTACK made `LogonSessionList` self-referential at the moment of the scan when it had not been before.
+The only observable change between runs was the Defender signature update — but as established, that has no plausible mechanism for causing this specific failure. The tool's logic in `find_logon_list` had not changed. lsasrv.dll on disk had not changed.
 
-The most likely candidate is lsass session state post-reboot: on a freshly booted non-DC machine, `LogonSessionList` may remain self-referential for longer than expected after interactive logon, particularly in a VM context where session initialisation timing differs from physical hardware. But this was not confirmed with controlled timing tests. The trigger is uncharacterised.
-
-The Server 2019 DC is unaffected structurally — AD DS populates `LogonSessionList` with machine account and service credentials during the boot sequence itself, before any tool could run against it. The list is never self-referential post-boot on a domain controller regardless of uptime or VM power cycle frequency.
+We don't have an explanation. The trigger is unknown.
 
 ---
 
