@@ -228,3 +228,33 @@ Both hosts are VMs powered on and off regularly. The Server 2019 DC is switched 
 The `head` fix should be validated across additional builds and session states. The downstream credential walker handles a self-referential list without looping — the existing `seen` set guard in `extract_creds` covers this.
 
 Findings reflect a single lab environment. Defender behaviour observed here is against Windows Defender only — MDE with advanced hunting or third-party EDR was not assessed.
+
+Selected screenshots:
+
+Perfview
+
+<img width="1907" height="932" alt="2022Defenderscannoaction" src="https://github.com/user-attachments/assets/91fa3d66-8ce1-4b39-830a-27b8628997ad" />
+
+<img width="1907" height="932" alt="nameditdidnothing2022" src="https://github.com/user-attachments/assets/e06b6433-23aa-418d-996c-e11540aa9843" />
+
+<img width="1907" height="932" alt="genericmessagetask2022" src="https://github.com/user-attachments/assets/43cd45dd-9fe4-467c-a514-705519c71d26" />
+
+Driver load:
+
+<img width="1907" height="932" alt="driverload2022" src="https://github.com/user-attachments/assets/fecb6605-887a-4e45-acac-e02255ca232f" />
+
+Working on 01-06-2026
+
+<img width="1593" height="937" alt="2022MORPHKATZEDGOTCREDSDEFENDERCAUGHTITBEFORE" src="https://github.com/user-attachments/assets/a1ed9c71-d3fe-4fd5-9e56-e7f9aa4a50af" />
+
+Failing on 03-06-2026
+
+<img width="1907" height="932" alt="flotexethatworked2daysagoonthismachneweird" src="https://github.com/user-attachments/assets/1b395927-8d46-45f8-9c67-709c68987b13" />
+
+
+
+
+
+
+
+
