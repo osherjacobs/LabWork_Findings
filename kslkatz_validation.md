@@ -145,7 +145,7 @@ Lab validation confirmed the kernel read primitive, PPL bypass behavior, and LSA
 
 This would need stricter testing and observation but it seems the tool degrades silently at higher patch levels. UBR is probably the variable that matters. Extending coverage to a new UBR requires extracting lsasrv.dll from the target, finding the `LogonSessionList` reference in a disassembler, and adding the pattern to the signature table. Repeatable but manual.
 
-The Server 2025 failure (not listed as supported in the matrix) is best explained by a signature-table miss rather than VBS or isolation-based protection, which were architecturally absent on this host. `App Control for Business policy: Enforced` was present but did not prevent execution of the renamed binary.
+The Server 2025 failure (not listed as supported in the matrix) might be best explained by a signature-table miss rather than VBS or isolation-based protection, which were architecturally absent on this host. `App Control for Business policy: Enforced` was present but did not prevent execution of the renamed binary.
 
 DRSUAPI remains unaffected by any of this — protocol-layer replication doesn't touch lsasrv.dll struct layouts, PPL, or local memory at all.
 
