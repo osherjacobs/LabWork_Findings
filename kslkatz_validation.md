@@ -30,9 +30,8 @@ My testing covers a range of OS versions, patch levels, and build configurations
 
 
 **Tools used:**
-- [KslKatz](https://github.com/S1lky/KslKatz) — BYOVD credential extractor using Microsoft Defender's KslD.sys (GPL-3.0)
-- Note (June 2026): The original KslKatz repository has been taken down by the author. The YouTube walkthrough by The Weekly Purple Team remains available and is linked above.
-- [MorphKatz](https://github.com/0xMohammedHassan/morphkatz) — polymorphic machine-code rewriter for Windows x64 binaries, used here for PE mutation and data-section encoding to evade ML-based Defender detections (AGPL-3.0)
+* [KslKatz](https://github.com/vergamota/KslKatz) — BYOVD credential extractor using Microsoft Defender's KslD.sys (GPL-3.0)
+* [MorphKatz](https://github.com/0xMohammedHassan/morphkatz) — polymorphic machine-code rewriter for Windows x64 binaries, used here for PE mutation and data-section encoding to evade ML-based Defender detections (AGPL-3.0)
 
 
 ---
