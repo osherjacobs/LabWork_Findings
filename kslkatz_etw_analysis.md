@@ -6,7 +6,7 @@
 
 **Lab:** lab2019.local / badsuccessor.local  
 **Date:** June 3, 2026  
-**Tool:** [KslKatz]([https://github.com/S1lky/KslKatz](https://github.com/vergamota/KslKatz)) — BYOVD credential extractor using Microsoft Defender's KslD.sys  
+**Tool:** [KslKatz](https://github.com/vergamota/KslKatz) — BYOVD credential extractor using Microsoft Defender's KslD.sys  
 **Tracer:** PerfView (Microsoft-Antimalware-Engine ETW provider)
 
 ---
