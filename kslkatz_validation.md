@@ -3,7 +3,7 @@
 
 # KslKatz Lab Validation — Operational Assumption Analysis
 
-**Tool:** [KslKatz](https://github.com/S1lky/KslKatz) — BYOVD credential extractor using Microsoft Defender's KslD.sys  
+**Tool:** [KslKatz](https://github.com/vergamota/KslKatz) — BYOVD credential extractor using Microsoft Defender's KslD.sys  
 **Lab:** lab2019.local / badsuccessor.local  
 **Date:** June 2026
 
