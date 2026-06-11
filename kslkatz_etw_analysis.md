@@ -13,7 +13,7 @@
 
 ## Background
 
-Following the OS matrix validation documented in the main KslKatz writeup, the focus here shifts to Defender's internal telemetry — what does the engine actually observe and decide when KslKatz executes, and does that picture differ across OS versions?
+Following the (partial) OS matrix validation documented in the main KslKatz writeup, the focus here shifts to Defender's internal telemetry — what does the engine actually observe and decide when KslKatz executes, and does that picture differ across OS versions?
 
 Two hosts were traced: WIN-ATTACK (Server 2022, UBR 587) and WIN-JOCP945SK51 (Server 2019, UBR 8755). Both ran at identical Defender signature versions. The Microsoft-Antimalware-Engine ETW provider was used via PerfView to capture the engine decision stream — behavioral classification events, MOAC cache lookups, driver trust evaluation, and process memory scan activity.
 
