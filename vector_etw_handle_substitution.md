@@ -6,6 +6,36 @@
 **Defender RTP:** Enabled · **ScriptBlock logging:** Enabled (registry/GPO)
 **Test date:** May 2026
 
+# AD-Lab-Research Wiki
+
+> Controlled offensive security research in enterprise-modeled Active Directory environments.  
+> Focus: attack path realism, defensive telemetry, and control failure analysis — not tool tutorials.
+
+---
+
+## Table of Contents
+
+1. [Lab Architecture](#lab-architecture)
+2. [Research Methodology](#research-methodology)
+3. [ADCS Exploitation (ESC Series)](#adcs-exploitation-esc-series)
+4. [Kerberos Attack Chains](#kerberos-attack-chains)
+5. [Windows Evasion](#windows-evasion)
+6. [Detection Engineering](#detection-engineering)
+7. [Setup Guides](#setup-guides)
+8. [Files Reference](#files-reference)
+
+---
+
+## Lab Architecture
+
+Two isolated AD lab environments built on VMware Workstation Pro (Ubuntu host, LUKS FDE):
+
+### lab2019.local
+| Host | Role | IP |
+|---|---|---|
+| DC01 | Domain Controller – Server 2019 | 192.168.1.x |
+| WIN-ATTACK | Attacker workstation – Server 2022 | 192.168.1.x |
+| ELK Stack | Log aggregation + Kibana | 192.168.1.250 |
 
 ---
 
