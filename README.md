@@ -16,7 +16,7 @@ Documented chains with raw telemetry, detection gaps, and KQL.
 
 - **kslkatz ETW Analysis & Validation** — Deep dive into kslkatz behavior, ETW telemetry, and detection opportunities.
 - **ETW Provider Blindness** (`etw_ps_blind.md`) — PowerShell ETW evasion vectors and visibility gaps.
-- **ETW Derrida** (`etw_derrida.md`) — Philosophical and technical exploration of ETW event loss and interpretation.
+- **ETW Derrida** (`etw_derrida.md`) — Philosophical and technical exploration of ETW event loss and interpretation (I love me some good satire - if it's technically accurate then all the more so).
 - **Defender Reconciliation Loop** — Analysis of Defender’s internal state reconciliation behavior under attack.
 - Ongoing LSASS boundary testing on Server 2025 (vector7b + pypykatz).
 - Expanded ADCS, Kerberos CNAME relay, and DACL/Shadow Credentials research.
