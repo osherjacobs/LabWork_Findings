@@ -1,4 +1,4 @@
-# Active Directory Security Research
+# Security Research
 
 > **Observed system behavior → adversarial chaining → telemetry reality → defensive implication.**
 
