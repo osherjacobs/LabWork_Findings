@@ -151,3 +151,11 @@ The finding is not that ScriptBlock logging can be disabled.
 The narrower observation is that a policy-enabled telemetry control may remain configured yet become operationally unreliable within a session boundary under tested conditions.
 
 The defensive question is therefore not simply whether a control is configured, but whether telemetry continuity can be trusted at runtime and assumed to hold throughout uptime.
+
+Screenshots:
+
+<img width="1918" height="739" alt="elastic31052026" src="https://github.com/user-attachments/assets/3613f32f-da4f-4ff2-bb34-4abc9c21fe12" />
+
+<img width="1918" height="957" alt="4624" src="https://github.com/user-attachments/assets/9f69b16e-9c46-4303-be74-5d89b31cdfa5" />
+
+<img width="1916" height="679" alt="4104" src="https://github.com/user-attachments/assets/0d36d313-18df-4f69-89c5-380c4f90c907" />
