@@ -1,6 +1,6 @@
 # Spook Yourself: What KeePassXC Leaves in RAM (and What It Doesn't)
 
-Nov 26, 2026
+Nov 26, 2026 · @Osher
 
 ## The premise
 
@@ -51,7 +51,7 @@ cat /proc/sys/kernel/yama/ptrace_scope
 - `2` — admin only (needs `CAP_SYS_PTRACE`, i.e. root)
 - `3` — nobody, not even root, until reboot
 
-Most desktops sit at `1` or `2`. The key point: **root bypasses all of this except level 3.** So at scope 2 your `sudo` dump works not because the protection failed, but because you *are* the admin it permits. An ordinary same-user process — malware running as you, without root — would be blocked. That's the restriction working.
+Most desktops sit at `1` or `2`. Debian and Ubuntu default to 1; this box reported 2. The key point: **root bypasses all of this except level 3.** So at scope 2 your `sudo` dump works not because the protection failed, but because you *are* the admin it permits. An ordinary same-user process — malware running as you, without root — would be blocked. That's the restriction working.
 
 ## Step 3 — Dump the process memory
 
@@ -179,8 +179,8 @@ Read the stack bottom-up. If your active swap is an LVM volume sitting on a `cry
 The cores you made hold your secrets in cleartext. So does your shell history — you typed password fragments into `grep` — and your terminal scrollback. Tidy all of it:
 
 ```bash
-shred -uvz kpxc_dump.* kpxc_locked.* kpxc_delayed.*
-history -c; shred -u ~/.bash_history; history -w
+shred -uvz kpxc_dump.* kpxc_locked.* kpxc_delayed.* kpxc_master.*
+shred -u ~/.bash_history; history -c; unset HISTFILE   # clear disk + memory, and stop an empty list being rewritten on exit
 xsel -bc 2>/dev/null   # or: wl-copy --clear   (Wayland)
 ```
 
