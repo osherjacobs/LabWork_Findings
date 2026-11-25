@@ -1,6 +1,6 @@
 # Spook Yourself: What KeePassXC Leaves in RAM (and What It Doesn't)
 
-Nov 26, 2026
+Nov 26, 2026 · @Osher
 
 ## The premise
 
@@ -24,7 +24,7 @@ This is documented, known behaviour, not a vulnerability. It needs root on the b
 | Kernel | 6.12.118+deb13-amd64 |
 | Qt | 6.4.2 |
 | Crypto | Botan 2.19.3 |
-| `ptrace_scope` | 2 (Debian/Ubuntu default is 1) |
+| `ptrace_scope` | 2 (hardened; Yama default is 1) |
 | Database format | KDBX 4 (2.8.0 default) |
 | Swap / core volume | LVM on LUKS, encrypted at rest |
 
@@ -52,7 +52,7 @@ cat /proc/sys/kernel/yama/ptrace_scope
 - `2` — admin only (needs `CAP_SYS_PTRACE`, i.e. root)
 - `3` — nobody, not even root, until reboot
 
-Most desktops sit at `1` or `2`. Debian and Ubuntu default to 1; this box reported 2. The key point: **root bypasses all of this except level 3.** So at scope 2 your `sudo` dump works not because the protection failed, but because you *are* the admin it permits. An ordinary same-user process — malware running as you, without root — would be blocked. That's the restriction working.
+When Yama is enabled, the default is `1`, restricted (Ubuntu, Arch, openSUSE); some distros ship it disabled at `0`. This box reported `2`, admin-only — a hardened setting, not a distro default, so something set it above the norm. The key point either way: **root bypasses all of this except level 3.** So at scope 2 your `sudo` dump works not because the protection failed, but because you *are* the admin it permits. An ordinary same-user process — malware running as you, without root — would be blocked. That's the restriction working.
 
 ## Step 3 — Dump the process memory
 
