@@ -1,6 +1,6 @@
 # Spook Yourself: What KeePassXC Leaves in RAM (and What It Doesn't)
 
-Nov 26, 2026 · @Osher
+Nov 26, 2026
 
 ## The premise
 
