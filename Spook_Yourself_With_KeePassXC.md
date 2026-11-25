@@ -1,6 +1,6 @@
 # Spook Yourself: What KeePassXC Leaves in RAM (and What It Doesn't)
 
-Nov 26, 2026
+Nov 26, 2026 · @Osher
 
 ## The premise
 
@@ -10,7 +10,7 @@ This is documented, known behaviour, not a vulnerability. It needs root on the b
 
 ## What you need
 
-- A Linux box (this run: KeePassXC 2.8.0, Debian 13, kernel 6.12.116+deb13-amd64) running KeePassXC, with a database unlocked.
+- A Linux box (this run: KeePassXC 2.8.0, Debian 13, kernel 6.12.118+deb13-amd64) running KeePassXC, with a database unlocked.
 - `gdb`, which provides the `gcore` command: `sudo apt install gdb`.
 - `root` / `sudo`. You will see below why it is required — without it the dump is blocked.
 - A disposable test entry, so you grep for a canary instead of your real secrets.
@@ -19,12 +19,13 @@ This is documented, known behaviour, not a vulnerability. It needs root on the b
 
 | Variable | Configuration |
 | --- | --- |
-| KeePassXC | 2.8.0 |
+| KeePassXC | 2.8.0 (AppImage, Release) |
 | OS | Debian 13 (trixie) |
-| Kernel | 6.12.116+deb13-amd64 |
-| Qt | run `keepassxc --version` to capture |
-| `ptrace_scope` | 2 (admin-only) |
-| Database format | KDBX (confirm in Database settings) |
+| Kernel | 6.12.118+deb13-amd64 |
+| Qt | 6.4.2 |
+| Crypto | Botan 2.19.3 |
+| `ptrace_scope` | 2 (Debian/Ubuntu default is 1) |
+| Database format | KDBX 4 (2.8.0 default) |
 | Swap / core volume | LVM on LUKS, encrypted at rest |
 
 ## Step 1 — Plant a canary
@@ -116,7 +117,7 @@ for enc in s S l b; do strings -e $enc -n4 kpxc_dump.* | grep -a 'FRAGMENT'; don
 
 You get the whole password back — not just your fragment. Two things are happening. On this build and test database, unlocking alone was enough to make that unviewed entry's password recoverable — you never had to open it. (Whether that holds across every KeePassXC version, database format, and entry setting is exactly what you'd confirm per configuration.) And `strings` emits contiguous runs of printable bytes, cut at any non-printable byte — so matching a fragment surfaces the whole printable run around it, which usually includes the rest of the password (and sometimes adjacent data too). It isn't reading application fields, just printable sequences.
 
-You don't even need a wildcard. If you want to be explicit about capturing the unknown tail, anchor on a known prefix:
+You don't even need a pattern here — strings already isolated the whole printable run, so grepping a fragment prints the full value. To anchor on a known prefix and pull everything after it explicitly:
 
 ```bash
 strings -e l -n4 kpxc_dump.* | grep -ao 'KNOWNPREFIX[[:print:]]*'
